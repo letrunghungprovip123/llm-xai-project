@@ -1,0 +1,25 @@
+{
+  "batch_name": "batch_1_raw_to_relationship_audit",
+  "created_at": "2026-06-21T11:16:17",
+  "technical_steps_completed": 3,
+  "technical_steps_total": 20,
+  "technical_steps_remaining": 17,
+  "step_statuses": [
+    {
+      "step": "Step 0",
+      "name": "Verify raw files",
+      "status": "raw_verified"
+    },
+    {
+      "step": "Step 1",
+      "name": "Raw schema audit",
+      "status": "schema_audit_passed"
+    },
+    {
+      "step": "Step 2",
+      "name": "Relationship audit",
+      "status": "relationship_audit_passed"
+    }
+  ],
+  "next_step": "Step 3 - Target audit"
+}

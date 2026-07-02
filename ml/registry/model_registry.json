@@ -1,0 +1,190 @@
+{
+  "created_at": "2026-06-24T03:28:16.083550+00:00",
+  "artifact_schema_version": "1.0.0",
+  "batch_name": "Batch F — Model Training Layer",
+  "task_type": "binary_classification",
+  "target_column": "TARGET",
+  "positive_class": 1,
+  "negative_class": 0,
+  "model_version": "v1",
+  "random_state": 42,
+  "default_threshold": 0.5,
+  "selection_policy": {
+    "primary_metric": "average_precision",
+    "secondary_metric": "roc_auc",
+    "tiebreaker_metric": "brier_score",
+    "tiebreaker_direction": "lower_is_better",
+    "selection_split": "valid"
+  },
+  "best_model": {
+    "model_name": "hist_gradient_boosting",
+    "model_family": "tree_boosting",
+    "dataset_branch": "tree",
+    "artifact_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/best_model.joblib",
+    "valid_metrics": {
+      "threshold": 0.5,
+      "roc_auc": 0.778471591179241,
+      "average_precision": 0.2711566761517476,
+      "precision": 0.18226217440543602,
+      "recall": 0.6914607948442535,
+      "f1": 0.28848308312794085,
+      "brier_score": 0.18128761429412119,
+      "tn": 30850,
+      "fp": 11553,
+      "fn": 1149,
+      "tp": 2575,
+      "positive_prediction_rate": 0.30628482233832677
+    },
+    "test_metrics": {
+      "threshold": 0.5,
+      "roc_auc": 0.7818126278633843,
+      "average_precision": 0.2740536201360184,
+      "precision": 0.1864528139768008,
+      "recall": 0.6992481203007519,
+      "f1": 0.2944036178631996,
+      "brier_score": 0.17997405730938718,
+      "tn": 31041,
+      "fp": 11362,
+      "fn": 1120,
+      "tp": 2604,
+      "positive_prediction_rate": 0.30277277950007586
+    }
+  },
+  "models": [
+    {
+      "model_name": "logistic_regression",
+      "model_version": "v1",
+      "model_family": "linear",
+      "dataset_branch": "linear",
+      "artifact_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/logistic_regression.joblib",
+      "best_model_artifact_path": null,
+      "feature_columns_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_columns_linear.json",
+      "feature_mapping_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_mapping_linear.json",
+      "train_rows": 215257,
+      "feature_count": 213,
+      "training_seconds": 6.952997249999498,
+      "metadata": {
+        "algorithm": "LogisticRegression",
+        "class_imbalance_strategy": "class_weight='balanced'",
+        "solver": "lbfgs",
+        "max_iter": 2000,
+        "random_state": 42
+      },
+      "valid_metrics": {
+        "threshold": 0.5,
+        "roc_auc": 0.7666275531545518,
+        "average_precision": 0.255501683930365,
+        "precision": 0.17067560462670872,
+        "recall": 0.6973684210526315,
+        "f1": 0.27423442449841606,
+        "brier_score": 0.19552886486053467,
+        "tn": 29784,
+        "fp": 12619,
+        "fn": 1127,
+        "tp": 2597,
+        "positive_prediction_rate": 0.3298718754742342
+      },
+      "test_metrics": null,
+      "selected_as_best": false
+    },
+    {
+      "model_name": "random_forest",
+      "model_version": "v1",
+      "model_family": "tree",
+      "dataset_branch": "tree",
+      "artifact_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/random_forest.joblib",
+      "best_model_artifact_path": null,
+      "feature_columns_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_columns_tree.json",
+      "feature_mapping_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_mapping_tree.json",
+      "train_rows": 215257,
+      "feature_count": 213,
+      "training_seconds": 91.22602283300057,
+      "metadata": {
+        "algorithm": "RandomForestClassifier",
+        "n_estimators": 300,
+        "max_depth": null,
+        "min_samples_leaf": 20,
+        "class_imbalance_strategy": "class_weight='balanced_subsample'",
+        "random_state": 42
+      },
+      "valid_metrics": {
+        "threshold": 0.5,
+        "roc_auc": 0.7663669754837938,
+        "average_precision": 0.2504762763144497,
+        "precision": 0.26929103016059536,
+        "recall": 0.3692266380236305,
+        "f1": 0.3114382785956965,
+        "brier_score": 0.11252660011635555,
+        "tn": 38672,
+        "fp": 3731,
+        "fn": 2349,
+        "tp": 1375,
+        "positive_prediction_rate": 0.11069438723524183
+      },
+      "test_metrics": null,
+      "selected_as_best": false
+    },
+    {
+      "model_name": "hist_gradient_boosting",
+      "model_version": "v1",
+      "model_family": "tree_boosting",
+      "dataset_branch": "tree",
+      "artifact_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/hist_gradient_boosting.joblib",
+      "best_model_artifact_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/best_model.joblib",
+      "feature_columns_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_columns_tree.json",
+      "feature_mapping_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_mapping_tree.json",
+      "train_rows": 215257,
+      "feature_count": 213,
+      "training_seconds": 96.83549299999959,
+      "metadata": {
+        "algorithm": "HistGradientBoostingClassifier",
+        "learning_rate": 0.05,
+        "max_iter": 300,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 0.1,
+        "class_imbalance_strategy": "sample_weight=balanced",
+        "random_state": 42
+      },
+      "valid_metrics": {
+        "threshold": 0.5,
+        "roc_auc": 0.778471591179241,
+        "average_precision": 0.2711566761517476,
+        "precision": 0.18226217440543602,
+        "recall": 0.6914607948442535,
+        "f1": 0.28848308312794085,
+        "brier_score": 0.18128761429412119,
+        "tn": 30850,
+        "fp": 11553,
+        "fn": 1149,
+        "tp": 2575,
+        "positive_prediction_rate": 0.30628482233832677
+      },
+      "test_metrics": {
+        "threshold": 0.5,
+        "roc_auc": 0.7818126278633843,
+        "average_precision": 0.2740536201360184,
+        "precision": 0.1864528139768008,
+        "recall": 0.6992481203007519,
+        "f1": 0.2944036178631996,
+        "brier_score": 0.17997405730938718,
+        "tn": 31041,
+        "fp": 11362,
+        "fn": 1120,
+        "tp": 2604,
+        "positive_prediction_rate": 0.30277277950007586
+      },
+      "selected_as_best": true
+    }
+  ],
+  "evaluation_outputs": {
+    "model_metrics_summary": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_metrics_summary.csv",
+    "model_predictions_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_valid.csv",
+    "model_predictions_test": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_test.csv",
+    "model_threshold_analysis_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_threshold_analysis_valid.csv",
+    "model_feature_importance": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_feature_importance.csv"
+  },
+  "upstream_registries": {
+    "raw_feature_registry_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/feature_registry.csv",
+    "concept_registry": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/concept_registry.yaml"
+  }
+}

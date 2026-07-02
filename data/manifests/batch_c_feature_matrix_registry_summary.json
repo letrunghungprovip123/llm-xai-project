@@ -1,0 +1,348 @@
+{
+  "batch_name": "batch_c_feature_matrix_registry_layer",
+  "created_at": "2026-06-22T10:14:10",
+  "assumption": "Batch A Raw Audit Layer and Batch B Feature Engineering Layer were already completed.",
+  "pipeline_group": "Batch C - Feature Matrix + Registry Layer",
+  "pipeline_group_status": "feature_matrix_registry_layer_completed",
+  "technical_steps_completed": 16,
+  "technical_steps_total": 20,
+  "technical_steps_remaining": 4,
+  "final_matrix_stats": {
+    "row_count": 307511,
+    "column_count": 167,
+    "feature_count": 166,
+    "numeric_feature_count": 159,
+    "categorical_feature_count": 7,
+    "binary_feature_count": 7,
+    "duplicate_sk_id_curr": 0,
+    "forbidden_columns_found": [],
+    "inf_count": 0,
+    "all_null_feature_count": 0,
+    "all_null_features": [],
+    "constant_feature_count": 0,
+    "constant_features": [],
+    "top_missing_features": [
+      {
+        "feature_name": "credit_card_avg_payment_to_min_ratio",
+        "missing_rate": 0.8072296600772005
+      },
+      {
+        "feature_name": "credit_card_min_payment_to_min_ratio",
+        "missing_rate": 0.8072296600772005
+      },
+      {
+        "feature_name": "credit_card_max_drawing_to_limit_ratio",
+        "missing_rate": 0.7202181385381335
+      },
+      {
+        "feature_name": "credit_card_max_utilization",
+        "missing_rate": 0.7202181385381335
+      },
+      {
+        "feature_name": "credit_card_avg_utilization",
+        "missing_rate": 0.7202181385381335
+      },
+      {
+        "feature_name": "credit_card_avg_drawing_to_limit_ratio",
+        "missing_rate": 0.7202181385381335
+      },
+      {
+        "feature_name": "credit_card_avg_dpd",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_max_drawings",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_avg_drawings",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_def_dpd_ratio",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_dpd_ratio",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_max_limit",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_avg_limit",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_max_dpd",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_min_balance",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_avg_balance",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_max_def_dpd",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_avg_def_dpd",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "credit_card_max_balance",
+        "missing_rate": 0.7173922233676193
+      },
+      {
+        "feature_name": "bureau_balance_recent_bad_status_ratio",
+        "missing_rate": 0.7071486873640292
+      },
+      {
+        "feature_name": "bureau_balance_avg_status_numeric",
+        "missing_rate": 0.7053243623805328
+      },
+      {
+        "feature_name": "bureau_balance_max_status_numeric",
+        "missing_rate": 0.7053243623805328
+      },
+      {
+        "feature_name": "bureau_balance_bad_status_ratio",
+        "missing_rate": 0.700072517731073
+      },
+      {
+        "feature_name": "EXT_SOURCE_1",
+        "missing_rate": 0.5638107254699832
+      },
+      {
+        "feature_name": "installment_max_days_late",
+        "missing_rate": 0.4959562422157256
+      },
+      {
+        "feature_name": "installment_avg_days_late",
+        "missing_rate": 0.4959562422157256
+      },
+      {
+        "feature_name": "OCCUPATION_TYPE",
+        "missing_rate": 0.31345545362604915
+      },
+      {
+        "feature_name": "bureau_credit_limit_mean",
+        "missing_rate": 0.21159893467225563
+      },
+      {
+        "feature_name": "EXT_SOURCE_3",
+        "missing_rate": 0.19825307062186392
+      },
+      {
+        "feature_name": "employment_years",
+        "missing_rate": 0.18007811102692262
+      }
+    ],
+    "status": "passed",
+    "errors": []
+  },
+  "target_stats": {
+    "row_count": 307511,
+    "column_count": 2,
+    "duplicate_sk_id_curr": 0,
+    "missing_target": 0,
+    "target_values": [
+      0,
+      1
+    ],
+    "target_positive_count": 24825,
+    "target_negative_count": 282686,
+    "target_positive_rate": 0.08072881945686496,
+    "status": "passed",
+    "errors": []
+  },
+  "registry_stats": {
+    "feature_count": 166,
+    "feature_registry_entry_count": 166,
+    "missing_feature_registry_count": 0,
+    "missing_feature_registry": [],
+    "extra_feature_registry_count": 0,
+    "extra_feature_registry": [],
+    "concepts_used": [
+      "applicant_stability",
+      "application_profile",
+      "bureau_monthly_behavior",
+      "credit_card_usage_behavior",
+      "external_credit_history",
+      "external_score_signal",
+      "installment_repayment_behavior",
+      "loan_affordability",
+      "pos_cash_behavior",
+      "previous_application_behavior"
+    ],
+    "missing_concepts_count": 0,
+    "missing_concepts": [],
+    "features_missing_concept_count": 0,
+    "features_missing_concept": [],
+    "explanation_blocked_feature_count": 0,
+    "explanation_blocked_features": [],
+    "explanation_limited_feature_count": 15,
+    "explanation_limited_features": [
+      "CNT_CHILDREN",
+      "NAME_EDUCATION_TYPE",
+      "NAME_FAMILY_STATUS",
+      "OCCUPATION_TYPE",
+      "CNT_FAM_MEMBERS",
+      "ORGANIZATION_TYPE",
+      "EXT_SOURCE_1",
+      "EXT_SOURCE_2",
+      "EXT_SOURCE_3",
+      "age_years",
+      "ext_source_mean",
+      "ext_source_min",
+      "ext_source_max",
+      "ext_source_std",
+      "ext_source_missing_count"
+    ],
+    "sensitive_feature_count": 15,
+    "sensitive_features": [
+      "CNT_CHILDREN",
+      "NAME_EDUCATION_TYPE",
+      "NAME_FAMILY_STATUS",
+      "OCCUPATION_TYPE",
+      "CNT_FAM_MEMBERS",
+      "ORGANIZATION_TYPE",
+      "EXT_SOURCE_1",
+      "EXT_SOURCE_2",
+      "EXT_SOURCE_3",
+      "age_years",
+      "ext_source_mean",
+      "ext_source_min",
+      "ext_source_max",
+      "ext_source_std",
+      "ext_source_missing_count"
+    ],
+    "suspicious_metadata_count": 0,
+    "suspicious_metadata": [],
+    "status": "passed",
+    "errors": []
+  },
+  "feature_group_merge_stats": [
+    {
+      "group_name": "application_features",
+      "rows": 307511,
+      "columns": 33,
+      "feature_count": 32,
+      "duplicate_sk_id_curr": 0,
+      "forbidden_columns_found": [],
+      "inf_count": 0,
+      "all_null_feature_count": 0,
+      "all_null_features": [],
+      "constant_feature_count": 0,
+      "constant_features": [],
+      "status": "merged",
+      "errors": []
+    },
+    {
+      "group_name": "bureau_features",
+      "rows": 307511,
+      "columns": 27,
+      "feature_count": 26,
+      "duplicate_sk_id_curr": 0,
+      "forbidden_columns_found": [],
+      "inf_count": 0,
+      "all_null_feature_count": 0,
+      "all_null_features": [],
+      "constant_feature_count": 0,
+      "constant_features": [],
+      "status": "merged",
+      "errors": []
+    },
+    {
+      "group_name": "bureau_balance_features",
+      "rows": 307511,
+      "columns": 13,
+      "feature_count": 12,
+      "duplicate_sk_id_curr": 0,
+      "forbidden_columns_found": [],
+      "inf_count": 0,
+      "all_null_feature_count": 0,
+      "all_null_features": [],
+      "constant_feature_count": 0,
+      "constant_features": [],
+      "status": "merged",
+      "errors": []
+    },
+    {
+      "group_name": "previous_application_features",
+      "rows": 307511,
+      "columns": 23,
+      "feature_count": 22,
+      "duplicate_sk_id_curr": 0,
+      "forbidden_columns_found": [],
+      "inf_count": 0,
+      "all_null_feature_count": 0,
+      "all_null_features": [],
+      "constant_feature_count": 0,
+      "constant_features": [],
+      "status": "merged",
+      "errors": []
+    },
+    {
+      "group_name": "installments_features",
+      "rows": 307511,
+      "columns": 28,
+      "feature_count": 27,
+      "duplicate_sk_id_curr": 0,
+      "forbidden_columns_found": [],
+      "inf_count": 0,
+      "all_null_feature_count": 0,
+      "all_null_features": [],
+      "constant_feature_count": 0,
+      "constant_features": [],
+      "status": "merged",
+      "errors": []
+    },
+    {
+      "group_name": "pos_cash_features",
+      "rows": 307511,
+      "columns": 21,
+      "feature_count": 20,
+      "duplicate_sk_id_curr": 0,
+      "forbidden_columns_found": [],
+      "inf_count": 0,
+      "all_null_feature_count": 0,
+      "all_null_features": [],
+      "constant_feature_count": 0,
+      "constant_features": [],
+      "status": "merged",
+      "errors": []
+    },
+    {
+      "group_name": "credit_card_features",
+      "rows": 307511,
+      "columns": 28,
+      "feature_count": 27,
+      "duplicate_sk_id_curr": 0,
+      "forbidden_columns_found": [],
+      "inf_count": 0,
+      "all_null_feature_count": 0,
+      "all_null_features": [],
+      "constant_feature_count": 0,
+      "constant_features": [],
+      "status": "merged",
+      "errors": []
+    }
+  ],
+  "outputs": [
+    "data/processed/feature_matrix_full.parquet",
+    "data/processed/target_full.parquet",
+    "ml/registry/concept_registry.yaml",
+    "ml/registry/feature_registry.yaml",
+    "ml/registry/feature_registry.csv",
+    "data/reports/feature_matrix_registry_report.md",
+    "data/reports/batch_c_feature_matrix_registry_summary.md",
+    "data/manifests/batch_c_feature_matrix_registry_summary.json"
+  ],
+  "next_group": "Batch D - Leakage + Split Layer"
+}

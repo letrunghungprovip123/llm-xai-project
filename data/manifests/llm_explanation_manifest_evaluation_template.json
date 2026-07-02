@@ -1,0 +1,24 @@
+{
+  "batch_name": "Batch I - LLM Explanation Layer",
+  "batch_short_name": "I",
+  "run_mode": "evaluation",
+  "explanation_schema_version": "v0.1",
+  "generator": {
+    "generator_type": "template",
+    "generator_name": "deterministic_template_generator",
+    "generator_version": "v0.1",
+    "uses_external_ai_api": false
+  },
+  "source": {
+    "source_batch": "Batch H - Concept-aware Explanation IR Layer",
+    "input_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir/evaluation/explanation_ir.jsonl"
+  },
+  "outputs": {
+    "llm_explanations_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/template/llm_explanations.jsonl",
+    "summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/template/llm_explanation_summary.csv",
+    "quality_report_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/template/llm_explanation_quality_report.json"
+  },
+  "record_count": 30,
+  "status": "PASSED_WITH_WARNINGS",
+  "created_at": "2026-06-29T02:25:18.292866+00:00"
+}

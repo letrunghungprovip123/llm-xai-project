@@ -1,0 +1,89 @@
+{
+  "dataset_name": "home_credit_default_risk",
+  "created_at": "2026-06-21T11:03:19",
+  "raw_dir": "data/raw",
+  "raw_files": {
+    "application_train.csv": {
+      "path": "data/raw/application_train.csv",
+      "exists": true,
+      "rows": 307511,
+      "columns": 122,
+      "size_mb": 158.44,
+      "sha256": "52e96b895b1112e1c853f670e58372719c8441c5ed1c57ac2f7fad559d784f5f",
+      "readable": true
+    },
+    "bureau.csv": {
+      "path": "data/raw/bureau.csv",
+      "exists": true,
+      "rows": 1716428,
+      "columns": 17,
+      "size_mb": 162.14,
+      "sha256": "9d799143423f280720cf51c1bfbbab2a0422da8ff2763335bb30bf43155494f7",
+      "readable": true
+    },
+    "bureau_balance.csv": {
+      "path": "data/raw/bureau_balance.csv",
+      "exists": true,
+      "rows": 27299925,
+      "columns": 3,
+      "size_mb": 358.19,
+      "sha256": "33e09f06174c26f0be6b8b7398886c69e7bf0abbb29b4122f7841ffe545729a9",
+      "readable": true
+    },
+    "previous_application.csv": {
+      "path": "data/raw/previous_application.csv",
+      "exists": true,
+      "rows": 1670214,
+      "columns": 37,
+      "size_mb": 386.21,
+      "sha256": "5046cd657ee04df2eaa6dc8308ae86be6b3b1763674a3f63574886a2f2896505",
+      "readable": true
+    },
+    "installments_payments.csv": {
+      "path": "data/raw/installments_payments.csv",
+      "exists": true,
+      "rows": 13605401,
+      "columns": 8,
+      "size_mb": 689.62,
+      "sha256": "428c2e2496e4d6d697ee8270e98497e5213c41be16d882eed1bc95b133726797",
+      "readable": true
+    },
+    "POS_CASH_balance.csv": {
+      "path": "data/raw/POS_CASH_balance.csv",
+      "exists": true,
+      "rows": 10001358,
+      "columns": 8,
+      "size_mb": 374.51,
+      "sha256": "0e13bc573ffa8fc29b3f00d975e557143193a405d675b0e4694b06fbdffcb0cd",
+      "readable": true
+    },
+    "credit_card_balance.csv": {
+      "path": "data/raw/credit_card_balance.csv",
+      "exists": true,
+      "rows": 3840312,
+      "columns": 23,
+      "size_mb": 404.91,
+      "sha256": "a9cdc48900d55131c90f3128b991859aeb94ca1326fb5f4d1624b9fd03782247",
+      "readable": true
+    }
+  },
+  "optional_files": {
+    "application_test.csv": {
+      "path": "data/raw/application_test.csv",
+      "exists": true,
+      "size_mb": 25.34
+    },
+    "sample_submission.csv": {
+      "path": "data/raw/sample_submission.csv",
+      "exists": true,
+      "size_mb": 0.51
+    },
+    "HomeCredit_columns_description.csv": {
+      "path": "data/raw/HomeCredit_columns_description.csv",
+      "exists": true,
+      "size_mb": 0.04
+    }
+  },
+  "status": "raw_verified",
+  "errors": []
+}

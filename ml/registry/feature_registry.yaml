@@ -1,0 +1,3818 @@
+NAME_CONTRACT_TYPE:
+  feature_name: NAME_CONTRACT_TYPE
+  display_name: loại hợp đồng vay
+  description: Feature `NAME_CONTRACT_TYPE` thuộc nhóm `hồ sơ khách hàng`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: categorical
+  pandas_dtype: str
+  value_type: categorical
+  unit: null
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: category
+CNT_CHILDREN:
+  feature_name: CNT_CHILDREN
+  display_name: số con
+  description: Feature `CNT_CHILDREN` thuộc nhóm `hồ sơ khách hàng`, được tạo từ bảng
+    `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: int64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 15
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+AMT_INCOME_TOTAL:
+  feature_name: AMT_INCOME_TOTAL
+  display_name: tổng thu nhập
+  description: Feature `AMT_INCOME_TOTAL` thuộc nhóm `hồ sơ khách hàng`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2548
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+AMT_CREDIT:
+  feature_name: AMT_CREDIT
+  display_name: số tiền khoản vay hiện tại
+  description: Feature `AMT_CREDIT` thuộc nhóm `hồ sơ khách hàng`, được tạo từ bảng
+    `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 5603
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+AMT_ANNUITY:
+  feature_name: AMT_ANNUITY
+  display_name: số tiền trả định kỳ
+  description: Feature `AMT_ANNUITY` thuộc nhóm `hồ sơ khách hàng`, được tạo từ bảng
+    `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 3.9022994299390916e-05
+  non_null_count: 307499
+  unique_count: 13672
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+AMT_GOODS_PRICE:
+  feature_name: AMT_GOODS_PRICE
+  display_name: giá trị hàng hóa/khoản mua
+  description: Feature `AMT_GOODS_PRICE` thuộc nhóm `hồ sơ khách hàng`, được tạo từ
+    bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0009040327012692228
+  non_null_count: 307233
+  unique_count: 1002
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+NAME_INCOME_TYPE:
+  feature_name: NAME_INCOME_TYPE
+  display_name: loại thu nhập
+  description: Feature `NAME_INCOME_TYPE` thuộc nhóm `hồ sơ khách hàng`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: categorical
+  pandas_dtype: str
+  value_type: categorical
+  unit: null
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 8
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: category
+NAME_EDUCATION_TYPE:
+  feature_name: NAME_EDUCATION_TYPE
+  display_name: trình độ học vấn
+  description: Feature `NAME_EDUCATION_TYPE` thuộc nhóm `hồ sơ khách hàng`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: categorical
+  pandas_dtype: str
+  value_type: categorical
+  unit: null
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 5
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: category
+NAME_FAMILY_STATUS:
+  feature_name: NAME_FAMILY_STATUS
+  display_name: tình trạng gia đình
+  description: Feature `NAME_FAMILY_STATUS` thuộc nhóm `hồ sơ khách hàng`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: categorical
+  pandas_dtype: str
+  value_type: categorical
+  unit: null
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 6
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: category
+NAME_HOUSING_TYPE:
+  feature_name: NAME_HOUSING_TYPE
+  display_name: loại nhà ở
+  description: Feature `NAME_HOUSING_TYPE` thuộc nhóm `hồ sơ khách hàng`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: categorical
+  pandas_dtype: str
+  value_type: categorical
+  unit: null
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 6
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: category
+OCCUPATION_TYPE:
+  feature_name: OCCUPATION_TYPE
+  display_name: nghề nghiệp
+  description: Feature `OCCUPATION_TYPE` thuộc nhóm `hồ sơ khách hàng`, được tạo từ
+    bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: categorical
+  pandas_dtype: str
+  value_type: categorical
+  unit: null
+  missing_rate: 0.31345545362604915
+  non_null_count: 211120
+  unique_count: 18
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: category
+CNT_FAM_MEMBERS:
+  feature_name: CNT_FAM_MEMBERS
+  display_name: số thành viên gia đình
+  description: Feature `CNT_FAM_MEMBERS` thuộc nhóm `hồ sơ khách hàng`, được tạo từ
+    bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 6.503832383231819e-06
+  non_null_count: 307509
+  unique_count: 17
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+ORGANIZATION_TYPE:
+  feature_name: ORGANIZATION_TYPE
+  display_name: loại tổ chức làm việc
+  description: Feature `ORGANIZATION_TYPE` thuộc nhóm `hồ sơ khách hàng`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: application_profile
+  concept_display_name: hồ sơ khách hàng
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: categorical
+  pandas_dtype: str
+  value_type: categorical
+  unit: null
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 58
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: category
+EXT_SOURCE_1:
+  feature_name: EXT_SOURCE_1
+  display_name: tín hiệu điểm ngoài 1
+  description: Feature `EXT_SOURCE_1` thuộc nhóm `tín hiệu điểm ngoài`, được tạo từ
+    bảng `application_train` trong Data Layer.
+  concept: external_score_signal
+  concept_display_name: tín hiệu điểm ngoài
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: score
+  unit: score
+  missing_rate: 0.5638107254699832
+  non_null_count: 134133
+  unique_count: 114584
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: number_3_decimal
+EXT_SOURCE_2:
+  feature_name: EXT_SOURCE_2
+  display_name: tín hiệu điểm ngoài 2
+  description: Feature `EXT_SOURCE_2` thuộc nhóm `tín hiệu điểm ngoài`, được tạo từ
+    bảng `application_train` trong Data Layer.
+  concept: external_score_signal
+  concept_display_name: tín hiệu điểm ngoài
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: score
+  unit: score
+  missing_rate: 0.0021462646864665006
+  non_null_count: 306851
+  unique_count: 119831
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: number_3_decimal
+EXT_SOURCE_3:
+  feature_name: EXT_SOURCE_3
+  display_name: tín hiệu điểm ngoài 3
+  description: Feature `EXT_SOURCE_3` thuộc nhóm `tín hiệu điểm ngoài`, được tạo từ
+    bảng `application_train` trong Data Layer.
+  concept: external_score_signal
+  concept_display_name: tín hiệu điểm ngoài
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: score
+  unit: score
+  missing_rate: 0.19825307062186392
+  non_null_count: 246546
+  unique_count: 814
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: number_3_decimal
+days_employed_abnormal:
+  feature_name: days_employed_abnormal
+  display_name: dấu hiệu ngày làm việc bất thường
+  description: Feature `days_employed_abnormal` thuộc nhóm `độ ổn định hồ sơ`, được
+    tạo từ bảng `application_train` trong Data Layer.
+  concept: applicant_stability
+  concept_display_name: độ ổn định hồ sơ
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: binary
+  pandas_dtype: int8
+  value_type: binary_indicator
+  unit: 0_or_1
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: boolean_indicator
+age_years:
+  feature_name: age_years
+  display_name: tuổi của khách hàng
+  description: Feature `age_years` thuộc nhóm `độ ổn định hồ sơ`, được tạo từ bảng
+    `application_train` trong Data Layer.
+  concept: applicant_stability
+  concept_display_name: độ ổn định hồ sơ
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: years
+  unit: years
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 17460
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_1_decimal
+employment_years:
+  feature_name: employment_years
+  display_name: số năm làm việc
+  description: Feature `employment_years` thuộc nhóm `độ ổn định hồ sơ`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: applicant_stability
+  concept_display_name: độ ổn định hồ sơ
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: years
+  unit: years
+  missing_rate: 0.18007811102692262
+  non_null_count: 252135
+  unique_count: 12572
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_1_decimal
+registration_years:
+  feature_name: registration_years
+  display_name: số năm từ khi đăng ký
+  description: Feature `registration_years` thuộc nhóm `độ ổn định hồ sơ`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: applicant_stability
+  concept_display_name: độ ổn định hồ sơ
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: years
+  unit: years
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 15688
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_1_decimal
+id_publish_years:
+  feature_name: id_publish_years
+  display_name: số năm từ khi cấp giấy tờ
+  description: Feature `id_publish_years` thuộc nhóm `độ ổn định hồ sơ`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: applicant_stability
+  concept_display_name: độ ổn định hồ sơ
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: years
+  unit: years
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 6168
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_1_decimal
+credit_to_income_ratio:
+  feature_name: credit_to_income_ratio
+  display_name: tỷ lệ khoản vay trên thu nhập
+  description: Feature `credit_to_income_ratio` thuộc nhóm `khả năng gánh khoản vay`,
+    được tạo từ bảng `application_train` trong Data Layer.
+  concept: loan_affordability
+  concept_display_name: khả năng gánh khoản vay
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 48697
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+annuity_to_income_ratio:
+  feature_name: annuity_to_income_ratio
+  display_name: tỷ lệ trả góp định kỳ trên thu nhập
+  description: Feature `annuity_to_income_ratio` thuộc nhóm `khả năng gánh khoản vay`,
+    được tạo từ bảng `application_train` trong Data Layer.
+  concept: loan_affordability
+  concept_display_name: khả năng gánh khoản vay
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 3.9022994299390916e-05
+  non_null_count: 307499
+  unique_count: 88811
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+goods_price_to_income_ratio:
+  feature_name: goods_price_to_income_ratio
+  display_name: tỷ lệ giá trị hàng hóa trên thu nhập
+  description: Feature `goods_price_to_income_ratio` thuộc nhóm `khả năng gánh khoản
+    vay`, được tạo từ bảng `application_train` trong Data Layer.
+  concept: loan_affordability
+  concept_display_name: khả năng gánh khoản vay
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.0009040327012692228
+  non_null_count: 307233
+  unique_count: 13410
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+annuity_to_credit_ratio:
+  feature_name: annuity_to_credit_ratio
+  display_name: tỷ lệ trả góp định kỳ trên khoản vay
+  description: Feature `annuity_to_credit_ratio` thuộc nhóm `khả năng gánh khoản vay`,
+    được tạo từ bảng `application_train` trong Data Layer.
+  concept: loan_affordability
+  concept_display_name: khả năng gánh khoản vay
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 3.9022994299390916e-05
+  non_null_count: 307499
+  unique_count: 39539
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+credit_to_goods_price_ratio:
+  feature_name: credit_to_goods_price_ratio
+  display_name: tỷ lệ khoản vay trên giá trị hàng hóa
+  description: Feature `credit_to_goods_price_ratio` thuộc nhóm `khả năng gánh khoản
+    vay`, được tạo từ bảng `application_train` trong Data Layer.
+  concept: loan_affordability
+  concept_display_name: khả năng gánh khoản vay
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.0009040327012692228
+  non_null_count: 307233
+  unique_count: 3066
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+income_per_family_member:
+  feature_name: income_per_family_member
+  display_name: thu nhập trên mỗi thành viên gia đình
+  description: Feature `income_per_family_member` thuộc nhóm `khả năng gánh khoản
+    vay`, được tạo từ bảng `application_train` trong Data Layer.
+  concept: loan_affordability
+  concept_display_name: khả năng gánh khoản vay
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 6.503832383231819e-06
+  non_null_count: 307509
+  unique_count: 3064
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+ext_source_mean:
+  feature_name: ext_source_mean
+  display_name: trung bình tín hiệu điểm ngoài
+  description: Feature `ext_source_mean` thuộc nhóm `tín hiệu điểm ngoài`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: external_score_signal
+  concept_display_name: tín hiệu điểm ngoài
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: score
+  unit: score
+  missing_rate: 0.0005593295849579365
+  non_null_count: 307339
+  unique_count: 300347
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: number_3_decimal
+ext_source_min:
+  feature_name: ext_source_min
+  display_name: tín hiệu điểm ngoài thấp nhất
+  description: Feature `ext_source_min` thuộc nhóm `tín hiệu điểm ngoài`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: external_score_signal
+  concept_display_name: tín hiệu điểm ngoài
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: score
+  unit: score
+  missing_rate: 0.0005593295849579365
+  non_null_count: 307339
+  unique_count: 139146
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: number_3_decimal
+ext_source_max:
+  feature_name: ext_source_max
+  display_name: tín hiệu điểm ngoài cao nhất
+  description: Feature `ext_source_max` thuộc nhóm `tín hiệu điểm ngoài`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: external_score_signal
+  concept_display_name: tín hiệu điểm ngoài
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: score
+  unit: score
+  missing_rate: 0.0005593295849579365
+  non_null_count: 307339
+  unique_count: 121113
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: number_3_decimal
+ext_source_std:
+  feature_name: ext_source_std
+  display_name: độ biến động tín hiệu điểm ngoài
+  description: Feature `ext_source_std` thuộc nhóm `tín hiệu điểm ngoài`, được tạo
+    từ bảng `application_train` trong Data Layer.
+  concept: external_score_signal
+  concept_display_name: tín hiệu điểm ngoài
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: score
+  unit: score
+  missing_rate: 0.12002497471635161
+  non_null_count: 270602
+  unique_count: 269867
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: number_3_decimal
+ext_source_missing_count:
+  feature_name: ext_source_missing_count
+  display_name: số lượng tín hiệu điểm ngoài bị thiếu
+  description: Feature `ext_source_missing_count` thuộc nhóm `tín hiệu điểm ngoài`,
+    được tạo từ bảng `application_train` trong Data Layer.
+  concept: external_score_signal
+  concept_display_name: tín hiệu điểm ngoài
+  source_table: application_train
+  source_feature_file: application_features.parquet
+  data_kind: numeric
+  pandas_dtype: int8
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 4
+  sensitive: true
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: limited
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: integer
+bureau_record_count:
+  feature_name: bureau_record_count
+  display_name: số bản ghi bureau
+  description: Feature `bureau_record_count` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 61
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_total_loans:
+  feature_name: bureau_total_loans
+  display_name: tổng số khoản tín dụng bureau
+  description: Feature `bureau_total_loans` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 61
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_active_loan_count:
+  feature_name: bureau_active_loan_count
+  display_name: số khoản tín dụng bureau đang hoạt động
+  description: Feature `bureau_active_loan_count` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 23
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_closed_loan_count:
+  feature_name: bureau_closed_loan_count
+  display_name: số khoản tín dụng bureau đã đóng
+  description: Feature `bureau_closed_loan_count` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 54
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: integer
+bureau_sold_loan_count:
+  feature_name: bureau_sold_loan_count
+  display_name: số khoản tín dụng bureau đã bán
+  description: Feature `bureau_sold_loan_count` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 8
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_bad_debt_count:
+  feature_name: bureau_bad_debt_count
+  display_name: số khoản nợ xấu bureau
+  description: Feature `bureau_bad_debt_count` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+bureau_overdue_count:
+  feature_name: bureau_overdue_count
+  display_name: số khoản bureau bị quá hạn
+  description: Feature `bureau_overdue_count` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 8
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+bureau_max_days_credit_overdue:
+  feature_name: bureau_max_days_credit_overdue
+  display_name: số ngày quá hạn bureau lớn nhất
+  description: Feature `bureau_max_days_credit_overdue` thuộc nhóm `lịch sử tín dụng
+    bên ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.14314935075493235
+  non_null_count: 263491
+  unique_count: 868
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+bureau_avg_days_credit_overdue:
+  feature_name: bureau_avg_days_credit_overdue
+  display_name: số ngày quá hạn bureau trung bình
+  description: Feature `bureau_avg_days_credit_overdue` thuộc nhóm `lịch sử tín dụng
+    bên ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.14314935075493235
+  non_null_count: 263491
+  unique_count: 1541
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+bureau_credit_sum_total:
+  feature_name: bureau_credit_sum_total
+  display_name: tổng giá trị tín dụng bureau
+  description: Feature `bureau_credit_sum_total` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 205644
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+bureau_credit_sum_mean:
+  feature_name: bureau_credit_sum_mean
+  display_name: bureau credit sum mean
+  description: Feature `bureau_credit_sum_mean` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.14315260267112395
+  non_null_count: 263490
+  unique_count: 209604
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+bureau_credit_sum_max:
+  feature_name: bureau_credit_sum_max
+  display_name: bureau credit sum max
+  description: Feature `bureau_credit_sum_max` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.14315260267112395
+  non_null_count: 263490
+  unique_count: 65160
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+bureau_credit_debt_total:
+  feature_name: bureau_credit_debt_total
+  display_name: tổng dư nợ bureau
+  description: Feature `bureau_credit_debt_total` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 155004
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+bureau_credit_debt_mean:
+  feature_name: bureau_credit_debt_mean
+  display_name: bureau credit debt mean
+  description: Feature `bureau_credit_debt_mean` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.16708345392522544
+  non_null_count: 256131
+  unique_count: 169333
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+bureau_credit_debt_max:
+  feature_name: bureau_credit_debt_max
+  display_name: bureau credit debt max
+  description: Feature `bureau_credit_debt_max` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.16708345392522544
+  non_null_count: 256131
+  unique_count: 138943
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+bureau_credit_limit_total:
+  feature_name: bureau_credit_limit_total
+  display_name: tổng hạn mức tín dụng bureau
+  description: Feature `bureau_credit_limit_total` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 37290
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+bureau_credit_limit_mean:
+  feature_name: bureau_credit_limit_mean
+  display_name: bureau credit limit mean
+  description: Feature `bureau_credit_limit_mean` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.21159893467225563
+  non_null_count: 242442
+  unique_count: 38950
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+bureau_overdue_amount_total:
+  feature_name: bureau_overdue_amount_total
+  display_name: tổng số tiền quá hạn bureau
+  description: Feature `bureau_overdue_amount_total` thuộc nhóm `lịch sử tín dụng
+    bên ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 1218
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: currency_rounded
+bureau_overdue_amount_max:
+  feature_name: bureau_overdue_amount_max
+  display_name: bureau overdue amount max
+  description: Feature `bureau_overdue_amount_max` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.14314935075493235
+  non_null_count: 263491
+  unique_count: 1203
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: currency_rounded
+bureau_avg_days_credit:
+  feature_name: bureau_avg_days_credit
+  display_name: bureau avg days credit
+  description: Feature `bureau_avg_days_credit` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.14314935075493235
+  non_null_count: 263491
+  unique_count: 64556
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_min_days_credit:
+  feature_name: bureau_min_days_credit
+  display_name: bureau min days credit
+  description: Feature `bureau_min_days_credit` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.14314935075493235
+  non_null_count: 263491
+  unique_count: 2922
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_max_days_credit:
+  feature_name: bureau_max_days_credit
+  display_name: bureau max days credit
+  description: Feature `bureau_max_days_credit` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.14314935075493235
+  non_null_count: 263491
+  unique_count: 2923
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_recent_loan_count:
+  feature_name: bureau_recent_loan_count
+  display_name: bureau recent loan count
+  description: Feature `bureau_recent_loan_count` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 32
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_debt_to_credit_ratio:
+  feature_name: bureau_debt_to_credit_ratio
+  display_name: tỷ lệ dư nợ trên tổng tín dụng bureau
+  description: Feature `bureau_debt_to_credit_ratio` thuộc nhóm `lịch sử tín dụng
+    bên ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.14667117599045237
+  non_null_count: 262408
+  unique_count: 184778
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+bureau_long_history_months:
+  feature_name: bureau_long_history_months
+  display_name: độ dài lịch sử bureau theo tháng
+  description: Feature `bureau_long_history_months` thuộc nhóm `lịch sử tín dụng bên
+    ngoài`, được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: months
+  unit: months
+  missing_rate: 0.14314935075493235
+  non_null_count: 263491
+  unique_count: 2922
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+has_bureau_history:
+  feature_name: has_bureau_history
+  display_name: có lịch sử bureau hay không
+  description: Feature `has_bureau_history` thuộc nhóm `lịch sử tín dụng bên ngoài`,
+    được tạo từ bảng `bureau` trong Data Layer.
+  concept: external_credit_history
+  concept_display_name: lịch sử tín dụng bên ngoài
+  source_table: bureau
+  source_feature_file: bureau_features.parquet
+  data_kind: binary
+  pandas_dtype: int8
+  value_type: binary_indicator
+  unit: 0_or_1
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: boolean_indicator
+bureau_balance_months_observed:
+  feature_name: bureau_balance_months_observed
+  display_name: số tháng bureau balance quan sát được
+  description: Feature `bureau_balance_months_observed` thuộc nhóm `hành vi tín dụng
+    hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 1102
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_balance_good_status_count:
+  feature_name: bureau_balance_good_status_count
+  display_name: số tháng bureau có trạng thái tốt
+  description: Feature `bureau_balance_good_status_count` thuộc nhóm `hành vi tín
+    dụng hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 451
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: integer
+bureau_balance_bad_status_count:
+  feature_name: bureau_balance_bad_status_count
+  display_name: số tháng bureau có trạng thái xấu
+  description: Feature `bureau_balance_bad_status_count` thuộc nhóm `hành vi tín dụng
+    hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 162
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+bureau_balance_closed_status_count:
+  feature_name: bureau_balance_closed_status_count
+  display_name: bureau balance closed status count
+  description: Feature `bureau_balance_closed_status_count` thuộc nhóm `hành vi tín
+    dụng hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 764
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: integer
+bureau_balance_unknown_status_count:
+  feature_name: bureau_balance_unknown_status_count
+  display_name: bureau balance unknown status count
+  description: Feature `bureau_balance_unknown_status_count` thuộc nhóm `hành vi tín
+    dụng hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 536
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_balance_recent_month_count:
+  feature_name: bureau_balance_recent_month_count
+  display_name: bureau balance recent month count
+  description: Feature `bureau_balance_recent_month_count` thuộc nhóm `hành vi tín
+    dụng hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 352
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+bureau_balance_recent_bad_status_count:
+  feature_name: bureau_balance_recent_bad_status_count
+  display_name: bureau balance recent bad status count
+  description: Feature `bureau_balance_recent_bad_status_count` thuộc nhóm `hành vi
+    tín dụng hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 60
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+bureau_balance_max_status_numeric:
+  feature_name: bureau_balance_max_status_numeric
+  display_name: bureau balance max status numeric
+  description: Feature `bureau_balance_max_status_numeric` thuộc nhóm `hành vi tín
+    dụng hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: numeric
+  unit: null
+  missing_rate: 0.7053243623805328
+  non_null_count: 90616
+  unique_count: 6
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_3_decimal
+bureau_balance_avg_status_numeric:
+  feature_name: bureau_balance_avg_status_numeric
+  display_name: bureau balance avg status numeric
+  description: Feature `bureau_balance_avg_status_numeric` thuộc nhóm `hành vi tín
+    dụng hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: numeric
+  unit: null
+  missing_rate: 0.7053243623805328
+  non_null_count: 90616
+  unique_count: 14559
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_3_decimal
+bureau_balance_bad_status_ratio:
+  feature_name: bureau_balance_bad_status_ratio
+  display_name: tỷ lệ tháng bureau có trạng thái xấu
+  description: Feature `bureau_balance_bad_status_ratio` thuộc nhóm `hành vi tín dụng
+    hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.700072517731073
+  non_null_count: 92231
+  unique_count: 6403
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+bureau_balance_recent_bad_status_ratio:
+  feature_name: bureau_balance_recent_bad_status_ratio
+  display_name: bureau balance recent bad status ratio
+  description: Feature `bureau_balance_recent_bad_status_ratio` thuộc nhóm `hành vi
+    tín dụng hàng tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.7071486873640292
+  non_null_count: 90055
+  unique_count: 1501
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+has_bureau_balance_history:
+  feature_name: has_bureau_balance_history
+  display_name: có lịch sử bureau balance hay không
+  description: Feature `has_bureau_balance_history` thuộc nhóm `hành vi tín dụng hàng
+    tháng từ bureau`, được tạo từ bảng `bureau_balance` trong Data Layer.
+  concept: bureau_monthly_behavior
+  concept_display_name: hành vi tín dụng hàng tháng từ bureau
+  source_table: bureau_balance
+  source_feature_file: bureau_balance_features.parquet
+  data_kind: binary
+  pandas_dtype: int8
+  value_type: binary_indicator
+  unit: 0_or_1
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: boolean_indicator
+previous_application_count:
+  feature_name: previous_application_count
+  display_name: số đơn vay trước đó
+  description: Feature `previous_application_count` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 66
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+previous_approved_count:
+  feature_name: previous_approved_count
+  display_name: số đơn vay trước được duyệt
+  description: Feature `previous_approved_count` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 26
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: integer
+previous_refused_count:
+  feature_name: previous_refused_count
+  display_name: số đơn vay trước bị từ chối
+  description: Feature `previous_refused_count` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 46
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+previous_canceled_count:
+  feature_name: previous_canceled_count
+  display_name: previous canceled count
+  description: Feature `previous_canceled_count` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 39
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+previous_unused_offer_count:
+  feature_name: previous_unused_offer_count
+  display_name: previous unused offer count
+  description: Feature `previous_unused_offer_count` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 11
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+previous_avg_credit_amount:
+  feature_name: previous_avg_credit_amount
+  display_name: previous avg credit amount
+  description: Feature `previous_avg_credit_amount` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.05350702901684818
+  non_null_count: 291057
+  unique_count: 210634
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+previous_max_credit_amount:
+  feature_name: previous_max_credit_amount
+  display_name: previous max credit amount
+  description: Feature `previous_max_credit_amount` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.05350702901684818
+  non_null_count: 291057
+  unique_count: 58510
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+previous_total_credit_amount:
+  feature_name: previous_total_credit_amount
+  display_name: previous total credit amount
+  description: Feature `previous_total_credit_amount` thuộc nhóm `lịch sử đơn vay
+    trước đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 194245
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+previous_avg_annuity:
+  feature_name: previous_avg_annuity
+  display_name: previous avg annuity
+  description: Feature `previous_avg_annuity` thuộc nhóm `lịch sử đơn vay trước đó`,
+    được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.054863078068752014
+  non_null_count: 290640
+  unique_count: 268978
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+previous_max_annuity:
+  feature_name: previous_max_annuity
+  display_name: previous max annuity
+  description: Feature `previous_max_annuity` thuộc nhóm `lịch sử đơn vay trước đó`,
+    được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.054863078068752014
+  non_null_count: 290640
+  unique_count: 145950
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+previous_avg_application_amount:
+  feature_name: previous_avg_application_amount
+  display_name: previous avg application amount
+  description: Feature `previous_avg_application_amount` thuộc nhóm `lịch sử đơn vay
+    trước đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.05350702901684818
+  non_null_count: 291057
+  unique_count: 191770
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+previous_total_application_amount:
+  feature_name: previous_total_application_amount
+  display_name: previous total application amount
+  description: Feature `previous_total_application_amount` thuộc nhóm `lịch sử đơn
+    vay trước đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 175562
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+previous_avg_days_decision:
+  feature_name: previous_avg_days_decision
+  display_name: previous avg days decision
+  description: Feature `previous_avg_days_decision` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.05350702901684818
+  non_null_count: 291057
+  unique_count: 60029
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+previous_recent_application_count:
+  feature_name: previous_recent_application_count
+  display_name: previous recent application count
+  description: Feature `previous_recent_application_count` thuộc nhóm `lịch sử đơn
+    vay trước đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 54
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+previous_cash_loan_count:
+  feature_name: previous_cash_loan_count
+  display_name: previous cash loan count
+  description: Feature `previous_cash_loan_count` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 59
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+previous_consumer_loan_count:
+  feature_name: previous_consumer_loan_count
+  display_name: previous consumer loan count
+  description: Feature `previous_consumer_loan_count` thuộc nhóm `lịch sử đơn vay
+    trước đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 36
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+previous_revolving_loan_count:
+  feature_name: previous_revolving_loan_count
+  display_name: previous revolving loan count
+  description: Feature `previous_revolving_loan_count` thuộc nhóm `lịch sử đơn vay
+    trước đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 27
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+previous_approval_ratio:
+  feature_name: previous_approval_ratio
+  display_name: tỷ lệ đơn vay trước được duyệt
+  description: Feature `previous_approval_ratio` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05350702901684818
+  non_null_count: 291057
+  unique_count: 362
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+previous_refusal_ratio:
+  feature_name: previous_refusal_ratio
+  display_name: tỷ lệ đơn vay trước bị từ chối
+  description: Feature `previous_refusal_ratio` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05350702901684818
+  non_null_count: 291057
+  unique_count: 397
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+previous_canceled_ratio:
+  feature_name: previous_canceled_ratio
+  display_name: previous canceled ratio
+  description: Feature `previous_canceled_ratio` thuộc nhóm `lịch sử đơn vay trước
+    đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05350702901684818
+  non_null_count: 291057
+  unique_count: 362
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+previous_credit_to_application_ratio:
+  feature_name: previous_credit_to_application_ratio
+  display_name: previous credit to application ratio
+  description: Feature `previous_credit_to_application_ratio` thuộc nhóm `lịch sử
+    đơn vay trước đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.056807723951338325
+  non_null_count: 290042
+  unique_count: 256081
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+has_previous_application_history:
+  feature_name: has_previous_application_history
+  display_name: có lịch sử đơn vay trước hay không
+  description: Feature `has_previous_application_history` thuộc nhóm `lịch sử đơn
+    vay trước đó`, được tạo từ bảng `previous_application` trong Data Layer.
+  concept: previous_application_behavior
+  concept_display_name: lịch sử đơn vay trước đó
+  source_table: previous_application
+  source_feature_file: previous_application_features.parquet
+  data_kind: binary
+  pandas_dtype: int8
+  value_type: binary_indicator
+  unit: 0_or_1
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: boolean_indicator
+installment_count:
+  feature_name: installment_count
+  display_name: installment count
+  description: Feature `installment_count` thuộc nhóm `hành vi trả góp`, được tạo
+    từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 320
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+installment_late_payment_count:
+  feature_name: installment_late_payment_count
+  display_name: installment late payment count
+  description: Feature `installment_late_payment_count` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 102
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+installment_early_payment_count:
+  feature_name: installment_early_payment_count
+  display_name: installment early payment count
+  description: Feature `installment_early_payment_count` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 222
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: integer
+installment_avg_days_late:
+  feature_name: installment_avg_days_late
+  display_name: installment avg days late
+  description: Feature `installment_avg_days_late` thuộc nhóm `hành vi trả góp`, được
+    tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.4959562422157256
+  non_null_count: 154999
+  unique_count: 9495
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+installment_max_days_late:
+  feature_name: installment_max_days_late
+  display_name: installment max days late
+  description: Feature `installment_max_days_late` thuộc nhóm `hành vi trả góp`, được
+    tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.4959562422157256
+  non_null_count: 154999
+  unique_count: 1641
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+installment_sum_days_late:
+  feature_name: installment_sum_days_late
+  display_name: installment sum days late
+  description: Feature `installment_sum_days_late` thuộc nhóm `hành vi trả góp`, được
+    tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2077
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+installment_avg_days_early:
+  feature_name: installment_avg_days_early
+  display_name: installment avg days early
+  description: Feature `installment_avg_days_early` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.05423545824377014
+  non_null_count: 290833
+  unique_count: 40552
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: integer
+installment_max_days_early:
+  feature_name: installment_max_days_early
+  display_name: installment max days early
+  description: Feature `installment_max_days_early` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.05423545824377014
+  non_null_count: 290833
+  unique_count: 421
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: integer
+installment_underpayment_count:
+  feature_name: installment_underpayment_count
+  display_name: installment underpayment count
+  description: Feature `installment_underpayment_count` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 126
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+installment_fully_paid_count:
+  feature_name: installment_fully_paid_count
+  display_name: installment fully paid count
+  description: Feature `installment_fully_paid_count` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 297
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: integer
+installment_payment_ratio_avg:
+  feature_name: installment_payment_ratio_avg
+  display_name: installment payment ratio avg
+  description: Feature `installment_payment_ratio_avg` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05163717720666903
+  non_null_count: 291632
+  unique_count: 42704
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+installment_payment_ratio_min:
+  feature_name: installment_payment_ratio_min
+  display_name: installment payment ratio min
+  description: Feature `installment_payment_ratio_min` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05163717720666903
+  non_null_count: 291632
+  unique_count: 117014
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+installment_payment_ratio_max:
+  feature_name: installment_payment_ratio_max
+  display_name: installment payment ratio max
+  description: Feature `installment_payment_ratio_max` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05163717720666903
+  non_null_count: 291632
+  unique_count: 36094
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+installment_payment_ratio_std:
+  feature_name: installment_payment_ratio_std
+  display_name: installment payment ratio std
+  description: Feature `installment_payment_ratio_std` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05387449554650078
+  non_null_count: 290944
+  unique_count: 143879
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+installment_total_expected_amount:
+  feature_name: installment_total_expected_amount
+  display_name: installment total expected amount
+  description: Feature `installment_total_expected_amount` thuộc nhóm `hành vi trả
+    góp`, được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 288144
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+installment_total_paid_amount:
+  feature_name: installment_total_paid_amount
+  display_name: installment total paid amount
+  description: Feature `installment_total_paid_amount` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 287755
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+installment_late_payment_ratio:
+  feature_name: installment_late_payment_ratio
+  display_name: tỷ lệ kỳ thanh toán bị trễ
+  description: Feature `installment_late_payment_ratio` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.051601406128561254
+  non_null_count: 291643
+  unique_count: 4972
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+installment_early_payment_ratio:
+  feature_name: installment_early_payment_ratio
+  display_name: installment early payment ratio
+  description: Feature `installment_early_payment_ratio` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.051601406128561254
+  non_null_count: 291643
+  unique_count: 8746
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_decrease_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+installment_underpayment_ratio:
+  feature_name: installment_underpayment_ratio
+  display_name: tỷ lệ kỳ thanh toán trả thiếu
+  description: Feature `installment_underpayment_ratio` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.051601406128561254
+  non_null_count: 291643
+  unique_count: 4892
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+installment_total_payment_gap:
+  feature_name: installment_total_payment_gap
+  display_name: tổng chênh lệch giữa số phải trả và đã trả
+  description: Feature `installment_total_payment_gap` thuộc nhóm `hành vi trả góp`,
+    được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 131290
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: currency_rounded
+installment_recent_count:
+  feature_name: installment_recent_count
+  display_name: installment recent count
+  description: Feature `installment_recent_count` thuộc nhóm `hành vi trả góp`, được
+    tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 13
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+installment_recent_late_payment_count:
+  feature_name: installment_recent_late_payment_count
+  display_name: installment recent late payment count
+  description: Feature `installment_recent_late_payment_count` thuộc nhóm `hành vi
+    trả góp`, được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 13
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+installment_recent_payment_ratio_avg:
+  feature_name: installment_recent_payment_ratio_avg
+  display_name: installment recent payment ratio avg
+  description: Feature `installment_recent_payment_ratio_avg` thuộc nhóm `hành vi
+    trả góp`, được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05166644445239357
+  non_null_count: 291623
+  unique_count: 35182
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+installment_recent_underpayment_count:
+  feature_name: installment_recent_underpayment_count
+  display_name: installment recent underpayment count
+  description: Feature `installment_recent_underpayment_count` thuộc nhóm `hành vi
+    trả góp`, được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 13
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+installment_recent_late_payment_ratio:
+  feature_name: installment_recent_late_payment_ratio
+  display_name: installment recent late payment ratio
+  description: Feature `installment_recent_late_payment_ratio` thuộc nhóm `hành vi
+    trả góp`, được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.051601406128561254
+  non_null_count: 291643
+  unique_count: 47
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+installment_recent_underpayment_ratio:
+  feature_name: installment_recent_underpayment_ratio
+  display_name: installment recent underpayment ratio
+  description: Feature `installment_recent_underpayment_ratio` thuộc nhóm `hành vi
+    trả góp`, được tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.051601406128561254
+  non_null_count: 291643
+  unique_count: 46
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+has_installment_history:
+  feature_name: has_installment_history
+  display_name: có lịch sử trả góp hay không
+  description: Feature `has_installment_history` thuộc nhóm `hành vi trả góp`, được
+    tạo từ bảng `installments_payments` trong Data Layer.
+  concept: installment_repayment_behavior
+  concept_display_name: hành vi trả góp
+  source_table: installments_payments
+  source_feature_file: installments_features.parquet
+  data_kind: binary
+  pandas_dtype: int8
+  value_type: binary_indicator
+  unit: 0_or_1
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: boolean_indicator
+pos_cash_months_observed:
+  feature_name: pos_cash_months_observed
+  display_name: pos cash months observed
+  description: Feature `pos_cash_months_observed` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 228
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+pos_cash_contract_count:
+  feature_name: pos_cash_contract_count
+  display_name: pos cash contract count
+  description: Feature `pos_cash_contract_count` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 26
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+pos_cash_avg_installment_count:
+  feature_name: pos_cash_avg_installment_count
+  display_name: pos cash avg installment count
+  description: Feature `pos_cash_avg_installment_count` thuộc nhóm `hành vi khoản
+    vay POS/CASH`, được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: numeric
+  unit: null
+  missing_rate: 0.05883041582252342
+  non_null_count: 289420
+  unique_count: 41222
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_3_decimal
+pos_cash_avg_future_installment_count:
+  feature_name: pos_cash_avg_future_installment_count
+  display_name: pos cash avg future installment count
+  description: Feature `pos_cash_avg_future_installment_count` thuộc nhóm `hành vi
+    khoản vay POS/CASH`, được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: numeric
+  unit: null
+  missing_rate: 0.05883041582252342
+  non_null_count: 289420
+  unique_count: 39840
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_3_decimal
+pos_cash_min_future_installment_count:
+  feature_name: pos_cash_min_future_installment_count
+  display_name: pos cash min future installment count
+  description: Feature `pos_cash_min_future_installment_count` thuộc nhóm `hành vi
+    khoản vay POS/CASH`, được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: numeric
+  unit: null
+  missing_rate: 0.05883041582252342
+  non_null_count: 289420
+  unique_count: 61
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_3_decimal
+pos_cash_max_future_installment_count:
+  feature_name: pos_cash_max_future_installment_count
+  display_name: pos cash max future installment count
+  description: Feature `pos_cash_max_future_installment_count` thuộc nhóm `hành vi
+    khoản vay POS/CASH`, được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: numeric
+  unit: null
+  missing_rate: 0.05883041582252342
+  non_null_count: 289420
+  unique_count: 62
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: number_3_decimal
+pos_cash_dpd_count:
+  feature_name: pos_cash_dpd_count
+  display_name: pos cash dpd count
+  description: Feature `pos_cash_dpd_count` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 103
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+pos_cash_avg_dpd:
+  feature_name: pos_cash_avg_dpd
+  display_name: pos cash avg dpd
+  description: Feature `pos_cash_avg_dpd` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.05875236983392464
+  non_null_count: 289444
+  unique_count: 10768
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+pos_cash_max_dpd:
+  feature_name: pos_cash_max_dpd
+  display_name: pos cash max dpd
+  description: Feature `pos_cash_max_dpd` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.05875236983392464
+  non_null_count: 289444
+  unique_count: 1919
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+pos_cash_def_dpd_count:
+  feature_name: pos_cash_def_dpd_count
+  display_name: pos cash def dpd count
+  description: Feature `pos_cash_def_dpd_count` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 62
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+pos_cash_avg_def_dpd:
+  feature_name: pos_cash_avg_def_dpd
+  display_name: pos cash avg def dpd
+  description: Feature `pos_cash_avg_def_dpd` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.05875236983392464
+  non_null_count: 289444
+  unique_count: 4471
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+pos_cash_max_def_dpd:
+  feature_name: pos_cash_max_def_dpd
+  display_name: pos cash max def dpd
+  description: Feature `pos_cash_max_def_dpd` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.05875236983392464
+  non_null_count: 289444
+  unique_count: 200
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+pos_cash_active_count:
+  feature_name: pos_cash_active_count
+  display_name: pos cash active count
+  description: Feature `pos_cash_active_count` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 212
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+pos_cash_completed_count:
+  feature_name: pos_cash_completed_count
+  display_name: pos cash completed count
+  description: Feature `pos_cash_completed_count` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 47
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+pos_cash_demand_count:
+  feature_name: pos_cash_demand_count
+  display_name: pos cash demand count
+  description: Feature `pos_cash_demand_count` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 53
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+pos_cash_signed_count:
+  feature_name: pos_cash_signed_count
+  display_name: pos cash signed count
+  description: Feature `pos_cash_signed_count` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 32
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+pos_cash_status_xna_count:
+  feature_name: pos_cash_status_xna_count
+  display_name: pos cash status xna count
+  description: Feature `pos_cash_status_xna_count` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+pos_cash_dpd_ratio:
+  feature_name: pos_cash_dpd_ratio
+  display_name: tỷ lệ tháng POS/CASH bị quá hạn
+  description: Feature `pos_cash_dpd_ratio` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05875236983392464
+  non_null_count: 289444
+  unique_count: 2499
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+pos_cash_def_dpd_ratio:
+  feature_name: pos_cash_def_dpd_ratio
+  display_name: pos cash def dpd ratio
+  description: Feature `pos_cash_def_dpd_ratio` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.05875236983392464
+  non_null_count: 289444
+  unique_count: 1258
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+has_pos_cash_history:
+  feature_name: has_pos_cash_history
+  display_name: có lịch sử POS/CASH hay không
+  description: Feature `has_pos_cash_history` thuộc nhóm `hành vi khoản vay POS/CASH`,
+    được tạo từ bảng `POS_CASH_balance` trong Data Layer.
+  concept: pos_cash_behavior
+  concept_display_name: hành vi khoản vay POS/CASH
+  source_table: POS_CASH_balance
+  source_feature_file: pos_cash_features.parquet
+  data_kind: binary
+  pandas_dtype: int8
+  value_type: binary_indicator
+  unit: 0_or_1
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: boolean_indicator
+credit_card_months_observed:
+  feature_name: credit_card_months_observed
+  display_name: credit card months observed
+  description: Feature `credit_card_months_observed` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 129
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+credit_card_avg_balance:
+  feature_name: credit_card_avg_balance
+  display_name: credit card avg balance
+  description: Feature `credit_card_avg_balance` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 59467
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+credit_card_max_balance:
+  feature_name: credit_card_max_balance
+  display_name: credit card max balance
+  description: Feature `credit_card_max_balance` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 56722
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+credit_card_min_balance:
+  feature_name: credit_card_min_balance
+  display_name: credit card min balance
+  description: Feature `credit_card_min_balance` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 11608
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+credit_card_avg_limit:
+  feature_name: credit_card_avg_limit
+  display_name: credit card avg limit
+  description: Feature `credit_card_avg_limit` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 11313
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+credit_card_max_limit:
+  feature_name: credit_card_max_limit
+  display_name: credit card max limit
+  description: Feature `credit_card_max_limit` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 54
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+credit_card_avg_utilization:
+  feature_name: credit_card_avg_utilization
+  display_name: mức sử dụng thẻ tín dụng trung bình
+  description: Feature `credit_card_avg_utilization` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.7202181385381335
+  non_null_count: 86036
+  unique_count: 59105
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+credit_card_max_utilization:
+  feature_name: credit_card_max_utilization
+  display_name: mức sử dụng thẻ tín dụng cao nhất
+  description: Feature `credit_card_max_utilization` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.7202181385381335
+  non_null_count: 86036
+  unique_count: 56150
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+credit_card_avg_payment_to_min_ratio:
+  feature_name: credit_card_avg_payment_to_min_ratio
+  display_name: credit card avg payment to min ratio
+  description: Feature `credit_card_avg_payment_to_min_ratio` thuộc nhóm `hành vi
+    sử dụng thẻ tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.8072296600772005
+  non_null_count: 59279
+  unique_count: 57701
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+credit_card_min_payment_to_min_ratio:
+  feature_name: credit_card_min_payment_to_min_ratio
+  display_name: credit card min payment to min ratio
+  description: Feature `credit_card_min_payment_to_min_ratio` thuộc nhóm `hành vi
+    sử dụng thẻ tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.8072296600772005
+  non_null_count: 59279
+  unique_count: 20770
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+credit_card_total_drawings:
+  feature_name: credit_card_total_drawings
+  display_name: credit card total drawings
+  description: Feature `credit_card_total_drawings` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 40377
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+credit_card_avg_drawings:
+  feature_name: credit_card_avg_drawings
+  display_name: credit card avg drawings
+  description: Feature `credit_card_avg_drawings` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 49079
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+credit_card_max_drawings:
+  feature_name: credit_card_max_drawings
+  display_name: credit card max drawings
+  description: Feature `credit_card_max_drawings` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: amount
+  unit: currency
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 24117
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: currency_rounded
+credit_card_avg_drawing_to_limit_ratio:
+  feature_name: credit_card_avg_drawing_to_limit_ratio
+  display_name: credit card avg drawing to limit ratio
+  description: Feature `credit_card_avg_drawing_to_limit_ratio` thuộc nhóm `hành vi
+    sử dụng thẻ tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.7202181385381335
+  non_null_count: 86036
+  unique_count: 49730
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+credit_card_max_drawing_to_limit_ratio:
+  feature_name: credit_card_max_drawing_to_limit_ratio
+  display_name: credit card max drawing to limit ratio
+  description: Feature `credit_card_max_drawing_to_limit_ratio` thuộc nhóm `hành vi
+    sử dụng thẻ tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.7202181385381335
+  non_null_count: 86036
+  unique_count: 24368
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: ratio_as_percentage_1_decimal
+credit_card_dpd_count:
+  feature_name: credit_card_dpd_count
+  display_name: credit card dpd count
+  description: Feature `credit_card_dpd_count` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 91
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+credit_card_avg_dpd:
+  feature_name: credit_card_avg_dpd
+  display_name: credit card avg dpd
+  description: Feature `credit_card_avg_dpd` thuộc nhóm `hành vi sử dụng thẻ tín dụng`,
+    được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 3606
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+credit_card_max_dpd:
+  feature_name: credit_card_max_dpd
+  display_name: credit card max dpd
+  description: Feature `credit_card_max_dpd` thuộc nhóm `hành vi sử dụng thẻ tín dụng`,
+    được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 409
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+credit_card_def_dpd_count:
+  feature_name: credit_card_def_dpd_count
+  display_name: credit card def dpd count
+  description: Feature `credit_card_def_dpd_count` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 64
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+credit_card_avg_def_dpd:
+  feature_name: credit_card_avg_def_dpd
+  display_name: credit card avg def dpd
+  description: Feature `credit_card_avg_def_dpd` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 1548
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+credit_card_max_def_dpd:
+  feature_name: credit_card_max_def_dpd
+  display_name: credit card max def dpd
+  description: Feature `credit_card_max_def_dpd` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: days
+  unit: days
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 52
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: integer
+credit_card_active_count:
+  feature_name: credit_card_active_count
+  display_name: credit card active count
+  description: Feature `credit_card_active_count` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 103
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+credit_card_completed_count:
+  feature_name: credit_card_completed_count
+  display_name: credit card completed count
+  description: Feature `credit_card_completed_count` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 40
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+credit_card_signed_count:
+  feature_name: credit_card_signed_count
+  display_name: credit card signed count
+  description: Feature `credit_card_signed_count` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: count
+  unit: count
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 43
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: integer
+credit_card_dpd_ratio:
+  feature_name: credit_card_dpd_ratio
+  display_name: tỷ lệ tháng thẻ tín dụng bị quá hạn
+  description: Feature `credit_card_dpd_ratio` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 1422
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+credit_card_def_dpd_ratio:
+  feature_name: credit_card_def_dpd_ratio
+  display_name: credit card def dpd ratio
+  description: Feature `credit_card_def_dpd_ratio` thuộc nhóm `hành vi sử dụng thẻ
+    tín dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: numeric
+  pandas_dtype: float64
+  value_type: ratio
+  unit: ratio
+  missing_rate: 0.7173922233676193
+  non_null_count: 86905
+  unique_count: 941
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: higher_value_may_increase_risk
+  formatting_rule: ratio_as_percentage_1_decimal
+has_credit_card_history:
+  feature_name: has_credit_card_history
+  display_name: có lịch sử thẻ tín dụng hay không
+  description: Feature `has_credit_card_history` thuộc nhóm `hành vi sử dụng thẻ tín
+    dụng`, được tạo từ bảng `credit_card_balance` trong Data Layer.
+  concept: credit_card_usage_behavior
+  concept_display_name: hành vi sử dụng thẻ tín dụng
+  source_table: credit_card_balance
+  source_feature_file: credit_card_features.parquet
+  data_kind: binary
+  pandas_dtype: int8
+  value_type: binary_indicator
+  unit: 0_or_1
+  missing_rate: 0.0
+  non_null_count: 307511
+  unique_count: 2
+  sensitive: false
+  mutable: false
+  allowed_for_model: true
+  allowed_in_user_explanation: true
+  allowed_in_recommendation: false
+  direction_prior: unknown
+  formatting_rule: boolean_indicator

@@ -1,0 +1,114 @@
+{
+  "created_at": "2026-06-24T03:28:16.083550+00:00",
+  "artifact_schema_version": "1.0.0",
+  "batch_name": "Batch F — Model Training Layer",
+  "status": "passed",
+  "script": "ml/scripts/model_layer/run_f_model_training_layer.py",
+  "random_state": 42,
+  "model_version": "v1",
+  "target_column": "TARGET",
+  "quality_gate": {
+    "status": "passed",
+    "check_count": 36,
+    "error_count": 0,
+    "warning_count": 0,
+    "errors": [],
+    "warnings": []
+  },
+  "models_trained": [
+    "logistic_regression",
+    "random_forest",
+    "hist_gradient_boosting"
+  ],
+  "models_skipped": [],
+  "training_errors": [],
+  "best_model": {
+    "model_name": "hist_gradient_boosting",
+    "model_family": "tree_boosting",
+    "dataset_branch": "tree",
+    "artifact_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/best_model.joblib",
+    "valid_metrics": {
+      "threshold": 0.5,
+      "roc_auc": 0.778471591179241,
+      "average_precision": 0.2711566761517476,
+      "precision": 0.18226217440543602,
+      "recall": 0.6914607948442535,
+      "f1": 0.28848308312794085,
+      "brier_score": 0.18128761429412119,
+      "tn": 30850,
+      "fp": 11553,
+      "fn": 1149,
+      "tp": 2575,
+      "positive_prediction_rate": 0.30628482233832677
+    },
+    "test_metrics": {
+      "threshold": 0.5,
+      "roc_auc": 0.7818126278633843,
+      "average_precision": 0.2740536201360184,
+      "precision": 0.1864528139768008,
+      "recall": 0.6992481203007519,
+      "f1": 0.2944036178631996,
+      "brier_score": 0.17997405730938718,
+      "tn": 31041,
+      "fp": 11362,
+      "fn": 1120,
+      "tp": 2604,
+      "positive_prediction_rate": 0.30277277950007586
+    }
+  },
+  "selection_policy": {
+    "primary_metric": "average_precision",
+    "secondary_metric": "roc_auc",
+    "tiebreaker_metric": "brier_score",
+    "tiebreaker_direction": "lower_is_better",
+    "selection_split": "valid"
+  },
+  "input_files": {
+    "tree_x_train": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/X_train_tree.parquet",
+    "tree_x_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/X_valid_tree.parquet",
+    "tree_x_test": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/X_test_tree.parquet",
+    "tree_y_train": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/y_train.parquet",
+    "tree_y_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/y_valid.parquet",
+    "tree_y_test": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/y_test.parquet",
+    "linear_x_train": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/linear/X_train_linear.parquet",
+    "linear_x_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/linear/X_valid_linear.parquet",
+    "linear_x_test": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/linear/X_test_linear.parquet",
+    "linear_y_train": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/linear/y_train.parquet",
+    "linear_y_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/linear/y_valid.parquet",
+    "linear_y_test": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/linear/y_test.parquet",
+    "tree_feature_columns": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_columns_tree.json",
+    "linear_feature_columns": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_columns_linear.json",
+    "tree_feature_mapping": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_mapping_tree.json",
+    "linear_feature_mapping": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_mapping_linear.json",
+    "raw_feature_registry_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/feature_registry.csv",
+    "concept_registry": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/concept_registry.yaml"
+  },
+  "configured_output_files": {
+    "logistic_regression_model": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/logistic_regression.joblib",
+    "random_forest_model": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/random_forest.joblib",
+    "hist_gradient_boosting_model": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/hist_gradient_boosting.joblib",
+    "best_model": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/best_model.joblib",
+    "model_metrics_summary": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_metrics_summary.csv",
+    "model_predictions_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_valid.csv",
+    "model_predictions_test": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_test.csv",
+    "model_threshold_analysis_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_threshold_analysis_valid.csv",
+    "model_feature_importance": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_feature_importance.csv",
+    "model_training_report": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_training_report.md",
+    "model_registry": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/model_registry.json",
+    "model_training_manifest": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/model_training_manifest.json"
+  },
+  "saved_model_paths": {
+    "logistic_regression": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/logistic_regression.joblib",
+    "random_forest": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/random_forest.joblib",
+    "hist_gradient_boosting": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/hist_gradient_boosting.joblib"
+  },
+  "best_model_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/best_model.joblib",
+  "dataframe_paths": {
+    "model_metrics_summary": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_metrics_summary.csv",
+    "model_predictions_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_valid.csv",
+    "model_predictions_test": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_test.csv",
+    "model_threshold_analysis_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_threshold_analysis_valid.csv",
+    "model_feature_importance": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_feature_importance.csv"
+  },
+  "model_registry_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/model_registry.json"
+}

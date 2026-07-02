@@ -1,0 +1,61 @@
+application_profile:
+  display_name: hồ sơ khách hàng
+  description: Nhóm thông tin mô tả hồ sơ cơ bản của khách hàng.
+  allowed_in_user_explanation: true
+  sensitive_risk: medium
+applicant_stability:
+  display_name: độ ổn định hồ sơ
+  description: Nhóm yếu tố phản ánh độ ổn định nghề nghiệp, tuổi hồ sơ và thông tin
+    đăng ký.
+  allowed_in_user_explanation: true
+  sensitive_risk: medium
+loan_affordability:
+  display_name: khả năng gánh khoản vay
+  description: Nhóm yếu tố phản ánh quan hệ giữa khoản vay, khoản trả định kỳ và thu
+    nhập.
+  allowed_in_user_explanation: true
+  sensitive_risk: low
+external_score_signal:
+  display_name: tín hiệu điểm ngoài
+  description: Nhóm điểm/tín hiệu rủi ro bên ngoài có sẵn trong dữ liệu.
+  allowed_in_user_explanation: limited
+  sensitive_risk: medium
+external_credit_history:
+  display_name: lịch sử tín dụng bên ngoài
+  description: Nhóm yếu tố phản ánh các khoản tín dụng của khách hàng tại tổ chức
+    khác.
+  allowed_in_user_explanation: true
+  sensitive_risk: low
+bureau_monthly_behavior:
+  display_name: hành vi tín dụng hàng tháng từ bureau
+  description: Nhóm yếu tố phản ánh trạng thái hàng tháng của các khoản tín dụng bên
+    ngoài.
+  allowed_in_user_explanation: true
+  sensitive_risk: low
+previous_application_behavior:
+  display_name: lịch sử đơn vay trước đó
+  description: Nhóm yếu tố phản ánh trạng thái các đơn vay trước đây của khách hàng.
+  allowed_in_user_explanation: true
+  sensitive_risk: low
+installment_repayment_behavior:
+  display_name: hành vi trả góp
+  description: Nhóm yếu tố phản ánh mức độ đúng hạn và đầy đủ trong các kỳ thanh toán
+    trả góp.
+  allowed_in_user_explanation: true
+  sensitive_risk: low
+pos_cash_behavior:
+  display_name: hành vi khoản vay POS/CASH
+  description: Nhóm yếu tố phản ánh trạng thái và quá hạn của các khoản vay POS/CASH.
+  allowed_in_user_explanation: true
+  sensitive_risk: low
+credit_card_usage_behavior:
+  display_name: hành vi sử dụng thẻ tín dụng
+  description: Nhóm yếu tố phản ánh dư nợ, hạn mức, thanh toán tối thiểu và quá hạn
+    trên thẻ tín dụng.
+  allowed_in_user_explanation: true
+  sensitive_risk: low
+unknown_feature_group:
+  display_name: nhóm feature chưa phân loại
+  description: Nhóm fallback cho các feature chưa map được concept rõ ràng.
+  allowed_in_user_explanation: false
+  sensitive_risk: unknown

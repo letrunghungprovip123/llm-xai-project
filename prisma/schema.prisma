@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Customer {
+  id         String   @id @default(cuid())
+  externalId String?  @unique
+  payload    Json
+  createdAt  DateTime @default(now())
+
+  predictions Prediction[]
+}
+
+model Prediction {
+  id             String   @id @default(cuid())
+  customerId     String?
+  customer       Customer? @relation(fields: [customerId], references: [id])
+
+  modelName      String
+  modelVersion   String
+  predictedLabel String
+  probability    Float
+  threshold      Float    @default(0.5)
+  inputPayload   Json
+  createdAt      DateTime @default(now())
+
+  explanationIRs  ExplanationIR[]
+  llmExplanations LLMExplanation[]
+}
+
+model ExplanationIR {
+  id           String   @id @default(cuid())
+  predictionId String
+  prediction   Prediction @relation(fields: [predictionId], references: [id])
+
+  irVersion    String
+  irJson       Json
+  createdAt    DateTime @default(now())
+}
+
+model LLMExplanation {
+  id            String   @id @default(cuid())
+  predictionId  String
+  prediction    Prediction @relation(fields: [predictionId], references: [id])
+
+  audienceType  String
+  promptVersion String
+  llmModel      String
+  text          String
+  createdAt     DateTime @default(now())
+
+  validationResults ValidationResult[]
+  humanEvaluations  HumanEvaluation[]
+}
+
+model ValidationResult {
+  id                String   @id @default(cuid())
+  explanationId     String
+  explanation       LLMExplanation @relation(fields: [explanationId], references: [id])
+
+  status            String
+  faithfulnessScore Float
+  errorsJson        Json
+  feedback          String?
+  createdAt         DateTime @default(now())
+}
+
+model HumanEvaluation {
+  id               String   @id @default(cuid())
+  explanationId    String
+  explanation      LLMExplanation @relation(fields: [explanationId], references: [id])
+
+  evaluatorType    String?
+  clarityScore     Int?
+  usefulnessScore  Int?
+  trustScore       Int?
+  correctnessScore Int?
+  comment          String?
+  createdAt        DateTime @default(now())
+}

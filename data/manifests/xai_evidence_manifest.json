@@ -1,0 +1,358 @@
+{
+  "batch_name": "Batch G — XAI Evidence Layer",
+  "batch_short_name": "batch_g_xai_evidence_layer",
+  "status": "PASSED",
+  "created_at": "2026-06-25T04:35:21.673957+00:00",
+  "run_mode": "evaluation",
+  "has_ground_truth": true,
+  "purpose": "Generate structured local XAI evidence using the selected best model, model-ready features, model predictions, representative case selection, and SHAP local attribution.",
+  "model": {
+    "model_name": "hist_gradient_boosting",
+    "model_version": "v1",
+    "model_family": "tree_boosting",
+    "dataset_branch": "tree",
+    "feature_count": 213,
+    "estimator_type": "HistGradientBoostingClassifier",
+    "default_threshold": 0.5
+  },
+  "xai_method": {
+    "method": "SHAP",
+    "explainer_type": "TreeExplainer",
+    "output_space": "probability",
+    "case_count": 30,
+    "feature_count": 213,
+    "top_k_features": 15
+  },
+  "inputs": {
+    "run_mode": "evaluation",
+    "has_ground_truth": true,
+    "required": {
+      "best_model": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/best_model.joblib",
+      "model_registry": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/model_registry.json",
+      "tree_feature_columns": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_columns_tree.json",
+      "tree_feature_mapping": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_mapping_tree.json",
+      "feature_registry_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/feature_registry.csv",
+      "concept_registry": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/concept_registry.yaml",
+      "x_tree": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/X_test_tree.parquet",
+      "y": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/y_test.parquet",
+      "model_predictions": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_test.csv"
+    },
+    "optional": {
+      "feature_registry_yaml": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/feature_registry.yaml",
+      "model_metrics_summary": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_metrics_summary.csv",
+      "model_threshold_analysis_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_threshold_analysis_valid.csv",
+      "model_feature_importance": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_feature_importance.csv",
+      "model_training_manifest": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/model_training_manifest.json"
+    },
+    "primary_runtime_inputs": {
+      "model_registry": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/model_registry.json",
+      "best_model": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/best_model.joblib",
+      "X_data": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/X_test_tree.parquet",
+      "y_data": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/y_test.parquet",
+      "model_predictions": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_test.csv"
+    }
+  },
+  "outputs": {
+    "selected_cases_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_selected_cases.csv",
+    "local_evidence_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_local_evidence.jsonl",
+    "evidence_summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_evidence_summary.csv",
+    "quality_report_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_quality_report.json",
+    "evidence_manifest_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/xai_evidence_manifest.json"
+  },
+  "output_path_status": {
+    "xai_selected_cases_csv": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_selected_cases.csv",
+      "exists": true,
+      "size_bytes": 5948
+    },
+    "xai_local_evidence_jsonl": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_local_evidence.jsonl",
+      "exists": true,
+      "size_bytes": 1493558
+    },
+    "xai_evidence_summary_csv": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_evidence_summary.csv",
+      "exists": true,
+      "size_bytes": 22598
+    },
+    "xai_evidence_manifest": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/xai_evidence_manifest.json",
+      "exists": true,
+      "size_bytes": 13093
+    },
+    "xai_quality_report_json": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_quality_report.json",
+      "exists": true,
+      "size_bytes": 4809
+    }
+  },
+  "config": {
+    "batch_name": "Batch G — XAI Evidence Layer",
+    "batch_short_name": "batch_g_xai_evidence_layer",
+    "project_root": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next",
+    "run_mode": "evaluation",
+    "has_ground_truth": true,
+    "supported_run_modes": [
+      "evaluation",
+      "inference"
+    ],
+    "expected_best_model_name": "hist_gradient_boosting",
+    "expected_dataset_branch": "tree",
+    "id_column": "SK_ID_CURR",
+    "target_column": "TARGET",
+    "positive_class": 1,
+    "negative_class": 0,
+    "positive_label_text": "high_default_risk",
+    "negative_label_text": "low_default_risk",
+    "unknown_label_text": "unknown_label",
+    "default_threshold_fallback": 0.5,
+    "xai_config": {
+      "random_state": 42,
+      "cases_per_group": 5,
+      "top_k_features": 15,
+      "shap_background_sample_size": 200,
+      "shap_debug_case_limit": 5,
+      "shap_output_space": "probability",
+      "xai_method": "SHAP",
+      "case_groups": [
+        "top_high_risk",
+        "low_risk",
+        "true_positive",
+        "false_positive",
+        "false_negative",
+        "near_threshold"
+      ],
+      "evaluation_case_groups": [
+        "top_high_risk",
+        "low_risk",
+        "true_positive",
+        "false_positive",
+        "false_negative",
+        "near_threshold"
+      ],
+      "inference_case_groups": [
+        "top_high_risk",
+        "low_risk",
+        "near_threshold"
+      ],
+      "additivity_tolerance": 0.01
+    },
+    "mode_paths": {
+      "x_data_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/X_test_tree.parquet",
+      "y_data_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/y_test.parquet",
+      "predictions_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_test.csv"
+    },
+    "required_input_paths": {
+      "best_model": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/artifacts/models/best_model.joblib",
+      "model_registry": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/model_registry.json",
+      "tree_feature_columns": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_columns_tree.json",
+      "tree_feature_mapping": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/preprocessed_feature_mapping_tree.json",
+      "feature_registry_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/feature_registry.csv",
+      "concept_registry": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/concept_registry.yaml",
+      "x_tree": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/X_test_tree.parquet",
+      "y": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/y_test.parquet",
+      "model_predictions": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_predictions_test.csv"
+    },
+    "optional_input_paths": {
+      "feature_registry_yaml": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/feature_registry.yaml",
+      "model_metrics_summary": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_metrics_summary.csv",
+      "model_threshold_analysis_valid": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_threshold_analysis_valid.csv",
+      "model_feature_importance": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/model_feature_importance.csv",
+      "model_training_manifest": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/model_training_manifest.json"
+    },
+    "output_paths": {
+      "xai_selected_cases_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_selected_cases.csv",
+      "xai_local_evidence_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_local_evidence.jsonl",
+      "xai_evidence_summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_evidence_summary.csv",
+      "xai_evidence_manifest": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/xai_evidence_manifest.json",
+      "xai_quality_report_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_quality_report.json"
+    }
+  },
+  "quality_report": {
+    "batch_name": "Batch G — XAI Evidence Layer",
+    "batch_short_name": "batch_g_xai_evidence_layer",
+    "status": "PASSED",
+    "created_at": "2026-06-25T04:35:21.673139+00:00",
+    "run_mode": "evaluation",
+    "has_ground_truth": true,
+    "model": {
+      "model_name": "hist_gradient_boosting",
+      "model_version": "v1",
+      "model_family": "tree_boosting",
+      "dataset_branch": "tree",
+      "feature_count": 213,
+      "estimator_type": "HistGradientBoostingClassifier",
+      "default_threshold": 0.5
+    },
+    "data": {
+      "X_shape": [
+        46127,
+        213
+      ],
+      "y_shape": [
+        46127,
+        2
+      ],
+      "predictions_shape": [
+        46127,
+        12
+      ],
+      "X_test_shape": [
+        46127,
+        213
+      ],
+      "y_test_shape": [
+        46127,
+        2
+      ],
+      "predictions_test_shape": [
+        46127,
+        12
+      ],
+      "feature_registry_shape": [
+        166,
+        21
+      ],
+      "feature_mapping_count": 213,
+      "concept_registry_keys": [
+        "application_profile",
+        "applicant_stability",
+        "loan_affordability",
+        "external_score_signal",
+        "external_credit_history",
+        "bureau_monthly_behavior",
+        "previous_application_behavior",
+        "installment_repayment_behavior",
+        "pos_cash_behavior",
+        "credit_card_usage_behavior",
+        "unknown_feature_group"
+      ]
+    },
+    "case_selection": {
+      "run_mode": "evaluation",
+      "has_ground_truth": true,
+      "total_selected_cases": 30,
+      "group_counts": {
+        "top_high_risk": 5,
+        "low_risk": 5,
+        "true_positive": 5,
+        "false_positive": 5,
+        "false_negative": 5,
+        "near_threshold": 5
+      },
+      "warnings": [],
+      "case_type_order": [
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold"
+      ],
+      "first_5_evidence_ids": [
+        "xai_hist_gradient_boosting_v1_156227_top_high_risk",
+        "xai_hist_gradient_boosting_v1_199300_top_high_risk",
+        "xai_hist_gradient_boosting_v1_232843_top_high_risk",
+        "xai_hist_gradient_boosting_v1_360304_top_high_risk",
+        "xai_hist_gradient_boosting_v1_163956_top_high_risk"
+      ],
+      "y_proba_min": 0.0242081317483548,
+      "y_proba_max": 0.9334133690059544,
+      "y_proba_mean": 0.6327893174048665
+    },
+    "shap": {
+      "case_count": 30,
+      "feature_count": 213,
+      "shap_values_shape": [
+        30,
+        213
+      ],
+      "explainer_type": "TreeExplainer",
+      "output_space": "probability",
+      "model_output_min": 0.024208131748354827,
+      "model_output_max": 0.9334133690059545,
+      "model_output_mean": 0.6327893174048665,
+      "base_value_min": 0.3990159352113729,
+      "base_value_max": 0.3990159352113729,
+      "base_value_mean": 0.399015935211373,
+      "mean_abs_shap": 0.002902932688368843,
+      "max_abs_shap": 0.2625133098151274,
+      "additivity_error_max": 7.808378388318715e-09,
+      "additivity_error_mean": 3.667968101241555e-09,
+      "passed_additivity_count": 30,
+      "failed_additivity_count": 0,
+      "warnings": []
+    },
+    "evidence": {
+      "record_count": 30,
+      "summary_shape": [
+        30,
+        48
+      ],
+      "run_mode_counts": {
+        "evaluation": 30
+      },
+      "has_ground_truth_counts": {
+        "True": 30
+      },
+      "case_type_counts": {
+        "top_high_risk": 5,
+        "low_risk": 5,
+        "true_positive": 5,
+        "false_positive": 5,
+        "false_negative": 5,
+        "near_threshold": 5
+      },
+      "mapping_missing_total": 0,
+      "failed_additivity_count": 0,
+      "mean_y_proba": 0.6327893174048665,
+      "min_y_proba": 0.0242081317483548,
+      "max_y_proba": 0.9334133690059544,
+      "first_5_evidence_ids": [
+        "xai_hist_gradient_boosting_v1_156227_top_high_risk",
+        "xai_hist_gradient_boosting_v1_199300_top_high_risk",
+        "xai_hist_gradient_boosting_v1_232843_top_high_risk",
+        "xai_hist_gradient_boosting_v1_360304_top_high_risk",
+        "xai_hist_gradient_boosting_v1_163956_top_high_risk"
+      ],
+      "warnings": []
+    },
+    "quality_checks": {
+      "run_mode": "evaluation",
+      "has_ground_truth": true,
+      "selected_case_count": 30,
+      "evidence_record_count": 30,
+      "shap_case_count": 30,
+      "shap_feature_count": 213,
+      "mapping_missing_total": 0,
+      "failed_additivity_count": 0,
+      "passed_additivity_count": 30,
+      "warning_count": 0
+    },
+    "warnings": []
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "split_name": "home_credit_default_risk_v1",
+  "created_at": "2026-06-22T10:32:35",
+  "source_files": {
+    "feature_matrix": "data/processed/feature_matrix_full.parquet",
+    "target": "data/processed/target_full.parquet",
+    "feature_registry_csv": "ml/registry/feature_registry.csv"
+  },
+  "split_config": {
+    "strategy": "stratified_by_TARGET",
+    "split_unit": "SK_ID_CURR",
+    "random_state": 42,
+    "ratios": {
+      "train": 0.7,
+      "valid": 0.15,
+      "test": 0.15
+    }
+  },
+  "model_feature_metadata": {
+    "model_feature_count": 166,
+    "id_columns": [
+      "SK_ID_CURR"
+    ],
+    "target_column": "TARGET",
+    "excluded_columns": [
+      "SK_ID_CURR"
+    ],
+    "allowed_for_model_false_excluded": []
+  },
+  "split_stats": {
+    "split_strategy": "stratified_by_TARGET",
+    "split_unit": "SK_ID_CURR",
+    "random_state": 42,
+    "ratios": {
+      "train": 0.7,
+      "valid": 0.15,
+      "test": 0.15
+    },
+    "full_rows": 307511,
+    "split_row_total": 307511,
+    "full_positive_rate": 0.08072881945686496,
+    "splits": {
+      "train": {
+        "rows": 215257,
+        "positive_count": 17377,
+        "negative_count": 197880,
+        "positive_rate": 0.08072675917624049,
+        "target_rate_gap_from_full": 2.060280624466282e-06
+      },
+      "valid": {
+        "rows": 46127,
+        "positive_count": 3724,
+        "negative_count": 42403,
+        "positive_rate": 0.08073362672621241,
+        "target_rate_gap_from_full": 4.807269347456566e-06
+      },
+      "test": {
+        "rows": 46127,
+        "positive_count": 3724,
+        "negative_count": 42403,
+        "positive_rate": 0.08073362672621241,
+        "target_rate_gap_from_full": 4.807269347456566e-06
+      }
+    },
+    "id_overlap_check": {
+      "train_valid_overlap": 0,
+      "train_test_overlap": 0,
+      "valid_test_overlap": 0
+    },
+    "warning_count": 0,
+    "warnings": [],
+    "error_count": 0,
+    "errors": [],
+    "status": "passed"
+  },
+  "leakage_status": "passed",
+  "leakage_warning_count": 1,
+  "leakage_error_count": 0,
+  "output_files": {
+    "X_train": "data/processed/splits/X_train.parquet",
+    "y_train": "data/processed/splits/y_train.parquet",
+    "X_valid": "data/processed/splits/X_valid.parquet",
+    "y_valid": "data/processed/splits/y_valid.parquet",
+    "X_test": "data/processed/splits/X_test.parquet",
+    "y_test": "data/processed/splits/y_test.parquet",
+    "model_feature_columns": "ml/registry/model_feature_columns.json",
+    "id_columns": "ml/registry/id_columns.json",
+    "target_column": "ml/registry/target_column.json",
+    "model_feature_metadata": "ml/registry/model_feature_metadata.json"
+  }
+}

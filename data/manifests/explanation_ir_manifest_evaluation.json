@@ -1,0 +1,124 @@
+{
+  "batch": {
+    "name": "Batch H - Concept-aware Explanation IR Layer",
+    "short_name": "H",
+    "status": "PASSED",
+    "created_at": "2026-06-28T03:53:55.334628+00:00",
+    "schema_version": "v1.0",
+    "builder_version": "v1"
+  },
+  "purpose": "Convert structured XAI evidence into concept-aware Explanation IR for LLM generation and faithfulness validation.",
+  "run_mode": "evaluation",
+  "has_ground_truth": true,
+  "inputs": {
+    "xai_local_evidence": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_local_evidence.jsonl"
+  },
+  "outputs": {
+    "explanation_ir_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir/evaluation/explanation_ir.jsonl",
+    "explanation_ir_summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir/evaluation/explanation_ir_summary.csv",
+    "quality_report": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir/evaluation/explanation_ir_quality_report.json",
+    "manifest": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/explanation_ir_manifest_evaluation.json"
+  },
+  "output_path_status": {
+    "explanation_ir_jsonl": true,
+    "explanation_ir_summary_csv": true,
+    "explanation_ir_quality_report_json": true,
+    "explanation_ir_manifest_json": true
+  },
+  "upstream": {
+    "batch": "Batch G - XAI Evidence Layer",
+    "xai_method": "SHAP",
+    "expected_primary_input": "data/reports/xai/xai_local_evidence.jsonl"
+  },
+  "downstream": {
+    "next_batch": "Batch I - LLM Explanation Layer",
+    "validator_batch": "Batch J - Faithfulness Validator",
+    "main_downstream_input": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir/evaluation/explanation_ir.jsonl"
+  },
+  "config": {
+    "max_feature_factors_per_direction": 5,
+    "max_concept_summaries": 5,
+    "strong_abs_shap_threshold": 0.1,
+    "moderate_abs_shap_threshold": 0.03,
+    "neutral_shap_epsilon": 1e-12
+  },
+  "schema_contract": {
+    "main_output": "explanation_ir.jsonl",
+    "record_shape_includes": [
+      "ir_id",
+      "source_evidence_id",
+      "trace_id",
+      "run_mode",
+      "has_ground_truth",
+      "model",
+      "customer",
+      "prediction_summary",
+      "xai_summary",
+      "feature_factors",
+      "risk_increasing_factors",
+      "risk_decreasing_factors",
+      "concept_summaries",
+      "allowed_claims",
+      "forbidden_claims",
+      "llm_input_contract",
+      "validation_contract",
+      "evidence_trace",
+      "quality",
+      "metadata"
+    ]
+  },
+  "quality_report": {
+    "batch_name": "Batch H - Concept-aware Explanation IR Layer",
+    "batch_short_name": "H",
+    "status": "PASSED",
+    "created_at": "2026-06-28T03:53:55.334142+00:00",
+    "run_mode": "evaluation",
+    "has_ground_truth": true,
+    "ir_schema_version": "v1.0",
+    "builder_version": "v1",
+    "purpose": "Convert structured XAI evidence into concept-aware Explanation IR for LLM generation and faithfulness validation.",
+    "inputs": {
+      "xai_local_evidence_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_local_evidence.jsonl"
+    },
+    "outputs": {
+      "explanation_ir_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir/evaluation/explanation_ir.jsonl",
+      "explanation_ir_summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir/evaluation/explanation_ir_summary.csv",
+      "explanation_ir_quality_report_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir/evaluation/explanation_ir_quality_report.json",
+      "explanation_ir_manifest_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/explanation_ir_manifest_evaluation.json"
+    },
+    "record_counts": {
+      "output_ir_record_count": 30,
+      "passed_record_count": 30,
+      "warning_record_count": 0,
+      "failed_record_count": 0
+    },
+    "claim_counts": {
+      "total_allowed_claims": 597,
+      "total_forbidden_claims": 240,
+      "records_with_empty_allowed_claims": 0,
+      "records_with_empty_forbidden_claims": 0
+    },
+    "factor_counts": {
+      "total_feature_factors": 450,
+      "total_concept_summaries": 150,
+      "records_with_no_risk_increasing_factors": 1,
+      "records_with_no_risk_decreasing_factors": 11
+    },
+    "quality_checks": {
+      "all_records_have_llm_input_contract": true,
+      "all_records_have_validation_contract": true,
+      "all_records_trace_to_evidence": true,
+      "all_claims_have_truth_conditions": true,
+      "all_factors_have_direction": true,
+      "all_factors_have_strength": true
+    },
+    "warnings": [],
+    "errors": []
+  },
+  "build_summary": {
+    "ir_record_count": 30,
+    "summary_row_count": 30,
+    "warning_count": 0,
+    "error_count": 0
+  }
+}

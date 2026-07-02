@@ -1,0 +1,100 @@
+# =========================
+# Environment / secrets
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# Node / Next.js
+# =========================
+node_modules/
+.next/
+out/
+dist/
+.turbo/
+.vercel/
+tsconfig.tsbuildinfo
+
+# =========================
+# Python
+# =========================
+ml/.venv/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# =========================
+# Raw / generated data
+# =========================
+data/raw/*
+data/interim/*
+data/processed/*
+data/samples/*
+
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/samples/.gitkeep
+
+# =========================
+# Large ML artifacts
+# =========================
+artifacts/models/*
+artifacts/preprocessing/*
+artifacts/customers/*
+artifacts/predictions/*
+artifacts/shap/*
+artifacts/lime/*
+artifacts/counterfactuals/*
+artifacts/xai-evidence/*
+artifacts/ir/*
+artifacts/evaluation/*
+
+!artifacts/models/.gitkeep
+!artifacts/preprocessing/.gitkeep
+!artifacts/customers/.gitkeep
+!artifacts/predictions/.gitkeep
+!artifacts/shap/.gitkeep
+!artifacts/lime/.gitkeep
+!artifacts/counterfactuals/.gitkeep
+!artifacts/xai-evidence/.gitkeep
+!artifacts/ir/.gitkeep
+!artifacts/evaluation/.gitkeep
+
+# =========================
+# Heavy file types
+# =========================
+*.parquet
+*.feather
+*.joblib
+*.pkl
+*.pickle
+*.onnx
+
+# =========================
+# Generated record-level reports
+# =========================
+data/reports/**/*.jsonl
+data/reports/**/*.csv
+
+# Keep summary docs/json reports
+!data/reports/**/*.md
+!data/reports/**/*.json
+
+# =========================
+# Logs / cache
+# =========================
+logs/
+.cache/
+*.log

@@ -1,0 +1,46 @@
+{
+  "batch_name": "Batch I - LLM Explanation Layer",
+  "batch_short_name": "I",
+  "run_mode": "evaluation",
+  "generator": {
+    "generator_type": "template",
+    "generator_name": "deterministic_template_generator",
+    "generator_version": "v0.1",
+    "uses_external_ai_api": false
+  },
+  "status": "PASSED_WITH_WARNINGS",
+  "input": {
+    "input_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir/evaluation/explanation_ir.jsonl"
+  },
+  "outputs": {
+    "llm_explanations_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/template/llm_explanations.jsonl",
+    "summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/template/llm_explanation_summary.csv"
+  },
+  "counts": {
+    "total_records": 30,
+    "generated_records": 30,
+    "warning_records": 11,
+    "failed_records": 0,
+    "batch_warning_count": 11,
+    "batch_error_count": 0
+  },
+  "text_stats": {
+    "total_characters": 30338,
+    "average_characters_per_record": 1011.2666666666667
+  },
+  "warnings": [
+    "llm_ir_xai_hist_gradient_boosting_v1_156227_top_high_risk: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_199300_top_high_risk: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_232843_top_high_risk: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_360304_top_high_risk: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_163956_top_high_risk: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_218966_true_positive: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_273439_true_positive: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_418340_false_positive: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_455614_false_positive: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_427557_false_positive: No risk-decreasing factors available for user-facing explanation.",
+    "llm_ir_xai_hist_gradient_boosting_v1_267775_false_positive: No risk-decreasing factors available for user-facing explanation."
+  ],
+  "errors": [],
+  "created_at": "2026-06-29T02:25:18.292563+00:00"
+}

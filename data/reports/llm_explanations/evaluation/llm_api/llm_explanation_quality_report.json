@@ -1,0 +1,16 @@
+{
+  "report_name": "Batch I v1.0 LLM API Explanation Quality Report",
+  "created_at": "2026-07-01T02:19:23.450Z",
+  "run_mode": "evaluation",
+  "batch_id": "evaluation",
+  "input_source": "precomputed_ir",
+  "generator_type": "llm_api",
+  "total_records": 1,
+  "parseable_json_count": 1,
+  "parseable_json_rate": 1,
+  "required_sections_count": 1,
+  "required_sections_rate": 1,
+  "records_with_errors_count": 0,
+  "records_with_warnings_count": 0,
+  "failed_records": []
+}
