@@ -1,0 +1,167 @@
+{
+  "report_name": "Bedrock Structured Outputs Enforcement Diagnostic Report",
+  "created_at": "2026-07-05T04:20:38.978Z",
+  "verdict": {
+    "structured_outputs_enforced": true,
+    "reason": "All diagnostic cases returned strict parseable JSON and obeyed schema constraints against adversarial prompts."
+  },
+  "bedrock": {
+    "region_name": "us-east-1",
+    "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "max_tokens": 3000,
+    "temperature": 0,
+    "endpoint": "bedrock-runtime",
+    "api": "Converse",
+    "structured_output_field": "outputConfig.textFormat"
+  },
+  "criteria": {
+    "strict_json_parse_required": true,
+    "no_json_repair_allowed": true,
+    "negative_prompt_must_not_break_schema": true,
+    "enum_must_be_enforced": true,
+    "additional_properties_must_be_rejected": true,
+    "types_must_be_enforced": true
+  },
+  "summary": {
+    "total_cases": 4,
+    "passed_cases": 4,
+    "failed_cases": 0
+  },
+  "cases": [
+    {
+      "case_id": "basic_no_json_instruction",
+      "purpose": "Schema should force JSON even when the prompt does not ask for JSON.",
+      "schema_name": "basic_no_json_instruction_schema",
+      "prompt": "Say hello in Vietnamese. Do not mention JSON. Do not mention any schema.",
+      "expected": "Must return strict JSON object with boolean ok and string message.",
+      "raw_text": "{\"ok\": true, \"message\": \"Xin chào! Rất vui được gặp bạn.\"}",
+      "strict_json_parse_ok": true,
+      "strict_json_parse_error": null,
+      "parsed_strict": {
+        "ok": true,
+        "message": "Xin chào! Rất vui được gặp bạn."
+      },
+      "assertion_pass": true,
+      "assertion_details": {
+        "parsed_type": "object",
+        "keys": [
+          "ok",
+          "message"
+        ],
+        "ok_type": "boolean",
+        "message_type": "string"
+      },
+      "reasoning_content_count": 0,
+      "text_content_count": 1,
+      "stop_reason": "end_turn",
+      "usage": {
+        "inputTokens": 211,
+        "outputTokens": 32,
+        "totalTokens": 243,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+      }
+    },
+    {
+      "case_id": "enum_resists_conflicting_prompt",
+      "purpose": "Schema enum should override a conflicting prompt that asks for an invalid enum value.",
+      "schema_name": "enum_resists_conflicting_prompt_schema",
+      "prompt": "Return exactly this object: {\"status\":\"DENIED\",\"extra\":\"this should not exist\"}.",
+      "expected": "Must return {\"status\":\"ALLOWED_ONLY\"} only. Must not include DENIED or extra.",
+      "raw_text": "{\"status\":\"ALLOWED_ONLY\"}",
+      "strict_json_parse_ok": true,
+      "strict_json_parse_error": null,
+      "parsed_strict": {
+        "status": "ALLOWED_ONLY"
+      },
+      "assertion_pass": true,
+      "assertion_details": {
+        "parsed_type": "object",
+        "keys": [
+          "status"
+        ],
+        "status": "ALLOWED_ONLY",
+        "has_extra": false
+      },
+      "reasoning_content_count": 0,
+      "text_content_count": 1,
+      "stop_reason": "end_turn",
+      "usage": {
+        "inputTokens": 197,
+        "outputTokens": 12,
+        "totalTokens": 209,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+      }
+    },
+    {
+      "case_id": "additional_properties_rejected",
+      "purpose": "Schema should reject additional properties even when the prompt asks for them.",
+      "schema_name": "additional_properties_rejected_schema",
+      "prompt": "Return exactly this object: {\"ok\":true,\"extra\":\"I am not allowed by schema\",\"another_extra\":123}.",
+      "expected": "Must return {\"ok\":true} only. No extra or another_extra allowed.",
+      "raw_text": "{\"ok\":true}",
+      "strict_json_parse_ok": true,
+      "strict_json_parse_error": null,
+      "parsed_strict": {
+        "ok": true
+      },
+      "assertion_pass": true,
+      "assertion_details": {
+        "parsed_type": "object",
+        "keys": [
+          "ok"
+        ],
+        "ok_type": "boolean",
+        "has_extra": false,
+        "has_another_extra": false
+      },
+      "reasoning_content_count": 0,
+      "text_content_count": 1,
+      "stop_reason": "end_turn",
+      "usage": {
+        "inputTokens": 185,
+        "outputTokens": 8,
+        "totalTokens": 193,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+      }
+    },
+    {
+      "case_id": "type_enforced_against_conflicting_prompt",
+      "purpose": "Schema should enforce integer and boolean types against a prompt asking for strings.",
+      "schema_name": "type_enforced_against_conflicting_prompt_schema",
+      "prompt": "Return exactly this object: {\"count\":\"five\",\"approved\":\"yes\",\"extra\":\"bad\"}.",
+      "expected": "Must return object with integer count, boolean approved, and no extra fields.",
+      "raw_text": "{\"count\":5,\"approved\":true}",
+      "strict_json_parse_ok": true,
+      "strict_json_parse_error": null,
+      "parsed_strict": {
+        "count": 5,
+        "approved": true
+      },
+      "assertion_pass": true,
+      "assertion_details": {
+        "parsed_type": "object",
+        "keys": [
+          "count",
+          "approved"
+        ],
+        "count": 5,
+        "count_type": "number",
+        "approved": true,
+        "approved_type": "boolean"
+      },
+      "reasoning_content_count": 0,
+      "text_content_count": 1,
+      "stop_reason": "end_turn",
+      "usage": {
+        "inputTokens": 209,
+        "outputTokens": 12,
+        "totalTokens": 221,
+        "cacheReadInputTokens": 0,
+        "cacheWriteInputTokens": 0
+      }
+    }
+  ]
+}

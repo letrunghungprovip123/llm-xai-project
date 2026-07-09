@@ -1,0 +1,36 @@
+{
+  "case_id": "type_enforced_against_conflicting_prompt",
+  "purpose": "Schema should enforce integer and boolean types against a prompt asking for strings.",
+  "schema_name": "type_enforced_against_conflicting_prompt_schema",
+  "prompt": "Return exactly this object: {\"count\":\"five\",\"approved\":\"yes\",\"extra\":\"bad\"}.",
+  "expected": "Must return object with integer count, boolean approved, and no extra fields.",
+  "raw_text": "{\"count\":5,\"approved\":true}",
+  "strict_json_parse_ok": true,
+  "strict_json_parse_error": null,
+  "parsed_strict": {
+    "count": 5,
+    "approved": true
+  },
+  "assertion_pass": true,
+  "assertion_details": {
+    "parsed_type": "object",
+    "keys": [
+      "count",
+      "approved"
+    ],
+    "count": 5,
+    "count_type": "number",
+    "approved": true,
+    "approved_type": "boolean"
+  },
+  "reasoning_content_count": 0,
+  "text_content_count": 1,
+  "stop_reason": "end_turn",
+  "usage": {
+    "inputTokens": 209,
+    "outputTokens": 12,
+    "totalTokens": 221,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  }
+}

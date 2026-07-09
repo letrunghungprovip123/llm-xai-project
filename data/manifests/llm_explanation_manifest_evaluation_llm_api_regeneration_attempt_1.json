@@ -1,0 +1,38 @@
+{
+  "manifest_name": "Batch I v1.2 LLM API Explanation Manifest",
+  "created_at": "2026-07-06T03:54:47.956Z",
+  "batch": "Batch I",
+  "batch_version": "v1.2",
+  "generator_type": "llm_api",
+  "run_mode": "evaluation",
+  "batch_id": "evaluation",
+  "input_source": "precomputed_ir",
+  "artifact_subdir": "regeneration_attempt_1",
+  "record_count": 1,
+  "generation_attempts": [
+    1
+  ],
+  "records_with_regeneration_feedback_count": 1,
+  "providers": [
+    "deepseek"
+  ],
+  "models": [
+    "deepseek-v4-flash"
+  ],
+  "prompt_versions": [
+    "batch_i_llm_prompt_v1.2_compact_feedback_ready_with_feedback"
+  ],
+  "artifacts": {
+    "llm_explanations_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/llm_api/regeneration_attempt_1/llm_explanations.jsonl",
+    "llm_explanation_summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/llm_api/regeneration_attempt_1/llm_explanation_summary.csv",
+    "llm_explanation_quality_report_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/llm_api/regeneration_attempt_1/llm_explanation_quality_report.json",
+    "manifest_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/llm_explanation_manifest_evaluation_llm_api_regeneration_attempt_1.json"
+  },
+  "next_batch": {
+    "name": "Batch J - Faithfulness Validator",
+    "expected_inputs": [
+      "data/reports/explanation_ir/.../explanation_ir.jsonl",
+      "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/llm_api/regeneration_attempt_1/llm_explanations.jsonl"
+    ]
+  }
+}

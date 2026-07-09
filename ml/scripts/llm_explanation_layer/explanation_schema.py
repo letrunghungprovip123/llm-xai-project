@@ -2,11 +2,11 @@
 Schema for Batch I - LLM Explanation Layer.
 
 This schema is shared by:
-- v0.1 template generator
-- v1.0 future LLM/API generator
+- v1.1 template generator
+- future LLM/API generator
 
-Therefore, Batch J can validate explanations without caring whether the
-explanation came from a template or an external LLM.
+Batch J can validate explanations without caring whether the explanation came
+from a deterministic template or an external LLM.
 """
 
 from __future__ import annotations
@@ -91,6 +91,28 @@ class LLMPredictionInfo:
 
 
 @dataclass
+class LLMReferencedTerm:
+    term_id: str
+    term_type: str
+    mention: str
+
+
+@dataclass
+class LLMEvidenceItemUsed:
+    evidence_id: str
+    evidence_type: str
+    direction: str
+    usage: str
+
+
+@dataclass
+class LLMEvidenceGroupUsed:
+    group_id: str
+    concept_id: Optional[str]
+    usage: str
+
+
+@dataclass
 class LLMSourceContract:
     allowed_claim_ids: List[str]
     forbidden_rule_ids: List[str]
@@ -98,11 +120,21 @@ class LLMSourceContract:
     must_not: List[str]
     required_output_sections: List[str]
 
+    contribution_accounting: Dict[str, Any] = field(default_factory=dict)
+    primary_features: List[Dict[str, Any]] = field(default_factory=list)
+    supporting_feature_groups: List[Dict[str, Any]] = field(default_factory=list)
+    remaining_features_summary: Dict[str, Any] = field(default_factory=dict)
+    allowed_terms: List[Dict[str, Any]] = field(default_factory=list)
+    writing_rules: Dict[str, Any] = field(default_factory=dict)
+    forbidden_content: List[str] = field(default_factory=list)
+
 
 @dataclass
 class LLMExplanationSections:
     prediction: str
+    contribution_overview: str
     main_risk_drivers: str
+    supporting_evidence_groups: str
     risk_reducing_factors: str
     limitations: str
 
@@ -111,7 +143,13 @@ class LLMExplanationSections:
 class LLMExplanationPayload:
     language: str
     sections: LLMExplanationSections
+
+    # Server/template-built text. External LLMs should not generate this field.
     full_text: str
+
+    referenced_terms: List[LLMReferencedTerm] = field(default_factory=list)
+    evidence_items_used: List[LLMEvidenceItemUsed] = field(default_factory=list)
+    evidence_groups_used: List[LLMEvidenceGroupUsed] = field(default_factory=list)
 
 
 @dataclass
@@ -121,10 +159,20 @@ class LLMExplanationQuality:
     errors: List[str] = field(default_factory=list)
     section_count: int = 0
     character_count: int = 0
+
     has_prediction_section: bool = False
+    has_contribution_overview_section: bool = False
     has_main_risk_drivers_section: bool = False
+    has_supporting_evidence_groups_section: bool = False
     has_risk_reducing_factors_section: bool = False
     has_limitations_section: bool = False
+
+    has_referenced_terms: bool = False
+    has_evidence_items_used: bool = False
+    has_evidence_groups_used: bool = False
+
+    contains_forbidden_default_wording: bool = False
+    contains_raw_technical_feature_name: bool = False
 
 
 @dataclass

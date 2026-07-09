@@ -1,0 +1,46 @@
+{
+  "flow_name": "Batch I + Batch J Single-Pass Validation Flow",
+  "created_at": "2026-07-07T03:14:29.005Z",
+  "flow_mode": "base",
+  "run_slot": "base",
+  "current_attempt": 0,
+  "next_attempt_if_fail": 1,
+  "run_mode": "evaluation",
+  "batch_id": "evaluation",
+  "input_source": "precomputed_ir",
+  "selected_filters": {
+    "limit": 5
+  },
+  "paths": {
+    "llm_explanations_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/llm_api/base/llm_explanations.jsonl",
+    "claim_extractions_jsonl": "data/reports/faithfulness_validation/evaluation/llm_api/base/claim_extractions.jsonl",
+    "faithfulness_validation_jsonl": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation.jsonl",
+    "faithfulness_validation_summary_json": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation_summary.json",
+    "faithfulness_validation_failures_json": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation_failures.json",
+    "validation_decisions_jsonl": "data/reports/faithfulness_validation/evaluation/llm_api/base/validation_decisions.jsonl",
+    "regeneration_feedback_jsonl": "data/reports/faithfulness_validation/evaluation/llm_api/base/regeneration_feedback.jsonl",
+    "finalization_candidates_jsonl": "data/reports/faithfulness_validation/evaluation/llm_api/base/finalization_candidates.jsonl",
+    "flow_summary_json": "data/reports/faithfulness_validation/evaluation/llm_api/base/ij_flow_summary.json"
+  },
+  "counts": {
+    "batch_i_records": 5,
+    "batch_i_records_with_errors": 0,
+    "batch_i_records_with_warnings": 0,
+    "batch_i_records_with_feedback": 0,
+    "j1_selected_records": 5,
+    "j1_failed": 0,
+    "j1_total_claims": 47,
+    "j2_status": "PASS_WITH_WARN",
+    "j2_validated_records": 5,
+    "j2_fail_records": 0,
+    "j2_pass_with_warn_records": 5,
+    "j3_regeneration_feedback_records": 0,
+    "j3_finalization_candidate_records": 5
+  },
+  "final_decision": {
+    "j2_status": "PASS_WITH_WARN",
+    "needs_regeneration": false,
+    "can_finalize": true,
+    "note": "J.2 did not fail. Explanation can move to finalization policy."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "report_name": "Batch J.1 Bedrock Claim Extraction Summary",
+  "created_at": "2026-07-05T05:34:19.410Z",
+  "run_name": "template",
+  "input_path": "data/reports/llm_explanations/evaluation/template/llm_explanations.jsonl",
+  "output_path": "data/reports/faithfulness_validation/evaluation/template/claim_extractions.jsonl",
+  "summary_path": "data/reports/faithfulness_validation/evaluation/template/claim_extraction_summary.json",
+  "failures_path": "data/reports/faithfulness_validation/evaluation/template/claim_extraction_failures.json",
+  "force_reextract": false,
+  "total_input_records": 30,
+  "selected_records": 5,
+  "newly_extracted": 0,
+  "reused": 5,
+  "failed": 0,
+  "total_claims": 86,
+  "token_usage_for_new_calls_only": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "estimated_cost_for_new_calls_only": {
+    "input_cost_usd": 0,
+    "output_cost_usd": 0,
+    "total_cost_usd": 0,
+    "input_price_per_1k": 0.0011,
+    "output_price_per_1k": 0.0055
+  },
+  "extractor": {
+    "provider": "amazon_bedrock",
+    "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "region_name": "us-east-1",
+    "extractor_version": "v1.0",
+    "prompt_version": "batch_j_claim_extraction_prompt_v1.0",
+    "schema_hash": "084fae5ab1a2f07d2d556b6431287612cd9a6714e15638a21da2225ed2b6992d"
+  }
+}

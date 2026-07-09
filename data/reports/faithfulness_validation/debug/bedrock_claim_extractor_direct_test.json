@@ -1,0 +1,154 @@
+{
+  "test_name": "bedrock_claim_extractor_direct_test",
+  "created_at": "2026-07-05T04:31:07.102Z",
+  "config": {
+    "regionName": "us-east-1",
+    "modelId": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "maxTokens": 3000,
+    "temperature": 0,
+    "extractorVersion": "v1.0"
+  },
+  "input": {
+    "ir_id": "ir_direct_test_001",
+    "explanation_id": "exp_direct_test_001",
+    "generator_type": "direct_bedrock_test",
+    "sections": {
+      "prediction": "Mô hình ước tính khách hàng có rủi ro gặp khó khăn trong thanh toán với xác suất 52.34%, cao hơn ngưỡng 50.00%.",
+      "contribution_overview": "Tổng đóng góp của các yếu tố quan trọng làm tăng nhẹ rủi ro so với mức nền của mô hình.",
+      "main_risk_drivers": "Một tín hiệu thuộc nhóm lịch sử thanh toán góp phần làm tăng rủi ro thêm +6.84 điểm phần trăm.",
+      "supporting_evidence_groups": "Các nhóm bằng chứng hỗ trợ gồm lịch sử thanh toán, thông tin khoản vay và tín hiệu hồ sơ khách hàng.",
+      "risk_reducing_factors": "Một số yếu tố khác làm giảm nhẹ rủi ro, nhưng không đủ để đảo chiều dự đoán.",
+      "limitations": "Lời giải thích này chỉ mô tả đóng góp vào dự đoán của mô hình, không chứng minh quan hệ nhân quả ngoài thực tế, không phải quyết định tín dụng cuối cùng và không phải kết luận chắc chắn."
+    },
+    "full_text": "Mô hình ước tính khách hàng có rủi ro gặp khó khăn trong thanh toán với xác suất 52.34%, cao hơn ngưỡng 50.00%.\n\nTổng đóng góp của các yếu tố quan trọng làm tăng nhẹ rủi ro so với mức nền của mô hình.\n\nMột tín hiệu thuộc nhóm lịch sử thanh toán góp phần làm tăng rủi ro thêm +6.84 điểm phần trăm.\n\nCác nhóm bằng chứng hỗ trợ gồm lịch sử thanh toán, thông tin khoản vay và tín hiệu hồ sơ khách hàng.\n\nMột số yếu tố khác làm giảm nhẹ rủi ro, nhưng không đủ để đảo chiều dự đoán.\n\nLời giải thích này chỉ mô tả đóng góp vào dự đoán của mô hình, không chứng minh quan hệ nhân quả ngoài thực tế, không phải quyết định tín dụng cuối cùng và không phải kết luận chắc chắn.",
+    "referenced_terms": [
+      "rủi ro gặp khó khăn trong thanh toán",
+      "xác suất",
+      "ngưỡng",
+      "đóng góp",
+      "không chứng minh quan hệ nhân quả",
+      "không phải quyết định tín dụng cuối cùng"
+    ],
+    "evidence_items_used": [
+      "ev_direct_test_001"
+    ],
+    "evidence_groups_used": [
+      "group_payment_history"
+    ]
+  },
+  "output": {
+    "claims": [
+      {
+        "claim_id": "claim_001",
+        "section": "prediction",
+        "claim_type": "prediction",
+        "text": "Mô hình ước tính khách hàng có rủi ro gặp khó khăn trong thanh toán với xác suất 52.34%, cao hơn ngưỡng 50.00%.",
+        "normalized_subject": "xác suất rủi ro gặp khó khăn trong thanh toán",
+        "direction": "increases_risk",
+        "value_mentioned": "52.34%",
+        "evidence_refs": [],
+        "confidence": "high"
+      },
+      {
+        "claim_id": "claim_002",
+        "section": "contribution_overview",
+        "claim_type": "contribution_accounting",
+        "text": "Tổng đóng góp của các yếu tố quan trọng làm tăng nhẹ rủi ro so với mức nền của mô hình.",
+        "normalized_subject": "tổng đóng góp của các yếu tố quan trọng",
+        "direction": "increases_risk",
+        "value_mentioned": "",
+        "evidence_refs": [],
+        "confidence": "medium"
+      },
+      {
+        "claim_id": "claim_003",
+        "section": "main_risk_drivers",
+        "claim_type": "contribution_value",
+        "text": "Một tín hiệu thuộc nhóm lịch sử thanh toán góp phần làm tăng rủi ro thêm +6.84 điểm phần trăm.",
+        "normalized_subject": "tín hiệu lịch sử thanh toán",
+        "direction": "increases_risk",
+        "value_mentioned": "+6.84 điểm phần trăm",
+        "evidence_refs": [
+          "group_payment_history"
+        ],
+        "confidence": "high"
+      },
+      {
+        "claim_id": "claim_004",
+        "section": "supporting_evidence_groups",
+        "claim_type": "referenced_term",
+        "text": "Các nhóm bằng chứng hỗ trợ gồm lịch sử thanh toán, thông tin khoản vay và tín hiệu hồ sơ khách hàng.",
+        "normalized_subject": "nhóm bằng chứng hỗ trợ",
+        "direction": "neutral",
+        "value_mentioned": "",
+        "evidence_refs": [
+          "group_payment_history"
+        ],
+        "confidence": "medium"
+      },
+      {
+        "claim_id": "claim_005",
+        "section": "risk_reducing_factors",
+        "claim_type": "contribution_accounting",
+        "text": "Một số yếu tố khác làm giảm nhẹ rủi ro, nhưng không đủ để đảo chiều dự đoán.",
+        "normalized_subject": "yếu tố làm giảm rủi ro",
+        "direction": "decreases_risk",
+        "value_mentioned": "",
+        "evidence_refs": [],
+        "confidence": "medium"
+      },
+      {
+        "claim_id": "claim_006",
+        "section": "limitations",
+        "claim_type": "limitation",
+        "text": "Lời giải thích này chỉ mô tả đóng góp vào dự đoán của mô hình",
+        "normalized_subject": "phạm vi giải thích",
+        "direction": "neutral",
+        "value_mentioned": "",
+        "evidence_refs": [],
+        "confidence": "high"
+      },
+      {
+        "claim_id": "claim_007",
+        "section": "limitations",
+        "claim_type": "limitation",
+        "text": "không chứng minh quan hệ nhân quả ngoài thực tế",
+        "normalized_subject": "không chứng minh quan hệ nhân quả",
+        "direction": "neutral",
+        "value_mentioned": "",
+        "evidence_refs": [],
+        "confidence": "high"
+      },
+      {
+        "claim_id": "claim_008",
+        "section": "limitations",
+        "claim_type": "limitation",
+        "text": "không phải quyết định tín dụng cuối cùng",
+        "normalized_subject": "không phải quyết định tín dụng cuối cùng",
+        "direction": "neutral",
+        "value_mentioned": "",
+        "evidence_refs": [],
+        "confidence": "high"
+      },
+      {
+        "claim_id": "claim_009",
+        "section": "limitations",
+        "claim_type": "limitation",
+        "text": "không phải kết luận chắc chắn",
+        "normalized_subject": "không phải kết luận chắc chắn",
+        "direction": "neutral",
+        "value_mentioned": "",
+        "evidence_refs": [],
+        "confidence": "high"
+      }
+    ],
+    "claim_count": 9
+  },
+  "checks": {
+    "has_claims_array": true,
+    "claim_count_matches_array_length": true,
+    "claim_count": 9,
+    "has_prediction_claim": true,
+    "has_limitation_claim": true
+  }
+}

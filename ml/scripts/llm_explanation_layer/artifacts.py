@@ -132,10 +132,46 @@ def build_quality_report(
         else 0.0
     )
 
+    records_with_all_required_sections = [
+        record for record in records
+        if record.quality.has_prediction_section
+        and record.quality.has_contribution_overview_section
+        and record.quality.has_main_risk_drivers_section
+        and record.quality.has_supporting_evidence_groups_section
+        and record.quality.has_risk_reducing_factors_section
+        and record.quality.has_limitations_section
+    ]
+
+    records_with_referenced_terms = [
+        record for record in records
+        if record.quality.has_referenced_terms
+    ]
+
+    records_with_evidence_items_used = [
+        record for record in records
+        if record.quality.has_evidence_items_used
+    ]
+
+    records_with_evidence_groups_used = [
+        record for record in records
+        if record.quality.has_evidence_groups_used
+    ]
+
+    records_with_forbidden_wording = [
+        record for record in records
+        if record.quality.contains_forbidden_default_wording
+    ]
+
+    records_with_raw_technical_names = [
+        record for record in records
+        if record.quality.contains_raw_technical_feature_name
+    ]
+
     return {
         "batch_name": BATCH_NAME,
         "batch_short_name": BATCH_SHORT_NAME,
         "run_mode": run_mode,
+        "explanation_schema_version": EXPLANATION_SCHEMA_VERSION,
         "generator": {
             "generator_type": GENERATOR_TYPE_TEMPLATE,
             "generator_name": GENERATOR_NAME_TEMPLATE,
@@ -161,6 +197,36 @@ def build_quality_report(
         "text_stats": {
             "total_characters": total_characters,
             "average_characters_per_record": avg_characters,
+        },
+        "schema_checks": {
+            "records_with_all_required_sections": len(records_with_all_required_sections),
+            "all_required_sections_rate": (
+                len(records_with_all_required_sections) / total_records
+                if total_records > 0
+                else 0.0
+            ),
+            "records_with_referenced_terms": len(records_with_referenced_terms),
+            "referenced_terms_rate": (
+                len(records_with_referenced_terms) / total_records
+                if total_records > 0
+                else 0.0
+            ),
+            "records_with_evidence_items_used": len(records_with_evidence_items_used),
+            "evidence_items_used_rate": (
+                len(records_with_evidence_items_used) / total_records
+                if total_records > 0
+                else 0.0
+            ),
+            "records_with_evidence_groups_used": len(records_with_evidence_groups_used),
+            "evidence_groups_used_rate": (
+                len(records_with_evidence_groups_used) / total_records
+                if total_records > 0
+                else 0.0
+            ),
+        },
+        "policy_checks": {
+            "records_with_forbidden_wording": len(records_with_forbidden_wording),
+            "records_with_raw_technical_names": len(records_with_raw_technical_names),
         },
         "warnings": build_result.warnings[:100],
         "errors": build_result.errors[:100],
@@ -199,6 +265,13 @@ def build_manifest(
         },
         "record_count": len(build_result.explanation_records),
         "status": determine_batch_status(build_result),
+        "next_batch": {
+            "name": "Batch J - Faithfulness Validator",
+            "expected_inputs": [
+                str(input_path),
+                str(output_jsonl_path),
+            ],
+        },
         "created_at": utc_now_iso(),
     }
 

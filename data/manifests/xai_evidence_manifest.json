@@ -2,7 +2,7 @@
   "batch_name": "Batch G — XAI Evidence Layer",
   "batch_short_name": "batch_g_xai_evidence_layer",
   "status": "PASSED",
-  "created_at": "2026-06-25T04:35:21.673957+00:00",
+  "created_at": "2026-07-08T02:52:56.079867+00:00",
   "run_mode": "evaluation",
   "has_ground_truth": true,
   "purpose": "Generate structured local XAI evidence using the selected best model, model-ready features, model predictions, representative case selection, and SHAP local attribution.",
@@ -19,9 +19,9 @@
     "method": "SHAP",
     "explainer_type": "TreeExplainer",
     "output_space": "probability",
-    "case_count": 30,
+    "case_count": 120,
     "feature_count": 213,
-    "top_k_features": 15
+    "top_k_features": 213
   },
   "inputs": {
     "run_mode": "evaluation",
@@ -63,27 +63,27 @@
     "xai_selected_cases_csv": {
       "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_selected_cases.csv",
       "exists": true,
-      "size_bytes": 5948
+      "size_bytes": 23216
     },
     "xai_local_evidence_jsonl": {
       "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_local_evidence.jsonl",
       "exists": true,
-      "size_bytes": 1493558
+      "size_bytes": 70881482
     },
     "xai_evidence_summary_csv": {
       "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_evidence_summary.csv",
       "exists": true,
-      "size_bytes": 22598
+      "size_bytes": 88858
     },
     "xai_evidence_manifest": {
       "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/xai_evidence_manifest.json",
       "exists": true,
-      "size_bytes": 13093
+      "size_bytes": 14547
     },
     "xai_quality_report_json": {
       "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_quality_report.json",
       "exists": true,
-      "size_bytes": 4809
+      "size_bytes": 6875
     }
   },
   "config": {
@@ -108,8 +108,8 @@
     "default_threshold_fallback": 0.5,
     "xai_config": {
       "random_state": 42,
-      "cases_per_group": 5,
-      "top_k_features": 15,
+      "cases_per_group": 20,
+      "top_k_features": null,
       "shap_background_sample_size": 200,
       "shap_debug_case_limit": 5,
       "shap_output_space": "probability",
@@ -172,7 +172,7 @@
     "batch_name": "Batch G — XAI Evidence Layer",
     "batch_short_name": "batch_g_xai_evidence_layer",
     "status": "PASSED",
-    "created_at": "2026-06-25T04:35:21.673139+00:00",
+    "created_at": "2026-07-08T02:52:56.078687+00:00",
     "run_mode": "evaluation",
     "has_ground_truth": true,
     "model": {
@@ -231,14 +231,14 @@
     "case_selection": {
       "run_mode": "evaluation",
       "has_ground_truth": true,
-      "total_selected_cases": 30,
+      "total_selected_cases": 120,
       "group_counts": {
-        "top_high_risk": 5,
-        "low_risk": 5,
-        "true_positive": 5,
-        "false_positive": 5,
-        "false_negative": 5,
-        "near_threshold": 5
+        "top_high_risk": 20,
+        "low_risk": 20,
+        "true_positive": 20,
+        "false_positive": 20,
+        "false_negative": 20,
+        "near_threshold": 20
       },
       "warnings": [],
       "case_type_order": [
@@ -247,6 +247,36 @@
         "top_high_risk",
         "top_high_risk",
         "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "top_high_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
+        "low_risk",
         "low_risk",
         "low_risk",
         "low_risk",
@@ -257,6 +287,36 @@
         "true_positive",
         "true_positive",
         "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "true_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
+        "false_positive",
         "false_positive",
         "false_positive",
         "false_positive",
@@ -267,6 +327,36 @@
         "false_negative",
         "false_negative",
         "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "false_negative",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
+        "near_threshold",
         "near_threshold",
         "near_threshold",
         "near_threshold",
@@ -282,54 +372,54 @@
       ],
       "y_proba_min": 0.0242081317483548,
       "y_proba_max": 0.9334133690059544,
-      "y_proba_mean": 0.6327893174048665
+      "y_proba_mean": 0.6276992414073971
     },
     "shap": {
-      "case_count": 30,
+      "case_count": 120,
       "feature_count": 213,
       "shap_values_shape": [
-        30,
+        120,
         213
       ],
       "explainer_type": "TreeExplainer",
       "output_space": "probability",
       "model_output_min": 0.024208131748354827,
       "model_output_max": 0.9334133690059545,
-      "model_output_mean": 0.6327893174048665,
+      "model_output_mean": 0.6276992414073971,
       "base_value_min": 0.3990159352113729,
       "base_value_max": 0.3990159352113729,
-      "base_value_mean": 0.399015935211373,
-      "mean_abs_shap": 0.002902932688368843,
+      "base_value_mean": 0.3990159352113728,
+      "mean_abs_shap": 0.002879867138424023,
       "max_abs_shap": 0.2625133098151274,
-      "additivity_error_max": 7.808378388318715e-09,
-      "additivity_error_mean": 3.667968101241555e-09,
-      "passed_additivity_count": 30,
+      "additivity_error_max": 8.462248013429985e-09,
+      "additivity_error_mean": 3.5986516828956374e-09,
+      "passed_additivity_count": 120,
       "failed_additivity_count": 0,
       "warnings": []
     },
     "evidence": {
-      "record_count": 30,
+      "record_count": 120,
       "summary_shape": [
-        30,
+        120,
         48
       ],
       "run_mode_counts": {
-        "evaluation": 30
+        "evaluation": 120
       },
       "has_ground_truth_counts": {
-        "True": 30
+        "True": 120
       },
       "case_type_counts": {
-        "top_high_risk": 5,
-        "low_risk": 5,
-        "true_positive": 5,
-        "false_positive": 5,
-        "false_negative": 5,
-        "near_threshold": 5
+        "top_high_risk": 20,
+        "low_risk": 20,
+        "true_positive": 20,
+        "false_positive": 20,
+        "false_negative": 20,
+        "near_threshold": 20
       },
       "mapping_missing_total": 0,
       "failed_additivity_count": 0,
-      "mean_y_proba": 0.6327893174048665,
+      "mean_y_proba": 0.6276992414073971,
       "min_y_proba": 0.0242081317483548,
       "max_y_proba": 0.9334133690059544,
       "first_5_evidence_ids": [
@@ -344,13 +434,13 @@
     "quality_checks": {
       "run_mode": "evaluation",
       "has_ground_truth": true,
-      "selected_case_count": 30,
-      "evidence_record_count": 30,
-      "shap_case_count": 30,
+      "selected_case_count": 120,
+      "evidence_record_count": 120,
+      "shap_case_count": 120,
       "shap_feature_count": 213,
       "mapping_missing_total": 0,
       "failed_additivity_count": 0,
-      "passed_additivity_count": 30,
+      "passed_additivity_count": 120,
       "warning_count": 0
     },
     "warnings": []

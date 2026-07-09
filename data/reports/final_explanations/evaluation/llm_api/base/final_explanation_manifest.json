@@ -1,0 +1,41 @@
+{
+  "manifest_name": "Batch K Final Explanation Manifest",
+  "created_at": "2026-07-07T03:46:45.259Z",
+  "batch": "Batch K",
+  "batch_version": "v1.0",
+  "mode": "final_explanation_finalization",
+  "run_mode": "evaluation",
+  "generator_type": "llm_api",
+  "run_slot": "base",
+  "input_paths": {
+    "llm_explanations_path": "data/reports/llm_explanations/evaluation/llm_api/base/llm_explanations.jsonl",
+    "finalization_candidates_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/finalization_candidates.jsonl",
+    "validation_decisions_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/validation_decisions.jsonl",
+    "faithfulness_validation_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation.jsonl"
+  },
+  "output_paths": {
+    "final_explanations_jsonl_path": "data/reports/final_explanations/evaluation/llm_api/base/final_explanations.jsonl",
+    "final_explanation_summary_json_path": "data/reports/final_explanations/evaluation/llm_api/base/final_explanation_summary.json",
+    "final_explanation_summary_csv_path": "data/reports/final_explanations/evaluation/llm_api/base/final_explanation_summary.csv",
+    "final_explanation_manifest_json_path": "data/reports/final_explanations/evaluation/llm_api/base/final_explanation_manifest.json",
+    "final_explanation_report_md_path": "data/reports/final_explanations/evaluation/llm_api/base/final_explanation_report.md"
+  },
+  "counts": {
+    "llm_explanation_records": 5,
+    "finalization_candidate_records": 5,
+    "validation_decision_records": 5,
+    "faithfulness_validation_records": 5,
+    "finalized_records": 0,
+    "finalized_with_warnings_records": 5,
+    "blocked_records": 0,
+    "records_with_errors": 0,
+    "records_with_warnings": 0,
+    "records_can_show_to_user": 5
+  },
+  "policy": {
+    "calls_llm": false,
+    "calls_bedrock": false,
+    "only_finalize_can_show_to_user": true
+  },
+  "next_batch": "UI / Human Evaluation / API Consumption"
+}

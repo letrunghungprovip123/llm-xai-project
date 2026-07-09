@@ -1,6 +1,6 @@
 {
-  "report_name": "Batch I v1.0 LLM API Explanation Quality Report",
-  "created_at": "2026-07-01T02:19:23.450Z",
+  "report_name": "Batch I v1.1 LLM API Explanation Quality Report",
+  "created_at": "2026-07-06T03:39:15.441Z",
   "run_mode": "evaluation",
   "batch_id": "evaluation",
   "input_source": "precomputed_ir",
@@ -10,7 +10,31 @@
   "parseable_json_rate": 1,
   "required_sections_count": 1,
   "required_sections_rate": 1,
+  "referenced_terms_count": 1,
+  "referenced_terms_rate": 1,
+  "evidence_items_used_count": 1,
+  "evidence_items_used_rate": 1,
+  "evidence_groups_used_count": 1,
+  "evidence_groups_used_rate": 1,
+  "records_with_forbidden_wording_count": 0,
+  "records_with_raw_technical_name_count": 0,
   "records_with_errors_count": 0,
-  "records_with_warnings_count": 0,
-  "failed_records": []
+  "records_with_warnings_count": 1,
+  "text_stats": {
+    "total_characters": 1258,
+    "average_characters_per_record": 1258
+  },
+  "usage": {
+    "total_tokens": 6079
+  },
+  "failed_records": [],
+  "warning_records": [
+    {
+      "explanation_id": "llm_api_ir_xai_hist_gradient_boosting_v1_163956_top_high_risk_163956_attempt_1",
+      "source_ir_id": "ir_xai_hist_gradient_boosting_v1_163956_top_high_risk",
+      "warnings": [
+        "Generated with Batch J feedback: j3_feedback_ir_xai_hist_gradient_boosting_v1_163956_top_high_risk_llm_api_ir_xai_hist_gradient_boosting_v1_163956_top_high_risk_163956_1."
+      ]
+    }
+  ]
 }

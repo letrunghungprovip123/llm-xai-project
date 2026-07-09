@@ -1,0 +1,544 @@
+[
+  {
+    "validation_id": "val_llm_api_ir_xai_hist_gradient_boosting_v1_163956_top_high_risk_163956",
+    "created_at": "2026-07-06T03:16:12.452Z",
+    "ir_id": "ir_xai_hist_gradient_boosting_v1_163956_top_high_risk",
+    "explanation_id": "llm_api_ir_xai_hist_gradient_boosting_v1_163956_top_high_risk_163956",
+    "claim_extraction_id": "cexp_llm_api_ir_xai_hist_gradient_boosting_v1_163956_top_high_risk_163956_ba5a91e0e11a",
+    "customer_id": "163956",
+    "status": "FAIL",
+    "summary": {
+      "total_claims": 9,
+      "pass_claims": 3,
+      "warn_claims": 5,
+      "fail_claims": 1,
+      "total_checks": 35,
+      "pass_checks": 22,
+      "warn_checks": 10,
+      "fail_checks": 3
+    },
+    "join": {
+      "claim_ir_id": "ir_xai_hist_gradient_boosting_v1_163956_top_high_risk",
+      "ir_found": true,
+      "ir_source_record_index": 4
+    },
+    "validation_rules": {
+      "validator_version": "batch_j2_faithfulness_validator_v1.0",
+      "mode": "rule_based_ir_faithfulness",
+      "llm_as_judge": false
+    },
+    "claim_results": [
+      {
+        "claim_id": "claim_001",
+        "claim_type": "prediction",
+        "section": "prediction",
+        "text": "Mô hình dự đoán khách hàng này có rủi ro gặp khó khăn trong thanh toán với xác suất 92.77%, cao hơn ngưỡng 50.00%.",
+        "status": "PASS",
+        "checks": [
+          {
+            "rule_id": "J2_SCHEMA_CLAIM_TEXT_REQUIRED",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim text is present."
+          },
+          {
+            "rule_id": "J2_PREDICTION_PROBABILITY_MATCH",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Prediction probability mentioned in claim is consistent with IR.",
+            "evidence": {
+              "claim_number": 92.77,
+              "ir_probability_percent": 92.76945366,
+              "abs_diff": 0.0005
+            }
+          }
+        ],
+        "matched_features": []
+      },
+      {
+        "claim_id": "claim_002",
+        "claim_type": "contribution_accounting",
+        "section": "contribution_overview",
+        "text": "Tổng đóng góp của toàn bộ các yếu tố được mô hình tính là +52.87 điểm phần trăm, đẩy xác suất từ mức nền 39.90% lên 92.77%.",
+        "status": "WARN",
+        "checks": [
+          {
+            "rule_id": "J2_SCHEMA_CLAIM_TEXT_REQUIRED",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim text is present."
+          },
+          {
+            "rule_id": "J2_FEATURE_MENTION_GROUNDED_IN_IR",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Feature-related claim did not directly match known IR feature names. This may be paraphrasing or an unsupported feature mention.",
+            "evidence": {
+              "claim_text": "Tổng đóng góp của toàn bộ các yếu tố được mô hình tính là +52.87 điểm phần trăm, đẩy xác suất từ mức nền 39.90% lên 92.77%.",
+              "available_feature_count": 213
+            }
+          },
+          {
+            "rule_id": "J2_CLAIM_TYPE_UNKNOWN",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Unknown claim_type \"contribution_accounting\". The claim is kept but only generic checks were applied.",
+            "evidence": {
+              "claim_type": "contribution_accounting"
+            }
+          }
+        ],
+        "matched_features": []
+      },
+      {
+        "claim_id": "claim_003",
+        "claim_type": "feature_mention",
+        "section": "main_risk_drivers",
+        "text": "Các yếu tố chính làm tăng rủi ro bao gồm: tỷ lệ đơn vay trước bị từ chối (+3.17 điểm phần trăm), tỷ lệ khoản vay trên giá trị hàng hóa (+2.56 điểm phần trăm), tổng giá trị tín dụng bureau (+2.42 điểm phần trăm), số năm làm việc (+1.95 điểm phần trăm), số năm từ khi cấp giấy tờ (+1.88 điểm phần trăm), và một tín hiệu thuộc nhóm hành vi trả góp (+1.83 điểm phần trăm).",
+        "status": "WARN",
+        "checks": [
+          {
+            "rule_id": "J2_SCHEMA_CLAIM_TEXT_REQUIRED",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim text is present."
+          },
+          {
+            "rule_id": "J2_FEATURE_MENTION_GROUNDED_IN_IR",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Feature-related claim mentions at least one feature available in IR.",
+            "evidence": {
+              "matched_features": [
+                "tỷ lệ đơn vay trước bị từ chối",
+                "tỷ lệ khoản vay trên giá trị hàng hóa",
+                "tổng giá trị tín dụng bureau",
+                "số năm làm việc",
+                "số năm từ khi cấp giấy tờ"
+              ]
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim direction matches IR for feature \"tỷ lệ đơn vay trước bị từ chối\".",
+            "evidence": {
+              "feature_id": "previous_refusal_ratio",
+              "display_name": "tỷ lệ đơn vay trước bị từ chối",
+              "claim_direction": "increases_risk",
+              "ir_direction": "increases_risk",
+              "contribution_value": 0.0317202471
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim direction matches IR for feature \"tỷ lệ khoản vay trên giá trị hàng hóa\".",
+            "evidence": {
+              "feature_id": "credit_to_goods_price_ratio",
+              "display_name": "tỷ lệ khoản vay trên giá trị hàng hóa",
+              "claim_direction": "increases_risk",
+              "ir_direction": "increases_risk",
+              "contribution_value": 0.0256292357
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim direction matches IR for feature \"tổng giá trị tín dụng bureau\".",
+            "evidence": {
+              "feature_id": "bureau_credit_sum_total",
+              "display_name": "tổng giá trị tín dụng bureau",
+              "claim_direction": "increases_risk",
+              "ir_direction": "increases_risk",
+              "contribution_value": 0.0241713705
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim direction matches IR for feature \"số năm làm việc\".",
+            "evidence": {
+              "feature_id": "employment_years",
+              "display_name": "số năm làm việc",
+              "claim_direction": "increases_risk",
+              "ir_direction": "increases_risk",
+              "contribution_value": 0.01952124
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim direction matches IR for feature \"số năm từ khi cấp giấy tờ\".",
+            "evidence": {
+              "feature_id": "id_publish_years",
+              "display_name": "số năm từ khi cấp giấy tờ",
+              "claim_direction": "increases_risk",
+              "ir_direction": "increases_risk",
+              "contribution_value": 0.018805991
+            }
+          },
+          {
+            "rule_id": "J2_CLAIM_TYPE_UNKNOWN",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Unknown claim_type \"feature_mention\". The claim is kept but only generic checks were applied.",
+            "evidence": {
+              "claim_type": "feature_mention"
+            }
+          }
+        ],
+        "matched_features": [
+          {
+            "feature_id": "previous_refusal_ratio",
+            "display_name": "tỷ lệ đơn vay trước bị từ chối",
+            "contribution_value": 0.0317202471,
+            "contribution_direction": "increases_risk",
+            "rank": 2
+          },
+          {
+            "feature_id": "credit_to_goods_price_ratio",
+            "display_name": "tỷ lệ khoản vay trên giá trị hàng hóa",
+            "contribution_value": 0.0256292357,
+            "contribution_direction": "increases_risk",
+            "rank": 3
+          },
+          {
+            "feature_id": "bureau_credit_sum_total",
+            "display_name": "tổng giá trị tín dụng bureau",
+            "contribution_value": 0.0241713705,
+            "contribution_direction": "increases_risk",
+            "rank": 4
+          },
+          {
+            "feature_id": "employment_years",
+            "display_name": "số năm làm việc",
+            "contribution_value": 0.01952124,
+            "contribution_direction": "increases_risk",
+            "rank": 5
+          },
+          {
+            "feature_id": "id_publish_years",
+            "display_name": "số năm từ khi cấp giấy tờ",
+            "contribution_value": 0.018805991,
+            "contribution_direction": "increases_risk",
+            "rank": 6
+          }
+        ]
+      },
+      {
+        "claim_id": "claim_004",
+        "claim_type": "concept_mention",
+        "section": "supporting_evidence_groups",
+        "text": "Các nhóm yếu tố hỗ trợ gồm: hành vi trả góp (+5.09 điểm phần trăm), khả năng gánh khoản vay (+2.94 điểm phần trăm), và lịch sử đơn vay trước đó (+2.28 điểm phần trăm).",
+        "status": "WARN",
+        "checks": [
+          {
+            "rule_id": "J2_SCHEMA_CLAIM_TEXT_REQUIRED",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim text is present."
+          },
+          {
+            "rule_id": "J2_CONCEPT_MENTION_GROUNDED_IN_IR",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Concept claim did not directly match known concept names/ids in IR. This may be paraphrasing.",
+            "evidence": {
+              "claim_text": "Các nhóm yếu tố hỗ trợ gồm: hành vi trả góp (+5.09 điểm phần trăm), khả năng gánh khoản vay (+2.94 điểm phần trăm), và lịch sử đơn vay trước đó (+2.28 điểm phần trăm)."
+            }
+          },
+          {
+            "rule_id": "J2_CLAIM_TYPE_UNKNOWN",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Unknown claim_type \"concept_mention\". The claim is kept but only generic checks were applied.",
+            "evidence": {
+              "claim_type": "concept_mention"
+            }
+          }
+        ],
+        "matched_features": []
+      },
+      {
+        "claim_id": "claim_005",
+        "claim_type": "concept_mention",
+        "section": "supporting_evidence_groups",
+        "text": "Các nhóm yếu tố hỗ trợ gồm: hành vi trả góp (+5.09 điểm phần trăm), khả năng gánh khoản vay (+2.94 điểm phần trăm), và lịch sử đơn vay trước đó (+2.28 điểm phần trăm).",
+        "status": "WARN",
+        "checks": [
+          {
+            "rule_id": "J2_SCHEMA_CLAIM_TEXT_REQUIRED",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim text is present."
+          },
+          {
+            "rule_id": "J2_CONCEPT_MENTION_GROUNDED_IN_IR",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Concept claim did not directly match known concept names/ids in IR. This may be paraphrasing.",
+            "evidence": {
+              "claim_text": "Các nhóm yếu tố hỗ trợ gồm: hành vi trả góp (+5.09 điểm phần trăm), khả năng gánh khoản vay (+2.94 điểm phần trăm), và lịch sử đơn vay trước đó (+2.28 điểm phần trăm)."
+            }
+          },
+          {
+            "rule_id": "J2_CLAIM_TYPE_UNKNOWN",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Unknown claim_type \"concept_mention\". The claim is kept but only generic checks were applied.",
+            "evidence": {
+              "claim_type": "concept_mention"
+            }
+          }
+        ],
+        "matched_features": []
+      },
+      {
+        "claim_id": "claim_006",
+        "claim_type": "concept_mention",
+        "section": "supporting_evidence_groups",
+        "text": "Các nhóm yếu tố hỗ trợ gồm: hành vi trả góp (+5.09 điểm phần trăm), khả năng gánh khoản vay (+2.94 điểm phần trăm), và lịch sử đơn vay trước đó (+2.28 điểm phần trăm).",
+        "status": "WARN",
+        "checks": [
+          {
+            "rule_id": "J2_SCHEMA_CLAIM_TEXT_REQUIRED",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim text is present."
+          },
+          {
+            "rule_id": "J2_CONCEPT_MENTION_GROUNDED_IN_IR",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Concept claim did not directly match known concept names/ids in IR. This may be paraphrasing.",
+            "evidence": {
+              "claim_text": "Các nhóm yếu tố hỗ trợ gồm: hành vi trả góp (+5.09 điểm phần trăm), khả năng gánh khoản vay (+2.94 điểm phần trăm), và lịch sử đơn vay trước đó (+2.28 điểm phần trăm)."
+            }
+          },
+          {
+            "rule_id": "J2_CLAIM_TYPE_UNKNOWN",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Unknown claim_type \"concept_mention\". The claim is kept but only generic checks were applied.",
+            "evidence": {
+              "claim_type": "concept_mention"
+            }
+          }
+        ],
+        "matched_features": []
+      },
+      {
+        "claim_id": "claim_007",
+        "claim_type": "feature_mention",
+        "section": "risk_reducing_factors",
+        "text": "Các yếu tố giảm rủi ro bao gồm: một tín hiệu thuộc nhóm hành vi khoản vay POS/CASH (-0.63 điểm phần trăm), loại thu nhập = Working (-0.38 điểm phần trăm), số năm từ khi đăng ký (-0.33 điểm phần trăm), và một tín hiệu khác thuộc nhóm hành vi khoản vay POS/CASH (-0.31 điểm phần trăm).",
+        "status": "FAIL",
+        "checks": [
+          {
+            "rule_id": "J2_SCHEMA_CLAIM_TEXT_REQUIRED",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim text is present."
+          },
+          {
+            "rule_id": "J2_FEATURE_MENTION_GROUNDED_IN_IR",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Feature-related claim mentions at least one feature available in IR.",
+            "evidence": {
+              "matched_features": [
+                "loại thu nhập",
+                "số năm từ khi đăng ký",
+                "loại thu nhập",
+                "loại thu nhập",
+                "loại thu nhập",
+                "loại thu nhập"
+              ]
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim direction matches IR for feature \"loại thu nhập\".",
+            "evidence": {
+              "feature_id": "NAME_INCOME_TYPE__Working",
+              "display_name": "loại thu nhập",
+              "claim_direction": "decreases_risk",
+              "ir_direction": "decreases_risk",
+              "contribution_value": -0.0037527745
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim direction matches IR for feature \"số năm từ khi đăng ký\".",
+            "evidence": {
+              "feature_id": "registration_years",
+              "display_name": "số năm từ khi đăng ký",
+              "claim_direction": "decreases_risk",
+              "ir_direction": "decreases_risk",
+              "contribution_value": -0.0033248921
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim direction matches IR for feature \"loại thu nhập\".",
+            "evidence": {
+              "feature_id": "NAME_INCOME_TYPE__Commercial_associate",
+              "display_name": "loại thu nhập",
+              "claim_direction": "decreases_risk",
+              "ir_direction": "decreases_risk",
+              "contribution_value": -0.0026376991
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "FAIL",
+            "severity": "error",
+            "message": "Claim direction does not match IR for feature \"loại thu nhập\".",
+            "evidence": {
+              "feature_id": "NAME_INCOME_TYPE__Pensioner",
+              "display_name": "loại thu nhập",
+              "claim_direction": "decreases_risk",
+              "ir_direction": "increases_risk",
+              "contribution_value": 0.0005830481
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "FAIL",
+            "severity": "error",
+            "message": "Claim direction does not match IR for feature \"loại thu nhập\".",
+            "evidence": {
+              "feature_id": "NAME_INCOME_TYPE__State_servant",
+              "display_name": "loại thu nhập",
+              "claim_direction": "decreases_risk",
+              "ir_direction": "increases_risk",
+              "contribution_value": 0.0002315706
+            }
+          },
+          {
+            "rule_id": "J2_DIRECTION_MATCH",
+            "status": "FAIL",
+            "severity": "error",
+            "message": "Claim direction does not match IR for feature \"loại thu nhập\".",
+            "evidence": {
+              "feature_id": "NAME_INCOME_TYPE__RARE",
+              "display_name": "loại thu nhập",
+              "claim_direction": "decreases_risk",
+              "ir_direction": "neutral",
+              "contribution_value": 0
+            }
+          },
+          {
+            "rule_id": "J2_CLAIM_TYPE_UNKNOWN",
+            "status": "WARN",
+            "severity": "warning",
+            "message": "Unknown claim_type \"feature_mention\". The claim is kept but only generic checks were applied.",
+            "evidence": {
+              "claim_type": "feature_mention"
+            }
+          }
+        ],
+        "matched_features": [
+          {
+            "feature_id": "NAME_INCOME_TYPE__Working",
+            "display_name": "loại thu nhập",
+            "contribution_value": -0.0037527745,
+            "contribution_direction": "decreases_risk",
+            "rank": 29
+          },
+          {
+            "feature_id": "registration_years",
+            "display_name": "số năm từ khi đăng ký",
+            "contribution_value": -0.0033248921,
+            "contribution_direction": "decreases_risk",
+            "rank": 33
+          },
+          {
+            "feature_id": "NAME_INCOME_TYPE__Commercial_associate",
+            "display_name": "loại thu nhập",
+            "contribution_value": -0.0026376991,
+            "contribution_direction": "decreases_risk",
+            "rank": 41
+          },
+          {
+            "feature_id": "NAME_INCOME_TYPE__Pensioner",
+            "display_name": "loại thu nhập",
+            "contribution_value": 0.0005830481,
+            "contribution_direction": "increases_risk",
+            "rank": 73
+          },
+          {
+            "feature_id": "NAME_INCOME_TYPE__State_servant",
+            "display_name": "loại thu nhập",
+            "contribution_value": 0.0002315706,
+            "contribution_direction": "increases_risk",
+            "rank": 98
+          },
+          {
+            "feature_id": "NAME_INCOME_TYPE__RARE",
+            "display_name": "loại thu nhập",
+            "contribution_value": 0,
+            "contribution_direction": "neutral",
+            "rank": 213
+          }
+        ]
+      },
+      {
+        "claim_id": "claim_008",
+        "claim_type": "limitation",
+        "section": "limitations",
+        "text": "Giải thích này chỉ mô tả đóng góp của từng yếu tố vào dự đoán của mô hình, không chứng minh mối quan hệ nhân quả thực tế.",
+        "status": "PASS",
+        "checks": [
+          {
+            "rule_id": "J2_SCHEMA_CLAIM_TEXT_REQUIRED",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim text is present."
+          },
+          {
+            "rule_id": "J2_LIMITATION_CAUTIOUS_LANGUAGE",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Limitation claim uses cautious/non-final language."
+          }
+        ],
+        "matched_features": []
+      },
+      {
+        "claim_id": "claim_009",
+        "claim_type": "limitation",
+        "section": "limitations",
+        "text": "Đây không phải là quyết định tín dụng cuối cùng và không phải là kết luận chắc chắn về khả năng thanh toán của khách hàng.",
+        "status": "PASS",
+        "checks": [
+          {
+            "rule_id": "J2_SCHEMA_CLAIM_TEXT_REQUIRED",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Claim text is present."
+          },
+          {
+            "rule_id": "J2_LIMITATION_CAUTIOUS_LANGUAGE",
+            "status": "PASS",
+            "severity": "info",
+            "message": "Limitation claim uses cautious/non-final language."
+          }
+        ],
+        "matched_features": []
+      }
+    ]
+  }
+]

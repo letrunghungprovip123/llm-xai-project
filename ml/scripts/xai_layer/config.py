@@ -60,9 +60,9 @@ class XAIConfig:
 
     random_state: int = RANDOM_STATE
 
-    cases_per_group: int = 5
+    cases_per_group: int = 20
 
-    top_k_features: int = 15
+    top_k_features: int | None = None
 
     shap_background_sample_size: int = 200
 

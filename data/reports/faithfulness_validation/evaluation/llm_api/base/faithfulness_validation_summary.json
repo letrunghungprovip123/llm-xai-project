@@ -1,0 +1,37 @@
+{
+  "report_name": "Batch J.2 Faithfulness Validation Summary",
+  "created_at": "2026-07-07T03:14:28.997Z",
+  "status": "PASS_WITH_WARN",
+  "input_paths": {
+    "claim_extractions_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/claim_extractions.jsonl",
+    "explanation_ir_path": "data/reports/explanation_ir/evaluation/explanation_ir.jsonl"
+  },
+  "output_paths": {
+    "validation_jsonl_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation.jsonl",
+    "summary_json_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation_summary.json",
+    "failures_json_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation_failures.json",
+    "report_md_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation_report.md"
+  },
+  "counts": {
+    "claim_extraction_records": 5,
+    "explanation_ir_records": 30,
+    "validated_records": 5,
+    "pass_records": 0,
+    "pass_with_warn_records": 5,
+    "fail_records": 0,
+    "total_claims": 47,
+    "pass_claims": 31,
+    "warn_claims": 16,
+    "fail_claims": 0
+  },
+  "join_quality": {
+    "joined_records": 5,
+    "missing_ir_records": 0,
+    "missing_ir_ids": []
+  },
+  "validator": {
+    "validator_version": "batch_j2_faithfulness_validator_v1.1",
+    "mode": "rule_based_ir_faithfulness",
+    "llm_as_judge": false
+  }
+}

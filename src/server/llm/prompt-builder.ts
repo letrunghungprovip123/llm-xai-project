@@ -2,80 +2,154 @@
 
 import type {
   BuiltPrompt,
+  ContributionStrength,
+  DisplayPolicy,
   ExplanationIrRecord,
-  LlmContractConcept,
+  IrPredictionSummary,
+  LlmAllowedTerm,
   LlmContractFeatureFactor,
   LlmInputContract,
-  IrPredictionSummary,
+  LlmSupportingFeatureGroup,
+  RegenerationFeedback,
   RiskDirection,
-  ContributionStrength,
 } from "./explanation-schema";
 
-import { getCustomerId, pickNumber, pickString } from "./explanation-schema";
+import {
+  asArray,
+  asRecord,
+  getCustomerId,
+  pickBoolean,
+  pickNumber,
+  pickString,
+} from "./explanation-schema";
 
 /**
- * Batch I v1.0 - Prompt Builder
+ * Batch I v1.2 - Compact Prompt Builder with Optional Validation Feedback
  *
  * Goal:
- * Convert Batch H Explanation IR into a tightly controlled prompt.
+ * Build a compact but faithful LLM prompt.
  *
- * Critical design rule:
- * The LLM is only a verbalization layer.
- * It must not invent new evidence, hidden features, causal claims, or certainty claims.
+ * Design:
+ * - Do NOT send a template full_text.
+ * - Do NOT send all long rule/claim arrays.
+ * - Do NOT send all 213 feature details.
+ * - Send only selected evidence needed for natural explanation.
+ * - Optionally receive Batch J feedback for controlled regeneration.
+ *
+ * Faithfulness is protected by:
+ * - selected evidence from Batch H
+ * - explicit facts/directions/contributions
+ * - display_policy
+ * - optional validator feedback from Batch J
+ * - later Batch J validator
  */
 
-export const PROMPT_VERSION = "batch_i_llm_prompt_v1.0";
+export const PROMPT_VERSION = "batch_i_llm_prompt_v1.2_compact_feedback_ready";
 
-type NormalizedPrediction = {
-  predictedLabel: string;
-  probability: number;
-  threshold: number;
-  thresholdComparison: string;
+const MAX_PRIMARY_FEATURES = 6;
+const MAX_SUPPORTING_GROUPS = 4;
+const MAX_RISK_REDUCING_FEATURES = 4;
+const MAX_ALLOWED_TERMS = 16;
+
+type SafePrediction = {
+  predicted_label: string;
+  probability_percent_display: string;
+  threshold_percent_display: string;
+  threshold_comparison: string;
 };
 
-type NormalizedConcept = {
-  conceptId: string;
-  displayName: string;
+type SafeContributionAccounting = {
+  total_feature_count?: number;
+  base_value_display?: string;
+  model_output_display?: string;
+  all_feature_sum_display?: string;
+  primary_feature_count?: number;
+  supporting_feature_count?: number;
+  remaining_feature_count?: number;
+  hidden_or_nonclaimable_feature_count?: number;
+  explained_abs_coverage_percent?: number;
+};
+
+type SafeFeature = {
+  id: string;
+  mention: string;
+  concept: string;
   direction: RiskDirection;
+  contribution: string;
   strength: ContributionStrength;
-  contributionPercent?: number;
+  display_policy: DisplayPolicy;
+  note?: string;
+
+  /**
+   * Unique label for categorical/one-hot features.
+   * Prefer this when display_name is too generic.
+   * Example: "loại thu nhập = Working"
+   */
+  unique_label?: string;
 };
 
-type NormalizedFeatureFactor = {
-  featureId: string;
-  displayName: string;
-  value?: unknown;
-  valueDisplay?: string;
-  shapValue?: number;
-  shapValueDisplay?: string;
+type SafeSupportingGroup = {
+  id: string;
+  concept_id: string;
+  name: string;
+  feature_count?: number;
   direction: RiskDirection;
-  strength: ContributionStrength;
-  contributionPercent?: number;
-  contributionPercentDisplay?: string;
+  contribution?: string;
 };
-/**
- * Main public function.
- */
+
+type SafeTerm = {
+  term_id: string;
+  term_type: string;
+  mention: string;
+};
+
+type CompactPromptContract = {
+  task: string;
+  language: "vi";
+  audience: string;
+  source_ir_id: string;
+  customer_id: string;
+  prediction: SafePrediction;
+  accounting: SafeContributionAccounting;
+  primary_features: SafeFeature[];
+  supporting_groups: SafeSupportingGroup[];
+  risk_reducing_features: SafeFeature[];
+  remaining_summary: {
+    count?: number;
+    note: string;
+  };
+  allowed_terms: SafeTerm[];
+  output_shape: {
+    language: "vi";
+    sections: [
+      "prediction",
+      "contribution_overview",
+      "main_risk_drivers",
+      "supporting_evidence_groups",
+      "risk_reducing_factors",
+      "limitations",
+    ];
+    include_usage_metadata: true;
+    no_full_text: true;
+  };
+};
+
 export function buildExplanationPrompt(
   irRecord: ExplanationIrRecord,
+  feedback: RegenerationFeedback | null = null,
 ): BuiltPrompt {
   const contract = getLlmInputContractOrThrow(irRecord);
-
-  const safeContract = buildSafePromptContract(irRecord, contract);
-
-  const system = buildSystemPrompt();
-  const user = buildUserPrompt(safeContract);
+  const compactContract = buildCompactPromptContract(irRecord, contract);
 
   return {
-    system,
-    user,
-    promptVersion: PROMPT_VERSION,
+    system: buildSystemPrompt(),
+    user: buildUserPrompt(compactContract, feedback),
+    promptVersion: feedback
+      ? `${PROMPT_VERSION}_with_feedback`
+      : PROMPT_VERSION,
   };
 }
 
-/**
- * We only expose the LLM input contract, not the full IR.
- */
 function getLlmInputContractOrThrow(
   irRecord: ExplanationIrRecord,
 ): LlmInputContract {
@@ -90,315 +164,587 @@ function getLlmInputContractOrThrow(
   return contract;
 }
 
-/**
- * Build a compact safe object for the LLM.
- *
- * This removes fields that the LLM should not need.
- * The goal is to minimize hallucination risk and avoid exposing hidden/internal data.
- */
-function buildSafePromptContract(
+function buildCompactPromptContract(
   irRecord: ExplanationIrRecord,
   contract: LlmInputContract,
-) {
-  const prediction = normalizePrediction(
-    contract.prediction ?? irRecord.prediction_summary,
+): CompactPromptContract {
+  const featureTiers = asRecord(
+    contract.feature_tiers ?? contract.featureTiers,
   );
 
-  const mainConcepts = normalizeConcepts(
-    contract.main_concepts ?? contract.mainConcepts ?? [],
-  );
-
-  const riskIncreasingFactors = normalizeFeatureFactors(
+  const primaryRaw =
+    contract.primary_features ??
+    contract.primaryFeatures ??
+    asArray<LlmContractFeatureFactor>(featureTiers.primary_features) ??
     contract.main_risk_increasing_factors ??
-      contract.mainRiskIncreasingFactors ??
-      [],
+    contract.mainRiskIncreasingFactors ??
+    [];
+
+  const riskReducingRaw =
+    asArray<LlmContractFeatureFactor>(featureTiers.risk_reducing_features)
+      .length > 0
+      ? asArray<LlmContractFeatureFactor>(featureTiers.risk_reducing_features)
+      : [
+          ...asArray<LlmContractFeatureFactor>(primaryRaw).filter(
+            (item) => asRecord(item).direction === "decreases_risk",
+          ),
+          ...asArray<LlmContractFeatureFactor>(
+            contract.main_risk_decreasing_factors ??
+              contract.mainRiskDecreasingFactors,
+          ),
+        ];
+
+  const supportingGroupsRaw =
+    contract.supporting_feature_groups ??
+    contract.supportingFeatureGroups ??
+    [];
+
+  const primaryFeatures = asArray<LlmContractFeatureFactor>(primaryRaw)
+    .map(normalizeFeature)
+    .filter((item) => item.display_policy !== "hidden")
+    .filter((item) => item.direction === "increases_risk")
+    .slice(0, MAX_PRIMARY_FEATURES);
+
+  const riskReducingFeatures = asArray<LlmContractFeatureFactor>(
+    riskReducingRaw,
+  )
+    .map(normalizeFeature)
+    .filter((item) => item.display_policy !== "hidden")
+    .filter((item) => item.direction === "decreases_risk")
+    .slice(0, MAX_RISK_REDUCING_FEATURES);
+
+  const supportingGroups = asArray<LlmSupportingFeatureGroup>(
+    supportingGroupsRaw,
+  )
+    .map(normalizeSupportingGroup)
+    .filter((item) => item.id !== "unknown_group")
+    .slice(0, MAX_SUPPORTING_GROUPS);
+
+  const allowedTerms = buildCompactAllowedTerms({
+    terms: contract.allowed_terms ?? contract.allowedTerms ?? [],
+    primaryFeatures,
+    riskReducingFeatures,
+    supportingGroups,
+  });
+
+  const remainingSummary = normalizeRemainingSummary(
+    asRecord(
+      contract.remaining_features_summary ?? contract.remainingFeaturesSummary,
+    ),
   );
-
-  const riskDecreasingFactors = normalizeFeatureFactors(
-    contract.main_risk_decreasing_factors ??
-      contract.mainRiskDecreasingFactors ??
-      [],
-  );
-
-  const allowedClaimIds =
-    contract.allowed_claim_ids ?? contract.allowedClaimIds ?? [];
-
-  const forbiddenRuleIds =
-    contract.forbidden_rule_ids ?? contract.forbiddenRuleIds ?? [];
-
-  const mustInclude = contract.must_include ?? contract.mustInclude ?? [];
-
-  const mustNot = contract.must_not ?? contract.mustNot ?? [];
-
-  const requiredOutputSections = contract.required_output_sections ??
-    contract.requiredOutputSections ?? [
-      "prediction",
-      "main_risk_drivers",
-      "risk_reducing_factors",
-      "limitations",
-    ];
 
   return {
-    task: "Generate a faithful Vietnamese explanation from the provided Explanation IR contract.",
+    task: "Write a natural Vietnamese explanation from selected XAI evidence. Facts are fixed; wording is flexible.",
     language: "vi",
+    audience: String(contract.audience ?? "credit_risk_reviewer"),
     source_ir_id: irRecord.ir_id,
-    source_evidence_id: irRecord.source_evidence_id ?? null,
-    trace_id: irRecord.trace_id ?? null,
-    run_mode: irRecord.run_mode ?? "evaluation",
-    has_ground_truth: Boolean(irRecord.has_ground_truth),
     customer_id: getCustomerId(irRecord.customer),
-
-    prediction,
-
-    allowed_content: {
-      main_concepts: mainConcepts,
-      main_risk_increasing_factors: riskIncreasingFactors,
-      main_risk_decreasing_factors: riskDecreasingFactors,
-    },
-
-    contract_rules: {
-      allowed_claim_ids: allowedClaimIds,
-      forbidden_rule_ids: forbiddenRuleIds,
-      must_include: mustInclude,
-      must_not: mustNot,
-      required_output_sections: requiredOutputSections,
-    },
-
-    required_json_output_schema: {
+    prediction: normalizePrediction(
+      contract.prediction ?? irRecord.prediction_summary,
+    ),
+    accounting: normalizeContributionAccounting(
+      asRecord(
+        contract.contribution_accounting ?? contract.contributionAccounting,
+      ),
+    ),
+    primary_features: primaryFeatures,
+    supporting_groups: supportingGroups,
+    risk_reducing_features: riskReducingFeatures,
+    remaining_summary: remainingSummary,
+    allowed_terms: allowedTerms,
+    output_shape: {
       language: "vi",
-      sections: {
-        prediction: "string",
-        main_risk_drivers: "string",
-        risk_reducing_factors: "string",
-        limitations: "string",
-      },
-      full_text: "string",
+      sections: [
+        "prediction",
+        "contribution_overview",
+        "main_risk_drivers",
+        "supporting_evidence_groups",
+        "risk_reducing_factors",
+        "limitations",
+      ],
+      include_usage_metadata: true,
+      no_full_text: true,
     },
   };
 }
 
-/**
- * System prompt: stable instruction for the model.
- */
 function buildSystemPrompt(): string {
   return [
-    "Bạn là một bộ sinh diễn giải cho hệ thống Machine Learning có khả năng giải thích.",
-    "Nhiệm vụ của bạn là diễn đạt Explanation IR thành tiếng Việt dễ hiểu.",
+    "Bạn là AI viết diễn giải cho hệ thống Machine Learning có khả năng giải thích.",
+    "Viết tiếng Việt tự nhiên, mạch lạc, giống người phân tích rủi ro đang giải thích cho người đọc.",
     "",
-    "Bạn KHÔNG phải là chuyên gia tín dụng tự suy luận thêm.",
-    "Bạn KHÔNG được thêm thông tin ngoài contract được cung cấp.",
-    "Bạn KHÔNG được tạo feature, concept, lý do, hoặc khuyến nghị mới.",
+    "Bạn KHÔNG phải máy chép contract.",
+    "Bạn ĐƯỢC sáng tạo trong cách diễn đạt, nối câu, giảm lặp từ và làm đoạn văn dễ đọc.",
+    "Nhưng bạn KHÔNG được sáng tạo dữ kiện.",
+    "",
+    "Ranh giới:",
+    "- Được sáng tạo cách nói.",
+    "- Không được sáng tạo facts.",
     "",
     "Quy tắc bắt buộc:",
-    "1. Chỉ dùng thông tin trong JSON contract do người dùng cung cấp.",
-    "2. Chỉ mô tả các yếu tố là đóng góp vào dự đoán của mô hình.",
-    "3. Trong sections.main_risk_drivers, nếu allowed_content.main_risk_increasing_factors có dữ liệu, phải nêu một số yếu tố cụ thể được phép hiển thị, không chỉ nói nhóm yếu tố chung.",
-    "4. Khi nêu yếu tố cụ thể, hãy dùng displayName, direction, strength và nếu có thì dùng valueDisplay, shapValueDisplay hoặc contributionPercentDisplay.",
-    "5. Nếu có SHAP/contribution value, diễn đạt là 'đóng góp vào dự đoán của mô hình', không diễn đạt là nguyên nhân ngoài thực tế.",
-    "6. Không được nói hoặc ngụ ý quan hệ nhân quả ngoài thực tế.",
-    "7. Không được nói khách hàng chắc chắn vỡ nợ hoặc chắc chắn trả nợ.",
-    "8. Không được nhắc TARGET, nhãn thật, true label, true positive, false positive, false negative.",
-    "9. Không được nhắc feature ẩn, feature nhạy cảm, hoặc bất kỳ thông tin nào không có trong allowed_content.",
-    "10. Không được nói đây là quyết định cuối cùng của ngân hàng.",
-    "11. Phải có phần giới hạn giải thích trong sections.limitations.",
-    "12. Khi nói về high_default_risk, ưu tiên dùng 'rủi ro gặp khó khăn trong thanh toán' hoặc 'rủi ro không trả nợ đúng hạn', hạn chế dùng từ quá mạnh như 'vỡ nợ'.",
-    "13. Chỉ trả về JSON hợp lệ, không markdown, không giải thích ngoài JSON.",
+    "1. Chỉ dùng evidence trong JSON contract.",
+    "2. Không thêm feature, concept, số liệu, nguyên nhân hoặc khuyến nghị mới.",
+    "3. Không đổi xác suất, ngưỡng, contribution hoặc direction.",
+    "4. Không nói quan hệ nhân quả ngoài thực tế.",
+    "5. Không nói khách hàng chắc chắn sẽ hoặc không sẽ gặp khó khăn thanh toán.",
+    "6. Tránh từ 'vỡ nợ'; dùng 'rủi ro gặp khó khăn trong thanh toán'.",
+    "7. Không nhắc TARGET, true label, true positive, false positive, false negative.",
+    "8. Không dùng raw snake_case hoặc tên feature kỹ thuật.",
+    "9. Nếu display_policy là concept_level_only thì chỉ nói ở cấp nhóm.",
+    "10. Không nói các yếu tố còn lại là 'không đáng kể' trừ khi contract nói rõ.",
+    "11. Với remaining features, chỉ nói chúng vẫn được tính nhưng không trình bày chi tiết.",
+    "12. Không trả full_text; server sẽ tự ghép full_text từ sections.",
+    "13. Chỉ trả JSON hợp lệ, không markdown, không text ngoài JSON.",
+    "14. sections.limitations bắt buộc phải nêu đủ: explanation chỉ mô tả đóng góp vào dự đoán của mô hình, không chứng minh quan hệ nhân quả ngoài thực tế, không phải quyết định tín dụng cuối cùng, và không phải kết luận chắc chắn.",
+    "15. Khi nói về all_feature_sum_display hoặc tổng mức tăng/giảm xác suất, phải nói đó là tổng đóng góp của toàn bộ các yếu tố được mô hình tính, không được nói là chỉ của các yếu tố chính/hỗ trợ.",
+    "16. Với các case xác suất rất sát threshold, phải nói 'rất sát ngưỡng' và nêu rõ thấp hơn/cao hơn ngưỡng một lượng rất nhỏ; không chỉ nói 'ngang bằng'.",
+    "17. Không được dùng cụm raw English technical như 'previous credit to application ratio'; nếu gặp feature khó diễn đạt, hãy dùng 'một tín hiệu thuộc nhóm ...'.",
+    "18. Nếu feedback từ validator được cung cấp, phải sửa đúng các lỗi được nêu trong feedback.",
+    "19. Không được lặp lại claim đã bị validator đánh dấu FAIL.",
+    "20. Nếu một feature là one-hot/categorical hoặc có tên hiển thị mơ hồ, phải nêu rõ category hoặc unique_label nếu được cung cấp.",
+    "21. Không được viết tên feature chung chung nếu nhiều feature có cùng display_name nhưng khác direction.",
+    "22. Ví dụ sai: 'Loại thu nhập (-0.38 điểm phần trăm)'. Ví dụ đúng: 'Loại thu nhập = Working làm giảm rủi ro khoảng -0.38 điểm phần trăm'.",
     "",
-    "Cách diễn đạt nên dùng:",
-    "- 'góp phần làm tăng rủi ro dự đoán của mô hình'",
-    "- 'góp phần làm giảm rủi ro dự đoán của mô hình'",
-    "- 'theo mô hình'",
-    "- 'dự đoán xác suất'",
-    "",
-    "Cách diễn đạt bị cấm:",
-    "- 'gây ra rủi ro'",
-    "- 'là nguyên nhân khiến khách hàng vỡ nợ'",
-    "- 'chắc chắn sẽ không trả nợ'",
-    "- 'chứng minh rằng khách hàng không trả được nợ'",
+    "Độ dài:",
+    "- Mỗi section 1 đến 3 câu.",
+    "- Ưu tiên rõ ràng, tự nhiên, không liệt kê quá dài.",
   ].join("\n");
 }
 
-/**
- * User prompt: contains the actual safe contract.
- */
-function buildUserPrompt(safeContract: unknown): string {
+function buildUserPrompt(
+  contract: CompactPromptContract,
+  feedback: RegenerationFeedback | null,
+): string {
   return [
-    "Hãy tạo giải thích tiếng Việt từ JSON contract bên dưới.",
+    "Hãy viết explanation tiếng Việt tự nhiên từ JSON contract bên dưới.",
     "",
-    "Yêu cầu output:",
-    "- Chỉ trả về JSON hợp lệ.",
-    "- Không dùng markdown.",
-    "- Không bọc JSON trong ```.",
-    "- Không thêm text ngoài JSON.",
-    "- JSON phải có đúng các field: language, sections, full_text.",
-    "- sections phải có: prediction, main_risk_drivers, risk_reducing_factors, limitations.",
-    "- sections.main_risk_drivers phải gồm 2 phần: nhóm yếu tố chính và các yếu tố cụ thể được phép hiển thị.",
-    "- Nếu contract có main_risk_increasing_factors, hãy nêu 3 đến 6 yếu tố cụ thể quan trọng nhất.",
-    "- Không được bỏ qua feature-level factors nếu chúng có trong allowed_content.",
+    "Output JSON bắt buộc:",
+    "{",
+    '  "language": "vi",',
+    '  "sections": {',
+    '    "prediction": "string",',
+    '    "contribution_overview": "string",',
+    '    "main_risk_drivers": "string",',
+    '    "supporting_evidence_groups": "string",',
+    '    "risk_reducing_factors": "string",',
+    '    "limitations": "string"',
+    "  },",
+    '  "referenced_terms": [{"term_id":"string","term_type":"feature|concept","mention":"string"}],',
+    '  "evidence_items_used": [{"evidence_id":"string","evidence_type":"feature|concept","direction":"string","usage":"primary|supporting|risk_reducing"}],',
+    '  "evidence_groups_used": [{"group_id":"string","concept_id":"string|null","usage":"supporting_group|remaining_summary"}]',
+    "}",
+    "",
+    "Không trả full_text.",
+    "Không markdown.",
+    "Không bọc JSON trong ```.",
+    "",
+    "Viết tự nhiên, không máy móc. Có thể gộp ý và nối câu mượt, nhưng không được đổi facts.",
+    "",
+    buildFeedbackPromptBlock(feedback),
+    "",
+    "Trong contribution_overview, nếu nói tổng +/− điểm phần trăm, hãy nói đó là tổng đóng góp của toàn bộ feature được mô hình tính.",
+    "Với categorical/one-hot feature, nếu contract có unique_label thì ưu tiên dùng unique_label thay vì mention chung.",
+    "Không được dùng display_name mơ hồ nếu có thể gây hiểu nhầm direction/contribution.",
+    "Trong limitations, bắt buộc nhắc đủ 4 ý: chỉ mô tả đóng góp vào dự đoán, không chứng minh nhân quả, không phải quyết định tín dụng cuối cùng, không phải kết luận chắc chắn.",
+    "Không dùng raw English technical feature phrase. Nếu feature name khó diễn giải, dùng concept-level phrase.",
+    "Với probability sát threshold, diễn đạt là 'rất sát ngưỡng', không làm người đọc hiểu sai rằng chắc chắn cao/thấp rõ ràng.",
     "",
     "JSON contract:",
-    JSON.stringify(safeContract, null, 2),
+    JSON.stringify(contract),
+  ].join("\n");
+}
+
+function buildFeedbackPromptBlock(
+  feedback: RegenerationFeedback | null,
+): string {
+  if (!feedback) {
+    return [
+      "VALIDATION FEEDBACK:",
+      "- No previous validation feedback.",
+      "- This is the first generation attempt.",
+    ].join("\n");
+  }
+
+  const issues = feedback.issues
+    .slice(0, 8)
+    .map((issue, index) =>
+      [
+        `${index + 1}. ${issue.failure_type}`,
+        `   Failed claim: ${issue.claim_text}`,
+        `   Reason: ${issue.reason}`,
+        `   Repair instruction: ${issue.repair_instruction}`,
+      ].join("\n"),
+    )
+    .join("\n");
+
+  const globalInstructions = feedback.global_repair_instructions
+    .slice(0, 8)
+    .map((item) => `- ${item}`)
+    .join("\n");
+
+  return [
+    "VALIDATION FEEDBACK FROM BATCH J:",
+    `- Feedback ID: ${feedback.feedback_id}`,
+    `- Previous explanation ID: ${feedback.explanation_id ?? "unknown"}`,
+    `- Attempt: ${feedback.attempt}`,
+    `- Status: ${feedback.status}`,
+    "",
+    "Failed/warning issues to fix:",
+    issues || "- No detailed issues provided.",
+    "",
+    "Global repair instructions:",
+    globalInstructions || "- Follow the IR strictly.",
+    "",
+    "You must regenerate the explanation so that these validator issues are fixed.",
   ].join("\n");
 }
 
 function normalizePrediction(
   prediction: IrPredictionSummary | undefined,
-): NormalizedPrediction {
-  const predictionObj = prediction as Record<string, unknown> | undefined;
+): SafePrediction {
+  const obj = asRecord(prediction);
+
+  const probability = pickNumber(
+    obj,
+    ["probability", "predicted_probability", "predictedProbability"],
+    0,
+  );
+
+  const threshold = pickNumber(obj, ["threshold"], 0.5);
 
   return {
-    predictedLabel: pickString(
-      predictionObj,
+    predicted_label: pickString(
+      obj,
       ["predicted_label", "predictedLabel"],
       "unknown",
     ),
-    probability: pickNumber(
-      predictionObj,
-      ["probability", "predicted_probability", "predictedProbability"],
-      0,
-    ),
-    threshold: pickNumber(predictionObj, ["threshold"], 0.5),
-    thresholdComparison: pickString(
-      predictionObj,
+    probability_percent_display:
+      pickString(obj, ["probability_percent_display"]) ||
+      `${(probability * 100).toFixed(2)}%`,
+    threshold_percent_display:
+      pickString(obj, ["threshold_percent_display"]) ||
+      `${(threshold * 100).toFixed(2)}%`,
+    threshold_comparison: pickString(
+      obj,
       ["threshold_comparison", "thresholdComparison"],
       "unknown",
     ),
   };
 }
 
-function normalizeConcepts(
-  concepts: LlmContractConcept[],
-): NormalizedConcept[] {
-  return concepts
-    .filter((item) => isVisibleAndClaimable(item))
-    .map((item) => {
-      const obj = item as Record<string, unknown>;
-
-      return {
-        conceptId: pickString(
-          obj,
-          ["concept_id", "conceptId"],
-          "unknown_concept",
-        ),
-        displayName: pickString(
-          obj,
-          ["display_name", "displayName"],
-          "yếu tố không xác định",
-        ),
-        direction: normalizeDirection(obj.direction),
-        strength: normalizeStrength(obj.strength),
-        contributionPercent: optionalNumber(obj, [
-          "contribution_percent",
-          "contributionPercent",
-        ]),
-      };
-    })
-    .filter((item) => item.conceptId !== "unknown_concept");
+function normalizeContributionAccounting(
+  accounting: Record<string, unknown>,
+): SafeContributionAccounting {
+  return {
+    total_feature_count: optionalNumber(accounting, ["total_feature_count"]),
+    base_value_display: pickString(accounting, ["base_value_display"]),
+    model_output_display: pickString(accounting, ["model_output_display"]),
+    all_feature_sum_display: pickString(accounting, [
+      "all_feature_sum_display",
+    ]),
+    primary_feature_count: optionalNumber(accounting, [
+      "primary_feature_count",
+    ]),
+    supporting_feature_count: optionalNumber(accounting, [
+      "supporting_feature_count",
+    ]),
+    remaining_feature_count: optionalNumber(accounting, [
+      "remaining_feature_count",
+    ]),
+    hidden_or_nonclaimable_feature_count: optionalNumber(accounting, [
+      "hidden_or_nonclaimable_feature_count",
+    ]),
+    explained_abs_coverage_percent: optionalNumber(accounting, [
+      "explained_abs_coverage_percent",
+    ]),
+  };
 }
 
-function normalizeFeatureFactors(
-  factors: LlmContractFeatureFactor[],
-): NormalizedFeatureFactor[] {
-  return factors
-    .filter((item) => isVisibleAndClaimable(item))
+function normalizeFeature(item: LlmContractFeatureFactor): SafeFeature {
+  const obj = asRecord(item);
+
+  const id = pickString(
+    obj,
+    [
+      "feature_name",
+      "featureName",
+      "feature_id",
+      "featureId",
+      "factor_id",
+      "factorId",
+    ],
+    "unknown_feature",
+  );
+
+  const displayName = pickString(obj, ["display_name", "displayName"], id);
+
+  const categoryValue = pickString(obj, [
+    "category_value",
+    "categoryValue",
+    "category",
+    "value_display",
+    "valueDisplay",
+    "formatted_value",
+    "formattedValue",
+  ]);
+
+  const uniqueLabel =
+    pickString(obj, [
+      "feature_label_unique",
+      "featureLabelUnique",
+      "unique_label",
+      "uniqueLabel",
+    ]) || buildUniqueFeatureLabel(displayName, id, categoryValue);
+
+  const conceptId = pickString(
+    obj,
+    ["concept_id", "conceptId", "concept"],
+    "unknown_concept",
+  );
+
+  const conceptDisplayName = pickString(
+    obj,
+    ["concept_display_name", "conceptDisplayName"],
+    conceptId.replace(/_/g, " "),
+  );
+
+  const displayPolicy = inferDisplayPolicy(obj, displayName);
+
+  const mention =
+    displayPolicy === "feature_level_allowed"
+      ? uniqueLabel || displayName
+      : `một tín hiệu thuộc nhóm ${conceptDisplayName}`;
+
+  return {
+    id,
+    mention,
+    concept: conceptDisplayName,
+    direction: normalizeDirection(obj.direction),
+    contribution: pickString(obj, [
+      "contribution_points_display",
+      "contributionPointsDisplay",
+      "shap_value_display",
+      "shapValueDisplay",
+      "contribution_percent_display",
+      "contributionPercentDisplay",
+    ]),
+    strength: normalizeStrength(obj.strength),
+    display_policy: displayPolicy,
+    unique_label: uniqueLabel || undefined,
+    note:
+      pickString(obj, ["feature_note", "featureNote"]) ||
+      (displayPolicy === "concept_level_only"
+        ? "Chỉ diễn giải ở cấp nhóm, không nêu tên kỹ thuật của feature."
+        : undefined),
+  };
+}
+
+function normalizeSupportingGroup(
+  item: LlmSupportingFeatureGroup,
+): SafeSupportingGroup {
+  const obj = asRecord(item);
+
+  const conceptId = pickString(
+    obj,
+    ["concept_id", "conceptId"],
+    "unknown_concept",
+  );
+
+  const displayName = pickString(
+    obj,
+    ["display_name", "displayName"],
+    conceptId.replace(/_/g, " "),
+  );
+
+  return {
+    id: pickString(obj, ["group_id", "groupId"], `supporting_${conceptId}`),
+    concept_id: conceptId,
+    name: displayName,
+    feature_count: optionalNumber(obj, ["feature_count", "featureCount"]),
+    direction: normalizeDirection(obj.direction),
+    contribution: pickString(obj, [
+      "net_contribution_points_display",
+      "netContributionPointsDisplay",
+    ]),
+  };
+}
+
+function normalizeRemainingSummary(summary: Record<string, unknown>): {
+  count?: number;
+  note: string;
+} {
+  const count = optionalNumber(summary, ["count", "feature_count"]);
+
+  return {
+    count,
+    note: "Các yếu tố còn lại vẫn được tính trong tổng đóng góp của mô hình nhưng không trình bày chi tiết trong explanation.",
+  };
+}
+
+function buildCompactAllowedTerms(input: {
+  terms: LlmAllowedTerm[];
+  primaryFeatures: SafeFeature[];
+  riskReducingFeatures: SafeFeature[];
+  supportingGroups: SafeSupportingGroup[];
+}): SafeTerm[] {
+  const relevantMentions = new Set<string>();
+
+  for (const item of input.primaryFeatures) {
+    relevantMentions.add(item.mention);
+    relevantMentions.add(item.concept);
+
+    if (item.unique_label) {
+      relevantMentions.add(item.unique_label);
+    }
+  }
+
+  for (const item of input.riskReducingFeatures) {
+    relevantMentions.add(item.mention);
+    relevantMentions.add(item.concept);
+
+    if (item.unique_label) {
+      relevantMentions.add(item.unique_label);
+    }
+  }
+
+  for (const item of input.supportingGroups) {
+    relevantMentions.add(item.name);
+  }
+
+  const normalized = asArray<LlmAllowedTerm>(input.terms)
     .map((item) => {
-      const obj = item as Record<string, unknown>;
+      const obj = asRecord(item);
 
       return {
-        featureId: pickString(
-          obj,
-          ["feature_id", "featureId"],
-          "unknown_feature",
-        ),
-        displayName: pickString(
-          obj,
-          ["display_name", "displayName"],
-          "yếu tố không xác định",
-        ),
-
-        value: obj.value,
-        valueDisplay: pickString(
-          obj,
-          [
-            "value_display",
-            "valueDisplay",
-            "formatted_value",
-            "formattedValue",
-          ],
-          "",
-        ),
-
-        shapValue: optionalNumber(obj, ["shap_value", "shapValue"]),
-        shapValueDisplay: pickString(
-          obj,
-          [
-            "shap_value_display",
-            "shapValueDisplay",
-            "formatted_shap_value",
-            "formattedShapValue",
-          ],
-          "",
-        ),
-
-        direction: normalizeDirection(obj.direction),
-        strength: normalizeStrength(obj.strength),
-
-        contributionPercent: optionalNumber(obj, [
-          "contribution_percent",
-          "contributionPercent",
-        ]),
-        contributionPercentDisplay: pickString(
-          obj,
-          [
-            "contribution_percent_display",
-            "contributionPercentDisplay",
-            "formatted_contribution_percent",
-            "formattedContributionPercent",
-          ],
-          "",
-        ),
+        term_id: pickString(obj, ["term_id", "termId"]),
+        term_type: pickString(obj, ["term_type", "termType"]),
+        mention: pickString(obj, ["mention", "display_name", "displayName"]),
       };
     })
-    .filter((item) => item.featureId !== "unknown_feature");
+    .filter(
+      (item) =>
+        item.term_id.length > 0 &&
+        item.term_type.length > 0 &&
+        item.mention.length > 0 &&
+        !isRawTechnicalText(item.mention),
+    )
+    .filter((item) => relevantMentions.has(item.mention))
+    .slice(0, MAX_ALLOWED_TERMS);
+
+  return normalized;
 }
-/**
- * Extra safety:
- * If Batch H already filtered correctly, this simply keeps allowed items.
- * If not, this avoids exposing items explicitly marked as hidden/unclaimable.
- */
-function isVisibleAndClaimable(item: Record<string, unknown>): boolean {
-  const llmVisible = item.llm_visible ?? item.llmVisible;
-  const claimable = item.claimable;
 
-  if (llmVisible === false) return false;
-  if (claimable === false) return false;
+function buildUniqueFeatureLabel(
+  displayName: string,
+  featureId: string,
+  categoryValue: string,
+): string {
+  if (!displayName) return "";
 
-  return true;
+  if (categoryValue && categoryValue !== displayName) {
+    return `${displayName} = ${categoryValue}`;
+  }
+
+  const inferredCategory = inferCategoryFromOneHotFeatureId(featureId);
+
+  if (inferredCategory) {
+    return `${displayName} = ${inferredCategory}`;
+  }
+
+  return displayName;
+}
+
+function inferCategoryFromOneHotFeatureId(featureId: string): string {
+  if (!featureId.includes("__")) return "";
+
+  const parts = featureId.split("__");
+  const category = parts[1];
+
+  if (!category) return "";
+
+  return category.replace(/_/g, " ");
+}
+
+function inferDisplayPolicy(
+  obj: Record<string, unknown>,
+  displayName: string,
+): DisplayPolicy {
+  const explicit = pickString(obj, ["display_policy", "displayPolicy"]);
+
+  if (explicit) {
+    return explicit;
+  }
+
+  const llmVisible = obj.llm_visible ?? obj.llmVisible;
+  const claimable = obj.claimable;
+  const sensitive = pickBoolean(obj, ["sensitive"], false);
+  const allowed = obj.allowed_in_user_explanation;
+
+  if (llmVisible === false || claimable === false || allowed === false) {
+    return "hidden";
+  }
+
+  if (sensitive || allowed === "limited" || isRawTechnicalText(displayName)) {
+    return "concept_level_only";
+  }
+
+  return "feature_level_allowed";
+}
+
+function isRawTechnicalText(text: string): boolean {
+  const value = text.trim();
+
+  if (!value) {
+    return false;
+  }
+
+  const lowered = value.toLowerCase();
+
+  const technicalTokens = [
+    "_",
+    "__",
+    "bureau ",
+    "installment ",
+    "pos cash ",
+    "credit card ",
+    " avg ",
+    " max ",
+    " min ",
+    " sum ",
+    " std",
+    " dpd",
+    " def ",
+    " xna",
+    " cnt",
+    " amt",
+    "ext_source",
+    "ext source",
+    "occupation_type",
+    "name_income_type",
+  ];
+
+  if (technicalTokens.some((token) => lowered.includes(token))) {
+    return true;
+  }
+
+  if (/^[A-Z0-9_]+$/.test(value) && value.length > 3) {
+    return true;
+  }
+
+  return false;
 }
 
 function normalizeDirection(value: unknown): RiskDirection {
-  if (
-    value === "increases_risk" ||
-    value === "decreases_risk" ||
-    value === "neutral" ||
-    value === "mixed" ||
-    value === "unknown"
-  ) {
-    return value;
+  if (typeof value === "string" && value.trim().length > 0) {
+    return value as RiskDirection;
   }
 
   return "unknown";
 }
 
 function normalizeStrength(value: unknown): ContributionStrength {
-  if (
-    value === "strong" ||
-    value === "moderate" ||
-    value === "weak" ||
-    value === "neutral" ||
-    value === "unknown"
-  ) {
-    return value;
+  if (typeof value === "string" && value.trim().length > 0) {
+    return value as ContributionStrength;
   }
 
   return "unknown";
@@ -417,6 +763,7 @@ function optionalNumber(
 
     if (typeof value === "string") {
       const parsed = Number(value);
+
       if (Number.isFinite(parsed)) {
         return parsed;
       }

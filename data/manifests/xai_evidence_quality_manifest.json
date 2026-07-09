@@ -1,0 +1,106 @@
+{
+  "batch_name": "Batch G+ — XAI Evidence Quality Evaluation",
+  "batch_short_name": "batch_g_plus_xai_evidence_quality_evaluation",
+  "status": "PASSED",
+  "created_at": "2026-07-08T02:54:14.157021+00:00",
+  "run_mode": "evaluation",
+  "purpose": "Evaluate SHAP evidence quality before Explanation IR v2 and LLM grounding.",
+  "inputs": {
+    "xai_local_evidence_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_local_evidence.jsonl",
+    "xai_evidence_summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_evidence_summary.csv",
+    "xai_quality_report_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_quality_report.json",
+    "xai_evidence_manifest_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/xai_evidence_manifest.json",
+    "x_train_tree_parquet": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/processed/model_ready/tree/X_train_tree.parquet"
+  },
+  "outputs": {
+    "xai_topk_coverage_report_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_topk_coverage_report.csv",
+    "xai_concept_aggregation_report_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_concept_aggregation_report.csv",
+    "xai_comprehensiveness_report_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_comprehensiveness_report.csv",
+    "xai_sufficiency_report_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_sufficiency_report.csv",
+    "xai_stability_report_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_stability_report.csv",
+    "xai_runtime_report_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_runtime_report.csv",
+    "xai_evidence_quality_summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_evidence_quality_summary.csv",
+    "xai_evidence_quality_report_md": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_evidence_quality_report.md",
+    "xai_evidence_quality_manifest_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/xai_evidence_quality_manifest.json"
+  },
+  "batch_g_reference": {
+    "status": "PASSED",
+    "manifest_status": "PASSED",
+    "model": {
+      "model_name": "hist_gradient_boosting",
+      "model_version": "v1",
+      "model_family": "tree_boosting",
+      "dataset_branch": "tree",
+      "feature_count": 213,
+      "estimator_type": "HistGradientBoostingClassifier",
+      "default_threshold": 0.5
+    },
+    "xai_method": {
+      "method": "SHAP",
+      "explainer_type": "TreeExplainer",
+      "output_space": "probability",
+      "case_count": 120,
+      "feature_count": 213,
+      "top_k_features": 213
+    }
+  },
+  "quality_gates": {
+    "max_additivity_error_allowed": 0.01,
+    "min_mean_top10_coverage": 0.5,
+    "max_concept_sum_error": 1e-08,
+    "max_unknown_abs_share": 0.05
+  },
+  "aggregate_summary": {
+    "batch_name": "Batch G+ — XAI Evidence Quality Evaluation",
+    "batch_short_name": "batch_g_plus_xai_evidence_quality_evaluation",
+    "status": "PASSED",
+    "created_at": "2026-07-08T02:54:14.132696+00:00",
+    "run_mode": "evaluation",
+    "case_count": 120,
+    "feature_count": 213,
+    "input_scope": "pilot_selected_cases_from_batch_g",
+    "additivity": {
+      "mean_additivity_error": 3.5986516828956374e-09,
+      "max_additivity_error": 8.462248013429985e-09,
+      "passed_additivity_count": 120,
+      "failed_additivity_count": 0
+    },
+    "topk_coverage": {
+      "mean_top3_coverage": 0.3444543350150283,
+      "median_top3_coverage": 0.3543806345769083,
+      "mean_top5_coverage": 0.42505471088079977,
+      "median_top5_coverage": 0.4304480627117534,
+      "mean_top10_coverage": 0.56697187796512,
+      "median_top10_coverage": 0.5791387033108946,
+      "mean_top20_coverage": 0.7332823865066962,
+      "median_top20_coverage": 0.7412438139792745
+    },
+    "concept_accounting": {
+      "mean_concept_sum_error": 2.7639927383897127e-17,
+      "max_concept_sum_error": 1.1102230246251565e-16,
+      "mean_unknown_feature_group_abs_share": 0.0
+    },
+    "comprehensiveness": {
+      "status": "completed",
+      "reason": null,
+      "mean_comprehensiveness_top10": 0.17654301426088048
+    },
+    "sufficiency": {
+      "status": "completed",
+      "reason": null,
+      "mean_sufficiency_drop_top10": 0.019553470669350634
+    },
+    "stability": {
+      "status": "skipped",
+      "reason": "Repeated SHAP runs are not generated in this Batch G+ version.",
+      "stability_score": null
+    },
+    "runtime": {
+      "runtime_total_seconds": 10.858586542000921,
+      "runtime_per_case_ms": 90.48822118334101,
+      "runtime_per_feature_ms": 0.42482732949925356
+    },
+    "warnings": [],
+    "failed_reasons": []
+  }
+}

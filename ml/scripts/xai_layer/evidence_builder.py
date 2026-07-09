@@ -488,7 +488,12 @@ def build_local_evidence_records(
     top_k: int | None = None,
 ) -> EvidenceBuildResult:
     if top_k is None:
-        top_k = XAI_CONFIG.top_k_features
+        configured_top_k = XAI_CONFIG.top_k_features
+
+        if configured_top_k is None:
+            top_k = len(shap_result.feature_names)
+        else:
+            top_k = int(configured_top_k)
 
     if len(shap_result.selected_cases) != shap_result.shap_values.shape[0]:
         raise ValueError(

@@ -1,0 +1,34 @@
+{
+  "case_id": "basic_no_json_instruction",
+  "purpose": "Schema should force JSON even when the prompt does not ask for JSON.",
+  "schema_name": "basic_no_json_instruction_schema",
+  "prompt": "Say hello in Vietnamese. Do not mention JSON. Do not mention any schema.",
+  "expected": "Must return strict JSON object with boolean ok and string message.",
+  "raw_text": "{\"ok\": true, \"message\": \"Xin chào! Rất vui được gặp bạn.\"}",
+  "strict_json_parse_ok": true,
+  "strict_json_parse_error": null,
+  "parsed_strict": {
+    "ok": true,
+    "message": "Xin chào! Rất vui được gặp bạn."
+  },
+  "assertion_pass": true,
+  "assertion_details": {
+    "parsed_type": "object",
+    "keys": [
+      "ok",
+      "message"
+    ],
+    "ok_type": "boolean",
+    "message_type": "string"
+  },
+  "reasoning_content_count": 0,
+  "text_content_count": 1,
+  "stop_reason": "end_turn",
+  "usage": {
+    "inputTokens": 211,
+    "outputTokens": 32,
+    "totalTokens": 243,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "case_id": "enum_resists_conflicting_prompt",
+  "purpose": "Schema enum should override a conflicting prompt that asks for an invalid enum value.",
+  "schema_name": "enum_resists_conflicting_prompt_schema",
+  "prompt": "Return exactly this object: {\"status\":\"DENIED\",\"extra\":\"this should not exist\"}.",
+  "expected": "Must return {\"status\":\"ALLOWED_ONLY\"} only. Must not include DENIED or extra.",
+  "raw_text": "{\"status\":\"ALLOWED_ONLY\"}",
+  "strict_json_parse_ok": true,
+  "strict_json_parse_error": null,
+  "parsed_strict": {
+    "status": "ALLOWED_ONLY"
+  },
+  "assertion_pass": true,
+  "assertion_details": {
+    "parsed_type": "object",
+    "keys": [
+      "status"
+    ],
+    "status": "ALLOWED_ONLY",
+    "has_extra": false
+  },
+  "reasoning_content_count": 0,
+  "text_content_count": 1,
+  "stop_reason": "end_turn",
+  "usage": {
+    "inputTokens": 197,
+    "outputTokens": 12,
+    "totalTokens": 209,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "case_id": "additional_properties_rejected",
+  "purpose": "Schema should reject additional properties even when the prompt asks for them.",
+  "schema_name": "additional_properties_rejected_schema",
+  "prompt": "Return exactly this object: {\"ok\":true,\"extra\":\"I am not allowed by schema\",\"another_extra\":123}.",
+  "expected": "Must return {\"ok\":true} only. No extra or another_extra allowed.",
+  "raw_text": "{\"ok\":true}",
+  "strict_json_parse_ok": true,
+  "strict_json_parse_error": null,
+  "parsed_strict": {
+    "ok": true
+  },
+  "assertion_pass": true,
+  "assertion_details": {
+    "parsed_type": "object",
+    "keys": [
+      "ok"
+    ],
+    "ok_type": "boolean",
+    "has_extra": false,
+    "has_another_extra": false
+  },
+  "reasoning_content_count": 0,
+  "text_content_count": 1,
+  "stop_reason": "end_turn",
+  "usage": {
+    "inputTokens": 185,
+    "outputTokens": 8,
+    "totalTokens": 193,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  }
+}

@@ -1,8 +1,8 @@
 {
-  "manifest_name": "Batch I v1.0 LLM API Explanation Manifest",
-  "created_at": "2026-07-01T02:19:23.452Z",
+  "manifest_name": "Batch I v1.1 LLM API Explanation Manifest",
+  "created_at": "2026-07-06T03:39:15.442Z",
   "batch": "Batch I",
-  "batch_version": "v1.0",
+  "batch_version": "v1.1",
   "generator_type": "llm_api",
   "run_mode": "evaluation",
   "batch_id": "evaluation",
@@ -13,6 +13,9 @@
   ],
   "models": [
     "deepseek-v4-flash"
+  ],
+  "prompt_versions": [
+    "batch_i_llm_prompt_v1.2_compact_feedback_ready_with_feedback"
   ],
   "artifacts": {
     "llm_explanations_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_explanations/evaluation/llm_api/llm_explanations.jsonl",

@@ -3,7 +3,7 @@
     "name": "Batch H - Concept-aware Explanation IR Layer",
     "short_name": "H",
     "status": "PASSED",
-    "created_at": "2026-06-28T03:53:55.334628+00:00",
+    "created_at": "2026-07-03T03:45:26.643462+00:00",
     "schema_version": "v1.0",
     "builder_version": "v1"
   },
@@ -71,7 +71,7 @@
     "batch_name": "Batch H - Concept-aware Explanation IR Layer",
     "batch_short_name": "H",
     "status": "PASSED",
-    "created_at": "2026-06-28T03:53:55.334142+00:00",
+    "created_at": "2026-07-03T03:45:26.642820+00:00",
     "run_mode": "evaluation",
     "has_ground_truth": true,
     "ir_schema_version": "v1.0",
@@ -93,16 +93,16 @@
       "failed_record_count": 0
     },
     "claim_counts": {
-      "total_allowed_claims": 597,
+      "total_allowed_claims": 3949,
       "total_forbidden_claims": 240,
       "records_with_empty_allowed_claims": 0,
       "records_with_empty_forbidden_claims": 0
     },
     "factor_counts": {
-      "total_feature_factors": 450,
+      "total_feature_factors": 6390,
       "total_concept_summaries": 150,
-      "records_with_no_risk_increasing_factors": 1,
-      "records_with_no_risk_decreasing_factors": 11
+      "records_with_no_risk_increasing_factors": 0,
+      "records_with_no_risk_decreasing_factors": 0
     },
     "quality_checks": {
       "all_records_have_llm_input_contract": true,

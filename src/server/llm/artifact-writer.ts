@@ -10,14 +10,13 @@ import type {
 } from "./explanation-schema";
 
 /**
- * Batch I v1.0 - Artifact Writer
+ * Batch I v1.2 - Artifact Writer
  *
- * Responsibility:
- * Save LLM explanation artifacts:
- * - llm_explanations.jsonl
- * - llm_explanation_summary.csv
- * - llm_explanation_quality_report.json
- * - manifest json
+ * Important artifact-lineage rule:
+ * - Normal/base generation writes to llm_api/base/
+ * - Regeneration writes to llm_api/regeneration_attempt_<n>/
+ *
+ * This prevents controlled regeneration from overwriting the base Batch I output.
  */
 
 export type LlmArtifactWriteOptions = {
@@ -25,6 +24,13 @@ export type LlmArtifactWriteOptions = {
   runMode: RunMode;
   batchId: string;
   inputSource: InputSource;
+
+  /**
+   * Examples:
+   * - base
+   * - regeneration_attempt_1
+   */
+  artifactSubdir?: string;
 };
 
 export type LlmArtifactPaths = {
@@ -64,8 +70,9 @@ export function buildLlmArtifactPaths(
   options: LlmArtifactWriteOptions,
 ): LlmArtifactPaths {
   const projectRoot = options.projectRoot ?? process.cwd();
+  const artifactSubdir = sanitizeFileName(options.artifactSubdir ?? "base");
 
-  const outputDir =
+  const baseOutputDir =
     options.runMode === "evaluation"
       ? path.join(
           projectRoot,
@@ -81,16 +88,18 @@ export function buildLlmArtifactPaths(
           "reports",
           "llm_explanations",
           "inference",
-          options.batchId,
+          sanitizeFileName(options.batchId),
           "llm_api",
         );
 
+  const outputDir = path.join(baseOutputDir, artifactSubdir);
+
   const manifestName =
     options.runMode === "evaluation"
-      ? "llm_explanation_manifest_evaluation_llm_api.json"
+      ? `llm_explanation_manifest_evaluation_llm_api_${artifactSubdir}.json`
       : `llm_explanation_manifest_inference_${sanitizeFileName(
           options.batchId,
-        )}_llm_api.json`;
+        )}_llm_api_${artifactSubdir}.json`;
 
   return {
     outputDir,
@@ -109,6 +118,7 @@ async function writeJsonl(
   records: LlmExplanationRecord[],
 ): Promise<void> {
   const content = records.map((record) => JSON.stringify(record)).join("\n");
+
   await writeFile(
     filePath,
     content + (records.length > 0 ? "\n" : ""),
@@ -131,12 +141,25 @@ function buildSummaryCsv(records: LlmExplanationRecord[]): string {
     "generator_type",
     "provider",
     "model_name",
+    "prompt_version",
+    "generation_attempt",
+    "has_regeneration_feedback",
+    "feedback_id",
+    "parent_explanation_id",
     "is_parseable_json",
     "has_required_sections",
     "section_count",
     "character_count",
+    "has_referenced_terms",
+    "has_evidence_items_used",
+    "has_evidence_groups_used",
+    "contains_forbidden_wording",
+    "contains_raw_technical_name",
     "error_count",
     "warning_count",
+    "prompt_tokens",
+    "completion_tokens",
+    "total_tokens",
   ];
 
   const rows = records.map((record) => {
@@ -158,6 +181,8 @@ function buildSummaryCsv(records: LlmExplanationRecord[]): string {
     const customerId =
       record.customer.SK_ID_CURR ?? record.customer.sk_id_curr ?? "";
 
+    const usage = record.raw_response?.usage ?? {};
+
     return [
       record.explanation_id,
       record.source_ir_id,
@@ -172,12 +197,25 @@ function buildSummaryCsv(records: LlmExplanationRecord[]): string {
       record.generator.generator_type,
       record.generator.provider ?? "",
       record.generator.model_name ?? "",
+      record.generator.prompt_version ?? "",
+      String(record.metadata.generation_attempt ?? 0),
+      String(Boolean(record.metadata.has_regeneration_feedback)),
+      record.metadata.feedback_id ?? "",
+      record.metadata.parent_explanation_id ?? "",
       String(record.quality.is_parseable_json),
       String(record.quality.has_required_sections),
       String(record.quality.section_count),
       String(record.quality.character_count),
+      String(record.quality.has_referenced_terms),
+      String(record.quality.has_evidence_items_used),
+      String(record.quality.has_evidence_groups_used),
+      String(record.quality.contains_forbidden_wording),
+      String(record.quality.contains_raw_technical_name),
       String(record.quality.errors.length),
       String(record.quality.warnings.length),
+      String(usage.prompt_tokens ?? ""),
+      String(usage.completion_tokens ?? ""),
+      String(usage.total_tokens ?? ""),
     ].map(csvEscape);
   });
 
@@ -191,12 +229,34 @@ function buildQualityReport(
   options: LlmArtifactWriteOptions,
 ) {
   const total = records.length;
+  const artifactSubdir = sanitizeFileName(options.artifactSubdir ?? "base");
+
   const parseableCount = records.filter(
     (record) => record.quality.is_parseable_json,
   ).length;
 
   const requiredSectionsCount = records.filter(
     (record) => record.quality.has_required_sections,
+  ).length;
+
+  const referencedTermsCount = records.filter(
+    (record) => record.quality.has_referenced_terms,
+  ).length;
+
+  const evidenceItemsCount = records.filter(
+    (record) => record.quality.has_evidence_items_used,
+  ).length;
+
+  const evidenceGroupsCount = records.filter(
+    (record) => record.quality.has_evidence_groups_used,
+  ).length;
+
+  const forbiddenCount = records.filter(
+    (record) => record.quality.contains_forbidden_wording,
+  ).length;
+
+  const rawTechnicalCount = records.filter(
+    (record) => record.quality.contains_raw_technical_name,
   ).length;
 
   const recordsWithErrors = records.filter(
@@ -207,24 +267,65 @@ function buildQualityReport(
     (record) => record.quality.warnings.length > 0,
   );
 
+  const recordsWithFeedback = records.filter(
+    (record) => record.metadata.has_regeneration_feedback,
+  );
+
+  const totalCharacters = records.reduce(
+    (sum, record) => sum + record.quality.character_count,
+    0,
+  );
+
+  const totalTokens = records.reduce(
+    (sum, record) =>
+      sum + Number(record.raw_response?.usage?.total_tokens ?? 0),
+    0,
+  );
+
   return {
-    report_name: "Batch I v1.0 LLM API Explanation Quality Report",
+    report_name: "Batch I v1.2 LLM API Explanation Quality Report",
     created_at: new Date().toISOString(),
     run_mode: options.runMode,
     batch_id: options.batchId,
     input_source: options.inputSource,
     generator_type: "llm_api",
+    artifact_subdir: artifactSubdir,
     total_records: total,
     parseable_json_count: parseableCount,
     parseable_json_rate: safeRate(parseableCount, total),
     required_sections_count: requiredSectionsCount,
     required_sections_rate: safeRate(requiredSectionsCount, total),
+    referenced_terms_count: referencedTermsCount,
+    referenced_terms_rate: safeRate(referencedTermsCount, total),
+    evidence_items_used_count: evidenceItemsCount,
+    evidence_items_used_rate: safeRate(evidenceItemsCount, total),
+    evidence_groups_used_count: evidenceGroupsCount,
+    evidence_groups_used_rate: safeRate(evidenceGroupsCount, total),
+    records_with_forbidden_wording_count: forbiddenCount,
+    records_with_raw_technical_name_count: rawTechnicalCount,
     records_with_errors_count: recordsWithErrors.length,
     records_with_warnings_count: recordsWithWarnings.length,
+    records_with_regeneration_feedback_count: recordsWithFeedback.length,
+    text_stats: {
+      total_characters: totalCharacters,
+      average_characters_per_record: total > 0 ? totalCharacters / total : 0,
+    },
+    usage: {
+      total_tokens: totalTokens,
+    },
     failed_records: recordsWithErrors.map((record) => ({
       explanation_id: record.explanation_id,
       source_ir_id: record.source_ir_id,
+      generation_attempt: record.metadata.generation_attempt ?? 0,
+      feedback_id: record.metadata.feedback_id,
       errors: record.quality.errors,
+    })),
+    warning_records: recordsWithWarnings.slice(0, 100).map((record) => ({
+      explanation_id: record.explanation_id,
+      source_ir_id: record.source_ir_id,
+      generation_attempt: record.metadata.generation_attempt ?? 0,
+      feedback_id: record.metadata.feedback_id,
+      warnings: record.quality.warnings,
     })),
   };
 }
@@ -234,6 +335,8 @@ function buildManifest(
   options: LlmArtifactWriteOptions,
   paths: LlmArtifactPaths,
 ) {
+  const artifactSubdir = sanitizeFileName(options.artifactSubdir ?? "base");
+
   const providers = Array.from(
     new Set(records.map((record) => record.generator.provider).filter(Boolean)),
   );
@@ -244,18 +347,36 @@ function buildManifest(
     ),
   );
 
+  const promptVersions = Array.from(
+    new Set(
+      records.map((record) => record.generator.prompt_version).filter(Boolean),
+    ),
+  );
+
+  const generationAttempts = Array.from(
+    new Set(
+      records.map((record) => Number(record.metadata.generation_attempt ?? 0)),
+    ),
+  ).sort((a, b) => a - b);
+
   return {
-    manifest_name: "Batch I v1.0 LLM API Explanation Manifest",
+    manifest_name: "Batch I v1.2 LLM API Explanation Manifest",
     created_at: new Date().toISOString(),
     batch: "Batch I",
-    batch_version: "v1.0",
+    batch_version: "v1.2",
     generator_type: "llm_api",
     run_mode: options.runMode,
     batch_id: options.batchId,
     input_source: options.inputSource,
+    artifact_subdir: artifactSubdir,
     record_count: records.length,
+    generation_attempts: generationAttempts,
+    records_with_regeneration_feedback_count: records.filter(
+      (record) => record.metadata.has_regeneration_feedback,
+    ).length,
     providers,
     models,
+    prompt_versions: promptVersions,
     artifacts: {
       llm_explanations_jsonl: paths.explanationsJsonl,
       llm_explanation_summary_csv: paths.summaryCsv,
@@ -283,5 +404,11 @@ function safeRate(count: number, total: number): number {
 }
 
 function sanitizeFileName(value: string): string {
-  return value.replace(/[^a-zA-Z0-9_-]+/g, "_");
+  const trimmed = value.trim();
+
+  if (!trimmed) {
+    return "base";
+  }
+
+  return trimmed.replace(/[^a-zA-Z0-9_-]+/g, "_");
 }

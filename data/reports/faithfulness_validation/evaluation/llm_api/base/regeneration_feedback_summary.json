@@ -1,0 +1,40 @@
+{
+  "report_name": "Batch J.3 Validation Decision & Feedback Summary",
+  "created_at": "2026-07-07T03:14:29.001Z",
+  "batch": "Batch J.3",
+  "batch_version": "v1.0",
+  "mode": "validation_decision_and_feedback_builder",
+  "run_mode": "evaluation",
+  "generator_type": "llm_api",
+  "input_paths": {
+    "validation_jsonl_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation.jsonl",
+    "validation_summary_json_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation_summary.json",
+    "validation_failures_json_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/faithfulness_validation_failures.json"
+  },
+  "output_paths": {
+    "validation_decisions_jsonl_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/validation_decisions.jsonl",
+    "regeneration_feedback_jsonl_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/regeneration_feedback.jsonl",
+    "regeneration_feedback_summary_json_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/regeneration_feedback_summary.json",
+    "finalization_candidates_jsonl_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/finalization_candidates.jsonl",
+    "validation_decision_report_md_path": "data/reports/faithfulness_validation/evaluation/llm_api/base/validation_decision_report.md"
+  },
+  "counts": {
+    "validation_records": 5,
+    "accepted_records": 0,
+    "accepted_with_warnings_records": 5,
+    "needs_regeneration_records": 0,
+    "system_error_records": 0,
+    "regeneration_feedback_records": 0,
+    "finalization_candidate_records": 5,
+    "total_feedback_issues": 0,
+    "total_feedback_errors": 0,
+    "total_feedback_warnings": 0
+  },
+  "policy": {
+    "generate_feedback_for_warnings": false,
+    "next_attempt": 1,
+    "auto_loop_enabled": false,
+    "calls_llm": false,
+    "calls_bedrock": false
+  }
+}

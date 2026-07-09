@@ -1,17 +1,16 @@
 // src/server/llm/explanation-schema.ts
 
 /**
- * Batch I v1.0 - LLM API Explanation Layer
+ * Batch I v1.1 - LLM API Explanation Layer
  *
- * This file defines shared TypeScript schemas/types for:
+ * Shared schemas/types for:
  * - Explanation IR input from Batch H
- * - LLM input contract
- * - LLM-generated explanation output
- * - Batch/run configuration
+ * - Safe LLM input contract
+ * - LLM-generated JSON output
+ * - Batch I output records
  *
- * Important design rule:
- * The LLM layer depends on Explanation IR, not raw data, not SHAP directly,
- * and not the trained model directly.
+ * Design rule:
+ * The LLM may write naturally, but it must not invent evidence.
  */
 
 export type RunMode = "evaluation" | "inference";
@@ -27,14 +26,17 @@ export type RiskDirection =
   | "decreases_risk"
   | "neutral"
   | "mixed"
-  | "unknown";
+  | "neutral_or_mixed"
+  | "unknown"
+  | string;
 
 export type ContributionStrength =
   | "strong"
   | "moderate"
   | "weak"
   | "neutral"
-  | "unknown";
+  | "unknown"
+  | string;
 
 export type PredictionLabel = "high_default_risk" | "low_default_risk" | string;
 
@@ -46,38 +48,47 @@ export type ThresholdComparison =
   | "unknown"
   | string;
 
-/**
- * Request shape used by both:
- * - offline script runner
- * - Next.js API route
- *
- * Current main implementation:
- * inputSource = "precomputed_ir"
- *
- * Future extension:
- * inputSource = "raw_batch" or "inference_ready"
- */
+export type DisplayPolicy =
+  | "feature_level_allowed"
+  | "concept_level_only"
+  | "hidden"
+  | string;
+
+export type EvidenceUsage =
+  | "primary"
+  | "supporting"
+  | "risk_reducing"
+  | "remaining_summary"
+  | "supporting_group"
+  | string;
+
 export type ExplanationGenerationRequest = {
   runMode: RunMode;
   batchId: string;
   inputSource: InputSource;
-
-  /**
-   * Optional filters.
-   * Used when UI wants to generate explanation for one customer/IR only.
-   */
   irId?: string;
   customerId?: string;
+  limit?: number;
 
   /**
-   * Useful for testing before calling the LLM on all records.
+   * Optional Batch J.3 feedback file.
+   * When provided, Batch I performs controlled regeneration for matching IR records.
    */
-  limit?: number;
+  feedbackPath?: string;
+
+  /**
+   * Artifact sub-directory under:
+   * data/reports/llm_explanations/<runMode>/.../llm_api/<artifactSubdir>/
+   *
+   * Examples:
+   * - base
+   * - regeneration_attempt_1
+   *
+   * This prevents regeneration runs from overwriting the base Batch I output.
+   */
+  artifactSubdir?: string;
 };
 
-/**
- * Minimal model metadata carried from IR.
- */
 export type IrModelInfo = {
   model_name?: string;
   modelName?: string;
@@ -87,101 +98,187 @@ export type IrModelInfo = {
   modelFamily?: string;
   dataset_branch?: string;
   datasetBranch?: string;
-
   [key: string]: unknown;
 };
 
-/**
- * Minimal customer identity carried from IR.
- */
 export type IrCustomerInfo = {
   SK_ID_CURR?: number | string;
   sk_id_curr?: number | string;
-
   [key: string]: unknown;
 };
 
-/**
- * Prediction summary produced before the LLM layer.
- */
 export type IrPredictionSummary = {
   predicted_class?: number | string;
   predicted_label?: PredictionLabel;
   predictedLabel?: PredictionLabel;
-
   probability?: number;
   predicted_probability?: number;
   predictedProbability?: number;
-
   threshold?: number;
-
   threshold_comparison?: ThresholdComparison;
   thresholdComparison?: ThresholdComparison;
-
+  probability_display?: string;
+  probability_percent_display?: string;
+  threshold_display?: string;
+  threshold_percent_display?: string;
   [key: string]: unknown;
 };
 
-/**
- * A concept-level item allowed for user-facing explanation.
- */
 export type LlmContractConcept = {
   concept_id?: string;
   conceptId?: string;
-
   display_name?: string;
   displayName?: string;
-
   direction?: RiskDirection;
   strength?: ContributionStrength;
-
   contribution_percent?: number;
   contributionPercent?: number;
-
+  net_contribution_points_display?: string;
+  feature_count?: number;
   claimable?: boolean;
   llm_visible?: boolean;
   llmVisible?: boolean;
-
   [key: string]: unknown;
 };
 
-/**
- * A feature-level item allowed for user-facing explanation.
- */
 export type LlmContractFeatureFactor = {
+  factor_id?: string;
+  factorId?: string;
   feature_id?: string;
   featureId?: string;
-
+  feature_name?: string;
+  featureName?: string;
   display_name?: string;
   displayName?: string;
-
+  concept?: string;
+  concept_id?: string;
+  conceptId?: string;
+  concept_display_name?: string;
+  conceptDisplayName?: string;
   value?: unknown;
-
+  value_display?: string;
+  valueDisplay?: string;
+  formatted_value?: string;
+  formattedValue?: string;
   shap_value?: number;
   shapValue?: number;
-
+  shap_value_display?: string;
+  shapValueDisplay?: string;
+  contribution_points_display?: string;
+  contributionPointsDisplay?: string;
   direction?: RiskDirection;
   strength?: ContributionStrength;
-
   contribution_percent?: number;
   contributionPercent?: number;
-
+  contribution_percent_display?: string;
+  contributionPercentDisplay?: string;
   claimable?: boolean;
   llm_visible?: boolean;
   llmVisible?: boolean;
-
+  sensitive?: boolean;
+  allowed_in_user_explanation?: boolean | "limited" | string;
+  display_policy?: DisplayPolicy;
+  displayPolicy?: DisplayPolicy;
+  usage?: EvidenceUsage;
+  feature_note?: string;
+  featureNote?: string;
   [key: string]: unknown;
 };
 
-/**
- * The controlled contract that the prompt builder will expose to the LLM.
- *
- * This is the most important input for Batch I v1.0.
- * The LLM should verbalize this contract, not invent new evidence.
- */
+
+export type RegenerationFeedbackIssue = {
+  claim_id?: string;
+  claim_type?: string;
+  section?: string;
+  claim_text: string;
+  failure_type:
+    | "prediction_value_mismatch"
+    | "direction_mismatch"
+    | "ungrounded_feature"
+    | "ambiguous_feature_reference"
+    | "unsupported_concept"
+    | "missing_required_limitation"
+    | "schema_or_format_issue"
+    | "unknown";
+  validator_rule_id?: string;
+  severity: "warning" | "error";
+  reason: string;
+  repair_instruction: string;
+  evidence?: Record<string, unknown>;
+};
+
+export type RegenerationFeedback = {
+  feedback_id: string;
+  created_at?: string;
+  ir_id: string;
+  explanation_id?: string;
+  validation_id?: string;
+  attempt: number;
+  source_batch: "Batch J.2" | "Batch J.3" | string;
+  status: "FAIL" | "PASS_WITH_WARN";
+  summary: {
+    total_issues: number;
+    error_count: number;
+    warning_count: number;
+  };
+  issues: RegenerationFeedbackIssue[];
+  global_repair_instructions: string[];
+};
+
+export type LlmSupportingFeatureGroup = {
+  group_id?: string;
+  groupId?: string;
+  concept_id?: string;
+  conceptId?: string;
+  display_name?: string;
+  displayName?: string;
+  feature_count?: number;
+  featureCount?: number;
+  direction?: RiskDirection;
+  strength?: ContributionStrength;
+  net_contribution_points_display?: string;
+  netContributionPointsDisplay?: string;
+  top_feature_display_names?: string[];
+  topFeatureDisplayNames?: string[];
+  factor_ids?: string[];
+  factorIds?: string[];
+  concept_note?: string;
+  conceptNote?: string;
+  [key: string]: unknown;
+};
+
+export type LlmAllowedTerm = {
+  term_id?: string;
+  termId?: string;
+  term_type?: string;
+  termType?: string;
+  mention?: string;
+  display_name?: string;
+  displayName?: string;
+  [key: string]: unknown;
+};
+
 export type LlmInputContract = {
   language?: ExplanationLanguage | string;
+  audience?: string;
+  style?: string;
 
   prediction?: IrPredictionSummary;
+
+  contribution_accounting?: Record<string, unknown>;
+  contributionAccounting?: Record<string, unknown>;
+
+  primary_features?: LlmContractFeatureFactor[];
+  primaryFeatures?: LlmContractFeatureFactor[];
+
+  supporting_feature_groups?: LlmSupportingFeatureGroup[];
+  supportingFeatureGroups?: LlmSupportingFeatureGroup[];
+
+  remaining_features_summary?: Record<string, unknown>;
+  remainingFeaturesSummary?: Record<string, unknown>;
+
+  feature_tiers?: Record<string, unknown>;
+  featureTiers?: Record<string, unknown>;
 
   main_concepts?: LlmContractConcept[];
   mainConcepts?: LlmContractConcept[];
@@ -191,6 +288,9 @@ export type LlmInputContract = {
 
   main_risk_decreasing_factors?: LlmContractFeatureFactor[];
   mainRiskDecreasingFactors?: LlmContractFeatureFactor[];
+
+  allowed_terms?: LlmAllowedTerm[];
+  allowedTerms?: LlmAllowedTerm[];
 
   allowed_claim_ids?: string[];
   allowedClaimIds?: string[];
@@ -204,63 +304,83 @@ export type LlmInputContract = {
   must_not?: string[];
   mustNot?: string[];
 
+  writing_rules?: Record<string, unknown>;
+  writingRules?: Record<string, unknown>;
+
+  forbidden_content?: string[];
+  forbiddenContent?: string[];
+
   required_output_sections?: string[];
   requiredOutputSections?: string[];
 
   [key: string]: unknown;
 };
 
-/**
- * Minimal shape of an Explanation IR record from Batch H.
- * We keep it flexible because Python-generated JSON may use snake_case.
- */
 export type ExplanationIrRecord = {
   ir_id: string;
   source_evidence_id?: string;
   trace_id?: string;
-
   run_mode?: RunMode | string;
   has_ground_truth?: boolean;
-
   ir_schema_version?: string;
   created_at?: string;
   source_batch?: string;
-
   model?: IrModelInfo;
   customer?: IrCustomerInfo;
   prediction_summary?: IrPredictionSummary;
-
   llm_input_contract?: LlmInputContract;
-
   allowed_claims?: unknown[];
   forbidden_claims?: unknown[];
   validation_contract?: Record<string, unknown>;
   evidence_trace?: Record<string, unknown>;
   quality?: Record<string, unknown>;
   metadata?: Record<string, unknown>;
-
   [key: string]: unknown;
 };
 
-/**
- * Strict JSON shape we want the LLM to return.
- */
 export type LlmGeneratedSections = {
   prediction: string;
+  contribution_overview: string;
   main_risk_drivers: string;
+  supporting_evidence_groups: string;
   risk_reducing_factors: string;
   limitations: string;
 };
 
-export type LlmGeneratedJson = {
-  language: ExplanationLanguage;
-  sections: LlmGeneratedSections;
-  full_text: string;
+export type LlmReferencedTerm = {
+  term_id: string;
+  term_type: string;
+  mention: string;
+};
+
+export type LlmEvidenceItemUsed = {
+  evidence_id: string;
+  evidence_type: string;
+  direction: RiskDirection;
+  usage: EvidenceUsage;
+};
+
+export type LlmEvidenceGroupUsed = {
+  group_id: string;
+  concept_id: string | null;
+  usage: EvidenceUsage;
 };
 
 /**
- * Raw LLM response metadata.
+ * Strict JSON shape returned by the LLM.
+ *
+ * Important:
+ * - LLM does NOT return full_text.
+ * - Server builds full_text from sections to avoid section/full_text mismatch.
  */
+export type LlmGeneratedJson = {
+  language: ExplanationLanguage;
+  sections: LlmGeneratedSections;
+  referenced_terms?: LlmReferencedTerm[];
+  evidence_items_used?: LlmEvidenceItemUsed[];
+  evidence_groups_used?: LlmEvidenceGroupUsed[];
+};
+
 export type LlmRawResponse = {
   provider: string;
   modelName: string;
@@ -268,11 +388,13 @@ export type LlmRawResponse = {
   parsedJson?: LlmGeneratedJson;
   isParseableJson: boolean;
   errorMessage?: string;
+  usage?: {
+    prompt_tokens?: number;
+    completion_tokens?: number;
+    total_tokens?: number;
+  };
 };
 
-/**
- * Generator metadata saved into each explanation record.
- */
 export type LlmGeneratorInfo = {
   generator_type: GeneratorType;
   generator_name: string;
@@ -283,58 +405,84 @@ export type LlmGeneratorInfo = {
   prompt_version?: string;
 };
 
-/**
- * Output record from Batch I v1.0.
- */
+export type LlmExplanationPayload = {
+  language: ExplanationLanguage;
+  sections: LlmGeneratedSections;
+  full_text: string;
+  referenced_terms: LlmReferencedTerm[];
+  evidence_items_used: LlmEvidenceItemUsed[];
+  evidence_groups_used: LlmEvidenceGroupUsed[];
+};
+
 export type LlmExplanationRecord = {
   explanation_id: string;
-
   source_ir_id: string;
   source_evidence_id?: string;
   trace_id?: string;
-
   run_mode: RunMode;
   has_ground_truth: boolean;
-
   customer: IrCustomerInfo;
   model?: IrModelInfo;
   prediction_summary?: IrPredictionSummary;
-
   generator: LlmGeneratorInfo;
-
-  sections: LlmGeneratedSections;
-  full_text: string;
-
+  explanation: LlmExplanationPayload;
+  source_contract_summary: {
+    required_output_sections: string[];
+    allowed_claim_count: number;
+    forbidden_rule_count: number;
+    primary_feature_count: number;
+    supporting_group_count: number;
+    has_contribution_accounting: boolean;
+  };
   quality: {
     is_parseable_json: boolean;
     has_required_sections: boolean;
     section_count: number;
     character_count: number;
+    has_referenced_terms: boolean;
+    has_evidence_items_used: boolean;
+    has_evidence_groups_used: boolean;
+    contains_forbidden_wording: boolean;
+    contains_raw_technical_name: boolean;
     warnings: string[];
     errors: string[];
   };
-
+  raw_response?: {
+    provider: string;
+    model_name: string;
+    raw_text_preview: string;
+    usage?: {
+      prompt_tokens?: number;
+      completion_tokens?: number;
+      total_tokens?: number;
+    };
+  };
   metadata: {
     created_at: string;
     batch_id: string;
+    batch_version: string;
     input_source: InputSource;
     source_batch?: string;
     ir_schema_version?: string;
+
+    /**
+     * Regeneration metadata.
+     * attempt = 0 means first generation.
+     * attempt > 0 means generated with validation feedback.
+     */
+    generation_attempt?: number;
+    has_regeneration_feedback?: boolean;
+    feedback_id?: string;
+    parent_explanation_id?: string;
   };
 };
 
-/**
- * Prompt object passed to llm-client.
- */
 export type BuiltPrompt = {
   system: string;
   user: string;
   promptVersion: string;
 };
 
-/**
- * Runtime config for the LLM generator.
- */
 export type LlmRuntimeConfig = {
   provider: string;
   modelName: string;
@@ -343,9 +491,6 @@ export type LlmRuntimeConfig = {
   promptVersion: string;
 };
 
-/**
- * Type guard: checks whether an unknown object looks like ExplanationIrRecord.
- */
 export function isExplanationIrRecord(
   value: unknown,
 ): value is ExplanationIrRecord {
@@ -354,13 +499,9 @@ export function isExplanationIrRecord(
   }
 
   const obj = value as Record<string, unknown>;
-
   return typeof obj.ir_id === "string";
 }
 
-/**
- * Type guard: checks whether LLM JSON has the required output shape.
- */
 export function isLlmGeneratedJson(value: unknown): value is LlmGeneratedJson {
   if (!value || typeof value !== "object") {
     return false;
@@ -380,16 +521,14 @@ export function isLlmGeneratedJson(value: unknown): value is LlmGeneratedJson {
 
   return (
     typeof sections.prediction === "string" &&
+    typeof sections.contribution_overview === "string" &&
     typeof sections.main_risk_drivers === "string" &&
+    typeof sections.supporting_evidence_groups === "string" &&
     typeof sections.risk_reducing_factors === "string" &&
-    typeof sections.limitations === "string" &&
-    typeof obj.full_text === "string"
+    typeof sections.limitations === "string"
   );
 }
 
-/**
- * Helper for reading both snake_case and camelCase keys.
- */
 export function pickString(
   obj: Record<string, unknown> | undefined,
   keys: string[],
@@ -399,17 +538,15 @@ export function pickString(
 
   for (const key of keys) {
     const value = obj[key];
+
     if (typeof value === "string" && value.trim().length > 0) {
-      return value;
+      return value.trim();
     }
   }
 
   return fallback;
 }
 
-/**
- * Helper for reading numeric values safely.
- */
 export function pickNumber(
   obj: Record<string, unknown> | undefined,
   keys: string[],
@@ -435,20 +572,31 @@ export function pickNumber(
   return fallback;
 }
 
-/**
- * Normalizes customer id from IR.
- */
+export function pickBoolean(
+  obj: Record<string, unknown> | undefined,
+  keys: string[],
+  fallback = false,
+): boolean {
+  if (!obj) return fallback;
+
+  for (const key of keys) {
+    const value = obj[key];
+
+    if (typeof value === "boolean") {
+      return value;
+    }
+  }
+
+  return fallback;
+}
+
 export function getCustomerId(customer: IrCustomerInfo | undefined): string {
   if (!customer) return "unknown_customer";
 
   const raw = customer.SK_ID_CURR ?? customer.sk_id_curr ?? "unknown_customer";
-
   return String(raw);
 }
 
-/**
- * Normalizes run mode from IR or request.
- */
 export function normalizeRunMode(
   value: unknown,
   fallback: RunMode = "evaluation",
@@ -458,4 +606,20 @@ export function normalizeRunMode(
   }
 
   return fallback;
+}
+
+export function asRecord(value: unknown): Record<string, unknown> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return {};
+  }
+
+  return value as Record<string, unknown>;
+}
+
+export function asArray<T = unknown>(value: unknown): T[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value as T[];
 }

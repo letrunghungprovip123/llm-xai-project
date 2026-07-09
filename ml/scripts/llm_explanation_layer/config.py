@@ -2,10 +2,12 @@
 Configuration for Batch I - LLM Explanation Layer.
 
 Stage:
-    v0.1 template-based explanation generator.
+    v1.1 template-based explanation generator.
 
 Important:
     This stage does NOT call an external LLM/API.
+    It creates a deterministic, schema-compatible explanation baseline from
+    Batch H llm_input_contract.
 """
 
 from __future__ import annotations
@@ -29,8 +31,8 @@ BATCH_NAME = "Batch I - LLM Explanation Layer"
 BATCH_SHORT_NAME = "I"
 SOURCE_BATCH_NAME = "Batch H - Concept-aware Explanation IR Layer"
 
-EXPLANATION_SCHEMA_VERSION = "v0.1"
-GENERATOR_VERSION = "v0.1"
+EXPLANATION_SCHEMA_VERSION = "v1.1"
+GENERATOR_VERSION = "v1.1"
 
 GENERATOR_TYPE_TEMPLATE = "template"
 GENERATOR_NAME_TEMPLATE = "deterministic_template_generator"
@@ -155,17 +157,33 @@ DEFAULT_LANGUAGE = "vi"
 DEFAULT_AUDIENCE = "credit_risk_reviewer"
 DEFAULT_STYLE = "clear_concise_non_technical"
 
-DEFAULT_MAX_CONCEPTS_TO_MENTION = 4
-DEFAULT_MAX_FEATURES_TO_MENTION = 5
+DEFAULT_MAX_PRIMARY_FEATURES_TO_MENTION = 6
+DEFAULT_MAX_SUPPORTING_GROUPS_TO_MENTION = 5
+DEFAULT_MAX_RISK_REDUCING_FEATURES_TO_MENTION = 4
+
+PREFERRED_RISK_TERM = "rủi ro gặp khó khăn trong thanh toán"
+DEFAULT_AUDIENCE_DESCRIPTION = (
+    "credit_risk_reviewer: người xem xét rủi ro tín dụng, cần giải thích rõ, "
+    "có số liệu chính, nhưng không quá học thuật."
+)
+
+
+# =============================================================================
+# Required explanation sections v1.1
+# =============================================================================
 
 SECTION_PREDICTION = "prediction"
+SECTION_CONTRIBUTION_OVERVIEW = "contribution_overview"
 SECTION_MAIN_RISK_DRIVERS = "main_risk_drivers"
+SECTION_SUPPORTING_EVIDENCE_GROUPS = "supporting_evidence_groups"
 SECTION_RISK_REDUCING_FACTORS = "risk_reducing_factors"
 SECTION_LIMITATIONS = "limitations"
 
 REQUIRED_OUTPUT_SECTIONS = [
     SECTION_PREDICTION,
+    SECTION_CONTRIBUTION_OVERVIEW,
     SECTION_MAIN_RISK_DRIVERS,
+    SECTION_SUPPORTING_EVIDENCE_GROUPS,
     SECTION_RISK_REDUCING_FACTORS,
     SECTION_LIMITATIONS,
 ]

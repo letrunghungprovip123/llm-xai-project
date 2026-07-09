@@ -10,26 +10,17 @@ import type {
 import { isLlmGeneratedJson } from "./explanation-schema";
 
 /**
- * Batch I v1.0 - LLM Client
+ * Batch I v1.1 - LLM Client
  *
- * Responsibility:
- * - Receive a BuiltPrompt from prompt-builder.ts
- * - Call an OpenAI-compatible Chat Completions API
- * - Parse the model response as strict JSON
- * - Validate that the JSON matches LlmGeneratedJson schema
- *
- * Important:
- * - No LangChain here.
- * - Do not use this file from client components.
- * - API key must stay server-side in .env.local.
+ * Calls an OpenAI-compatible Chat Completions API such as DeepSeek.
  */
 
-const DEFAULT_PROVIDER = "openai_compatible";
-const DEFAULT_MODEL = "gpt-4o-mini";
-const DEFAULT_BASE_URL = "https://api.openai.com/v1/chat/completions";
-const DEFAULT_TEMPERATURE = 0.1;
-const DEFAULT_MAX_TOKENS = 1200;
-const DEFAULT_PROMPT_VERSION = "batch_i_llm_prompt_v1.0";
+const DEFAULT_PROVIDER = "deepseek";
+const DEFAULT_MODEL = "deepseek-v4-flash";
+const DEFAULT_BASE_URL = "https://api.deepseek.com/chat/completions";
+const DEFAULT_TEMPERATURE = 0.45;
+const DEFAULT_MAX_TOKENS = 2400;
+const DEFAULT_PROMPT_VERSION = "batch_i_llm_prompt_v1.1";
 
 export type OpenAiCompatibleChatMessage = {
   role: "system" | "user" | "assistant";
@@ -44,6 +35,10 @@ type OpenAiCompatibleRequestBody = {
   response_format?: {
     type: "json_object";
   };
+  thinking?: {
+    type: "enabled" | "disabled";
+  };
+  reasoning_effort?: "high" | "max";
 };
 
 type OpenAiCompatibleResponse = {
@@ -71,18 +66,6 @@ type OpenAiCompatibleResponse = {
   };
 };
 
-/**
- * Reads runtime config from environment variables.
- *
- * .env.local example:
- *
- * LLM_PROVIDER=openai_compatible
- * LLM_MODEL=gpt-4o-mini
- * LLM_API_KEY=your_api_key_here
- * LLM_BASE_URL=https://api.openai.com/v1/chat/completions
- * LLM_TEMPERATURE=0.1
- * LLM_MAX_TOKENS=1200
- */
 export function getLlmRuntimeConfig(): LlmRuntimeConfig {
   return {
     provider: process.env.LLM_PROVIDER || DEFAULT_PROVIDER,
@@ -99,9 +82,6 @@ export function getLlmRuntimeConfig(): LlmRuntimeConfig {
   };
 }
 
-/**
- * Main public function used by explanation-generator.ts.
- */
 export async function generateLlmJson(
   prompt: BuiltPrompt,
   config: LlmRuntimeConfig = getLlmRuntimeConfig(),
@@ -116,7 +96,7 @@ export async function generateLlmJson(
       rawText: "",
       isParseableJson: false,
       errorMessage:
-        "Missing LLM_API_KEY. Please set LLM_API_KEY in .env.local.",
+        "Missing LLM_API_KEY. Please set LLM_API_KEY in .env or .env.local.",
     };
   }
 
@@ -139,6 +119,9 @@ export async function generateLlmJson(
         type: "json_object" as const,
       },
     }),
+    thinking: {
+      type: getDeepSeekThinkingMode(),
+    },
   };
 
   try {
@@ -182,6 +165,7 @@ export async function generateLlmJson(
         rawText: responseText,
         isParseableJson: false,
         errorMessage: apiResponse.value.error.message,
+        usage: apiResponse.value.usage,
       };
     }
 
@@ -191,10 +175,11 @@ export async function generateLlmJson(
     if (!rawContent) {
       return {
         provider: config.provider,
-        modelName: config.modelName,
+        modelName: apiResponse.value.model || config.modelName,
         rawText: "",
         isParseableJson: false,
         errorMessage: "LLM API response did not contain message content.",
+        usage: apiResponse.value.usage,
       };
     }
 
@@ -207,6 +192,7 @@ export async function generateLlmJson(
       parsedJson: parsed.ok ? parsed.value : undefined,
       isParseableJson: parsed.ok,
       errorMessage: parsed.ok ? undefined : parsed.errorMessage,
+      usage: apiResponse.value.usage,
     };
   } catch (error) {
     return {
@@ -222,13 +208,6 @@ export async function generateLlmJson(
   }
 }
 
-/**
- * Parse and validate the actual text returned by the model.
- *
- * The prompt asks for pure JSON, but this parser is defensive:
- * - accepts pure JSON
- * - tries to extract the first JSON object if the model accidentally wraps it
- */
 export function parseLlmGeneratedJson(rawText: string):
   | {
       ok: true;
@@ -245,7 +224,7 @@ export function parseLlmGeneratedJson(rawText: string):
   if (directParse.ok && isLlmGeneratedJson(directParse.value)) {
     return {
       ok: true,
-      value: directParse.value,
+      value: normalizeOptionalArrays(directParse.value),
     };
   }
 
@@ -272,48 +251,28 @@ export function parseLlmGeneratedJson(rawText: string):
     return {
       ok: false,
       errorMessage:
-        "Parsed JSON does not match required LLM output schema. Required shape: { language: 'vi', sections: { prediction, main_risk_drivers, risk_reducing_factors, limitations }, full_text }.",
+        "Parsed JSON does not match required LLM output schema. Required shape: { language: 'vi', sections: { prediction, contribution_overview, main_risk_drivers, supporting_evidence_groups, risk_reducing_factors, limitations }, referenced_terms?, evidence_items_used?, evidence_groups_used? }.",
     };
   }
 
   return {
     ok: true,
-    value: extractedParse.value,
+    value: normalizeOptionalArrays(extractedParse.value),
   };
 }
 
-/**
- * Optional test helper.
- *
- * This is not used in the official run unless you explicitly import it.
- * It can stay here safely because official generator uses generateLlmJson().
- */
-export async function generateMockLlmJson(
-  prompt: BuiltPrompt,
-  config: LlmRuntimeConfig = getLlmRuntimeConfig(),
-): Promise<LlmRawResponse> {
-  const mockJson: LlmGeneratedJson = {
-    language: "vi",
-    sections: {
-      prediction:
-        "Mô hình đưa ra dự đoán dựa trên xác suất và ngưỡng phân loại được cung cấp trong Explanation IR.",
-      main_risk_drivers:
-        "Các yếu tố được phép hiển thị trong contract cho thấy một số thông tin góp phần làm tăng rủi ro dự đoán của mô hình.",
-      risk_reducing_factors:
-        "Không có yếu tố làm giảm rủi ro nào đủ điều kiện hiển thị trực tiếp trong contract hiện tại.",
-      limitations:
-        "Các yếu tố trên chỉ mô tả đóng góp vào dự đoán của mô hình, không chứng minh quan hệ nhân quả ngoài thực tế và không phải kết luận chắc chắn về hành vi trả nợ.",
-    },
-    full_text:
-      "Mô hình đưa ra dự đoán dựa trên xác suất và ngưỡng phân loại được cung cấp trong Explanation IR.\n\nCác yếu tố được phép hiển thị trong contract cho thấy một số thông tin góp phần làm tăng rủi ro dự đoán của mô hình.\n\nKhông có yếu tố làm giảm rủi ro nào đủ điều kiện hiển thị trực tiếp trong contract hiện tại.\n\nCác yếu tố trên chỉ mô tả đóng góp vào dự đoán của mô hình, không chứng minh quan hệ nhân quả ngoài thực tế và không phải kết luận chắc chắn về hành vi trả nợ.",
-  };
-
+function normalizeOptionalArrays(value: LlmGeneratedJson): LlmGeneratedJson {
   return {
-    provider: `${config.provider}_mock`,
-    modelName: `${config.modelName}_mock`,
-    rawText: JSON.stringify(mockJson),
-    parsedJson: mockJson,
-    isParseableJson: true,
+    ...value,
+    referenced_terms: Array.isArray(value.referenced_terms)
+      ? value.referenced_terms
+      : [],
+    evidence_items_used: Array.isArray(value.evidence_items_used)
+      ? value.evidence_items_used
+      : [],
+    evidence_groups_used: Array.isArray(value.evidence_groups_used)
+      ? value.evidence_groups_used
+      : [],
   };
 }
 
@@ -340,13 +299,6 @@ function safeJsonParse<T>(text: string):
   }
 }
 
-/**
- * Removes accidental markdown fences:
- *
- * ```json
- * {...}
- * ```
- */
 function stripMarkdownJsonFence(text: string): string {
   let result = text.trim();
 
@@ -363,10 +315,6 @@ function stripMarkdownJsonFence(text: string): string {
   return result;
 }
 
-/**
- * Extracts the first balanced JSON object from text.
- * Useful if the model accidentally returns extra text before/after JSON.
- */
 function extractFirstJsonObject(text: string): string | null {
   const start = text.indexOf("{");
 
@@ -442,4 +390,14 @@ function isJsonModeEnabled(): boolean {
   }
 
   return value !== "false";
+}
+
+function getDeepSeekThinkingMode(): "enabled" | "disabled" {
+  const value = process.env.LLM_THINKING_MODE;
+
+  if (value === "enabled") {
+    return "enabled";
+  }
+
+  return "disabled";
 }
