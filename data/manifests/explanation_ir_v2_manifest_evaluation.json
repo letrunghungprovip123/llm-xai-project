@@ -3,7 +3,7 @@
     "name": "Batch H v2 - Quality-aware Explanation IR Layer",
     "short_name": "H_v2",
     "status": "PASSED_WITH_WARNINGS",
-    "created_at": "2026-07-09T02:18:19.458176+00:00",
+    "created_at": "2026-07-09T08:13:13.855685+00:00",
     "schema_version": "v2.0",
     "builder_version": "v2"
   },
@@ -17,19 +17,19 @@
   "downstream": {
     "next_batch": "Adaptive Evidence Selection / Evidence Exposure Controller",
     "validator_batch": "Batch J - Claim-level Faithfulness Validator",
-    "main_downstream_input": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir_v2/evaluation/explanation_ir_v2.jsonl"
+    "main_downstream_input": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\explanation_ir_v2\\evaluation\\explanation_ir_v2.jsonl"
   },
   "inputs": {
-    "xai_local_evidence": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_local_evidence.jsonl",
-    "xai_quality_summary": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_evidence_quality_summary.csv",
-    "xai_concept_aggregation": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_concept_aggregation_report.csv",
-    "xai_quality_manifest": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/xai_evidence_quality_manifest.json"
+    "xai_local_evidence": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\xai\\xai_local_evidence.jsonl",
+    "xai_quality_summary": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\xai_quality\\xai_evidence_quality_summary.csv",
+    "xai_concept_aggregation": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\xai_quality\\xai_concept_aggregation_report.csv",
+    "xai_quality_manifest": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\manifests\\xai_evidence_quality_manifest.json"
   },
   "outputs": {
-    "explanation_ir_v2_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir_v2/evaluation/explanation_ir_v2.jsonl",
-    "explanation_ir_v2_summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir_v2/evaluation/explanation_ir_v2_summary.csv",
-    "quality_report": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir_v2/evaluation/explanation_ir_v2_quality_report.json",
-    "manifest": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/explanation_ir_v2_manifest_evaluation.json"
+    "explanation_ir_v2_jsonl": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\explanation_ir_v2\\evaluation\\explanation_ir_v2.jsonl",
+    "explanation_ir_v2_summary_csv": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\explanation_ir_v2\\evaluation\\explanation_ir_v2_summary.csv",
+    "quality_report": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\explanation_ir_v2\\evaluation\\explanation_ir_v2_quality_report.json",
+    "manifest": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\manifests\\explanation_ir_v2_manifest_evaluation.json"
   },
   "config": {
     "default_top_k_for_llm": 10,
@@ -82,23 +82,23 @@
     "batch_name": "Batch H v2 - Quality-aware Explanation IR Layer",
     "batch_short_name": "H_v2",
     "status": "PASSED_WITH_WARNINGS",
-    "created_at": "2026-07-09T02:18:19.457603+00:00",
+    "created_at": "2026-07-09T08:13:13.854330+00:00",
     "run_mode": "evaluation",
     "has_ground_truth": true,
     "ir_schema_version": "v2.0",
     "builder_version": "v2",
     "purpose": "Build quality-aware and selection-ready Explanation IR for Adaptive Evidence Selection and Evidence Exposure S0-S5.",
     "inputs": {
-      "xai_local_evidence_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai/xai_local_evidence.jsonl",
-      "xai_quality_summary_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_evidence_quality_summary.csv",
-      "xai_concept_aggregation_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/xai_quality/xai_concept_aggregation_report.csv",
-      "xai_quality_manifest_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/xai_evidence_quality_manifest.json"
+      "xai_local_evidence_path": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\xai\\xai_local_evidence.jsonl",
+      "xai_quality_summary_path": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\xai_quality\\xai_evidence_quality_summary.csv",
+      "xai_concept_aggregation_path": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\xai_quality\\xai_concept_aggregation_report.csv",
+      "xai_quality_manifest_path": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\manifests\\xai_evidence_quality_manifest.json"
     },
     "outputs": {
-      "explanation_ir_v2_jsonl": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir_v2/evaluation/explanation_ir_v2.jsonl",
-      "explanation_ir_v2_summary_csv": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir_v2/evaluation/explanation_ir_v2_summary.csv",
-      "explanation_ir_v2_quality_report_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/explanation_ir_v2/evaluation/explanation_ir_v2_quality_report.json",
-      "explanation_ir_v2_manifest_json": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/manifests/explanation_ir_v2_manifest_evaluation.json"
+      "explanation_ir_v2_jsonl": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\explanation_ir_v2\\evaluation\\explanation_ir_v2.jsonl",
+      "explanation_ir_v2_summary_csv": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\explanation_ir_v2\\evaluation\\explanation_ir_v2_summary.csv",
+      "explanation_ir_v2_quality_report_json": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\reports\\explanation_ir_v2\\evaluation\\explanation_ir_v2_quality_report.json",
+      "explanation_ir_v2_manifest_json": "D:\\Document\\NghienCuuSau\\llm-xai-project\\data\\manifests\\explanation_ir_v2_manifest_evaluation.json"
     },
     "record_counts": {
       "output_ir_record_count": 120,

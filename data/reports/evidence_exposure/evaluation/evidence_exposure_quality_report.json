@@ -1,0 +1,32 @@
+{
+  "batch": "I0_evidence_exposure_layer",
+  "status": "PASSED_WITH_WARNINGS",
+  "created_at": "2026-07-09T08:34:52.705693+00:00",
+  "input_ir_record_count": 120,
+  "expected_package_count": 720,
+  "output_package_count": 720,
+  "level_counts": {
+    "S0": 120,
+    "S1": 120,
+    "S2": 120,
+    "S3": 120,
+    "S4": 120,
+    "S5": 120
+  },
+  "missing_source_ir_id_count": 0,
+  "missing_source_evidence_id_count": 0,
+  "missing_narrative_policy_count": 0,
+  "missing_forbidden_rule_ids_count": 0,
+  "s0_with_evidence_count": 0,
+  "s3_coverage_below_target_count": 81,
+  "s4_coverage_below_target_count": 25,
+  "s4_high_entropy_count": 62,
+  "s4_empty_concept_evidence_count": 0,
+  "top10_coverage_null_count": 0,
+  "top20_coverage_null_count": 0,
+  "errors": [],
+  "warnings": [
+    "Some S3 packages did not reach coverage target within k_max=10.",
+    "Some S4 packages did not reach coverage target within k_max=20."
+  ]
+}

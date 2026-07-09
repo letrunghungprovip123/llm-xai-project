@@ -1,0 +1,21 @@
+{
+  "batch": "I0_evidence_exposure_layer",
+  "status": "PASSED_WITH_WARNINGS",
+  "created_at": "2026-07-09T08:34:52.707033+00:00",
+  "input_path": "data\\reports\\explanation_ir_v2\\evaluation\\explanation_ir_v2.jsonl",
+  "output_dir": "data\\reports\\evidence_exposure\\evaluation",
+  "input_ir_record_count": 120,
+  "output_package_count": 720,
+  "main_output": "data\\reports\\evidence_exposure\\evaluation\\evidence_packages.jsonl",
+  "split_outputs": {
+    "S0": "data\\reports\\evidence_exposure\\evaluation\\prediction_only.jsonl",
+    "S1": "data\\reports\\evidence_exposure\\evaluation\\raw_shap_fixed_topk.jsonl",
+    "S2": "data\\reports\\evidence_exposure\\evaluation\\semantic_shap_fixed_topk.jsonl",
+    "S3": "data\\reports\\evidence_exposure\\evaluation\\adaptive_coverage_constraints.jsonl",
+    "S4": "data\\reports\\evidence_exposure\\evaluation\\adaptive_entropy_concept_quality.jsonl",
+    "S5": "data\\reports\\evidence_exposure\\evaluation\\backend_overguided.jsonl"
+  },
+  "summary_output": "data\\reports\\evidence_exposure\\evaluation\\evidence_package_summary.csv",
+  "adaptive_report_output": "data\\reports\\evidence_exposure\\evaluation\\adaptive_selection_report.csv",
+  "quality_report_output": "data\\reports\\evidence_exposure\\evaluation\\evidence_exposure_quality_report.json"
+}
