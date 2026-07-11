@@ -1,21 +1,106 @@
 {
   "batch": "I0_evidence_exposure_layer",
+  "builder_version": "2.1",
+  "evidence_package_schema_version": "2.1",
   "status": "PASSED_WITH_WARNINGS",
-  "created_at": "2026-07-09T08:34:52.707033+00:00",
-  "input_path": "data\\reports\\explanation_ir_v2\\evaluation\\explanation_ir_v2.jsonl",
-  "output_dir": "data\\reports\\evidence_exposure\\evaluation",
-  "input_ir_record_count": 120,
-  "output_package_count": 720,
-  "main_output": "data\\reports\\evidence_exposure\\evaluation\\evidence_packages.jsonl",
-  "split_outputs": {
-    "S0": "data\\reports\\evidence_exposure\\evaluation\\prediction_only.jsonl",
-    "S1": "data\\reports\\evidence_exposure\\evaluation\\raw_shap_fixed_topk.jsonl",
-    "S2": "data\\reports\\evidence_exposure\\evaluation\\semantic_shap_fixed_topk.jsonl",
-    "S3": "data\\reports\\evidence_exposure\\evaluation\\adaptive_coverage_constraints.jsonl",
-    "S4": "data\\reports\\evidence_exposure\\evaluation\\adaptive_entropy_concept_quality.jsonl",
-    "S5": "data\\reports\\evidence_exposure\\evaluation\\backend_overguided.jsonl"
+  "created_at": "2026-07-10T03:39:38.914997+00:00",
+  "run_mode": "evaluation",
+  "git_commit_hash": "a55b38bbe58dbb8943a6799340f50977607e82f0",
+  "input": {
+    "path": "data/reports/explanation_ir_v2/evaluation/explanation_ir_v2.jsonl",
+    "sha256": "0a472ca2c9e351452e8cfc6889acb6e5526d987782c72ea3f8c4d410d4b30113",
+    "ir_record_count": 120,
+    "source_ir_ids_sha256": "5b0c8175ba19ac5952aad875edfdb72c7b8ac7c5d0c0abf40b3d13029d0e5c31"
   },
-  "summary_output": "data\\reports\\evidence_exposure\\evaluation\\evidence_package_summary.csv",
-  "adaptive_report_output": "data\\reports\\evidence_exposure\\evaluation\\adaptive_selection_report.csv",
-  "quality_report_output": "data\\reports\\evidence_exposure\\evaluation\\evidence_exposure_quality_report.json"
+  "output_dir": "data/reports/evidence_exposure/evaluation",
+  "output_package_count": 720,
+  "main_output": {
+    "path": "data/reports/evidence_exposure/evaluation/evidence_packages.jsonl",
+    "sha256": "9bbb380174bf225798b136dd982aa173d99844b5b175fee8b25ebafc6141338d"
+  },
+  "split_outputs": {
+    "S0": {
+      "path": "data/reports/evidence_exposure/evaluation/prediction_only.jsonl",
+      "sha256": "ebe40bb0feb2c3b6bcf7df2837d45618b4f0a74857d2a4371c4747188411f317",
+      "record_count": 120
+    },
+    "S1": {
+      "path": "data/reports/evidence_exposure/evaluation/raw_shap_fixed_topk.jsonl",
+      "sha256": "0e1c1e5cfc753cc516bb4a796988119379f31e4772c254d873e22e66e83486fc",
+      "record_count": 120
+    },
+    "S2": {
+      "path": "data/reports/evidence_exposure/evaluation/semantic_shap_fixed_topk.jsonl",
+      "sha256": "7f319621e64163c2891a70de1929daed3b8a98569e9cead21aebb62cbc105be5",
+      "record_count": 120
+    },
+    "S3": {
+      "path": "data/reports/evidence_exposure/evaluation/adaptive_coverage_constraints.jsonl",
+      "sha256": "6f5412e2c6dcca3f75c6ba92bebc3ca17f902fa033936b1c9415bce142f7f468",
+      "record_count": 120
+    },
+    "S4": {
+      "path": "data/reports/evidence_exposure/evaluation/adaptive_entropy_concept_quality.jsonl",
+      "sha256": "6d6af5c3a5488965e6be422c383130c95537fac293bac86a1a1b5e1428353d82",
+      "record_count": 120
+    },
+    "S5": {
+      "path": "data/reports/evidence_exposure/evaluation/backend_overguided.jsonl",
+      "sha256": "25c6c194e045f3d3898c470a5c287c034b11055ad988761b8b3423b9054eab63",
+      "record_count": 120
+    }
+  },
+  "summary_output": {
+    "path": "data/reports/evidence_exposure/evaluation/evidence_package_summary.csv",
+    "sha256": "2a8f2ed2b3832ef00740de6f38a044133ce6956e524cf6748eb46ac7265fe460"
+  },
+  "adaptive_report_output": {
+    "path": "data/reports/evidence_exposure/evaluation/adaptive_selection_report.csv",
+    "sha256": "9b20c5e6bc483e4257c15c32f19027146fe3acd816c14952d58fb13add51fb35"
+  },
+  "quality_report_output": {
+    "path": "data/reports/evidence_exposure/evaluation/evidence_exposure_quality_report.json",
+    "sha256": "ec29645cc0e644c45a3e87ce6659c70540d106ab141fbe8786143516d5f8f992"
+  },
+  "selection_config": {
+    "S1": {
+      "method": "fixed_raw_shap_topk",
+      "top_k": 10
+    },
+    "S2": {
+      "method": "semantic_enrichment_of_exact_s1_feature_set",
+      "top_k": 10
+    },
+    "S3": {
+      "method": "adaptive_shap_coverage",
+      "coverage_threshold": 0.6,
+      "k_min": 3,
+      "k_max": 10
+    },
+    "S4": {
+      "method": "adaptive_coverage_entropy_concept_direction_grouping",
+      "coverage_threshold": 0.7,
+      "k_min": 5,
+      "k_max": 20
+    },
+    "S5": {
+      "method": "same_s4_evidence_with_backend_overguidance"
+    }
+  },
+  "prompt_contract": {
+    "prompt_source_field": "prompt_payload",
+    "ground_truth_allowed_in_prompt": false,
+    "forbidden_prompt_keys": [
+      "SK_ID_CURR",
+      "case_type",
+      "customer_id",
+      "has_ground_truth",
+      "prediction_outcome",
+      "row_index",
+      "selection_rank",
+      "selection_stratum",
+      "true_label",
+      "true_label_text"
+    ]
+  }
 }

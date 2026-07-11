@@ -8,7 +8,7 @@ def load_ir_records(path):
         raise FileNotFoundError(f"Input IR file not found: {path}")
 
     records = []
-    
+
     with path.open("r", encoding="utf-8") as f:
         for line_no, line in enumerate(f, start=1):
             line = line.strip()

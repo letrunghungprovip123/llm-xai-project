@@ -1,7 +1,9 @@
 {
   "batch": "I0_evidence_exposure_layer",
+  "builder_version": "2.1",
+  "evidence_package_schema_version": "2.1",
   "status": "PASSED_WITH_WARNINGS",
-  "created_at": "2026-07-09T08:34:52.705693+00:00",
+  "created_at": "2026-07-10T03:39:38.914066+00:00",
   "input_ir_record_count": 120,
   "expected_package_count": 720,
   "output_package_count": 720,
@@ -13,20 +15,35 @@
     "S4": 120,
     "S5": 120
   },
+  "duplicate_package_id_count": 0,
+  "missing_case_level_count": 0,
   "missing_source_ir_id_count": 0,
   "missing_source_evidence_id_count": 0,
   "missing_narrative_policy_count": 0,
   "missing_forbidden_rule_ids_count": 0,
+  "missing_prompt_payload_count": 0,
+  "prompt_leakage_finding_count": 0,
+  "prompt_leakage_findings": [],
   "s0_with_evidence_count": 0,
+  "s0_invalid_claim_policy_count": 0,
+  "s1_s2_feature_order_mismatch_count": 0,
+  "s1_s2_shap_mismatch_count": 0,
   "s3_coverage_below_target_count": 81,
   "s4_coverage_below_target_count": 25,
   "s4_high_entropy_count": 62,
   "s4_empty_concept_evidence_count": 0,
+  "s4_unselected_concept_feature_count": 0,
+  "s4_grouping_contract_error_count": 0,
+  "s4_s5_evidence_mismatch_count": 0,
+  "s4_s5_concept_mismatch_count": 0,
+  "semantic_item_count": 1200,
+  "semantic_fallback_count": 311,
   "top10_coverage_null_count": 0,
   "top20_coverage_null_count": 0,
   "errors": [],
   "warnings": [
     "Some S3 packages did not reach coverage target within k_max=10.",
-    "Some S4 packages did not reach coverage target within k_max=20."
+    "Some S4 packages did not reach coverage target within k_max=20.",
+    "Some S2 semantic evidence items still use fallback display names."
   ]
 }

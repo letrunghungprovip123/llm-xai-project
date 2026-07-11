@@ -56,10 +56,24 @@ def normalize_feature(feature, rank=None):
     shap_value = get_shap_value(feature)
     abs_shap = get_abs_shap(feature)
 
+    display_name = feature.get("display_name") or feature.get("feature_display_name")
+    display_name_source = feature.get("display_name_source")
+
+    if not display_name:
+        display_name = feature.get("feature_name") or feature_id
+        display_name_source = "fallback"
+    elif not display_name_source:
+        simple_fallback = str(feature_id).replace("_", " ") if feature_id is not None else None
+        if display_name in (feature_id, simple_fallback):
+            display_name_source = "fallback"
+        else:
+            display_name_source = "registry"
+
     item = {
         "feature_id": feature_id,
         "feature_name": feature.get("feature_name") or feature_id,
-        "display_name": feature.get("display_name") or feature.get("feature_display_name") or feature_id,
+        "display_name": display_name,
+        "display_name_source": display_name_source,
         "concept": feature.get("concept") or feature.get("feature_group") or feature.get("concept_id") or "unknown",
         "concept_display_name": feature.get("concept_display_name") or feature.get("concept_name"),
         "shap_value": shap_value,
@@ -94,10 +108,6 @@ def fixed_top_features(features, top_k):
     for i, feature in enumerate(ordered[:top_k], start=1):
         selected.append(normalize_feature(feature, rank=i))
 
-    print("fixed_top_features:")
-    print("  selected_count:", len(selected))
-    print("  selected_feature_ids:", [x.get("feature_id") for x in selected])
-
     return selected
 
 
@@ -107,7 +117,7 @@ def select_by_coverage(features, threshold, k_min, k_max):
     total_mass = sum(get_abs_shap(feature) for feature in ordered)
 
     if not ordered:
-        result = {
+        return {
             "selected": [],
             "adaptive_k": 0,
             "coverage": 0.0,
@@ -117,13 +127,6 @@ def select_by_coverage(features, threshold, k_min, k_max):
             "total_abs_shap_mass": 0.0,
         }
 
-        print("select_by_coverage:")
-        print("  status:", result["coverage_status"])
-        print("  adaptive_k:", result["adaptive_k"])
-        print("  coverage:", result["coverage"])
-
-        return result
-
     if total_mass <= 0:
         limit = min(k_min, len(ordered))
         selected = []
@@ -131,7 +134,7 @@ def select_by_coverage(features, threshold, k_min, k_max):
         for i, feature in enumerate(ordered[:limit], start=1):
             selected.append(normalize_feature(feature, rank=i))
 
-        result = {
+        return {
             "selected": selected,
             "adaptive_k": len(selected),
             "coverage": 0.0,
@@ -140,14 +143,6 @@ def select_by_coverage(features, threshold, k_min, k_max):
             "selected_feature_ids": [x.get("feature_id") for x in selected],
             "total_abs_shap_mass": 0.0,
         }
-
-        print("select_by_coverage:")
-        print("  status:", result["coverage_status"])
-        print("  adaptive_k:", result["adaptive_k"])
-        print("  coverage:", result["coverage"])
-        print("  selected_feature_ids:", result["selected_feature_ids"])
-
-        return result
 
     selected = []
     cumulative = 0.0
@@ -163,7 +158,7 @@ def select_by_coverage(features, threshold, k_min, k_max):
 
     coverage = cumulative / total_mass
 
-    result = {
+    return {
         "selected": selected,
         "adaptive_k": len(selected),
         "coverage": coverage,
@@ -172,15 +167,6 @@ def select_by_coverage(features, threshold, k_min, k_max):
         "selected_feature_ids": [x.get("feature_id") for x in selected],
         "total_abs_shap_mass": total_mass,
     }
-
-    print("select_by_coverage:")
-    print("  status:", result["coverage_status"])
-    print("  adaptive_k:", result["adaptive_k"])
-    print("  coverage:", result["coverage"])
-    print("  threshold:", result["coverage_threshold"])
-    print("  selected_feature_ids:", result["selected_feature_ids"])
-
-    return result
 
 
 # Tính normalized entropy để biết SHAP tập trung hay phân tán.
@@ -196,16 +182,10 @@ def compute_entropy(features):
     total = sum(values)
 
     if total <= 0 or len(values) <= 1:
-        result = {
+        return {
             "normalized_entropy": 0.0,
             "entropy_level": "low",
         }
-
-        print("compute_entropy:")
-        print("  normalized_entropy:", result["normalized_entropy"])
-        print("  entropy_level:", result["entropy_level"])
-
-        return result
 
     entropy = 0.0
 
@@ -222,74 +202,100 @@ def compute_entropy(features):
     else:
         level = "high"
 
-    result = {
+    return {
         "normalized_entropy": normalized,
         "entropy_level": level,
     }
 
-    print("compute_entropy:")
-    print("  normalized_entropy:", result["normalized_entropy"])
-    print("  entropy_level:", result["entropy_level"])
 
-    return result
-
-
-# Gom feature theo concept và direction.
+# Gom feature theo đúng concept + direction.
 def build_concept_grouping(selected_evidence):
-    by_concept = {}
+    groups = {}
 
     for item in selected_evidence:
         concept = item.get("concept") or "unknown"
         direction = item.get("direction") or "unknown"
+        key = (concept, direction)
 
-        if concept not in by_concept:
-            by_concept[concept] = {}
+        if key not in groups:
+            groups[key] = []
 
-        if direction not in by_concept[concept]:
-            by_concept[concept][direction] = []
+        groups[key].append(item)
 
-        by_concept[concept][direction].append(item)
-
+    concept_groups = []
     representative_features = []
     grouped_supporting_features = []
-    mixed_concept_groups = []
+    directions_by_concept = {}
 
-    for concept, direction_groups in by_concept.items():
-        directions = []
+    for (concept, direction), features in groups.items():
+        features = sorted(
+            features,
+            key=lambda x: safe_float(x.get("abs_shap_value")),
+            reverse=True,
+        )
 
-        for direction in direction_groups.keys():
-            if direction != "neutral":
-                directions.append(direction)
+        representative = features[0]
+        supporting = features[1:]
+        representative_features.append(representative)
 
-        if len(set(directions)) > 1:
-            mixed_concept_groups.append({
+        for feature in supporting:
+            grouped_supporting_features.append({
                 "concept": concept,
-                "directions": sorted(set(directions)),
-                "feature_count": sum(len(value) for value in direction_groups.values()),
+                "concept_display_name": representative.get("concept_display_name"),
+                "direction": direction,
+                "feature_id": feature.get("feature_id"),
+                "display_name": feature.get("display_name"),
+                "rank": feature.get("rank"),
+                "abs_shap_value": feature.get("abs_shap_value"),
             })
 
-        for direction, features in direction_groups.items():
-            features = sorted(features, key=lambda x: safe_float(x.get("abs_shap_value")), reverse=True)
+        concept_groups.append({
+            "concept": concept,
+            "concept_display_name": representative.get("concept_display_name"),
+            "direction": direction,
+            "representative_feature": representative,
+            "supporting_features": supporting,
+            "selected_feature_ids": [x.get("feature_id") for x in features],
+            "feature_count": len(features),
+            "selected_abs_shap_sum": sum(
+                safe_float(x.get("abs_shap_value")) for x in features
+            ),
+        })
 
-            for feature in features[:2]:
-                representative_features.append(feature)
+        if concept not in directions_by_concept:
+            directions_by_concept[concept] = set()
 
-            for feature in features[2:]:
-                grouped_supporting_features.append({
-                    "concept": concept,
-                    "direction": direction,
-                    "feature_id": feature.get("feature_id"),
-                    "display_name": feature.get("display_name"),
-                    "rank": feature.get("rank"),
-                    "abs_shap_value": feature.get("abs_shap_value"),
-                })
+        if direction not in ("neutral", "unknown"):
+            directions_by_concept[concept].add(direction)
 
-    result = {
+    mixed_concept_groups = []
+
+    for concept, directions in directions_by_concept.items():
+        if len(directions) <= 1:
+            continue
+
+        feature_count = 0
+        for group in concept_groups:
+            if group.get("concept") == concept:
+                feature_count += group.get("feature_count", 0)
+
+        mixed_concept_groups.append({
+            "concept": concept,
+            "directions": sorted(directions),
+            "feature_count": feature_count,
+        })
+
+    concept_groups = sorted(
+        concept_groups,
+        key=lambda x: safe_float(x.get("selected_abs_shap_sum")),
+        reverse=True,
+    )
+
+    return {
+        "concept_groups": concept_groups,
         "representative_features": representative_features,
         "grouped_supporting_features": grouped_supporting_features,
         "mixed_concept_groups": mixed_concept_groups,
-        "concept_group_count": len(by_concept),
+        "concept_group_count": len(concept_groups),
+        "unique_concept_count": len(directions_by_concept),
     }
-
-
-    return result

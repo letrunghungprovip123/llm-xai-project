@@ -1,0 +1,47 @@
+{
+  "run_id": "run_template_eval36_001",
+  "experiment_stage": "evaluation",
+  "created_at": "2026-07-11T03:16:28.895Z",
+  "git_commit_hash": "a55b38bbe58dbb8943a6799340f50977607e82f0",
+  "input_path": "data/reports/evidence_exposure/evaluation_36/evidence_packages_36.jsonl",
+  "model": {
+    "id": "template_baseline",
+    "provider": "template",
+    "family": "deterministic_template",
+    "runtime": "template",
+    "remote_model_id": "template_baseline",
+    "revision": "1.0",
+    "output_constraint_mode": "none",
+    "enabled": true,
+    "note": "Deterministic pipeline baseline, not an LLM."
+  },
+  "repeat_id": 1,
+  "evidence_levels": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "chunk_start": 0,
+  "chunk_size": null,
+  "selected_case_count": 36,
+  "planned_generation_count": 216,
+  "written_generation_count": 216,
+  "success_count": 216,
+  "failed_count": 0,
+  "request_order_seed": 225552881,
+  "concurrency": 1,
+  "decoding_config": {
+    "temperature": 0.2,
+    "top_p": 1,
+    "max_tokens": 2000,
+    "frequency_penalty": 0,
+    "presence_penalty": 0
+  },
+  "prompt_version": "prompt_v1",
+  "output_schema_version": "1.0",
+  "generation_path": "data/reports/llm_narratives/evaluation/run_template_eval36_001/shards/model=template_baseline/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/generations.jsonl",
+  "prompt_path": "data/reports/llm_narratives/evaluation/run_template_eval36_001/shards/model=template_baseline/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/prompt_instances.jsonl"
+}

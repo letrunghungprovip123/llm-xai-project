@@ -1,0 +1,29 @@
+{
+  "batch": "Batch I - Multi-LLM Narrative Generation Layer",
+  "run_id": "run_deepseek_smoke_002",
+  "status": "PASSED_WITH_WARNINGS",
+  "created_at": "2026-07-10T04:49:08.663Z",
+  "experiment_stage": "development",
+  "generation_shard_count": 1,
+  "expected_generation_count": 20,
+  "actual_generation_count": 20,
+  "completed_generation_count": 20,
+  "failed_generation_count": 0,
+  "duplicate_generation_count": 0,
+  "missing_generation_count": 0,
+  "unexpected_generation_count": 0,
+  "generation_completion_rate": 1,
+  "runtime_success_rate": 1,
+  "json_parse_success_rate": 0.3,
+  "schema_validity_rate": 0.3,
+  "empty_output_rate": 0,
+  "missing_prompt_section_count": 0,
+  "errors": [],
+  "warnings": [
+    "Development JSON parse success rate is below 0.95.",
+    "Development schema validity rate is below 0.95.",
+    "Cell deepseek_v4_flash/S3 schema validity is below 0.80.",
+    "Cell deepseek_v4_flash/S4 schema validity is below 0.80.",
+    "Cell deepseek_v4_flash/S5 schema validity is below 0.80."
+  ]
+}

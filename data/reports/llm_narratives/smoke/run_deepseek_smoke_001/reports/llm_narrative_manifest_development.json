@@ -1,0 +1,48 @@
+{
+  "batch": "Batch I - Multi-LLM Narrative Generation Layer",
+  "run_id": "run_deepseek_smoke_001",
+  "experiment_stage": "development",
+  "created_at": "2026-07-10T04:38:16.124Z",
+  "git_commit_hash": "a55b38bbe58dbb8943a6799340f50977607e82f0",
+  "input_evidence_package_path": "data/reports/evidence_exposure/evaluation/evidence_packages.jsonl",
+  "shards_dir": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/shards",
+  "output_dir": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports",
+  "generation_shard_count": 1,
+  "prompt_shard_count": 1,
+  "generation_count": 20,
+  "prompt_instance_count": 20,
+  "model_list": [
+    "deepseek_v4_flash"
+  ],
+  "prompt_versions": [
+    "prompt_v1"
+  ],
+  "output_schema_versions": [
+    "1.0"
+  ],
+  "repeat_ids": [
+    1
+  ],
+  "evidence_levels": [
+    "S0",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "quality_gate_status": "FAILED",
+  "main_output": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/generated_explanations.jsonl",
+  "prompt_output": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/prompt_instances.jsonl",
+  "reports": {
+    "api_call_report": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/api_call_report.csv",
+    "prompt_audit_report": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/prompt_audit_report.csv",
+    "schema_validation_report": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/schema_validation_report.csv",
+    "content_quality_report": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/content_quality_report.csv",
+    "evidence_mention_report": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/evidence_mention_report.csv",
+    "repeat_stability_report": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/repeat_stability_report.csv",
+    "summary_by_level_model": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/summary_by_level_model.csv",
+    "summary_by_model": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/summary_by_model.csv",
+    "summary_by_level": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/summary_by_level.csv",
+    "matrix_integrity_report": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/matrix_integrity_report.csv",
+    "run_cell_quality_report": "data/reports/llm_narratives/smoke/run_deepseek_smoke_001/reports/run_cell_quality_report.csv"
+  }
+}

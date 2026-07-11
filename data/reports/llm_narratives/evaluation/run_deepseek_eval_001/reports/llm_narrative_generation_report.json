@@ -1,0 +1,23 @@
+{
+  "batch": "Batch I - Multi-LLM Narrative Generation Layer",
+  "run_id": "run_deepseek_eval_001",
+  "status": "PASSED",
+  "created_at": "2026-07-10T15:37:00.672Z",
+  "experiment_stage": "evaluation",
+  "generation_shard_count": 1,
+  "expected_generation_count": 720,
+  "actual_generation_count": 720,
+  "completed_generation_count": 720,
+  "failed_generation_count": 0,
+  "duplicate_generation_count": 0,
+  "missing_generation_count": 0,
+  "unexpected_generation_count": 0,
+  "generation_completion_rate": 1,
+  "runtime_success_rate": 1,
+  "json_parse_success_rate": 0.9888888888888889,
+  "schema_validity_rate": 0.9888888888888889,
+  "empty_output_rate": 0,
+  "missing_prompt_section_count": 0,
+  "errors": [],
+  "warnings": []
+}

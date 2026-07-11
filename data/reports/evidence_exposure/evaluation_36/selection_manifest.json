@@ -1,0 +1,35 @@
+{
+  "subset_id": "aws_budget_subset_36_v1",
+  "source_input_path": "data/reports/evidence_exposure/evaluation/evidence_packages.jsonl",
+  "source_input_sha256": "9bbb380174bf225798b136dd982aa173d99844b5b175fee8b25ebafc6141338d",
+  "selection_method": "deterministic stratified difficulty-balanced selection",
+  "seed": 20260711,
+  "target_strata": [
+    "top_high_risk",
+    "low_risk",
+    "true_positive",
+    "false_positive",
+    "false_negative",
+    "near_threshold"
+  ],
+  "cases_per_stratum": 6,
+  "difficulty_groups_per_stratum": {
+    "easy": 2,
+    "medium": 2,
+    "hard": 2
+  },
+  "selected_case_count": 36,
+  "evidence_levels": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "selected_package_count": 216,
+  "subset_path": "data/reports/evidence_exposure/evaluation_36/evidence_packages_36.jsonl",
+  "subset_sha256": "37c25b261d496e7c9bf50a62141f93b5544a45af43208918d0eaf589d6307117",
+  "selected_case_ids_csv": "data/reports/evidence_exposure/evaluation_36/selected_case_ids_36.csv",
+  "selection_performed_before_aws_generation": true
+}
