@@ -20,6 +20,7 @@ export interface HttpResponseResult {
   error_message: string | null;
 }
 
+// Gọi JSON API với backoff tuyến tính và giữ đúng số lần retry đã thực sự xảy ra.
 export async function postJsonWithRetry(
   options: HttpRequestOptions,
 ): Promise<HttpResponseResult> {
@@ -28,8 +29,10 @@ export async function postJsonWithRetry(
   let lastErrorMessage: string | null = null;
   let lastStatusCode: number | null = null;
   let lastResponseText: string | null = null;
+  let actualRetryCount = 0;
 
   for (let attempt = 0; attempt <= options.max_retries; attempt += 1) {
+    actualRetryCount = attempt;
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), options.timeout_ms);
 
@@ -100,7 +103,7 @@ export async function postJsonWithRetry(
     status_code: lastStatusCode,
     response_json: null,
     response_text: lastResponseText,
-    retry_count: options.max_retries,
+    retry_count: actualRetryCount,
     latency_ms: Date.now() - startedAt,
     error_type: lastErrorType || "UNKNOWN_HTTP_ERROR",
     error_message: lastErrorMessage || "Request failed.",

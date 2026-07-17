@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim_extraction_failure.schema.json",
+  "title": "Atomic claim extraction failure",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "failure_schema_version", "generation_id", "canonical_key", "source_ir_id",
+    "case_id", "evidence_level", "repeat_id", "attempted", "failure_code",
+    "failure_message", "source_input_sha256", "extractor_model_id",
+    "extractor_version"
+  ],
+  "properties": {
+    "failure_schema_version": {
+      "enum": ["claim_extraction_failure_v1", "claim_extraction_failure_v2"]
+    },
+    "generation_id": {"type": "string", "minLength": 1},
+    "canonical_key": {"type": "string", "minLength": 1},
+    "source_ir_id": {"type": "string", "minLength": 1},
+    "case_id": {"type": ["string", "null"]},
+    "evidence_level": {"enum": ["S0", "S1", "S2", "S3", "S4", "S5"]},
+    "repeat_id": {"type": "integer", "minimum": 1},
+    "attempted": {"type": "boolean"},
+    "failure_code": {
+      "enum": [
+        "GENERATION_UNUSABLE", "SOURCE_TEXT_EMPTY", "BEDROCK_CALL_FAILED",
+        "PROVIDER_CALL_FAILED", "RESPONSE_NOT_JSON", "RESPONSE_SCHEMA_INVALID",
+        "SOURCE_SPAN_INVALID", "NO_CLAIMS_EXTRACTED"
+      ]
+    },
+    "failure_message": {"type": "string", "minLength": 1},
+    "source_input_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "extractor_provider": {"enum": ["deepseek", null]},
+    "extractor_model_id": {"type": ["string", "null"]},
+    "extractor_version": {"type": "string", "minLength": 1},
+    "extractor_prompt_version": {"type": "string", "minLength": 1},
+    "extractor_prompt_sha256": {
+      "type": "string", "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"failure_schema_version": {"const": "claim_extraction_failure_v2"}}
+      },
+      "then": {
+        "required": [
+          "extractor_provider", "extractor_prompt_version",
+          "extractor_prompt_sha256"
+        ]
+      }
+    }
+  ]
+}

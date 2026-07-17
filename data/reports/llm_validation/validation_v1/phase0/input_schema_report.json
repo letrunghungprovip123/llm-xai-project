@@ -1,0 +1,2344 @@
+{
+  "phase": "Phase 0",
+  "tool_version": "phase0_canonicalizer_v1.0.0",
+  "profile_count": 16,
+  "profiles": [
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/evidence_exposure/evaluation_36/evidence_packages_36.jsonl",
+      "sha256": "37c25b261d496e7c9bf50a62141f93b5544a45af43208918d0eaf589d6307117",
+      "byte_count": 6826430,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_evidence_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "trace_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "run_mode": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "ir_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_package_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "internal_metadata": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "prediction": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "selected_evidence": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "array": 216
+          }
+        },
+        "concept_evidence": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "array": 216
+          }
+        },
+        "selection_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "narrative_policy": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "constraints": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "audit_trace": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "prompt_payload": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "concept_grouping": {
+          "present_count": 72,
+          "null_count": 0,
+          "types": {
+            "object": 72
+          }
+        },
+        "xai_quality_metrics": {
+          "present_count": 72,
+          "null_count": 0,
+          "types": {
+            "object": 72
+          }
+        },
+        "backend_explanation_skeleton": {
+          "present_count": 36,
+          "null_count": 0,
+          "types": {
+            "object": 36
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/evidence_exposure/evaluation_36/selected_case_ids_36.csv",
+      "sha256": "04fc4aa5106378294bbd66e56159b8522c45f0ecd5117a49272000876e0085c5",
+      "byte_count": 3116,
+      "format": "csv",
+      "record_count": 36,
+      "invalid_record_count": 0,
+      "csv_headers": [
+        "case_id",
+        "stratum",
+        "difficulty_group",
+        "difficulty_score"
+      ],
+      "csv_widths": {
+        "4": 37
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/evidence_exposure/evaluation_36/selection_manifest.json",
+      "sha256": "a3661828f76c6296eab929b06987a01fecf125a85adab106a760435a50ab6c4d",
+      "byte_count": 1073,
+      "format": "json",
+      "record_count": 1,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "subset_id": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "source_input_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "source_input_sha256": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "selection_method": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "seed": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "target_strata": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "array": 1
+          }
+        },
+        "cases_per_stratum": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "difficulty_groups_per_stratum": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "selected_case_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "evidence_levels": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "array": 1
+          }
+        },
+        "selected_package_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "subset_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "subset_sha256": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "selected_case_ids_csv": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "selection_performed_before_aws_generation": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "boolean": 1
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/ml/registry/feature_registry.csv",
+      "sha256": "7134631bb3f7cda3ebbcea98b02efadfde032786697f2ebd00778c01a0b7c2e7",
+      "byte_count": 70885,
+      "format": "csv",
+      "record_count": 166,
+      "invalid_record_count": 0,
+      "csv_headers": [
+        "feature_name",
+        "display_name",
+        "description",
+        "concept",
+        "concept_display_name",
+        "source_table",
+        "source_feature_file",
+        "data_kind",
+        "pandas_dtype",
+        "value_type",
+        "unit",
+        "missing_rate",
+        "non_null_count",
+        "unique_count",
+        "sensitive",
+        "mutable",
+        "allowed_for_model",
+        "allowed_in_user_explanation",
+        "allowed_in_recommendation",
+        "direction_prior",
+        "formatting_rule"
+      ],
+      "csv_widths": {
+        "21": 167
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_qwen3_8b_eval36_r1_pinned_v3/outputs/shards/model=qwen3_8b/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/generations.jsonl",
+      "sha256": "ddd12889767ac7c5f50b7e279e421c9a72f535ec6751a22f71f45a9b9bf43cb9",
+      "byte_count": 3928389,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "generation_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "run_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "experiment_stage": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_evidence_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "case_metadata": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "model_provider": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "remote_model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_family": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_revision": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "output_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "repeat_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "generation_seed": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "request_order_index": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "output_constraint_mode": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "decoding_config": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "input_package_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_message_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "input_snapshot": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "prompt_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "runtime_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "raw_output": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "cleaned_output": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "parsed_output": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "schema_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "content_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "policy_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "evidence_mention_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "created_at": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_qwen3_8b_eval36_r1_pinned_v3/outputs/shards/model=qwen3_8b/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/prompt_instances.jsonl",
+      "sha256": "4cbc48842e8a1df40392121fa00c1507b273bc881d0f55c6f0b306a436c3d201",
+      "byte_count": 2801164,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "prompt_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "output_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_revision": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "messages": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "array": 216
+          }
+        },
+        "message_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_char_count": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "prompt_estimated_token_count": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "section_flags": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "created_at": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_qwen3_8b_eval36_r1_pinned_v3/outputs/shards/model=qwen3_8b/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/shard_manifest.json",
+      "sha256": "fe52e62317cf3e6140f5c1f96f87c51d8424afcaa95d26069ed45d8f3056c55a",
+      "byte_count": 1685,
+      "format": "json",
+      "record_count": 1,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "run_id": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "experiment_stage": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "created_at": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "git_commit_hash": {
+          "present_count": 1,
+          "null_count": 1,
+          "types": {
+            "null": 1
+          }
+        },
+        "input_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "model": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "repeat_id": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "evidence_levels": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "array": 1
+          }
+        },
+        "chunk_start": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "chunk_size": {
+          "present_count": 1,
+          "null_count": 1,
+          "types": {
+            "null": 1
+          }
+        },
+        "selected_case_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "planned_generation_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "written_generation_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "success_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "failed_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "request_order_seed": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "concurrency": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "decoding_config": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "prompt_version": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "output_schema_version": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "generation_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "prompt_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/generations.jsonl",
+      "sha256": "391233a777a6e2fd890a49f0688a3e0f686afa9c28eb5c8b94adacc9c25ca26d",
+      "byte_count": 3583275,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "generation_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "run_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "experiment_stage": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_evidence_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "case_metadata": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "model_provider": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "remote_model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_family": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_revision": {
+          "present_count": 216,
+          "null_count": 216,
+          "types": {
+            "null": 216
+          }
+        },
+        "prompt_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "output_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "repeat_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "generation_seed": {
+          "present_count": 216,
+          "null_count": 216,
+          "types": {
+            "null": 216
+          }
+        },
+        "request_order_index": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "output_constraint_mode": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "decoding_config": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "input_package_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_message_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "input_snapshot": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "prompt_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "runtime_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "raw_output": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "cleaned_output": {
+          "present_count": 216,
+          "null_count": 3,
+          "types": {
+            "string": 213,
+            "null": 3
+          }
+        },
+        "parsed_output": {
+          "present_count": 216,
+          "null_count": 3,
+          "types": {
+            "object": 213,
+            "null": 3
+          }
+        },
+        "schema_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "content_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "policy_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "evidence_mention_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "created_at": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/prompt_instances.jsonl",
+      "sha256": "e1ecd0afcbd4eb846fb593b2447addd79d5a15f88e6988dcb37a21ba910864a6",
+      "byte_count": 2794900,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "prompt_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "output_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_revision": {
+          "present_count": 216,
+          "null_count": 216,
+          "types": {
+            "null": 216
+          }
+        },
+        "messages": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "array": 216
+          }
+        },
+        "message_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_char_count": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "prompt_estimated_token_count": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "section_flags": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "created_at": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/filter_manifest.json",
+      "sha256": "1b19829e4e88a1242c9a372132988e23ed8bd114f96bdaa745429ee031571329",
+      "byte_count": 6699,
+      "format": "json",
+      "record_count": 1,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "phase": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "operation": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "tool_version": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "status": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "created_at": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "canonical_key": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "preservation_policy": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "source": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "output": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "counts": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "counts_by_level": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "unusable_records": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "array": 1
+          }
+        },
+        "integrity_checks": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "array": 1
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_phi4_mini_eval36_r1_pinned/outputs/shards/model=phi4_mini_instruct/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/generations.jsonl",
+      "sha256": "5935b2b14e4dc591a35f209e4169af356f2b2e86772168e1cbbf72eed7e89583",
+      "byte_count": 3994113,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "generation_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "run_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "experiment_stage": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_evidence_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "case_metadata": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "model_provider": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "remote_model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_family": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_revision": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "output_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "repeat_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "generation_seed": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "request_order_index": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "output_constraint_mode": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "decoding_config": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "input_package_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_message_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "input_snapshot": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "prompt_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "runtime_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "raw_output": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "cleaned_output": {
+          "present_count": 216,
+          "null_count": 7,
+          "types": {
+            "string": 209,
+            "null": 7
+          }
+        },
+        "parsed_output": {
+          "present_count": 216,
+          "null_count": 7,
+          "types": {
+            "object": 209,
+            "null": 7
+          }
+        },
+        "schema_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "content_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "policy_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "evidence_mention_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "created_at": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_phi4_mini_eval36_r1_pinned/outputs/shards/model=phi4_mini_instruct/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/prompt_instances.jsonl",
+      "sha256": "0f9ea87d02964f4dcfd95a3da73bb949f103212a93e89bfaec8ffc9fb59cc1ff",
+      "byte_count": 2803324,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "prompt_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "output_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_revision": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "messages": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "array": 216
+          }
+        },
+        "message_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_char_count": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "prompt_estimated_token_count": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "section_flags": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "created_at": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_phi4_mini_eval36_r1_pinned/outputs/shards/model=phi4_mini_instruct/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/shard_manifest.json",
+      "sha256": "2aaf837e1a43fb69ca5a927b3cd387f8bf7ef6d7e11fc93c5d11dbf53da481ba",
+      "byte_count": 1656,
+      "format": "json",
+      "record_count": 1,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "run_id": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "experiment_stage": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "created_at": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "git_commit_hash": {
+          "present_count": 1,
+          "null_count": 1,
+          "types": {
+            "null": 1
+          }
+        },
+        "input_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "model": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "repeat_id": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "evidence_levels": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "array": 1
+          }
+        },
+        "chunk_start": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "chunk_size": {
+          "present_count": 1,
+          "null_count": 1,
+          "types": {
+            "null": 1
+          }
+        },
+        "selected_case_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "planned_generation_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "written_generation_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "success_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "failed_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "request_order_seed": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "concurrency": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "decoding_config": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "prompt_version": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "output_schema_version": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "generation_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "prompt_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_template_eval36_001/shards/model=template_baseline/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/generations.jsonl",
+      "sha256": "dfc1f4b7ea9e1b9c7648d169141e97e5e0d4fafac77f0991e97b7e341b156f0b",
+      "byte_count": 2578687,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "generation_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "run_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "experiment_stage": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_evidence_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "case_metadata": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "model_provider": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "remote_model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_family": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_revision": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "output_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "repeat_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "generation_seed": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "request_order_index": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "output_constraint_mode": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "decoding_config": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "input_package_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_message_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "input_snapshot": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "prompt_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "runtime_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "raw_output": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "cleaned_output": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "parsed_output": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "schema_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "content_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "policy_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "evidence_mention_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "created_at": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_template_eval36_001/shards/model=template_baseline/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/prompt_instances.jsonl",
+      "sha256": "943a785a9a80e7f9a0424dc9fb4e707b7cdc7f14e72ce82d768e49ed49503f20",
+      "byte_count": 2795116,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "prompt_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "output_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "model_revision": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "messages": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "array": 216
+          }
+        },
+        "message_sha256": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "prompt_char_count": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "prompt_estimated_token_count": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "number": 216
+          }
+        },
+        "section_flags": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "created_at": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_template_eval36_001/shards/model=template_baseline/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/shard_manifest.json",
+      "sha256": "54a84342f97a4f0cf0037bece667ff586782e1147d5aba6dd534329eb036a657",
+      "byte_count": 1530,
+      "format": "json",
+      "record_count": 1,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "run_id": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "experiment_stage": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "created_at": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "git_commit_hash": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "input_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "model": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "repeat_id": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "evidence_levels": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "array": 1
+          }
+        },
+        "chunk_start": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "chunk_size": {
+          "present_count": 1,
+          "null_count": 1,
+          "types": {
+            "null": 1
+          }
+        },
+        "selected_case_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "planned_generation_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "written_generation_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "success_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "failed_count": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "request_order_seed": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "concurrency": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "number": 1
+          }
+        },
+        "decoding_config": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "object": 1
+          }
+        },
+        "prompt_version": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "output_schema_version": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "generation_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        },
+        "prompt_path": {
+          "present_count": 1,
+          "null_count": 0,
+          "types": {
+            "string": 1
+          }
+        }
+      }
+    }
+  ]
+}

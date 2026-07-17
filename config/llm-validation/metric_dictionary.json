@@ -1,0 +1,224 @@
+{
+  "dictionary_version": "metric_dictionary_v1",
+  "status": "FROZEN_BEFORE_FINAL_VALIDATION",
+  "frozen_date": "2026-07-14",
+  "denominator_rules": {
+    "reliability": "planned_generations",
+    "conditional_content": "usable_generations_or_evaluable_claims_as_declared",
+    "end_to_end": "planned_generations",
+    "statistical_unit": "case_id_after_claims_are_aggregated_to_generation"
+  },
+  "metrics": [
+    {
+      "name": "request_success", "display_name": "Request success", "definition": "Generation request completed successfully.",
+      "formula": "runtime_status == SUCCESS", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_is_failure",
+      "source_fields": ["generation_record.runtime_metrics.status"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "usable_output", "display_name": "Usable output", "definition": "Official output passed runtime, raw JSON, schema and truncation checks.",
+      "formula": "request_success AND raw_json_parse_success AND schema_valid AND NOT truncated", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_is_failure",
+      "source_fields": ["generation_index.usable"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "schema_valid", "display_name": "Schema validity", "definition": "Parsed official output conforms to the frozen explanation schema.",
+      "formula": "schema_metrics.schema_valid", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_is_failure",
+      "source_fields": ["generation_record.schema_metrics.schema_valid"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "truncation_failure", "display_name": "Truncation failure", "definition": "Generation ended due to length or was explicitly marked truncated.",
+      "formula": "truncated_response OR finish_reason == length", "unit": "boolean", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "missing_flags_are_false_only_when_runtime_record_exists",
+      "source_fields": ["generation_record.runtime_metrics.truncated_response","generation_record.runtime_metrics.finish_reason"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "latency_ms", "display_name": "Latency", "definition": "End-to-end provider latency reported for one generation.",
+      "formula": "runtime_metrics.latency_ms", "unit": "milliseconds", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "successful_requests", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "keep_null_do_not_impute",
+      "source_fields": ["generation_record.runtime_metrics.latency_ms"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "input_tokens", "display_name": "Input tokens", "definition": "Provider-reported input token count.",
+      "formula": "runtime_metrics.input_token_count", "unit": "tokens", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "successful_requests", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "keep_null_do_not_estimate_when_provider_count_missing",
+      "source_fields": ["generation_record.runtime_metrics.input_token_count"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "output_tokens", "display_name": "Output tokens", "definition": "Provider-reported output token count.",
+      "formula": "runtime_metrics.output_token_count", "unit": "tokens", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "successful_requests", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "keep_null_do_not_estimate_when_provider_count_missing",
+      "source_fields": ["generation_record.runtime_metrics.output_token_count"], "primary_or_secondary": "secondary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "cost_per_generation", "display_name": "Cost per generation", "definition": "API or allocated compute cost for one planned generation.",
+      "formula": "provider_api_cost_usd OR allocated_run_compute_cost_usd", "unit": "usd", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "keep_null_until_cost_provenance_is_available",
+      "source_fields": ["generation_record.runtime_metrics.total_cost_usd","cost_allocation.cost_per_generation"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "required_sections_present", "display_name": "Required sections present", "definition": "All five frozen explanation output fields exist with the required data types.",
+      "formula": "all_required_output_fields_present", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "unparseable_output_is_false",
+      "source_fields": ["generation_record.parsed_output"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "factor_id_unique", "display_name": "Unique factor IDs", "definition": "No factor_id is repeated inside one generation.",
+      "formula": "unique(factor_id).count == factors.count", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "usable_generations_with_factors", "applicable_levels": ["S1","S2","S3","S4","S5"], "null_handling": "S0_or_unparseable_is_null",
+      "source_fields": ["generation_record.parsed_output.factors.factor_id"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "factor_count_accuracy", "display_name": "Factor count accuracy", "definition": "Factor count matches an explicit level contract; no assumed count is invented when the contract is silent.",
+      "formula": "actual_factor_count == explicit_expected_factor_count", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "generations_with_explicit_factor_count_contract", "applicable_levels": ["S0","S5"], "null_handling": "null_when_no_explicit_count_contract",
+      "source_fields": ["generation_record.parsed_output.factors","evidence_package.prompt_payload.backend_explanation_skeleton.main_factor_slots"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "factor_order_accuracy", "display_name": "Factor order accuracy", "definition": "S5 factors follow the backend skeleton order exactly.",
+      "formula": "ordered_output_feature_ids == ordered_skeleton_feature_ids", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "usable_S5_generations", "applicable_levels": ["S5"], "null_handling": "null_outside_S5",
+      "source_fields": ["generation_record.parsed_output.factors.declared_feature_ids","evidence_package.prompt_payload.backend_explanation_skeleton.main_factor_slots"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "factor_role_accuracy", "display_name": "Factor role accuracy", "definition": "S5 skeleton factors all use the required main role.",
+      "formula": "every_S5_factor.role == main", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "usable_S5_generations", "applicable_levels": ["S5"], "null_handling": "null_outside_S5",
+      "source_fields": ["generation_record.parsed_output.factors.role"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "skeleton_compliance", "display_name": "Backend skeleton compliance", "definition": "S5 count, order, role and allowed-slot checks all pass.",
+      "formula": "factor_count_accuracy AND factor_order_accuracy AND factor_role_accuracy", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "usable_S5_generations", "applicable_levels": ["S5"], "null_handling": "null_outside_S5",
+      "source_fields": ["factor_count_accuracy","factor_order_accuracy","factor_role_accuracy"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "allowed_feature_compliance", "display_name": "Allowed feature compliance", "definition": "Every declared feature ID is allowed by the evidence package contract.",
+      "formula": "invalid_declared_feature_ids.count == 0", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "usable_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "unparseable_output_is_false",
+      "source_fields": ["generation_record.parsed_output.factors.declared_feature_ids","evidence_package.constraints.allowed_feature_ids"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "allowed_concept_compliance", "display_name": "Allowed concept compliance", "definition": "Every declared concept ID is allowed by the evidence package contract.",
+      "formula": "invalid_declared_concept_ids.count == 0", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "usable_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "unparseable_output_is_false",
+      "source_fields": ["generation_record.parsed_output.factors.declared_concept_ids","evidence_package.constraints.allowed_concept_ids"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "language_compliance", "display_name": "Vietnamese language compliance", "definition": "Output contains sufficient Vietnamese text and is not dominated by English prose; IDs are ignored.",
+      "formula": "vietnamese_character_or_stopword_signal_pass", "unit": "rate_0_to_1", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "usable_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "empty_or_unparseable_is_null",
+      "source_fields": ["generation_record.parsed_output"], "primary_or_secondary": "primary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "selected_evidence_mention_rate", "display_name": "Selected evidence mention rate", "definition": "Share of selected feature IDs mentioned by the output surface heuristic.",
+      "formula": "mentioned_selected_features / selected_features", "unit": "rate_0_to_1", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "selected_features", "applicable_levels": ["S1","S2","S3","S4","S5"], "null_handling": "null_when_selected_features_is_zero",
+      "source_fields": ["generation_record.evidence_mention_metrics.selected_feature_mention_rate"], "primary_or_secondary": "secondary", "validation_stage": "generation_contract"
+    },
+    {
+      "name": "claim_extraction_success", "display_name": "Claim extraction success", "definition": "Usable generation produced schema-valid atomic claims with valid source spans.",
+      "formula": "claims.count > 0 AND no_extraction_failure", "unit": "boolean", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "unusable_or_failed_generation_is_false",
+      "source_fields": ["claims.jsonl","claim_extraction_failures.jsonl"], "primary_or_secondary": "primary", "validation_stage": "claim_extraction"
+    },
+    {
+      "name": "duplicate_claim_rate", "display_name": "Duplicate claim rate", "definition": "Duplicate normalized claims divided by all extracted claims.",
+      "formula": "duplicate_claim_count / total_claim_count", "unit": "rate_0_to_1", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "extracted_claims", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_when_no_claims",
+      "source_fields": ["claims.normalized_claim_key"], "primary_or_secondary": "secondary", "validation_stage": "claim_extraction"
+    },
+    {
+      "name": "weighted_faithfulness", "display_name": "Weighted faithfulness", "definition": "Supported claims score 1 and partially supported claims score 0.5.",
+      "formula": "(supported + 0.5 * partially_supported) / evaluable_claims", "unit": "rate_0_to_1", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "evaluable_claims", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_when_no_evaluable_claims_but_end_to_end_value_is_zero",
+      "source_fields": ["claim_validations.validation_label"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "unsupported_claim_rate", "display_name": "Unsupported claim rate", "definition": "Unsupported claims divided by evaluable claims.",
+      "formula": "unsupported_claims / evaluable_claims", "unit": "rate_0_to_1", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "evaluable_claims", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_when_no_evaluable_claims",
+      "source_fields": ["claim_validations.validation_label"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "contradicted_claim_rate", "display_name": "Contradicted claim rate", "definition": "Contradicted claims divided by evaluable claims; reported separately from unsupported claims.",
+      "formula": "contradicted_claims / evaluable_claims", "unit": "rate_0_to_1", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "evaluable_claims", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_when_no_evaluable_claims",
+      "source_fields": ["claim_validations.validation_label"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "direction_accuracy", "display_name": "Direction accuracy", "definition": "Correctly expressed risk directions divided by direction-evaluable claims.",
+      "formula": "direction_match_true / direction_evaluable_claims", "unit": "rate_0_to_1", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "direction_evaluable_claims", "applicable_levels": ["S1","S2","S3","S4","S5"], "null_handling": "null_when_no_direction_evaluable_claims",
+      "source_fields": ["claim_validations.direction_match"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "shap_mass_coverage", "display_name": "SHAP-mass coverage", "definition": "Absolute SHAP mass of correctly expressed selected evidence divided by total selected absolute SHAP mass.",
+      "formula": "sum(abs_shap_of_correctly_expressed_evidence) / sum(abs_shap_of_selected_evidence)", "unit": "rate_0_to_1", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "selected_absolute_shap_mass", "applicable_levels": ["S1","S2","S3","S4","S5"], "null_handling": "null_when_selected_mass_is_zero_or_not_applicable",
+      "source_fields": ["evidence_package.selected_evidence.abs_shap_value","claim_validations.matched_feature_ids","claim_validations.direction_match"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "causal_overclaim_rate", "display_name": "Causal overclaim rate", "definition": "Causal overclaim claims divided by evaluable claims.",
+      "formula": "causal_overclaim_count / evaluable_claims", "unit": "rate_0_to_1", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "evaluable_claims", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_when_no_evaluable_claims",
+      "source_fields": ["claim_validations.causal_overclaim"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "policy_compliance", "display_name": "Policy compliance", "definition": "Share of applicable frozen narrative-policy checks passed.",
+      "formula": "passed_applicable_policy_checks / applicable_policy_checks", "unit": "rate_0_to_1", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "applicable_policy_checks", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_when_no_policy_check_is_applicable",
+      "source_fields": ["generation_record.policy_metrics","claim_validations"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "narrative_synthesis_score", "display_name": "Narrative synthesis", "definition": "Pre-registered score for coherent synthesis beyond copying evidence, calibrated with human annotation.",
+      "formula": "frozen_narrative_rubric_score", "unit": "rate_0_to_1", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "usable_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "keep_null_until_validator_or_human_score_exists",
+      "source_fields": ["semantic_validation.narrative_synthesis_score","human_calibration"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "extractiveness_rate", "display_name": "Extractiveness rate", "definition": "Share of output tokens copied or near-copied from supplied evidence phrases.",
+      "formula": "matched_evidence_copy_tokens / output_tokens", "unit": "rate_0_to_1", "direction": "lower_is_better", "grain": "generation",
+      "denominator": "output_tokens", "applicable_levels": ["S1","S2","S3","S4","S5"], "null_handling": "null_when_output_tokens_is_zero",
+      "source_fields": ["generation_text","evidence_package"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "generation_quality", "display_name": "Generation quality", "definition": "Hard-gated weighted geometric mean of applicable normalized quality metrics.",
+      "formula": "H * product(metric ^ weight) ^ (1 / applied_weight_sum)", "unit": "index_0_to_1_not_probability", "direction": "higher_is_better", "grain": "generation",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "exclude_non_applicable_metric_and_renormalize; hard_gate_failure_is_zero",
+      "source_fields": ["weighted_faithfulness","direction_accuracy","shap_mass_coverage","policy_compliance","narrative_synthesis_score","language_compliance"], "primary_or_secondary": "primary", "validation_stage": "selection"
+    },
+    {
+      "name": "end_to_end_faithfulness_yield", "display_name": "E2E faithfulness yield", "definition": "Faithfulness yield over every planned generation, including unusable and extraction failures as zero.",
+      "formula": "sum(usable_output * weighted_faithfulness_or_zero) / planned_generation_count", "unit": "rate_0_to_1", "direction": "higher_is_better", "grain": "configuration",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "unusable_or_missing_faithfulness_contributes_zero",
+      "source_fields": ["usable_output","weighted_faithfulness"], "primary_or_secondary": "primary", "validation_stage": "generation_aggregation"
+    },
+    {
+      "name": "configuration_quality_point", "display_name": "Configuration quality", "definition": "Mean generation quality for one model and evidence level over all 36 planned cases.",
+      "formula": "sum(generation_quality) / 36", "unit": "index_0_to_1_not_probability", "direction": "higher_is_better", "grain": "configuration",
+      "denominator": "36_planned_cases", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "missing_or_unusable_generation_contributes_zero",
+      "source_fields": ["generation_quality"], "primary_or_secondary": "primary", "validation_stage": "selection"
+    },
+    {
+      "name": "configuration_quality_lcb_95", "display_name": "Configuration quality 95% LCB", "definition": "Lower 95% paired-stratified bootstrap confidence bound for configuration quality.",
+      "formula": "percentile_2_5_of_stratified_case_bootstrap_means", "unit": "index_0_to_1_not_probability", "direction": "higher_is_better", "grain": "configuration",
+      "denominator": "paired_36_case_cohort", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_until_bootstrap_is_run",
+      "source_fields": ["generation_quality","case_id","selection_stratum"], "primary_or_secondary": "primary", "validation_stage": "selection"
+    },
+    {
+      "name": "reliability", "display_name": "Reliability", "definition": "Usable generations divided by planned generations.",
+      "formula": "usable_generation_count / planned_generation_count", "unit": "rate_0_to_1", "direction": "higher_is_better", "grain": "configuration",
+      "denominator": "planned_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "never_null_when_plan_exists",
+      "source_fields": ["usable_output"], "primary_or_secondary": "primary", "validation_stage": "selection"
+    },
+    {
+      "name": "cost_per_faithful_generation", "display_name": "Cost per faithful generation", "definition": "Total cost divided by hard-gate-passing faithful generations.",
+      "formula": "sum(cost_per_generation) / faithful_generation_count", "unit": "usd", "direction": "lower_is_better", "grain": "configuration",
+      "denominator": "faithful_generations", "applicable_levels": ["S0","S1","S2","S3","S4","S5"], "null_handling": "null_when_cost_missing_or_faithful_count_zero",
+      "source_fields": ["cost_per_generation","hard_gate_pass"], "primary_or_secondary": "primary", "validation_stage": "selection"
+    }
+  ]
+}
+

@@ -1,0 +1,203 @@
+{
+  "schema_version": "canonical_sources_v1",
+  "created_at": "2026-07-14T07:17:50.321Z",
+  "evidence": {
+    "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/evidence_exposure/evaluation_36/evidence_packages_36.jsonl",
+    "sha256": "37c25b261d496e7c9bf50a62141f93b5544a45af43208918d0eaf589d6307117",
+    "byte_count": 6826430,
+    "record_count": 216
+  },
+  "selected_cases": {
+    "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/evidence_exposure/evaluation_36/selected_case_ids_36.csv",
+    "sha256": "04fc4aa5106378294bbd66e56159b8522c45f0ecd5117a49272000876e0085c5",
+    "byte_count": 3116,
+    "record_count": 36
+  },
+  "selection_manifest": {
+    "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/evidence_exposure/evaluation_36/selection_manifest.json",
+    "sha256": "a3661828f76c6296eab929b06987a01fecf125a85adab106a760435a50ab6c4d",
+    "byte_count": 1073
+  },
+  "main_models": [
+    {
+      "model_id": "qwen3_8b",
+      "is_baseline": false,
+      "eligible_for_selection": true,
+      "generation_artifact": {
+        "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_qwen3_8b_eval36_r1_pinned_v3/outputs/shards/model=qwen3_8b/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/generations.jsonl",
+        "sha256": "ddd12889767ac7c5f50b7e279e421c9a72f535ec6751a22f71f45a9b9bf43cb9",
+        "byte_count": 3928389,
+        "record_count": 216
+      },
+      "prompt_artifact": {
+        "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_qwen3_8b_eval36_r1_pinned_v3/outputs/shards/model=qwen3_8b/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/prompt_instances.jsonl",
+        "sha256": "4cbc48842e8a1df40392121fa00c1507b273bc881d0f55c6f0b306a436c3d201",
+        "byte_count": 2801164,
+        "record_count": 216
+      },
+      "manifest_artifact": {
+        "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_qwen3_8b_eval36_r1_pinned_v3/outputs/shards/model=qwen3_8b/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/shard_manifest.json",
+        "sha256": "fe52e62317cf3e6140f5c1f96f87c51d8424afcaa95d26069ed45d8f3056c55a",
+        "byte_count": 1685
+      },
+      "observed": {
+        "run_ids": [
+          "run_qwen3_8b_eval36_r1_pinned_v3"
+        ],
+        "model_revisions": [
+          "21073ac5a57f8ac6b159dae129728af51ac707e8"
+        ],
+        "prompt_versions": [
+          "prompt_v1"
+        ],
+        "output_schema_versions": [
+          "1.0"
+        ],
+        "repeat_ids": [
+          1
+        ],
+        "experiment_stages": [
+          "evaluation"
+        ],
+        "usable_count": 216,
+        "unusable_count": 0,
+        "first_generation_id": "run_qwen3_8b_eval36_r1_pinned_v3__qwen3_8b__r1__pkg_S2_ir_xai_hist_gradient_boosting_v1_280694_near_threshold"
+      }
+    },
+    {
+      "model_id": "deepseek_v4_flash",
+      "is_baseline": false,
+      "eligible_for_selection": true,
+      "generation_artifact": {
+        "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/generations.jsonl",
+        "sha256": "391233a777a6e2fd890a49f0688a3e0f686afa9c28eb5c8b94adacc9c25ca26d",
+        "byte_count": 3583275,
+        "record_count": 216
+      },
+      "prompt_artifact": {
+        "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/prompt_instances.jsonl",
+        "sha256": "e1ecd0afcbd4eb846fb593b2447addd79d5a15f88e6988dcb37a21ba910864a6",
+        "byte_count": 2794900,
+        "record_count": 216
+      },
+      "manifest_artifact": {
+        "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/filter_manifest.json",
+        "sha256": "1b19829e4e88a1242c9a372132988e23ed8bd114f96bdaa745429ee031571329",
+        "byte_count": 6699
+      },
+      "observed": {
+        "run_ids": [
+          "run_deepseek_eval_001"
+        ],
+        "model_revisions": [
+          null
+        ],
+        "prompt_versions": [
+          "prompt_v1"
+        ],
+        "output_schema_versions": [
+          "1.0"
+        ],
+        "repeat_ids": [
+          1
+        ],
+        "experiment_stages": [
+          "evaluation"
+        ],
+        "usable_count": 213,
+        "unusable_count": 3,
+        "first_generation_id": "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S0_ir_xai_hist_gradient_boosting_v1_156227_top_high_risk"
+      }
+    },
+    {
+      "model_id": "phi4_mini_instruct",
+      "is_baseline": false,
+      "eligible_for_selection": true,
+      "generation_artifact": {
+        "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_phi4_mini_eval36_r1_pinned/outputs/shards/model=phi4_mini_instruct/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/generations.jsonl",
+        "sha256": "5935b2b14e4dc591a35f209e4169af356f2b2e86772168e1cbbf72eed7e89583",
+        "byte_count": 3994113,
+        "record_count": 216
+      },
+      "prompt_artifact": {
+        "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_phi4_mini_eval36_r1_pinned/outputs/shards/model=phi4_mini_instruct/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/prompt_instances.jsonl",
+        "sha256": "0f9ea87d02964f4dcfd95a3da73bb949f103212a93e89bfaec8ffc9fb59cc1ff",
+        "byte_count": 2803324,
+        "record_count": 216
+      },
+      "manifest_artifact": {
+        "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/batch_i_downloads/run_phi4_mini_eval36_r1_pinned/outputs/shards/model=phi4_mini_instruct/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/shard_manifest.json",
+        "sha256": "2aaf837e1a43fb69ca5a927b3cd387f8bf7ef6d7e11fc93c5d11dbf53da481ba",
+        "byte_count": 1656
+      },
+      "observed": {
+        "run_ids": [
+          "run_phi4_mini_eval36_r1_pinned"
+        ],
+        "model_revisions": [
+          "618e63e60172e9efa181cbfeee9d7012e5b2ad66"
+        ],
+        "prompt_versions": [
+          "prompt_v1"
+        ],
+        "output_schema_versions": [
+          "1.0"
+        ],
+        "repeat_ids": [
+          1
+        ],
+        "experiment_stages": [
+          "evaluation"
+        ],
+        "usable_count": 209,
+        "unusable_count": 7,
+        "first_generation_id": "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S3_ir_xai_hist_gradient_boosting_v1_360304_top_high_risk"
+      }
+    }
+  ],
+  "baseline": {
+    "model_id": "template_baseline",
+    "is_baseline": true,
+    "eligible_for_selection": false,
+    "generation_artifact": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_template_eval36_001/shards/model=template_baseline/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/generations.jsonl",
+      "sha256": "dfc1f4b7ea9e1b9c7648d169141e97e5e0d4fafac77f0991e97b7e341b156f0b",
+      "byte_count": 2578687,
+      "record_count": 216
+    },
+    "prompt_artifact": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_template_eval36_001/shards/model=template_baseline/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/prompt_instances.jsonl",
+      "sha256": "943a785a9a80e7f9a0424dc9fb4e707b7cdc7f14e72ce82d768e49ed49503f20",
+      "byte_count": 2795116,
+      "record_count": 216
+    },
+    "manifest_artifact": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_template_eval36_001/shards/model=template_baseline/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/shard_manifest.json",
+      "sha256": "54a84342f97a4f0cf0037bece667ff586782e1147d5aba6dd534329eb036a657",
+      "byte_count": 1530
+    },
+    "observed": {
+      "run_ids": [
+        "run_template_eval36_001"
+      ],
+      "model_revisions": [
+        "1.0"
+      ],
+      "prompt_versions": [
+        "prompt_v1"
+      ],
+      "output_schema_versions": [
+        "1.0"
+      ],
+      "repeat_ids": [
+        1
+      ],
+      "experiment_stages": [
+        "evaluation"
+      ],
+      "usable_count": 216,
+      "unusable_count": 0,
+      "first_generation_id": "run_template_eval36_001__template_baseline__r1__pkg_S1_ir_xai_hist_gradient_boosting_v1_449188_false_positive"
+    }
+  }
+}

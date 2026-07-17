@@ -1,0 +1,101 @@
+{
+  "policy_name": "Risk-Constrained Non-Inferior Minimum-Sufficient Selection",
+  "policy_version": "selection_policy_v1",
+  "status": "FROZEN_BEFORE_FINAL_VALIDATION",
+  "frozen_date": "2026-07-14",
+  "selection_unit": "model_id x evidence_level",
+  "paired_unit": "case_id",
+  "planned_cases_per_configuration": 36,
+  "generation_quality": {
+    "hard_gates": {
+      "usable_output": true,
+      "schema_valid": true,
+      "maximum_contradicted_claim_count": 0,
+      "maximum_causal_overclaim_count": 0
+    },
+    "soft_metric_weights": {
+      "faithfulness": 0.3,
+      "direction": 0.25,
+      "shap_coverage": 0.2,
+      "policy": 0.1,
+      "narrative": 0.1,
+      "language": 0.05
+    },
+    "combination": "weighted_geometric_mean",
+    "null_metric_rule": "exclude_and_renormalize_weights",
+    "hard_gate_failure_score": 0
+  },
+  "configuration_hard_gates": {
+    "minimum_observed_usable_generation_rate": 1,
+    "minimum_observed_schema_validity_rate": 1,
+    "maximum_contradicted_claim_rate": 0,
+    "maximum_causal_overclaim_rate": 0,
+    "minimum_direction_accuracy": 0.95,
+    "maximum_unsupported_claim_rate": 0.05,
+    "minimum_weighted_faithfulness": 0.9,
+    "minimum_shap_mass_coverage": 0.8,
+    "minimum_policy_compliance": 0.95,
+    "minimum_language_compliance": 0.98,
+    "rate_interval": "wilson",
+    "confidence": 0.95,
+    "rule_if_no_candidate_passes": "do_not_relax_thresholds_select_lowest_risk_for_analysis_and_require_human_review"
+  },
+  "paired_bootstrap": {
+    "iterations": 5000,
+    "confidence": 0.95,
+    "seed": 20260714,
+    "resample_unit": "case_id",
+    "stratify_by": "selection_stratum",
+    "keep_all_candidate_cells_for_sampled_case": true
+  },
+  "non_inferiority": {
+    "margin": 0.03,
+    "difference": "quality_best_minus_quality_candidate",
+    "decision_rule": "upper_95_ci_less_than_or_equal_to_margin"
+  },
+  "pareto": {
+    "maximize": [
+      "configuration_quality_lcb_95",
+      "reliability"
+    ],
+    "minimize": [
+      "cost_per_faithful_generation",
+      "p95_latency_ms",
+      "mean_input_tokens",
+      "extractiveness_rate"
+    ],
+    "null_rule": "candidate_with_missing_efficiency_metric_cannot_dominate_on_that_metric"
+  },
+  "minimum_sufficient_evidence": {
+    "default_candidate_levels": ["S1", "S2", "S3", "S4"],
+    "excluded_baseline_level": "S0",
+    "separate_fallback_level": "S5",
+    "burden_axis": "mean_input_tokens",
+    "quality_axis": "configuration_quality_lcb_95",
+    "knee_role": "supporting_evidence_only",
+    "calculate_per_model": true
+  },
+  "lexicographic_tie_break": [
+    {"metric": "evidence_level_order", "direction": "ascending"},
+    {"metric": "cost_per_faithful_generation", "direction": "ascending"},
+    {"metric": "p95_latency_ms", "direction": "ascending"},
+    {"metric": "extractiveness_rate", "direction": "ascending"},
+    {"metric": "narrative_synthesis_score", "direction": "descending"},
+    {"metric": "candidate_id", "direction": "ascending"}
+  ],
+  "runtime_probability_threshold": {
+    "enabled_before_human_calibration": false,
+    "false_accept_to_false_reject_cost_ratio": 9,
+    "calibrated_accept_probability_threshold": 0.9,
+    "acceptance_rule_after_calibration": "hard_gate_pass_and_calibrated_p_accept_at_least_0_90",
+    "required_reports": ["brier_score", "expected_calibration_error", "false_accept_rate", "false_reject_rate"]
+  },
+  "prohibited_shortcuts": [
+    "do_not_interpret_generation_quality_as_probability",
+    "do_not_tune_thresholds_after_seeing_the_winner",
+    "do_not_resample_claims_as_independent_observations",
+    "do_not_remove_unusable_generations_from_denominator",
+    "do_not_mix_s0_or_s5_into_the_s1_to_s4_knee_curve"
+  ]
+}
+

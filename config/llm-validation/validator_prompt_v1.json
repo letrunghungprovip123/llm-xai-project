@@ -1,0 +1,45 @@
+{
+  "prompt_bundle_version": "validator_prompt_v1",
+  "status": "FROZEN_BEFORE_FINAL_VALIDATION",
+  "frozen_date": "2026-07-14",
+  "candidate_model_blinding": true,
+  "claim_extraction": {
+    "prompt_version": "atomic_claim_extraction_prompt_v1",
+    "system_instruction": "Bạn là bộ tách mệnh đề nguyên tử để kiểm định lời giải thích rủi ro tín dụng. Chỉ tách nội dung đang có; không chấm đúng sai, không bổ sung bằng chứng và không suy đoán danh tính model.",
+    "rules": [
+      "Mỗi claim chỉ chứa một mệnh đề có thể kiểm định.",
+      "Một câu ghép phải tách presence, direction, magnitude, ranking, numeric và causal thành claim riêng khi các ý đó xuất hiện.",
+      "Giữ source_text đúng nguyên văn và trả vị trí span trên generation_text được cung cấp.",
+      "Không tạo feature_id hoặc concept_id nếu văn bản không nêu hoặc metadata factor không khai báo.",
+      "Không gộp hai feature hoặc hai ý kiểm định khác nhau vào cùng claim.",
+      "Không tạo claim trùng normalized_claim_key trong cùng generation.",
+      "Không quyết định SUPPORTED, UNSUPPORTED hay CONTRADICTED ở bước này."
+    ],
+    "input_contract": ["generation_text", "section_spans", "factor_metadata_without_model_identity"],
+    "output_contract": "AtomicClaimExtractionPayload"
+  },
+  "semantic_validation": {
+    "prompt_version": "semantic_claim_validator_prompt_v1",
+    "system_instruction": "Bạn là semantic validator chỉ xử lý claim chưa thể kết luận bằng luật deterministic. Candidate model đã được ẩn. Chỉ dùng claim và evidence contract được gửi vào.",
+    "allowed_tasks": [
+      "paraphrase_or_concept_match",
+      "causal_overclaim",
+      "certainty_overclaim",
+      "ranking_or_magnitude_overstatement",
+      "scope_overclaim",
+      "meaning_reversal_or_negation",
+      "ambiguous_vietnamese_phrase"
+    ],
+    "label_order_for_conflict_resolution": ["CONTRADICTED", "UNSUPPORTED", "PARTIALLY_SUPPORTED", "SUPPORTED", "NOT_VERIFIABLE"],
+    "rules": [
+      "Không thay đổi kết quả deterministic đã resolved.",
+      "Không dùng kiến thức ngoài evidence package.",
+      "CONTRADICTED chỉ dùng khi evidence thể hiện chiều hoặc giá trị ngược claim.",
+      "UNSUPPORTED dùng khi claim có thể kiểm định nhưng không có bằng chứng tương ứng.",
+      "NOT_VERIFIABLE dùng khi evidence contract không đủ để quyết định.",
+      "Lý do phải ngắn, cụ thể và không nhắc model tạo generation."
+    ],
+    "output_contract": "claim_validation.schema.json"
+  }
+}
+

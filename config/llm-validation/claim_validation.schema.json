@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim_validation.schema.json",
+  "title": "Claim validation result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "validation_schema_version", "claim_id", "generation_id", "validation_label",
+    "support_type", "matched_evidence_ids", "matched_feature_ids", "matched_concept_ids",
+    "feature_match", "concept_match", "direction_match", "magnitude_match",
+    "ranking_match", "numeric_match", "causal_overclaim", "certainty_overclaim",
+    "ranking_overclaim", "scope_overclaim", "unsupported_recommendation",
+    "validator_confidence", "validator_reason", "validator_stage", "validator_version"
+  ],
+  "properties": {
+    "validation_schema_version": {"const": "claim_validation_v1"},
+    "claim_id": {"type": "string", "minLength": 1},
+    "generation_id": {"type": "string", "minLength": 1},
+    "validation_label": {"enum": ["SUPPORTED", "PARTIALLY_SUPPORTED", "UNSUPPORTED", "CONTRADICTED", "NOT_VERIFIABLE"]},
+    "support_type": {"enum": ["DIRECT_FEATURE_EVIDENCE", "CONCEPT_EVIDENCE", "PREDICTION_METADATA", "NARRATIVE_POLICY", "SEMANTIC_VALIDATION", "NONE"]},
+    "matched_evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "matched_feature_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "matched_concept_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "feature_match": {"type": ["boolean", "null"]},
+    "concept_match": {"type": ["boolean", "null"]},
+    "direction_match": {"type": ["boolean", "null"]},
+    "magnitude_match": {"type": ["boolean", "null"]},
+    "ranking_match": {"type": ["boolean", "null"]},
+    "numeric_match": {"type": ["boolean", "null"]},
+    "causal_overclaim": {"type": "boolean"},
+    "certainty_overclaim": {"type": "boolean"},
+    "ranking_overclaim": {"type": "boolean"},
+    "scope_overclaim": {"type": "boolean"},
+    "unsupported_recommendation": {"type": "boolean"},
+    "validator_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "validator_reason": {"type": "string", "minLength": 1},
+    "validator_stage": {"enum": ["DETERMINISTIC", "SEMANTIC"]},
+    "validator_version": {"type": "string", "minLength": 1}
+  }
+}
+

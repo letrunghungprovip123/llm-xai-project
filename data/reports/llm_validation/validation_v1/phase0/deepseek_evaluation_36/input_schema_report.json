@@ -1,0 +1,514 @@
+{
+  "phase": "Phase 0",
+  "tool_version": "phase0_canonicalizer_v1.0.0",
+  "profiles": [
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/evidence_exposure/evaluation_36/evidence_packages_36.jsonl",
+      "sha256": "37c25b261d496e7c9bf50a62141f93b5544a45af43208918d0eaf589d6307117",
+      "byte_count": 6826430,
+      "format": "jsonl",
+      "record_count": 216,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "package_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_ir_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "source_evidence_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "trace_id": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "run_mode": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "ir_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_package_schema_version": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "evidence_level": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "string": 216
+          }
+        },
+        "internal_metadata": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "prediction": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "selected_evidence": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "array": 216
+          }
+        },
+        "concept_evidence": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "array": 216
+          }
+        },
+        "selection_metrics": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "narrative_policy": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "constraints": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "audit_trace": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "prompt_payload": {
+          "present_count": 216,
+          "null_count": 0,
+          "types": {
+            "object": 216
+          }
+        },
+        "concept_grouping": {
+          "present_count": 72,
+          "null_count": 0,
+          "types": {
+            "object": 72
+          }
+        },
+        "xai_quality_metrics": {
+          "present_count": 72,
+          "null_count": 0,
+          "types": {
+            "object": 72
+          }
+        },
+        "backend_explanation_skeleton": {
+          "present_count": 36,
+          "null_count": 0,
+          "types": {
+            "object": 36
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_deepseek_eval_001/reports_v2/generated_explanations.jsonl",
+      "sha256": "9f0d59cf476649f52470f3ed3016ebe6fad12314b2cd954f182a16f6c5ca5097",
+      "byte_count": 11977801,
+      "format": "jsonl",
+      "record_count": 720,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "generation_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "run_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "experiment_stage": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "package_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "source_ir_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "source_evidence_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "evidence_level": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "case_metadata": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "model_provider": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "model_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "remote_model_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "model_family": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "model_revision": {
+          "present_count": 720,
+          "null_count": 720,
+          "types": {
+            "null": 720
+          }
+        },
+        "prompt_version": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "output_schema_version": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "repeat_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "number": 720
+          }
+        },
+        "generation_seed": {
+          "present_count": 720,
+          "null_count": 720,
+          "types": {
+            "null": 720
+          }
+        },
+        "request_order_index": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "number": 720
+          }
+        },
+        "output_constraint_mode": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "decoding_config": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "input_package_sha256": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "prompt_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "prompt_message_sha256": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "input_snapshot": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "prompt_metrics": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "runtime_metrics": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "raw_output": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "cleaned_output": {
+          "present_count": 720,
+          "null_count": 8,
+          "types": {
+            "string": 712,
+            "null": 8
+          }
+        },
+        "parsed_output": {
+          "present_count": 720,
+          "null_count": 10,
+          "types": {
+            "object": 710,
+            "null": 10
+          }
+        },
+        "schema_metrics": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "content_metrics": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "policy_metrics": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "evidence_mention_metrics": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "created_at": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        }
+      }
+    },
+    {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_deepseek_eval_001/shards/model=deepseek_v4_flash/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/prompt_instances.jsonl",
+      "sha256": "197df8e582a04d8fe0f3b2fd7747ef4b41e97764bf8b757779c9c79328dd4b68",
+      "byte_count": 9358528,
+      "format": "jsonl",
+      "record_count": 720,
+      "invalid_record_count": 0,
+      "top_level_fields": {
+        "prompt_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "prompt_version": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "output_schema_version": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "package_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "source_ir_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "evidence_level": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "model_id": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "model_revision": {
+          "present_count": 720,
+          "null_count": 720,
+          "types": {
+            "null": 720
+          }
+        },
+        "messages": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "array": 720
+          }
+        },
+        "message_sha256": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        },
+        "prompt_char_count": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "number": 720
+          }
+        },
+        "prompt_estimated_token_count": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "number": 720
+          }
+        },
+        "section_flags": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "object": 720
+          }
+        },
+        "created_at": {
+          "present_count": 720,
+          "null_count": 0,
+          "types": {
+            "string": 720
+          }
+        }
+      }
+    }
+  ]
+}

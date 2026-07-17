@@ -1,0 +1,221 @@
+{
+  "phase": "Phase 0",
+  "operation": "filter_deepseek_evaluation_36",
+  "tool_version": "phase0_canonicalizer_v1.0.0",
+  "status": "PASSED",
+  "created_at": "2026-07-14T07:17:27.272Z",
+  "canonical_key": "source_ir_id::evidence_level",
+  "preservation_policy": {
+    "raw_source_files_modified": false,
+    "unusable_records_preserved": true,
+    "rerun_or_replacement_performed": false
+  },
+  "source": {
+    "evidence": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/evidence_exposure/evaluation_36/evidence_packages_36.jsonl",
+      "sha256": "37c25b261d496e7c9bf50a62141f93b5544a45af43208918d0eaf589d6307117",
+      "byte_count": 6826430,
+      "record_count": 216
+    },
+    "generations": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_deepseek_eval_001/reports_v2/generated_explanations.jsonl",
+      "sha256": "9f0d59cf476649f52470f3ed3016ebe6fad12314b2cd954f182a16f6c5ca5097",
+      "byte_count": 11977801,
+      "record_count": 720
+    },
+    "prompts": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_narratives/evaluation/run_deepseek_eval_001/shards/model=deepseek_v4_flash/repeat=1/chunk=0-end/levels=S0-S1-S2-S3-S4-S5/prompt_instances.jsonl",
+      "sha256": "197df8e582a04d8fe0f3b2fd7747ef4b41e97764bf8b757779c9c79328dd4b68",
+      "byte_count": 9358528,
+      "record_count": 720
+    }
+  },
+  "output": {
+    "generations": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/generations.jsonl",
+      "sha256": "391233a777a6e2fd890a49f0688a3e0f686afa9c28eb5c8b94adacc9c25ca26d",
+      "byte_count": 3583275,
+      "record_count": 216
+    },
+    "prompts": {
+      "path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/prompt_instances.jsonl",
+      "sha256": "e1ecd0afcbd4eb846fb593b2447addd79d5a15f88e6988dcb37a21ba910864a6",
+      "byte_count": 2794900,
+      "record_count": 216
+    },
+    "integrity_report_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/integrity_report.csv",
+    "input_schema_report_path": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next/data/reports/llm_validation/validation_v1/phase0/deepseek_evaluation_36/input_schema_report.json"
+  },
+  "counts": {
+    "source_generation_count": 720,
+    "source_prompt_count": 720,
+    "selected_case_count": 36,
+    "selected_package_count": 216,
+    "selected_generation_count": 216,
+    "selected_prompt_count": 216,
+    "usable_generation_count": 213,
+    "unusable_generation_count": 3,
+    "excluded_non_cohort_generation_count": 504,
+    "excluded_non_cohort_prompt_count": 504
+  },
+  "counts_by_level": {
+    "S0": {
+      "total": 36,
+      "usable": 36
+    },
+    "S1": {
+      "total": 36,
+      "usable": 36
+    },
+    "S2": {
+      "total": 36,
+      "usable": 36
+    },
+    "S3": {
+      "total": 36,
+      "usable": 36
+    },
+    "S4": {
+      "total": 36,
+      "usable": 33
+    },
+    "S5": {
+      "total": 36,
+      "usable": 36
+    }
+  },
+  "unusable_records": [
+    {
+      "generation_id": "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_280694_near_threshold",
+      "source_ir_id": "ir_xai_hist_gradient_boosting_v1_280694_near_threshold",
+      "evidence_level": "S4",
+      "reason_codes": [
+        "truncated_response",
+        "finish_reason_length",
+        "raw_json_parse_failed",
+        "schema_invalid",
+        "schema_validation_errors",
+        "parsed_output_missing"
+      ]
+    },
+    {
+      "generation_id": "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_310672_near_threshold",
+      "source_ir_id": "ir_xai_hist_gradient_boosting_v1_310672_near_threshold",
+      "evidence_level": "S4",
+      "reason_codes": [
+        "truncated_response",
+        "finish_reason_length",
+        "raw_json_parse_failed",
+        "schema_invalid",
+        "schema_validation_errors",
+        "parsed_output_missing"
+      ]
+    },
+    {
+      "generation_id": "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_441551_near_threshold",
+      "source_ir_id": "ir_xai_hist_gradient_boosting_v1_441551_near_threshold",
+      "evidence_level": "S4",
+      "reason_codes": [
+        "truncated_response",
+        "finish_reason_length",
+        "raw_json_parse_failed",
+        "schema_invalid",
+        "schema_validation_errors",
+        "parsed_output_missing"
+      ]
+    }
+  ],
+  "integrity_checks": [
+    {
+      "check_id": "evidence_package_count",
+      "status": "PASS",
+      "expected": 216,
+      "actual": 216,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "selected_generation_count",
+      "status": "PASS",
+      "expected": 216,
+      "actual": 216,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "selected_prompt_count",
+      "status": "PASS",
+      "expected": 216,
+      "actual": 216,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "unique_case_count",
+      "status": "PASS",
+      "expected": 36,
+      "actual": 36,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "levels_per_case",
+      "status": "PASS",
+      "expected": 6,
+      "actual": 6,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "source_generation_duplicate_count",
+      "status": "PASS",
+      "expected": 0,
+      "actual": 0,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "source_prompt_duplicate_count",
+      "status": "PASS",
+      "expected": 0,
+      "actual": 0,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "missing_generation_count",
+      "status": "PASS",
+      "expected": 0,
+      "actual": 0,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "missing_prompt_count",
+      "status": "PASS",
+      "expected": 0,
+      "actual": 0,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "package_hash_mismatch_count",
+      "status": "PASS",
+      "expected": 0,
+      "actual": 0,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "prompt_hash_mismatch_count",
+      "status": "PASS",
+      "expected": 0,
+      "actual": 0,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "usable_generation_count",
+      "status": "PASS",
+      "expected": 213,
+      "actual": 213,
+      "detail": "Verified."
+    },
+    {
+      "check_id": "unusable_generation_count",
+      "status": "PASS",
+      "expected": 3,
+      "actual": 3,
+      "detail": "Verified."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "prompt_version": "atomic_claim_extraction_prompt_v3",
+  "system_instruction": "Bạn là bộ tách mệnh đề nguyên tử để kiểm định lời giải thích rủi ro tín dụng. Chỉ tách nội dung đang có; không chấm đúng sai, không thêm bằng chứng và không suy đoán danh tính model.",
+  "rules": [
+    "Mỗi claim chỉ chứa một mệnh đề có thể kiểm định.",
+    "Không xuất feature_presence hoặc concept_presence; code sẽ sinh hai loại claim này từ declared IDs và factor_name.",
+    "Tách direction, magnitude, ranking, numeric và causal thành claim riêng khi chúng là các ý kiểm định khác nhau.",
+    "Chỉ dùng causal_strength=causal khi câu nói rõ quan hệ nhân quả đời thực như gây ra hoặc dẫn đến; góp phần/đóng góp/liên quan đến dự đoán của mô hình là associational.",
+    "Numeric phải là claim_type=numeric riêng; không gắn numeric_value_text vào prediction, direction hoặc claim khác.",
+    "numeric_role là prediction_score cho xác suất dự đoán, decision_threshold cho ngưỡng quyết định, feature_value cho giá trị feature, rank cho thứ hạng và other cho trường hợp còn lại.",
+    "source_text phải là đoạn trích nguyên văn, liên tục từ generation_text; không sửa dấu câu, khoảng trắng hoặc cách viết.",
+    "source_text chỉ lấy nội dung section, không chứa nhãn kỹ thuật dạng [section:factor].",
+    "Khai báo đúng source_section và source_factor_id; dùng chuỗi rỗng khi section không thuộc factor.",
+    "Dùng chuỗi rỗng cho feature_id, concept_id, numeric_value_text và numeric_unit khi không áp dụng; dùng not_applicable cho magnitude và numeric_role khi không áp dụng.",
+    "Không tự tính character offset, local claim index hoặc claim ID; hệ thống sẽ gán bằng code.",
+    "feature_id hoặc concept_id phải thuộc metadata đã khai báo; một claim không được nhắm feature và concept cùng lúc.",
+    "Không lặp lại cùng một prediction ở safe_summary nếu prediction_summary đã chứa đúng mệnh đề đó; chỉ lấy safe_summary khi nó thêm ý mới.",
+    "numeric_value_text chỉ chứa số, dấu phân cách và dấu phần trăm nếu có; numeric_unit dùng percent cho phần trăm.",
+    "normalized_claim_key mô tả ngắn nội dung claim; code sẽ tạo semantic signature cuối cùng để khử trùng lặp.",
+    "Không quyết định SUPPORTED, UNSUPPORTED hay CONTRADICTED ở bước này."
+  ],
+  "input_contract": [
+    "generation_text",
+    "available_source_sections",
+    "factor_metadata_without_model_identity"
+  ],
+  "output_contract": "ProviderAtomicClaimPayload"
+}

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "noUncheckedIndexedAccess": false
+  },
+  "include": [
+    "src/server/llmValidation/**/*.ts",
+    "src/types/generation-contract.ts",
+    "src/types/llm-validation.ts",
+    "src/types/validation-claims.ts",
+    "src/types/validation-selection.ts",
+    "src/utils/llmNarrative/utils.ts",
+    "batch/llm-validation/**/*.ts",
+    "tests/llmValidation/**/*.ts"
+  ]
+}

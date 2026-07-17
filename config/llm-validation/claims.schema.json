@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claims.schema.json",
+  "title": "Atomic validation claim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claim_schema_version", "claim_id", "generation_id", "model_id",
+    "source_ir_id", "case_id", "evidence_level", "repeat_id",
+    "local_claim_index", "source_section", "source_factor_id", "source_text",
+    "source_span_start", "source_span_end", "source_input_sha256", "source_text_sha256", "claim_type",
+    "subject_type", "feature_id", "concept_id", "direction", "magnitude",
+    "certainty", "causal_strength", "numeric_value", "numeric_unit",
+    "numeric_role", "claim_origin", "model_normalized_claim_key",
+    "semantic_signature", "normalized_claim_key", "extractor_provider", "extractor_model_id",
+    "extractor_version", "extractor_prompt_version", "extractor_prompt_sha256",
+    "extractor_status"
+  ],
+  "properties": {
+    "claim_schema_version": {"const": "claims_v2"},
+    "claim_id": {"type": "string", "minLength": 1},
+    "generation_id": {"type": "string", "minLength": 1},
+    "model_id": {"type": "string", "minLength": 1},
+    "source_ir_id": {"type": "string", "minLength": 1},
+    "case_id": {"type": ["string", "null"]},
+    "evidence_level": {"enum": ["S0", "S1", "S2", "S3", "S4", "S5"]},
+    "repeat_id": {"type": "integer", "minimum": 1},
+    "local_claim_index": {"type": "integer", "minimum": 1},
+    "source_section": {"enum": ["prediction_summary", "factor_name", "factor_explanation", "uncertainty_note", "distributed_evidence_note", "safe_summary"]},
+    "source_factor_id": {"type": ["string", "null"]},
+    "source_text": {"type": "string", "minLength": 1},
+    "source_span_start": {"type": "integer", "minimum": 0},
+    "source_span_end": {"type": "integer", "minimum": 1},
+    "source_input_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "source_text_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "claim_type": {"enum": ["prediction", "feature_presence", "feature_direction", "concept_presence", "concept_direction", "magnitude", "ranking", "numeric", "causal", "uncertainty", "distributed_evidence", "recommendation", "limitation"]},
+    "subject_type": {"enum": ["prediction", "feature", "concept", "evidence", "narrative", "none"]},
+    "feature_id": {"type": ["string", "null"]},
+    "concept_id": {"type": ["string", "null"]},
+    "direction": {"enum": ["increase_risk", "decrease_risk", "mixed", "neutral", "unknown"]},
+    "magnitude": {"enum": ["weak", "moderate", "strong", "unknown", null]},
+    "certainty": {"enum": ["deterministic", "probabilistic", "hedged", "unknown"]},
+    "causal_strength": {"enum": ["associational", "causal", "none", "unknown"]},
+    "numeric_value": {"type": ["number", "null"]},
+    "numeric_unit": {"type": ["string", "null"]},
+    "numeric_role": {"enum": ["prediction_score", "decision_threshold", "feature_value", "rank", "other", null]},
+    "claim_origin": {"enum": ["llm", "deterministic_metadata", "derived_numeric"]},
+    "model_normalized_claim_key": {"type": ["string", "null"]},
+    "semantic_signature": {"type": "string", "minLength": 1},
+    "normalized_claim_key": {"type": "string", "minLength": 1},
+    "extractor_provider": {"const": "deepseek"},
+    "extractor_model_id": {"type": "string", "minLength": 1},
+    "extractor_version": {"type": "string", "minLength": 1},
+    "extractor_prompt_version": {"type": "string", "minLength": 1},
+    "extractor_prompt_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "extractor_status": {"const": "SUCCESS"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"claim_type": {"const": "numeric"}}},
+      "then": {
+        "properties": {
+          "numeric_value": {"type": "number"},
+          "numeric_role": {
+            "enum": ["prediction_score", "decision_threshold", "feature_value", "rank", "other"]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "numeric_value": {"const": null},
+          "numeric_unit": {"const": null},
+          "numeric_role": {"const": null}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "claim_type": {"enum": ["feature_presence", "feature_direction"]}
+        }
+      },
+      "then": {
+        "properties": {
+          "subject_type": {"const": "feature"},
+          "feature_id": {"type": "string", "minLength": 1},
+          "concept_id": {"const": null}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "claim_type": {"enum": ["concept_presence", "concept_direction"]}
+        }
+      },
+      "then": {
+        "properties": {
+          "subject_type": {"const": "concept"},
+          "feature_id": {"const": null},
+          "concept_id": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"claim_origin": {"const": "deterministic_metadata"}}},
+      "then": {
+        "properties": {
+          "claim_type": {"enum": ["feature_presence", "concept_presence"]},
+          "source_section": {"const": "factor_name"},
+          "model_normalized_claim_key": {"const": null}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"claim_origin": {"const": "derived_numeric"}}},
+      "then": {"properties": {"claim_type": {"const": "numeric"}}}
+    }
+  ]
+}
