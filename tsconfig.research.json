@@ -11,7 +11,8 @@
     "research/**/*.ts",
     "contracts/**/*.ts",
     "batch/**/*.ts",
-    "tests/llmValidation/**/*.ts"
+    "tests/llmValidation/**/*.ts",
+    "tests/research/**/*.ts"
   ],
   "exclude": ["node_modules", "dist", "legacy"]
 }

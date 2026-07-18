@@ -16,7 +16,6 @@ export function buildPrompt(
   model: ModelConfig,
   promptVersion: string,
 ): PromptBuildResult {
-  const payload = packageItem.prompt_payload;
   const systemMessage = buildSystemMessage();
   const userMessage = buildUserMessage(packageItem);
   const messages: PromptMessage[] = [

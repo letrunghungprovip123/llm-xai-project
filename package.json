@@ -12,6 +12,8 @@
     "typecheck:batch-i": "npm run typecheck:research",
     "batch:i": "tsx batch/llm-narrative/run.ts",
     "batch:i:aggregate": "tsx batch/llm-narrative/aggregate.ts",
+    "test:batch-i:schema": "node --import tsx --test tests/research/llm/narrative/outputSchema.test.ts",
+    "test:batch-i:template": "node --import tsx --test tests/research/llm/narrative/templateSmoke.test.ts",
     "typecheck:llm-validation": "npm run typecheck:research",
     "canonicalize:filter-deepseek": "tsx batch/llm-validation/filter-deepseek-eval36.ts",
     "canonicalize:build-index": "tsx batch/llm-validation/build-generation-index.ts",

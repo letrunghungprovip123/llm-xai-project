@@ -6,9 +6,14 @@ import {
   writeJsonlFile,
 } from "./artifacts";
 import { getModelConfig } from "./modelRegistry";
-import { loadEvidencePackages, getOrderedCaseIds, readJsonl } from "./loaders";
+import { loadEvidencePackages, readJsonl } from "./loaders";
 import { buildPrompt } from "./promptBuilder";
 import { parseExplanationOutput } from "./outputSchema";
+import {
+  buildGenerationId,
+  isGenerationUsable,
+  selectPackages,
+} from "./generation";
 import { buildPromptMetrics } from "./metrics/promptMetrics";
 import { buildSchemaMetrics } from "./metrics/schemaMetrics";
 import { buildContentMetrics } from "./metrics/contentMetrics";
@@ -41,23 +46,6 @@ interface GenerationTask {
   package_item: EvidencePackage;
   request_order_index: number;
   generation_seed: number;
-}
-
-function isGenerationUsable(record: GenerationRecord): boolean {
-  const runtime = record.runtime_metrics;
-  const schema = record.schema_metrics;
-
-  return (
-    runtime.status === "SUCCESS" &&
-    runtime.empty_response !== true &&
-    runtime.truncated_response !== true &&
-    runtime.finish_reason !== "length" &&
-    schema.raw_json_parse_success === true &&
-    schema.schema_valid === true &&
-    schema.missing_required_field_count === 0 &&
-    schema.validation_error_count === 0 &&
-    record.parsed_output !== null
-  );
 }
 
 export async function runNarrativePipeline(
@@ -416,35 +404,6 @@ async function runModel(
   );
 }
 
-function selectPackages(
-  packages: EvidencePackage[],
-  options: RunOptions,
-): EvidencePackage[] {
-  let caseIds = getOrderedCaseIds(packages);
-
-  if (options.chunk_start > 0 || options.chunk_size !== undefined) {
-    const end =
-      options.chunk_size === undefined
-        ? undefined
-        : options.chunk_start + options.chunk_size;
-    caseIds = caseIds.slice(options.chunk_start, end);
-  }
-
-  if (options.limit_cases !== undefined) {
-    caseIds = caseIds.slice(0, options.limit_cases);
-  }
-
-  const selectedCaseIds = new Set(caseIds);
-  const selectedLevels = new Set(options.levels);
-
-  return packages.filter((packageItem) => {
-    return (
-      selectedCaseIds.has(packageItem.source_ir_id) &&
-      selectedLevels.has(packageItem.evidence_level)
-    );
-  });
-}
-
 function validateRunOptions(options: RunOptions): void {
   if (!options.run_id.trim()) {
     throw new Error("run_id must not be empty.");
@@ -592,20 +551,6 @@ function buildCaseMetadata(packageItem: EvidencePackage): CaseMetadata {
     prediction_outcome: predictionOutcome,
     true_label: trueLabel,
   };
-}
-
-function buildGenerationId(
-  runId: string,
-  modelId: string,
-  repeatId: number,
-  packageId: string,
-): string {
-  return [
-    sanitizeFilePart(runId),
-    sanitizeFilePart(modelId),
-    `r${repeatId}`,
-    sanitizeFilePart(packageId),
-  ].join("__");
 }
 
 async function writeShardFiles(
