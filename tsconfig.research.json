@@ -1,17 +1,17 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "CommonJS",
     "moduleResolution": "Node",
     "lib": ["ES2022", "DOM"],
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "noEmit": true,
-    "noUncheckedIndexedAccess": false
+    "noEmit": true
   },
   "include": [
+    "research/**/*.ts",
+    "src/server/llmNarrative/**/*.ts",
+    "src/app/api/experiments/llm-narrative/route.ts",
+    "batch/llm-narrative/**/*.ts",
     "src/server/llmValidation/**/*.ts",
     "src/types/generation-contract.ts",
     "src/types/llm-validation.ts",
@@ -20,5 +20,6 @@
     "src/utils/llmNarrative/utils.ts",
     "batch/llm-validation/**/*.ts",
     "tests/llmValidation/**/*.ts"
-  ]
+  ],
+  "exclude": ["node_modules", "dist", "legacy"]
 }

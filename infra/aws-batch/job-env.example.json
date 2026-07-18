@@ -1,0 +1,15 @@
+{
+  "source_revision": "5cd405fec7aaa271ebcc62d9b44d95a82757c759",
+  "phi4_mini": {
+    "RUN_ID": "run_phi4_mini_eval36_r1",
+    "MODEL_ID": "phi4_mini_instruct",
+    "HF_MODEL_ID": "microsoft/Phi-4-mini-instruct",
+    "SERVED_MODEL_NAME": "microsoft/Phi-4-mini-instruct"
+  },
+  "qwen3_8b": {
+    "RUN_ID": "run_qwen3_8b_eval36_r1",
+    "MODEL_ID": "qwen3_8b",
+    "HF_MODEL_ID": "Qwen/Qwen3-8B",
+    "SERVED_MODEL_NAME": "Qwen/Qwen3-8B"
+  }
+}

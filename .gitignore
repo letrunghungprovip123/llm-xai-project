@@ -7,9 +7,6 @@
 
 *.zip
 
-infra
-
-
 # =========================
 # Node / Next.js
 # =========================
@@ -103,3 +100,6 @@ data/reports/**/*.csv
 logs/
 .cache/
 *.log
+
+# Kết quả kiểm tra cục bộ của phiên refactor; không phải artifact nghiên cứu chính thức.
+.refactor-validation/
