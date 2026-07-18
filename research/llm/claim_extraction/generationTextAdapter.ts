@@ -1,5 +1,5 @@
 import { sha256 } from "../common/utils";
-import type { CanonicalGenerationRow, JsonObject } from "../../../contracts/llm-validation";
+import type { CanonicalGenerationRow } from "../../../contracts/llm-validation";
 import type { ClaimSourceSection } from "../../../contracts/validation-claims";
 import { isPlainObject } from "../canonicalization/io";
 

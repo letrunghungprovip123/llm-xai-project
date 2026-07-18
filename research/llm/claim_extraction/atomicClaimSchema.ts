@@ -3,7 +3,6 @@ import type {
   AtomicClaimExtractionPayload,
   ClaimCausalStrength,
   ClaimCertainty,
-  ClaimDirection,
   ClaimMagnitude,
   ClaimNumericRole,
   ClaimSubjectType,
