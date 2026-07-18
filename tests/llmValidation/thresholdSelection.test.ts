@@ -8,7 +8,7 @@ import {
   pairedStratifiedNonInferiority,
   runThresholdSelection,
   wilsonInterval,
-} from "../../research/llm/selection/thresholdSelection";
+} from "../../research/llm/selection/index";
 import type {
   ConfigurationCandidate,
   PairedQualityObservation,
@@ -138,4 +138,3 @@ test("knee uses actual token burden for S1-S4 and is supporting evidence only", 
   assert.equal(knee?.evidence_level, "S2");
   assert.equal(knee?.role, "SUPPORTING_EVIDENCE_ONLY");
 });
-

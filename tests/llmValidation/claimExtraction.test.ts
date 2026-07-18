@@ -5,20 +5,17 @@ import path from "node:path";
 import test from "node:test";
 
 import type { ClaimExtractionRawResponse } from "../../contracts/validation-claims";
-import { postJsonWithRetry } from "../../research/llm/narrative/runners/httpHelpers";
-
 import {
   ATOMIC_CLAIM_RESPONSE_JSON_SCHEMA,
   ClaimExtractionValidationError,
-  parseNumericClaimValue,
-  validateAndNormalizeClaimPayload,
-} from "../../research/llm/claim_extraction/atomicClaimSchema";
-import {
   DeepSeekAtomicClaimExtractor,
+  buildGenerationTextDocument,
+  parseNumericClaimValue,
   parseClaimExtractionResponse,
-} from "../../research/llm/claim_extraction/deepseekAtomicClaimExtractor";
-import { runAtomicClaimExtraction } from "../../research/llm/claim_extraction/claimExtractionRunner";
-import { buildGenerationTextDocument } from "../../research/llm/claim_extraction/generationTextAdapter";
+  runAtomicClaimExtraction,
+  validateAndNormalizeClaimPayload,
+} from "../../research/llm/claim_extraction/index";
+import { postJsonWithRetry } from "../../research/llm/narrative/index";
 import { canonicalRow } from "./fixtures";
 
 function validClaim(sourceText: string): Record<string, unknown> {

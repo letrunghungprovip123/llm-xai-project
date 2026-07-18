@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { calculateGenerationQuality } from "../../research/llm/selection/generationQuality";
 import {
+  calculateGenerationQuality,
   calibratedAcceptProbability,
   shouldAcceptAtRuntime,
-} from "../../research/llm/selection/runtimeAcceptance";
+} from "../../research/llm/selection/index";
 import type { GenerationQualityInput } from "../../contracts/validation-selection";
 
 function qualityInput(
@@ -67,4 +67,3 @@ test("runtime acceptance uses calibrated probability and still requires hard gat
     false,
   );
 });
-

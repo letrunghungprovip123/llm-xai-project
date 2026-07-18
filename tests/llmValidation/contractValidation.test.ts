@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { validateGenerationContract } from "../../research/llm/contract_validation/generationContractValidator";
+import { validateGenerationContract } from "../../research/llm/contract_validation/index";
 import { canonicalRow, defaultParsedOutput, evidencePackage } from "./fixtures";
 
 test("S5 contract passes when factor count, order, role and IDs match", () => {

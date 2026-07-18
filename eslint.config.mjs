@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Code lịch sử không thuộc active lint/import graph.
+    "legacy/**",
+    ".refactor-validation/**",
   ]),
 ]);
 

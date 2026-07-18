@@ -6,7 +6,7 @@ import {
   evidencePackageHash,
   getUsability,
   matrixKey,
-} from "../../research/llm/canonicalization/contracts";
+} from "../../research/llm/canonicalization/index";
 import type {
   EvidencePackageRecord,
   GenerationRecordLike,

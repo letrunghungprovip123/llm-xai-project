@@ -1,164 +1,96 @@
-# LLM-XAI Thesis Project
+# LLM-XAI Next
 
-## 1. Tổng quan dự án
+Repository này chứa một ứng dụng Next.js và pipeline nghiên cứu giải thích dự đoán rủi ro tín dụng. Mục tiêu hiện tại là giữ được chuỗi provenance từ dữ liệu Home Credit đến narrative và atomic claims, không tuyên bố các stage validation/selection chưa có producer hoàn chỉnh.
 
-Đề tài: **Ứng dụng Large Language Model cho hệ thống Explainable AI (XAI)**.
+## Kiến trúc
 
-Mục tiêu của dự án là xây dựng một hệ thống giải thích dự đoán rủi ro tín dụng theo hướng **faithful explanation**. Hệ thống không chỉ dùng LLM để sinh explanation dễ hiểu bằng tiếng Việt, mà còn kiểm tra explanation đó có bám đúng bằng chứng XAI hay không.
-
-Pipeline tổng quan:
-
-```text id="vuauwa"
-Raw Data
-→ Feature Engineering
-→ ML Model
-→ Prediction
-→ XAI Evidence
-→ Explanation IR
-→ LLM Explanation
-→ Claim Extraction
-→ Faithfulness Validation
-→ UI Demo
+```text
+src/                 Next.js và adapter chỉ đọc kết quả nghiên cứu
+research/ml/         Python: dữ liệu, model, SHAP, IR và evidence S0–S5
+research/llm/        TypeScript: narrative, canonical, contract và claims
+contracts/           Artifact contracts giữa Python và TypeScript
+config/research/     Policy/prompt/config được version hóa
+tests/research/      Regression tests của active pipeline
+legacy/              Source lịch sử, không thuộc active import graph
+infra/aws-batch/     Hạ tầng batch có provenance, không tự được thực thi
+data/, artifacts/    Official/local artifacts; phần lớn file lớn bị Git ignore
 ```
 
-## 2. Mục tiêu chính
+Python kết thúc tại Evidence Package JSONL. TypeScript bắt đầu từ artifact đó; hai ngôn ngữ không import implementation của nhau. `src/` không chứa research logic và chỉ đọc artifact đã hoàn tất.
 
-Dự án tập trung vào câu hỏi:
+## Active pipeline và điểm dừng
 
-> Làm thế nào để dùng LLM tạo explanation dễ hiểu cho prediction của Machine Learning model, nhưng vẫn kiểm soát được việc LLM có hallucinate, nói sai evidence, hoặc diễn giải vượt quá bằng chứng XAI hay không?
-
-Các thành phần chính của hệ thống:
-
-* **ML Model**: dự đoán rủi ro tín dụng của khách hàng.
-* **XAI Evidence Layer**: tạo evidence giải thích từ model, ví dụ SHAP local evidence.
-* **Explanation IR Layer**: chuẩn hóa XAI evidence thành dữ liệu có cấu trúc, dễ kiểm tra và dễ đưa vào LLM.
-* **LLM Explanation Layer**: dùng LLM để diễn đạt prediction và XAI evidence thành explanation tiếng Việt.
-* **Claim Extraction Layer**: extract các claim chính từ LLM explanation.
-* **Faithfulness Validation Layer**: kiểm tra các claim có đúng với Explanation IR và XAI evidence hay không.
-* **UI Demo**: hiển thị prediction, explanation và validation result.
-
-## 3. Tiến độ hiện tại
-
-| Batch   | Layer                      | Status             |
-| ------- | -------------------------- | ------------------ |
-| Batch A | Raw Data Audit             | Done               |
-| Batch B | Feature Engineering        | Done               |
-| Batch C | Feature Matrix / Registry  | Done               |
-| Batch D | Leakage Audit & Data Split | Done               |
-| Batch E | Preprocessing              | Done               |
-| Batch F | Model Layer                | Done               |
-| Batch G | XAI Evidence Layer         | Done               |
-| Batch H | Explanation IR Layer       | Done / In Progress |
-| Batch I | LLM Explanation Layer      | In Progress        |
-| Batch J | Claim Extraction           | Planned            |
-| Batch K | Faithfulness Validation    | Planned            |
-| UI      | Explanation Dashboard      | Planned            |
-
-## 4. Cấu trúc thư mục
-
-```text id="ptg1f7"
-llm-xai-next/
-├── src/                     # Next.js application và server-side code
-├── ml/                      # Python ML/XAI pipeline
-│   ├── scripts/             # Batch scripts cho Data, Model, XAI và IR layers
-│   └── registry/            # Feature registry, concept registry và mappings
-├── data/                    # Local data folders, large files ignored by Git
-├── artifacts/               # Local model/XAI artifacts, large files ignored by Git
-├── docs/                    # Project documentation và progress notes
-├── README.md                # Project overview và progress tracking
-└── .gitignore               # Ignore generated data, model artifacts và secrets
+```text
+Home Credit
+→ feature engineering
+→ preprocessing
+→ HistGradientBoosting
+→ SHAP/XAI
+→ Explanation IR v2
+→ evidence exposure 2.1, S0–S5
+→ LLM narrative
+→ canonical generation index
+→ deterministic contract validation
+→ partial atomic claim extraction v2.1 smoke
 ```
 
-## 5. Artifact Policy
+Pipeline hiện dừng tại partial claim extraction v2.1. Claim validation hiện hành, semantic validation, generation-level aggregation, paired observations, bootstrap, human calibration và final configuration selection chưa hoàn chỉnh. Repository không có command active để chạy selection thật.
 
-Repository này **không lưu trực tiếp các large generated artifacts trên GitHub**.
+## Giao diện chạy chính thức
 
-GitHub chỉ lưu:
+Chỉ dùng một command family ở repository root:
 
-* source code
-* schema files
-* registry files
-* prompt builders
-* validation logic
-* documentation
-* small manifests hoặc summary reports
-
-Các file lớn không được push lên GitHub, bao gồm:
-
-* raw CSV datasets
-* processed Parquet files
-* trained model artifacts dạng `.joblib`
-* full JSONL outputs
-* full prediction CSV files
-* large XAI evidence files
-
-Large artifacts được lưu bên ngoài GitHub, ví dụ trong Amazon S3 private bucket. Khi cần gửi cho giảng viên hướng dẫn, các artifact này có thể được chia sẻ bằng pre-signed URL có thời hạn truy cập.
-
-## 6. Development Setup
-
-Cài đặt dependencies cho phần Next.js:
-
-```bash id="0v1bsv"
-npm install
+```bash
+npm run research -- <stage> [arguments]
 ```
 
-Chạy development server:
+Các stage active:
 
-```bash id="pu40pz"
-npm run dev
+```text
+ml:data-audit       ml:target-audit    ml:features
+ml:matrix           ml:split           ml:preprocess
+ml:train            ml:xai             ml:xai-quality
+ml:ir               ml:evidence
+
+llm:generate        llm:aggregate      llm:filter-deepseek
+llm:canonicalize    llm:contract       llm:claims
 ```
 
-Mở trình duyệt tại:
+Xem danh sách từ dispatcher:
 
-```text id="yazwql"
-http://localhost:3000
+```bash
+npm run research -- --help
 ```
 
-Các Python scripts cho ML/XAI pipeline nằm trong:
+Mỗi module README mô tả input/output, key, invariant và cách truyền arguments. Không có `run-all`: các stage đắt tiền hoặc có provider phải được chạy có chủ đích và output phải trỏ tới vị trí mới.
 
-```text id="22yboo"
-ml/scripts/
-```
+## Golden invariants hiện tại
 
-Python environment và cách chạy từng batch có thể được mô tả riêng trong tài liệu hoặc báo cáo tương ứng.
+| Boundary | Invariant |
+| --- | ---: |
+| Application rows | 307,511 |
+| Engineered features | 166 |
+| Split train / validation / test | 215,257 / 46,127 / 46,127 |
+| Model-ready columns | 213 |
+| Selected model | HistGradientBoosting |
+| XAI / Explanation IR v2 | 120 / 120 |
+| Evidence packages / evaluation subset | 720 / 216 |
+| Qwen total / usable | 216 / 216 |
+| DeepSeek total / usable / unusable | 216 / 213 / 3 |
+| Phi total / usable / unusable | 216 / 209 / 7 |
+| Template total / usable | 216 / 216 |
+| Canonical main usable / unusable | 638 / 10 trong 648 |
+| Contract pass / fail | 602 / 46 |
+| Claim attempts / successful generations / claims | 21 / 19 / 383 |
 
-## 7. Git Tracking Policy
+Mười canonical generation unusable vẫn được giữ để audit. `direction_surface_match` hiện là `null` cho đủ 648 contract records; không diễn giải field này như metric đã implement.
 
-Repository đã được cấu hình để ignore generated files, large artifacts và sensitive files, bao gồm:
+## Artifact và provenance
 
-```text id="4j6phf"
-.env
-.env.local
-node_modules/
-.next/
-data/raw/
-data/interim/
-data/processed/
-artifacts/models/
-artifacts/preprocessing/
-*.parquet
-*.joblib
-*.jsonl
-```
+Không rewrite official artifacts trong `data/manifests/`, `data/reports/` hoặc `artifacts/`. Regression output của phiên refactor nằm trong `.refactor-validation/` và bị Git ignore. Manifest mới nên dùng project-relative path, SHA-256, record count, tool version, source commit và `created_at`; absolute path chỉ là metadata phụ.
 
-Chỉ nên commit các file nhẹ và cần thiết, ví dụ:
+Secrets nằm trong environment và không được commit. Không tự chạy DeepSeek, Bedrock, Qwen/Phi generation, AWS Batch, full claim extraction, retraining hoặc selection khi chỉ kiểm tra code.
 
-* source code
-* documentation
-* registry
-* schema
-* prompt
-* validation logic
-* small summary reports
+## Legacy boundary
 
-## 8. Progress Tracking
-
-Tiến độ dự án được theo dõi thông qua:
-
-* Git commit history
-* GitHub Issues checklist theo từng batch
-* progress table trong README
-* báo cáo PDF riêng gửi cho giảng viên hướng dẫn
-
-Báo cáo chi tiết theo tuần được nộp riêng dưới dạng PDF. README này chỉ cung cấp project overview và trạng thái triển khai hiện tại.
-
+`legacy/` giữ Python explanation v1, TypeScript Batch I cũ, J1/J2/J3, K finalization, integrated I–J flow và web mock lịch sử. Active research không import từ thư mục này. Các wrapper trong `batch/` và `ml/scripts/` chỉ duy trì command cũ trong thời gian chuyển tiếp; source-of-truth nằm trong `research/`.

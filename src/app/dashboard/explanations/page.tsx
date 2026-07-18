@@ -2,8 +2,14 @@
 
 import { useState } from "react";
 
+type PipelineResult = {
+  explanation?: { text?: string };
+  validation?: unknown;
+  ir?: unknown;
+};
+
 export default function ExplanationDashboardPage() {
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<PipelineResult | null>(null);
   const [loading, setLoading] = useState(false);
 
   async function runPipeline() {
@@ -26,7 +32,7 @@ export default function ExplanationDashboardPage() {
         }),
       });
 
-      const data = await response.json();
+      const data = (await response.json()) as PipelineResult;
       setResult(data);
     } finally {
       setLoading(false);
