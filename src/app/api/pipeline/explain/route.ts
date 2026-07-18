@@ -1,18 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
-import { runExplanationPipeline } from "@/server/pipeline/explanation-pipeline";
-
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
-    const result = await runExplanationPipeline(body);
-    return NextResponse.json(result);
-  } catch (error) {
-    return NextResponse.json(
-      {
-        error: "Pipeline failed",
-        detail: error instanceof Error ? error.message : String(error),
-      },
-      { status: 400 },
-    );
-  }
+export async function POST(): Promise<Response> {
+  return Response.json(
+    {
+      error: "NOT_IMPLEMENTED",
+      detail:
+        "Web explanation pipeline là bản mock lịch sử và chưa có validator hiện hành.",
+    },
+    { status: 501 },
+  );
 }
