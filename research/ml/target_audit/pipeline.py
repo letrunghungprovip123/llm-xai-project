@@ -1,21 +1,18 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
 
 import pandas as pd
 
+from ..common.paths import DEFAULT_PATHS, create_directories
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
-RAW_DIR = PROJECT_ROOT / "data" / "raw"
-REPORT_DIR = PROJECT_ROOT / "data" / "reports"
-MANIFEST_DIR = PROJECT_ROOT / "data" / "manifests"
-
-REPORT_DIR.mkdir(parents=True, exist_ok=True)
-MANIFEST_DIR.mkdir(parents=True, exist_ok=True)
+PROJECT_ROOT = DEFAULT_PATHS.project_root
+RAW_DIR = DEFAULT_PATHS.raw_dir
+REPORT_DIR = DEFAULT_PATHS.report_dir
+MANIFEST_DIR = DEFAULT_PATHS.manifest_dir
 
 REQUIRED_FILES = [
     "application_train.csv",
@@ -559,7 +556,9 @@ def write_a2_summary(target_result: dict, missing_result: dict) -> None:
     )
 
 
-def main() -> None:
+def run_target_audit() -> None:
+    create_directories(REPORT_DIR, MANIFEST_DIR)
+
     print("=== Batch A2: Target audit + Missing/anomaly audit ===")
     print("Assuming Step 0, Step 1, and Step 2 were already completed.\n")
 
@@ -579,7 +578,3 @@ def main() -> None:
     print("- data/reports/anomaly_summary.csv")
     print("- data/reports/batch_a2_target_missing_audit_summary.md")
     print("- data/manifests/batch_a2_target_missing_audit_summary.json")
-
-
-if __name__ == "__main__":
-    main()

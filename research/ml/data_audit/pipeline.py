@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import csv
-import hashlib
 import json
 from pathlib import Path
 from datetime import datetime
@@ -9,15 +8,14 @@ from collections import defaultdict
 
 import pandas as pd
 
+from ..common.hashing import sha256_file
+from ..common.paths import DEFAULT_PATHS, create_directories
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
-RAW_DIR = PROJECT_ROOT / "data" / "raw"
-REPORT_DIR = PROJECT_ROOT / "data" / "reports"
-MANIFEST_DIR = PROJECT_ROOT / "data" / "manifests"
-
-REPORT_DIR.mkdir(parents=True, exist_ok=True)
-MANIFEST_DIR.mkdir(parents=True, exist_ok=True)
+PROJECT_ROOT = DEFAULT_PATHS.project_root
+RAW_DIR = DEFAULT_PATHS.raw_dir
+REPORT_DIR = DEFAULT_PATHS.report_dir
+MANIFEST_DIR = DEFAULT_PATHS.manifest_dir
 
 REQUIRED_FILES = [
     "application_train.csv",
@@ -85,17 +83,6 @@ RELATIONSHIPS = [
         "aggregation_level": "SK_ID_CURR via SK_ID_PREV",
     },
 ]
-
-
-def sha256_file(path: Path, chunk_size: int = 1024 * 1024 * 8) -> str:
-    h = hashlib.sha256()
-    with path.open("rb") as f:
-        while True:
-            chunk = f.read(chunk_size)
-            if not chunk:
-                break
-            h.update(chunk)
-    return h.hexdigest()
 
 
 def count_csv_rows_columns(path: Path) -> tuple[int, int]:
@@ -487,7 +474,9 @@ def write_batch_summary(step0: dict, step1: dict, step2: dict) -> None:
     (REPORT_DIR / "batch_1_summary.md").write_text("\n".join(md_lines), encoding="utf-8")
 
 
-def main() -> None:
+def run_data_audit() -> None:
+    create_directories(REPORT_DIR, MANIFEST_DIR)
+
     print("=== Batch 1: Raw verification + schema audit + relationship audit ===")
 
     print("\n[Step 0] Verify raw files")
@@ -522,7 +511,3 @@ def main() -> None:
     print("- data/reports/raw_schema_summary.csv")
     print("- data/reports/relationship_audit_report.md")
     print("- data/reports/batch_1_summary.md")
-
-
-if __name__ == "__main__":
-    main()
