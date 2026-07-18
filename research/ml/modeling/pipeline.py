@@ -317,22 +317,3 @@ def run_model_training_layer() -> ModelLayerRunResult:
         evaluation_result=evaluation_result,
         artifact_result=artifact_result,
     )
-
-
-def main() -> None:
-    """
-    CLI entry point.
-    """
-
-    try:
-        run_model_training_layer()
-    except Exception as exc:
-        print_section("Batch F Failed")
-        print(f"Status: FAILED")
-        print(f"Error type: {type(exc).__name__}")
-        print(f"Error message: {exc}")
-        raise
-
-
-if __name__ == "__main__":
-    main()

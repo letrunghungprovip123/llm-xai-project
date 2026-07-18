@@ -38,6 +38,10 @@ const STAGE_COMMANDS: Record<string, StageCommand> = {
     executable: "python3",
     arguments: ["-m", "research.ml.xai.main"],
   },
+  "ml:xai-quality": {
+    executable: "python3",
+    arguments: ["-m", "research.ml.xai.quality.main"],
+  },
   "ml:ir": {
     executable: "python3",
     arguments: ["-m", "research.ml.explanation_ir.main"],

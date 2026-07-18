@@ -7,10 +7,6 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.utils.class_weight import compute_sample_weight
-
 from .config import (
     MODEL_CONFIGS,
     RANDOM_STATE,
@@ -53,10 +49,14 @@ def get_branch_for_model(*,datasets : ModelReadyDatasets, dataset_branch : str,)
 
 
 def build_sample_weight_balanced(y : pd.Series) -> np.ndarray :
+    from sklearn.utils.class_weight import compute_sample_weight
+
     return compute_sample_weight(class_weight="balanced",y=y)
 
 
 def train_logistic_regression(branch : DatasetBranch) -> TrainedModel :
+    from sklearn.linear_model import LogisticRegression
+
     X_train = branch.X_train
     y_train = extract_target(branch.y_train)
 
@@ -93,6 +93,7 @@ def train_logistic_regression(branch : DatasetBranch) -> TrainedModel :
 
 
 def train_random_forest(branch: DatasetBranch) -> TrainedModel:
+    from sklearn.ensemble import RandomForestClassifier
 
 
     X_train = branch.X_train
@@ -132,6 +133,7 @@ def train_random_forest(branch: DatasetBranch) -> TrainedModel:
 
 
 def train_hist_gradient_boosting(branch: DatasetBranch) -> TrainedModel:
+    from sklearn.ensemble import HistGradientBoostingClassifier
 
 
     X_train = branch.X_train
@@ -235,4 +237,3 @@ def train_all_models(datasets: ModelReadyDatasets) -> TrainingResult:
         skipped_models=skipped_models,
         errors=errors,
     )
-

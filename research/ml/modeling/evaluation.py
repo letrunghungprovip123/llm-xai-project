@@ -6,16 +6,6 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from sklearn.metrics import (
-    average_precision_score,
-    brier_score_loss,
-    confusion_matrix,
-    f1_score,
-    precision_score,
-    recall_score,
-    roc_auc_score,
-)
-
 from .config import (
     DEFAULT_THRESHOLD,
     MODEL_VERSION,
@@ -242,6 +232,16 @@ def compute_binary_classification_metrics(
         - Brier Score
         - Confusion Matrix
     """
+
+    from sklearn.metrics import (
+        average_precision_score,
+        brier_score_loss,
+        confusion_matrix,
+        f1_score,
+        precision_score,
+        recall_score,
+        roc_auc_score,
+    )
 
     y_true_array = np.asarray(y_true).astype(int)
     y_pred = proba_to_pred(y_proba=y_proba, threshold=threshold)
@@ -768,4 +768,3 @@ def evaluate_trained_models(
         threshold_analysis_df=threshold_analysis_df,
         feature_importance_df=feature_importance_df,
     )
-

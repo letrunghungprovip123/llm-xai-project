@@ -3,8 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from ..common.paths import DEFAULT_PATHS
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = DEFAULT_PATHS.project_root
 
 BATCH_NAME = "Batch H v2 - Quality-aware Explanation IR Layer"
 BATCH_SHORT_NAME = "H_v2"

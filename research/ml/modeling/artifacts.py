@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-import joblib
 import numpy as np
 import pandas as pd
 
@@ -289,6 +288,8 @@ def save_model_bundle(
     created_at: str,
     selected_as_best: bool,
 ) -> str:
+    import joblib
+
     artifact_path.parent.mkdir(parents=True, exist_ok=True)
 
     bundle = build_model_artifact_bundle(
@@ -372,6 +373,8 @@ def load_model_artifact(path: Path) -> dict[str, Any]:
 
     Future inference layer can use this helper.
     """
+
+    import joblib
 
     artifact = joblib.load(path)
 
@@ -780,5 +783,4 @@ def save_all_model_artifacts(
         "model_registry_path": model_registry_path,
         "manifest_path": manifest_path,
     }
-
 

@@ -5,7 +5,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-import joblib
 import numpy as np
 import pandas as pd
 
@@ -153,6 +152,8 @@ def validate_model_bundle_dict(bundle: Any) -> dict[str, Any]:
 
 
 def load_model_bundle(path: Path) -> XAIModelBundle:
+    import joblib
+
     raw_bundle = joblib.load(path)
     bundle = validate_model_bundle_dict(raw_bundle)
 

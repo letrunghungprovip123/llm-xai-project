@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import argparse
 import json
-import sys
 from pathlib import Path
 from typing import Optional
 
@@ -11,7 +9,6 @@ from .config import (
     BATCH_NAME,
     BATCH_SHORT_NAME,
     DEFAULT_RUN_MODE,
-    SUPPORTED_RUN_MODES,
     get_config_summary,
 )
 from .ir_builder import build_explanation_ir_records
@@ -19,55 +16,6 @@ from .loaders import (
     load_xai_evidence_inputs,
     summarize_loaded_inputs,
 )
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Batch H v2 - Build quality-aware Explanation IR."
-    )
-
-    parser.add_argument(
-        "--mode",
-        type=str,
-        default=DEFAULT_RUN_MODE,
-        choices=SUPPORTED_RUN_MODES,
-    )
-
-    parser.add_argument(
-        "--input-path",
-        type=str,
-        default=None,
-    )
-
-    parser.add_argument(
-        "--xai-quality-summary-path",
-        type=str,
-        default=None,
-    )
-
-    parser.add_argument(
-        "--xai-concept-aggregation-path",
-        type=str,
-        default=None,
-    )
-
-    parser.add_argument(
-        "--xai-quality-manifest-path",
-        type=str,
-        default=None,
-    )
-
-    parser.add_argument(
-        "--print-config",
-        action="store_true",
-    )
-
-    parser.add_argument(
-        "--fail-on-warnings",
-        action="store_true",
-    )
-
-    return parser.parse_args()
 
 
 def run_batch_h(
@@ -183,23 +131,3 @@ def run_batch_h(
         return 2
 
     return 0
-
-
-def main() -> None:
-    args = parse_args()
-
-    exit_code = run_batch_h(
-        run_mode=args.mode,
-        input_path=args.input_path,
-        xai_quality_summary_path=args.xai_quality_summary_path,
-        xai_concept_aggregation_path=args.xai_concept_aggregation_path,
-        xai_quality_manifest_path=args.xai_quality_manifest_path,
-        print_config=args.print_config,
-        fail_on_warnings=args.fail_on_warnings,
-    )
-
-    sys.exit(exit_code)
-
-
-if __name__ == "__main__":
-    main()

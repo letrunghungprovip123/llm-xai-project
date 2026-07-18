@@ -8,8 +8,9 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from ..common.paths import DEFAULT_PATHS, create_directories
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = DEFAULT_PATHS.project_root
 
 TREE_DIR = PROJECT_ROOT / "data" / "processed" / "model_ready" / "tree"
 LINEAR_DIR = PROJECT_ROOT / "data" / "processed" / "model_ready" / "linear"
@@ -18,9 +19,6 @@ REGISTRY_DIR = PROJECT_ROOT / "ml" / "registry"
 REPORT_DIR = PROJECT_ROOT / "data" / "reports"
 AUDIT_DIR = REPORT_DIR / "model_ready_audit"
 MANIFEST_DIR = PROJECT_ROOT / "data" / "manifests"
-
-AUDIT_DIR.mkdir(parents=True, exist_ok=True)
-MANIFEST_DIR.mkdir(parents=True, exist_ok=True)
 
 TREE_X_TRAIN_PATH = TREE_DIR / "X_train_tree.parquet"
 TREE_X_VALID_PATH = TREE_DIR / "X_valid_tree.parquet"
@@ -762,6 +760,8 @@ def write_summary_md(summary: dict[str, Any]) -> None:
 
 
 def main() -> None:
+    create_directories(AUDIT_DIR, MANIFEST_DIR)
+
     print("=== Batch F0: Final Model-Ready Data Audit ===")
     print("This audit does not change data. It creates CSV reports describing the dataset before model training.\n")
 

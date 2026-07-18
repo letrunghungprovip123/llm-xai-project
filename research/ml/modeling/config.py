@@ -4,13 +4,14 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
 
+from ..common.paths import DEFAULT_PATHS
 
 # ============================================================
 # Project Root
 # ============================================================
 #
 
-PROJECT_ROOT: Final[Path] = Path(__file__).resolve().parents[3]
+PROJECT_ROOT: Final[Path] = DEFAULT_PATHS.project_root
 
 
 # ============================================================
@@ -311,4 +312,3 @@ def get_output_paths() -> dict[str, Path]:
         "model_registry": MODEL_REGISTRY_PATH,
         "model_training_manifest": MODEL_TRAINING_MANIFEST_PATH,
     }
-

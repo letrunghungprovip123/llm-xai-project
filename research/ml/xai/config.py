@@ -3,11 +3,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
+from ..common.paths import DEFAULT_PATHS
 
 BATCH_NAME = "Batch G — XAI Evidence Layer"
 BATCH_SHORT_NAME = "batch_g_xai_evidence_layer"
 
-PROJECT_ROOT = Path.cwd()
+PROJECT_ROOT = DEFAULT_PATHS.project_root
 
 
 RUN_MODE_EVALUATION = "evaluation"

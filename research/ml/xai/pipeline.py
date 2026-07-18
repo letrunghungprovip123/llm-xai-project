@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-import argparse
-import sys
 import time
-import traceback
 from dataclasses import dataclass
 from typing import Any
 
@@ -18,9 +15,6 @@ from .case_selection import (
 from .config import (
     BATCH_NAME,
     DEFAULT_RUN_MODE,
-    RUN_MODE_EVALUATION,
-    RUN_MODE_INFERENCE,
-    SUPPORTED_RUN_MODES,
     XAI_CONFIG,
     ensure_output_dirs,
     get_config_summary,
@@ -58,25 +52,6 @@ def print_section(title: str) -> None:
     print("\n" + "=" * 80)
     print(title)
     print("=" * 80)
-
-
-def build_argument_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Run Batch G — XAI Evidence Layer."
-    )
-
-    parser.add_argument(
-        "--mode",
-        choices=SUPPORTED_RUN_MODES,
-        default=DEFAULT_RUN_MODE,
-        help=(
-            "Run mode for the XAI pipeline. "
-            "evaluation uses X_test/y_test/model_predictions_test. "
-            "inference uses X_inference/model_predictions_inference and does not require y_true."
-        ),
-    )
-
-    return parser
 
 
 def print_config_summary(run_mode: str) -> None:
@@ -237,30 +212,3 @@ def run_pipeline(
         evidence_summary=evidence_summary,
         artifact_summary=artifact_summary,
     )
-
-
-def main() -> int:
-    parser = build_argument_parser()
-    args = parser.parse_args()
-
-    try:
-        result = run_pipeline(
-            run_mode=args.mode,
-        )
-
-        if result.status == "FAILED":
-            return 1
-
-        return 0
-
-    except Exception as exc:
-        print_section("Batch G failed")
-        print("Error type:", type(exc).__name__)
-        print("Error message:", exc)
-        print("\nTraceback:")
-        traceback.print_exc()
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())

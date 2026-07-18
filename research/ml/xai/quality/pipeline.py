@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-import argparse
 import json
 import math
-import sys
 import time
-import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -15,8 +12,6 @@ import pandas as pd
 
 from ..config import (
     PROJECT_ROOT,
-    RUN_MODE_EVALUATION,
-    SUPPORTED_RUN_MODES,
     XAI_EVIDENCE_MANIFEST_PATH,
     XAI_EVIDENCE_SUMMARY_CSV_PATH,
     XAI_LOCAL_EVIDENCE_JSONL_PATH,
@@ -164,27 +159,6 @@ def validate_required_files() -> None:
             "Batch G+ cannot start because Batch G artifacts are missing:\n"
             f"{lines}"
         )
-
-
-def build_argument_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Run Batch G+ — XAI Evidence Quality Evaluation."
-    )
-
-    parser.add_argument(
-        "--mode",
-        choices=SUPPORTED_RUN_MODES,
-        default=RUN_MODE_EVALUATION,
-        help="Run mode inherited from Batch G artifacts. Default is evaluation.",
-    )
-
-    parser.add_argument(
-        "--skip-model-metrics",
-        action="store_true",
-        help="Skip comprehensiveness and sufficiency model-based metrics.",
-    )
-
-    return parser
 
 
 def run_pipeline(
@@ -968,26 +942,3 @@ Warnings:
         return 1
 
     return 0
-
-
-def main() -> int:
-    parser = build_argument_parser()
-    args = parser.parse_args()
-
-    try:
-        return run_pipeline(
-            run_mode=args.mode,
-            skip_model_metrics=args.skip_model_metrics,
-        )
-
-    except Exception as exc:
-        print_section("Batch G+ failed")
-        print("Error type:", type(exc).__name__)
-        print("Error message:", exc)
-        print("\nTraceback:")
-        traceback.print_exc()
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
