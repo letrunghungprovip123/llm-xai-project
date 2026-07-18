@@ -6,11 +6,11 @@ import {
   evidencePackageHash,
   getUsability,
   matrixKey,
-} from "../../src/server/llmValidation/canonicalization/contracts";
+} from "../../research/llm/canonicalization/contracts";
 import type {
   EvidencePackageRecord,
   GenerationRecordLike,
-} from "../../src/types/llm-validation";
+} from "../../contracts/llm-validation";
 
 function generation(overrides: Record<string, unknown> = {}): GenerationRecordLike {
   return {

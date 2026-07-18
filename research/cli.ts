@@ -2,73 +2,73 @@ import { spawn } from "node:child_process";
 
 type StageCommand = {
   executable: "python3" | "tsx";
-  entrypoint: string;
+  arguments: string[];
 };
 
 const STAGE_COMMANDS: Record<string, StageCommand> = {
   "ml:data-audit": {
     executable: "python3",
-    entrypoint: "ml/scripts/run_00_02_first_batch.py",
+    arguments: ["-m", "research.ml.data_audit.main"],
   },
   "ml:target-audit": {
     executable: "python3",
-    entrypoint: "ml/scripts/run_a2_target_missing_audit.py",
+    arguments: ["-m", "research.ml.target_audit.main"],
   },
   "ml:features": {
     executable: "python3",
-    entrypoint: "ml/scripts/run_b_feature_engineering_layer.py",
+    arguments: ["-m", "research.ml.feature_engineering.main"],
   },
   "ml:matrix": {
     executable: "python3",
-    entrypoint: "ml/scripts/run_c_feature_matrix_registry_layer.py",
+    arguments: ["-m", "research.ml.feature_matrix.main"],
   },
   "ml:split": {
     executable: "python3",
-    entrypoint: "ml/scripts/run_d_leakage_split_layer.py",
+    arguments: ["-m", "research.ml.data_split.main"],
   },
   "ml:preprocess": {
     executable: "python3",
-    entrypoint: "ml/scripts/run_e_preprocessing_layer.py",
+    arguments: ["-m", "research.ml.preprocessing.main"],
   },
   "ml:train": {
     executable: "python3",
-    entrypoint: "ml/scripts/model_layer/run_f_model_training_layer.py",
+    arguments: ["-m", "research.ml.modeling.main"],
   },
   "ml:xai": {
     executable: "python3",
-    entrypoint: "ml/scripts/xai_layer/run_g_xai_evidence_layer.py",
+    arguments: ["-m", "research.ml.xai.main"],
   },
   "ml:ir": {
     executable: "python3",
-    entrypoint: "ml/scripts/explanation_ir_layer/run_h_explanation_ir_layer.py",
+    arguments: ["-m", "research.ml.explanation_ir.main"],
   },
   "ml:evidence": {
     executable: "python3",
-    entrypoint: "ml/scripts/evidence_exposure_layer/main.py",
+    arguments: ["-m", "research.ml.evidence_exposure.main"],
   },
   "llm:generate": {
     executable: "tsx",
-    entrypoint: "batch/llm-narrative/run.ts",
+    arguments: ["research/llm/narrative/main.ts"],
   },
   "llm:aggregate": {
     executable: "tsx",
-    entrypoint: "batch/llm-narrative/aggregate.ts",
+    arguments: ["research/llm/narrative/aggregate-main.ts"],
   },
   "llm:filter-deepseek": {
     executable: "tsx",
-    entrypoint: "batch/llm-validation/filter-deepseek-eval36.ts",
+    arguments: ["research/llm/canonicalization/filter-main.ts"],
   },
   "llm:canonicalize": {
     executable: "tsx",
-    entrypoint: "batch/llm-validation/build-generation-index.ts",
+    arguments: ["research/llm/canonicalization/main.ts"],
   },
   "llm:contract": {
     executable: "tsx",
-    entrypoint: "batch/llm-validation/run-contract-validation.ts",
+    arguments: ["research/llm/contract_validation/main.ts"],
   },
   "llm:claims": {
     executable: "tsx",
-    entrypoint: "batch/llm-validation/run-claim-extraction.ts",
+    arguments: ["research/llm/claim_extraction/main.ts"],
   },
 };
 
@@ -93,7 +93,7 @@ function runStage(stageName: string, forwardedArguments: string[]): void {
 
   const child = spawn(
     command.executable,
-    [command.entrypoint, ...forwardedArguments],
+    [...command.arguments, ...forwardedArguments],
     { stdio: "inherit" },
   );
 

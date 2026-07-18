@@ -4,21 +4,21 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 
-import type { ClaimExtractionRawResponse } from "../../src/types/validation-claims";
-import { postJsonWithRetry } from "../../src/server/llmNarrative/runners/httpHelpers";
+import type { ClaimExtractionRawResponse } from "../../contracts/validation-claims";
+import { postJsonWithRetry } from "../../research/llm/narrative/runners/httpHelpers";
 
 import {
   ATOMIC_CLAIM_RESPONSE_JSON_SCHEMA,
   ClaimExtractionValidationError,
   parseNumericClaimValue,
   validateAndNormalizeClaimPayload,
-} from "../../src/server/llmValidation/claimExtraction/atomicClaimSchema";
+} from "../../research/llm/claim_extraction/atomicClaimSchema";
 import {
   DeepSeekAtomicClaimExtractor,
   parseClaimExtractionResponse,
-} from "../../src/server/llmValidation/claimExtraction/deepseekAtomicClaimExtractor";
-import { runAtomicClaimExtraction } from "../../src/server/llmValidation/claimExtraction/claimExtractionRunner";
-import { buildGenerationTextDocument } from "../../src/server/llmValidation/claimExtraction/generationTextAdapter";
+} from "../../research/llm/claim_extraction/deepseekAtomicClaimExtractor";
+import { runAtomicClaimExtraction } from "../../research/llm/claim_extraction/claimExtractionRunner";
+import { buildGenerationTextDocument } from "../../research/llm/claim_extraction/generationTextAdapter";
 import { canonicalRow } from "./fixtures";
 
 function validClaim(sourceText: string): Record<string, unknown> {

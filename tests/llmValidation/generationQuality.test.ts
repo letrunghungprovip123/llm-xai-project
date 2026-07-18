@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { calculateGenerationQuality } from "../../src/server/llmValidation/selection/generationQuality";
+import { calculateGenerationQuality } from "../../research/llm/selection/generationQuality";
 import {
   calibratedAcceptProbability,
   shouldAcceptAtRuntime,
-} from "../../src/server/llmValidation/selection/runtimeAcceptance";
-import type { GenerationQualityInput } from "../../src/types/validation-selection";
+} from "../../research/llm/selection/runtimeAcceptance";
+import type { GenerationQualityInput } from "../../contracts/validation-selection";
 
 function qualityInput(
   overrides: Partial<GenerationQualityInput> = {},

@@ -8,12 +8,12 @@ import {
   pairedStratifiedNonInferiority,
   runThresholdSelection,
   wilsonInterval,
-} from "../../src/server/llmValidation/selection/thresholdSelection";
+} from "../../research/llm/selection/thresholdSelection";
 import type {
   ConfigurationCandidate,
   PairedQualityObservation,
-} from "../../src/types/validation-selection";
-import type { EvidenceLevel } from "../../src/types/llm-validation";
+} from "../../contracts/validation-selection";
+import type { EvidenceLevel } from "../../contracts/llm-validation";
 
 function candidate(
   id: string,

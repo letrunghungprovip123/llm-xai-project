@@ -9,16 +9,8 @@
   },
   "include": [
     "research/**/*.ts",
-    "src/server/llmNarrative/**/*.ts",
-    "src/app/api/experiments/llm-narrative/route.ts",
-    "batch/llm-narrative/**/*.ts",
-    "src/server/llmValidation/**/*.ts",
-    "src/types/generation-contract.ts",
-    "src/types/llm-validation.ts",
-    "src/types/validation-claims.ts",
-    "src/types/validation-selection.ts",
-    "src/utils/llmNarrative/utils.ts",
-    "batch/llm-validation/**/*.ts",
+    "contracts/**/*.ts",
+    "batch/**/*.ts",
     "tests/llmValidation/**/*.ts"
   ],
   "exclude": ["node_modules", "dist", "legacy"]

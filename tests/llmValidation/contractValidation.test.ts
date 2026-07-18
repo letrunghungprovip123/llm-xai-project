@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { validateGenerationContract } from "../../src/server/llmValidation/contractValidation/generationContractValidator";
+import { validateGenerationContract } from "../../research/llm/contract_validation/generationContractValidator";
 import { canonicalRow, defaultParsedOutput, evidencePackage } from "./fixtures";
 
 test("S5 contract passes when factor count, order, role and IDs match", () => {
@@ -32,4 +32,3 @@ test("unusable generation remains a contract record and fails", () => {
   assert.equal(result.contract_pass, false);
   assert.ok(result.issue_codes.includes("OUTPUT_UNUSABLE"));
 });
-

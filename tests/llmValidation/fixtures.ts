@@ -3,7 +3,7 @@ import type {
   EvidencePackageRecord,
   EvidenceLevel,
   JsonObject,
-} from "../../src/types/llm-validation";
+} from "../../contracts/llm-validation";
 
 export function canonicalRow(input: {
   evidenceLevel?: EvidenceLevel;
