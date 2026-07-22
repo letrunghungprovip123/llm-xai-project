@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 import { sha256 } from "../common/utils";
@@ -6,6 +7,7 @@ import type {
   JsonObject,
 } from "../../../contracts/llm-validation";
 import type {
+  AtomicClaimDraft,
   AtomicClaimRecord,
   ClaimExtractionAttemptRecord,
   ClaimExtractionFailure,
@@ -49,6 +51,11 @@ import {
   writeCheckpoint,
 } from "./claimExtractionState";
 
+export type ClaimExtractionProviderPolicy =
+  | "stored-only"
+  | "stored-first"
+  | "provider-only";
+
 export type ClaimExtractionRunnerOptions = {
   generationIndexPath: string;
   claimsOutputPath: string;
@@ -58,6 +65,8 @@ export type ClaimExtractionRunnerOptions = {
   force: boolean;
   checkpointEvery: number;
   storeRawResponses?: boolean;
+  providerPolicy?: ClaimExtractionProviderPolicy;
+  reprocessStoredSuccessIdsPath?: string;
 };
 
 export type ClaimExtractionRunnerSummary = {
@@ -69,6 +78,7 @@ export type ClaimExtractionRunnerSummary = {
   failed_or_unusable_generations: number;
   total_claims: number;
   reused_successes: number;
+  reprocessed_stored_successes: number;
   new_provider_calls: number;
   new_attempt_records: number;
   pending_generations: number;
@@ -128,7 +138,20 @@ export async function runAtomicClaimExtraction(
   const nextAttemptNumberByGeneration = buildNextAttemptNumbers(attempts);
 
   const config = extractor.getConfig();
+  const providerPolicy = options.providerPolicy ?? "stored-first";
+  assertProviderPolicy(providerPolicy);
+  const requestedReprocessIds = await readGenerationIdSet(
+    options.reprocessStoredSuccessIdsPath,
+  );
+  assertKnownGenerationIds(requestedReprocessIds, rows);
+  const preparedStoredSuccesses = prepareStoredSuccessReprocess(
+    requestedReprocessIds,
+    rows,
+    attempts,
+    config.modelId,
+  );
   let reusedSuccesses = 0;
+  let reprocessedStoredSuccesses = 0;
   let newProviderCalls = 0;
   let newAttemptRecords = 0;
   let pendingGenerations = 0;
@@ -155,18 +178,26 @@ export async function runAtomicClaimExtraction(
           DEEPSEEK_EXTRACTOR_LINEAGE.promptSha256,
     );
 
+    const preparedReprocess = preparedStoredSuccesses.get(row.generation_id);
+    if (preparedReprocess) {
+      claimsByGeneration.set(row.generation_id, preparedReprocess.claims);
+      failureByGeneration.delete(row.generation_id);
+      reprocessedStoredSuccesses += 1;
+      addPostprocessTotals(postprocessTotals, preparedReprocess.metrics);
+      changedSinceCheckpoint += 1;
+      await checkpointWhenNeeded();
+      continue;
+    }
+
     if (!options.force && cacheIsCurrent) {
       failureByGeneration.delete(row.generation_id);
       reusedSuccesses += 1;
       continue;
     }
 
-    // Cache cũ bị xóa ngay vì không còn cùng source/model/version với lượt chạy này.
-    if (cachedClaims.length > 0) {
-      claimsByGeneration.delete(row.generation_id);
-    }
-
     if (!row.usable) {
+      // Generation không hợp lệ nên claims cũ không còn được giữ.
+      claimsByGeneration.delete(row.generation_id);
       failureByGeneration.set(
         row.generation_id,
         buildFailure(row, {
@@ -184,6 +215,8 @@ export async function runAtomicClaimExtraction(
     }
 
     if (!document.generation_text.trim()) {
+      // Source text rỗng không thể giữ lại claims từ lần chạy cũ.
+      claimsByGeneration.delete(row.generation_id);
       failureByGeneration.set(
         row.generation_id,
         buildFailure(row, {
@@ -196,6 +229,64 @@ export async function runAtomicClaimExtraction(
       );
       changedSinceCheckpoint += 1;
       await checkpointWhenNeeded();
+      continue;
+    }
+
+    // Limit chỉ giới hạn provider calls. Các row pending phải giữ nguyên cache/failure hiện có
+    // để smoke run không làm thay đổi các generation ngoài phạm vi chạy.
+    // Replay complete validation-failed response cùng lineage trước provider boundary.
+    if (!options.force && providerPolicy !== "provider-only") {
+      let recoveredFromStoredResponse = false;
+      const storedRawResponses = findStoredValidationFailedRawResponses(
+        attempts,
+        {
+          generationId: row.generation_id,
+          sourceInputSha256: document.source_input_sha256,
+          extractorModelId: config.modelId,
+          extractorVersion: ATOMIC_CLAIM_EXTRACTOR_VERSION,
+          promptVersion: ATOMIC_CLAIM_PROMPT_VERSION,
+          promptSha256: DEEPSEEK_EXTRACTOR_LINEAGE.promptSha256,
+        },
+      );
+
+      for (const storedRawText of storedRawResponses) {
+        try {
+          const payload = parseClaimExtractionResponse(
+            storedRawText,
+            document,
+          );
+          if (payload.postprocess_metrics.llm_claim_count === 0) continue;
+
+          const claims = buildAtomicClaimRecords(
+            row,
+            document,
+            config.modelId,
+            payload.claims,
+          );
+
+          claimsByGeneration.set(row.generation_id, claims);
+          failureByGeneration.delete(row.generation_id);
+          reusedSuccesses += 1;
+          addPostprocessTotals(
+            postprocessTotals,
+            payload.postprocess_metrics,
+          );
+          changedSinceCheckpoint += 1;
+          await checkpointWhenNeeded();
+          recoveredFromStoredResponse = true;
+          break;
+        } catch {
+          // Stored response không qua canonical validation; provider policy quyết định bước tiếp theo.
+        }
+      }
+
+      if (recoveredFromStoredResponse) continue;
+    }
+
+    // stored-only is an explicit reproducible replay mode. It never crosses
+    // the provider boundary and leaves provider/network failures for a later run.
+    if (providerPolicy === "stored-only") {
+      pendingGenerations += 1;
       continue;
     }
 
@@ -256,29 +347,12 @@ export async function runAtomicClaimExtraction(
           ),
         );
       } else {
-        const claims = payload.claims.map((draft): AtomicClaimRecord => ({
-          ...draft,
-          claim_schema_version: "claims_v2",
-          claim_id: buildClaimId(
-            row.generation_id,
-            draft.semantic_signature,
-            draft.source_span_start,
-          ),
-          generation_id: row.generation_id,
-          model_id: row.model_id,
-          source_ir_id: row.source_ir_id,
-          case_id: row.case_id,
-          evidence_level: row.evidence_level,
-          repeat_id: row.repeat_id,
-          source_input_sha256: document.source_input_sha256,
-          source_text_sha256: sha256(draft.source_text),
-          extractor_provider: "deepseek",
-          extractor_model_id: config.modelId,
-          extractor_version: ATOMIC_CLAIM_EXTRACTOR_VERSION,
-          extractor_prompt_version: ATOMIC_CLAIM_PROMPT_VERSION,
-          extractor_prompt_sha256: DEEPSEEK_EXTRACTOR_LINEAGE.promptSha256,
-          extractor_status: "SUCCESS",
-        }));
+        const claims = buildAtomicClaimRecords(
+          row,
+          document,
+          config.modelId,
+          payload.claims,
+        );
         claimsByGeneration.set(row.generation_id, claims);
         failureByGeneration.delete(row.generation_id);
         attemptStatus = "SUCCESS";
@@ -353,6 +427,7 @@ export async function runAtomicClaimExtraction(
     failed_or_unusable_generations: failedGenerations,
     total_claims: allClaims.length,
     reused_successes: reusedSuccesses,
+    reprocessed_stored_successes: reprocessedStoredSuccesses,
     new_provider_calls: newProviderCalls,
     new_attempt_records: newAttemptRecords,
     pending_generations: Math.max(
@@ -379,6 +454,213 @@ export async function runAtomicClaimExtraction(
       attemptsOutputPath,
     );
     changedSinceCheckpoint = 0;
+  }
+}
+
+type PreparedStoredSuccess = {
+  claims: AtomicClaimRecord[];
+  metrics: ClaimExtractionPostprocessMetrics;
+};
+
+async function readGenerationIdSet(filePath: string | undefined): Promise<Set<string>> {
+  if (!filePath) return new Set();
+  const text = await readFile(path.resolve(filePath), "utf8");
+  const ids = text
+    .split(/\r?\n/gu)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0 && !line.startsWith("#"));
+  if (ids.length === 0) {
+    throw new Error("Reprocess generation ID file is empty.");
+  }
+  if (new Set(ids).size !== ids.length) {
+    throw new Error("Reprocess generation ID file contains duplicate IDs.");
+  }
+  return new Set(ids);
+}
+
+function assertKnownGenerationIds(
+  requested: ReadonlySet<string>,
+  rows: readonly CanonicalGenerationRow[],
+): void {
+  if (requested.size === 0) return;
+  const known = new Set(rows.map((row) => row.generation_id));
+  const unknown = [...requested].filter((id) => !known.has(id));
+  if (unknown.length > 0) {
+    throw new Error(
+      `Unknown reprocess generation IDs: ${unknown.join(", ")}`,
+    );
+  }
+}
+
+function prepareStoredSuccessReprocess(
+  requested: ReadonlySet<string>,
+  rows: readonly CanonicalGenerationRow[],
+  attempts: readonly StoredClaimExtractionAttemptRecord[],
+  extractorModelId: string,
+): Map<string, PreparedStoredSuccess> {
+  const prepared = new Map<string, PreparedStoredSuccess>();
+  if (requested.size === 0) return prepared;
+
+  for (const row of rows) {
+    if (!requested.has(row.generation_id)) continue;
+    if (!row.usable) {
+      throw new Error(`Cannot reprocess unusable generation: ${row.generation_id}`);
+    }
+
+    const document = buildGenerationTextDocument(row);
+    if (!document.generation_text.trim()) {
+      throw new Error(`Cannot reprocess empty generation: ${row.generation_id}`);
+    }
+    const rawResponses = findStoredSuccessfulRawResponses(attempts, {
+      generationId: row.generation_id,
+      sourceInputSha256: document.source_input_sha256,
+      extractorModelId,
+      extractorVersion: ATOMIC_CLAIM_EXTRACTOR_VERSION,
+      promptVersion: ATOMIC_CLAIM_PROMPT_VERSION,
+      promptSha256: DEEPSEEK_EXTRACTOR_LINEAGE.promptSha256,
+    });
+    const latestRawText = rawResponses[0];
+    if (!latestRawText) {
+      throw new Error(
+        `No matching successful stored raw response for ${row.generation_id}.`,
+      );
+    }
+
+    const payload = parseClaimExtractionResponse(latestRawText, document);
+    if (payload.postprocess_metrics.llm_claim_count === 0) {
+      throw new Error(`Stored response has no LLM claims: ${row.generation_id}`);
+    }
+    prepared.set(row.generation_id, {
+      claims: buildAtomicClaimRecords(
+        row,
+        document,
+        extractorModelId,
+        payload.claims,
+      ),
+      metrics: payload.postprocess_metrics,
+    });
+  }
+
+  return prepared;
+}
+
+function buildAtomicClaimRecords(
+  row: CanonicalGenerationRow,
+  document: GenerationTextDocument,
+  extractorModelId: string,
+  drafts: AtomicClaimDraft[],
+): AtomicClaimRecord[] {
+  return drafts.map((draft): AtomicClaimRecord => ({
+    ...draft,
+    claim_schema_version: "claims_v2",
+    claim_id: buildClaimId(
+      row.generation_id,
+      draft.semantic_signature,
+      draft.source_span_start,
+    ),
+    generation_id: row.generation_id,
+    model_id: row.model_id,
+    source_ir_id: row.source_ir_id,
+    case_id: row.case_id,
+    evidence_level: row.evidence_level,
+    repeat_id: row.repeat_id,
+    source_input_sha256: document.source_input_sha256,
+    source_text_sha256: sha256(draft.source_text),
+    extractor_provider: "deepseek",
+    extractor_model_id: extractorModelId,
+    extractor_version: ATOMIC_CLAIM_EXTRACTOR_VERSION,
+    extractor_prompt_version: ATOMIC_CLAIM_PROMPT_VERSION,
+    extractor_prompt_sha256: DEEPSEEK_EXTRACTOR_LINEAGE.promptSha256,
+    extractor_status: "SUCCESS",
+  }));
+}
+
+type StoredResponseLineage = {
+  generationId: string;
+  sourceInputSha256: string;
+  extractorModelId: string;
+  extractorVersion: string;
+  promptVersion: string;
+  promptSha256: string;
+};
+
+const REPLAYABLE_VALIDATION_FAILURE_CODES = new Set([
+  "RESPONSE_SCHEMA_INVALID",
+  "SOURCE_SPAN_INVALID",
+]);
+
+function findStoredValidationFailedRawResponses(
+  attempts: readonly StoredClaimExtractionAttemptRecord[],
+  expected: StoredResponseLineage,
+): string[] {
+  const matching = attempts
+    .filter((attempt) =>
+      attempt.generation_id === expected.generationId
+      && attempt.status === "VALIDATION_FAILED"
+      && REPLAYABLE_VALIDATION_FAILURE_CODES.has(
+        attempt.failure_code ?? "",
+      )
+      && attempt.source_input_sha256 === expected.sourceInputSha256
+      && attempt.extractor_provider === "deepseek"
+      && attempt.extractor_model_id === expected.extractorModelId
+      && attempt.extractor_version === expected.extractorVersion
+      && attempt.extractor_prompt_version === expected.promptVersion
+      && attempt.extractor_prompt_sha256 === expected.promptSha256
+      && typeof attempt.raw_response_text === "string"
+      && attempt.raw_response_text.trim().length > 0
+    )
+    .sort((left, right) => right.attempt_number - left.attempt_number);
+
+  const uniqueResponses: string[] = [];
+  const seen = new Set<string>();
+  for (const attempt of matching) {
+    const rawText = attempt.raw_response_text as string;
+    if (seen.has(rawText)) continue;
+    seen.add(rawText);
+    uniqueResponses.push(rawText);
+  }
+  return uniqueResponses;
+}
+
+function findStoredSuccessfulRawResponses(
+  attempts: readonly StoredClaimExtractionAttemptRecord[],
+  expected: StoredResponseLineage,
+): string[] {
+  const matching = attempts
+    .filter((attempt) =>
+      attempt.generation_id === expected.generationId
+      && attempt.status === "SUCCESS"
+      && attempt.source_input_sha256 === expected.sourceInputSha256
+      && attempt.extractor_provider === "deepseek"
+      && attempt.extractor_model_id === expected.extractorModelId
+      && attempt.extractor_version === expected.extractorVersion
+      && attempt.extractor_prompt_version === expected.promptVersion
+      && attempt.extractor_prompt_sha256 === expected.promptSha256
+      && typeof attempt.raw_response_text === "string"
+      && attempt.raw_response_text.trim().length > 0
+    )
+    .sort((left, right) => right.attempt_number - left.attempt_number);
+
+  const uniqueResponses: string[] = [];
+  const seen = new Set<string>();
+  for (const attempt of matching) {
+    const rawText = attempt.raw_response_text as string;
+    if (seen.has(rawText)) continue;
+    seen.add(rawText);
+    uniqueResponses.push(rawText);
+  }
+  return uniqueResponses;
+}
+
+function assertProviderPolicy(
+  value: ClaimExtractionProviderPolicy,
+): void {
+  if (
+    value !== "stored-only"
+    && value !== "stored-first"
+    && value !== "provider-only"
+  ) {
+    throw new Error(`Unsupported claim extraction provider policy: ${value}`);
   }
 }
 

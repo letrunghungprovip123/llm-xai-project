@@ -103,3 +103,15 @@ logs/
 
 # Kết quả kiểm tra cục bộ của phiên refactor; không phải artifact nghiên cứu chính thức.
 .refactor-validation/
+
+# BEGIN local LLM validation artifacts
+data/reports/llm_validation/validation_v1/canonicalization/generation_index.jsonl
+data/reports/llm_validation/validation_v1/claim_extraction_deepseek_v2_1/
+data/reports/llm_validation/validation_v1/claim_finalization_v1/
+apply_claim_finalization*.py
+apply_claim_extraction*.py
+*.bak
+*.orig
+*.rej
+.DS_Store
+# END local LLM validation artifacts

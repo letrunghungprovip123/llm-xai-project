@@ -1,4 +1,7 @@
-import { runAtomicClaimExtraction } from "./claimExtractionRunner";
+import {
+  runAtomicClaimExtraction,
+  type ClaimExtractionProviderPolicy,
+} from "./claimExtractionRunner";
 
 // CLI hỗ trợ limit để smoke test và tự resume bằng source hash khi chạy lại toàn cohort.
 async function main(): Promise<void> {
@@ -12,6 +15,11 @@ async function main(): Promise<void> {
     force: optionalBoolean(args, "force", false),
     checkpointEvery: optionalInteger(args, "checkpoint-every") ?? 5,
     storeRawResponses: optionalBoolean(args, "store-raw-responses", false),
+    providerPolicy: optionalProviderPolicy(args),
+    reprocessStoredSuccessIdsPath: optionalString(
+      args,
+      "reprocess-stored-success-ids",
+    ),
   });
 
   console.log("Atomic claim extraction completed.");
@@ -20,8 +28,12 @@ async function main(): Promise<void> {
   console.log(`Failure/unusable records: ${summary.failed_or_unusable_generations}`);
   console.log(`Claims: ${summary.total_claims}`);
   console.log(`Reused successes: ${summary.reused_successes}`);
+  console.log(
+    `Reprocessed stored successes: ${summary.reprocessed_stored_successes}`,
+  );
   console.log(`New DeepSeek calls: ${summary.new_provider_calls}`);
   console.log(`New attempt records: ${summary.new_attempt_records}`);
+  console.log(`Provider policy: ${optionalProviderPolicy(args)}`);
   console.log(`Pending generations: ${summary.pending_generations}`);
   console.log(
     `Usage for new calls: ${summary.usage_for_new_calls.input_tokens} input + ` +
@@ -35,7 +47,7 @@ async function main(): Promise<void> {
   }
   const postprocess = summary.postprocess_for_new_successes;
   console.log(
-    `Postprocess: ${postprocess.llm_claims_received} LLM claims + ` +
+    `Postprocess (new/reprocessed): ${postprocess.llm_claims_received} LLM claims + ` +
       `${postprocess.deterministic_claims_added} deterministic + ` +
       `${postprocess.derived_numeric_claims_added} derived numeric; ` +
       `${postprocess.causal_overclaims_demoted} causal overclaims demoted; ` +
@@ -88,6 +100,22 @@ function optionalString(
 ): string | undefined {
   const value = args.get(key)?.trim();
   return value || undefined;
+}
+
+function optionalProviderPolicy(
+  args: Map<string, string>,
+): ClaimExtractionProviderPolicy {
+  const value = args.get("provider-policy") ?? "stored-first";
+  if (
+    value === "stored-only"
+    || value === "stored-first"
+    || value === "provider-only"
+  ) {
+    return value;
+  }
+  throw new Error(
+    "--provider-policy must be stored-only, stored-first or provider-only.",
+  );
 }
 
 function optionalBoolean(

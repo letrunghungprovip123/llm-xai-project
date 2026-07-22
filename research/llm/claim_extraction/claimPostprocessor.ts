@@ -118,10 +118,16 @@ function buildDeterministicPresenceClaims(
 ): AtomicClaimDraft[] {
   const claims: AtomicClaimDraft[] = [];
 
+  const nextOccurrenceByFactorId = new Map<string, number>();
   for (const factor of document.factor_metadata) {
+    const occurrence = nextOccurrenceByFactorId.get(
+      factor.source_factor_id,
+    ) ?? 0;
+    nextOccurrenceByFactorId.set(factor.source_factor_id, occurrence + 1);
     const factorNameSpan = findFactorNameSpan(
       document,
       factor.source_factor_id,
+      occurrence,
     );
     if (!factorNameSpan) continue;
 
@@ -244,12 +250,12 @@ function splitNumericAttributes(claims: AtomicClaimDraft[]): {
   return { claims: result, derivedCount };
 }
 
-function locateNumericSource(claim: AtomicClaimDraft): {
+export function locateNumericSource(claim: AtomicClaimDraft): {
   text: string;
   start: number;
   end: number;
 } {
-  const pattern = /[+-]?(?:\d{1,3}(?:[.,]\d{3})+|\d+)(?:[.,]\d+)?(?:\s*%)?/gu;
+  const pattern = /[+-]?\d+(?:[.,]\d+)*(?:\s*%)?/gu;
   for (const match of claim.source_text.matchAll(pattern)) {
     const raw = match[0];
     const parsed = parseNumericToken(raw);
@@ -303,7 +309,7 @@ function withSemanticSignature(claim: AtomicClaimDraft): AtomicClaimDraft {
   };
 }
 
-function buildSemanticSignature(claim: AtomicClaimDraft): string {
+export function buildSemanticSignature(claim: AtomicClaimDraft): string {
   const feature = normalizePart(claim.feature_id);
   const concept = normalizePart(claim.concept_id);
   const magnitude = claim.magnitude ?? "none";
@@ -395,7 +401,7 @@ function deduplicateClaims(claims: AtomicClaimDraft[]): DeduplicationResult {
   };
 }
 
-function compareClaimPreference(
+export function compareClaimPreference(
   left: AtomicClaimDraft,
   right: AtomicClaimDraft,
 ): number {
@@ -460,7 +466,7 @@ function calculateCoverage(
   };
 }
 
-function compareClaims(left: AtomicClaimDraft, right: AtomicClaimDraft): number {
+export function compareClaims(left: AtomicClaimDraft, right: AtomicClaimDraft): number {
   return (
     left.source_span_start - right.source_span_start ||
     left.source_span_end - right.source_span_end ||
@@ -478,12 +484,13 @@ function sourceSlot(value: AtomicClaimDraft | GenerationTextSpan): string {
 function findFactorNameSpan(
   document: GenerationTextDocument,
   factorId: string,
+  occurrence: number,
 ): GenerationTextSpan | null {
-  return document.section_spans.find(
+  return document.section_spans.filter(
     (span) =>
       span.source_section === "factor_name" &&
       span.source_factor_id === factorId,
-  ) ?? null;
+  )[occurrence] ?? null;
 }
 
 function uniqueStrings(values: string[]): string[] {

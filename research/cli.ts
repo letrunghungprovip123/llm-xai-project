@@ -34,6 +34,10 @@ const STAGE_COMMANDS: Record<string, StageCommand> = {
     executable: "python3",
     arguments: ["-m", "research.ml.modeling.main"],
   },
+  "ml:model-ready-audit": {
+    executable: "python3",
+    arguments: ["-m", "research.ml.modeling.model_ready_audit"],
+  },
   "ml:xai": {
     executable: "python3",
     arguments: ["-m", "research.ml.xai.main"],
@@ -49,6 +53,13 @@ const STAGE_COMMANDS: Record<string, StageCommand> = {
   "ml:evidence": {
     executable: "python3",
     arguments: ["-m", "research.ml.evidence_exposure.main"],
+  },
+  "ml:evidence-subset": {
+    executable: "python3",
+    arguments: [
+      "-m",
+      "research.ml.evidence_exposure.select_evaluation_subset",
+    ],
   },
   "llm:generate": {
     executable: "tsx",
@@ -73,6 +84,10 @@ const STAGE_COMMANDS: Record<string, StageCommand> = {
   "llm:claims": {
     executable: "tsx",
     arguments: ["research/llm/claim_extraction/main.ts"],
+  },
+  "llm:claims-finalize": {
+    executable: "tsx",
+    arguments: ["research/llm/claim_finalization/main.ts"],
   },
 };
 
@@ -116,7 +131,11 @@ function runStage(stageName: string, forwardedArguments: string[]): void {
   });
 }
 
-const [stageName, ...forwardedArguments] = process.argv.slice(2);
+const [stageName, ...rawForwardedArguments] = process.argv.slice(2);
+const forwardedArguments =
+  rawForwardedArguments[0] === "--"
+    ? rawForwardedArguments.slice(1)
+    : rawForwardedArguments;
 
 if (!stageName || stageName === "--help" || stageName === "-h") {
   printUsage();

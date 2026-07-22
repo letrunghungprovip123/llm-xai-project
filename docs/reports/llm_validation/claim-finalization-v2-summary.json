@@ -1,0 +1,70 @@
+{
+  "artifact": "claim_finalization_v2",
+  "finalizer_version": "claim_finalizer_v1.1.0",
+  "policy_version": "claim_finalization_policy_v2",
+  "lineage": {
+    "extractor_version": "atomic_claim_extractor_v2.1.0",
+    "prompt_version": "atomic_claim_extraction_prompt_v3",
+    "prompt_sha256": "6c571dbe10b12e2f1b933fca366ae5f8b900520a330a9a36111ff9c477fb2553",
+    "claim_schema_version": "claims_v2"
+  },
+  "cohort": {
+    "canonical_generations": 648,
+    "successful_generations": 638,
+    "unusable_generations": 10,
+    "input_claims": 14640,
+    "replayed_claims": 14645,
+    "final_claims": 14680
+  },
+  "inputs": {
+    "generation_index": {
+      "path": "data/reports/llm_validation/validation_v1/canonicalization/generation_index.jsonl",
+      "sha256": "252edae8dd920c259a1da74d7b2f09b26558b994e01b3cd29dd60c0d6f9086ec",
+      "record_count": 648
+    },
+    "claims": {
+      "path": "data/reports/llm_validation/validation_v1/claim_extraction_deepseek_v2_1/claims.jsonl",
+      "sha256": "216410f98ed3b7f43430eb34da17bb1e3b0928d561031bc37c2b8b0aa20f371c",
+      "record_count": 14640
+    },
+    "attempts": {
+      "path": "data/reports/llm_validation/validation_v1/claim_extraction_deepseek_v2_1/claim_extraction_attempts.jsonl",
+      "sha256": "b877911ce8983413a9a11d8607503b9339d82bb2855f71178333f11904b5e6a0",
+      "record_count": 680
+    },
+    "failures": {
+      "path": "data/reports/llm_validation/validation_v1/claim_extraction_deepseek_v2_1/claim_extraction_failures.jsonl",
+      "sha256": "c77788d8ac5e0ab2d309487d2f5499bdf6876137fc8e46ead479642c625f5add",
+      "record_count": 10
+    }
+  },
+  "output": {
+    "path": "data/reports/llm_validation/validation_v1/claim_finalization_v1/claims_final.jsonl",
+    "sha256": "9b53bae17359f3f43415b62f0c7d9f6d9cbda21f2dcac43081bea93d406763f4",
+    "record_count": 14680
+  },
+  "change_log": {
+    "sha256": "ee819a5cbc91f69d2987b4a4894b3ef817be3eed6432d26b4198b571f573d97e",
+    "record_count": 1288,
+    "action_counts": {
+      "ADD": 42,
+      "DROP": 2,
+      "UPDATE": 1244
+    }
+  },
+  "atomic_numeric_policy": {
+    "explicit_count_facts_are_claim_bearing": true,
+    "detected_count_facts": 73,
+    "validated_count_facts": 73,
+    "completeness_failures": 0
+  },
+  "coverage_policy": {
+    "policy_absence_slots_are_claim_bearing": false,
+    "policy_absence_slot_count": 5
+  },
+  "reproducibility": {
+    "provider_calls_made": 0,
+    "replayed_success_generations": 638,
+    "deterministic_output_sha256": "9b53bae17359f3f43415b62f0c7d9f6d9cbda21f2dcac43081bea93d406763f4"
+  }
+}

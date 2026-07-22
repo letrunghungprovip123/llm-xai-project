@@ -9,19 +9,9 @@
     "lint": "eslint",
     "research": "tsx research/cli.ts",
     "typecheck:research": "tsc -p tsconfig.research.json --noEmit",
-    "typecheck:batch-i": "npm run typecheck:research",
-    "batch:i": "tsx batch/llm-narrative/run.ts",
-    "batch:i:aggregate": "tsx batch/llm-narrative/aggregate.ts",
-    "test:batch-i:schema": "node --import tsx --test tests/research/llm/narrative/outputSchema.test.ts",
-    "test:batch-i:template": "node --import tsx --test tests/research/llm/narrative/templateSmoke.test.ts",
     "test:research:llm": "node --import tsx --test tests/llmValidation/*.test.ts tests/research/llm/*.test.ts tests/research/llm/narrative/*.test.ts",
-    "typecheck:llm-validation": "npm run typecheck:research",
-    "canonicalize:filter-deepseek": "tsx batch/llm-validation/filter-deepseek-eval36.ts",
-    "canonicalize:build-index": "tsx batch/llm-validation/build-generation-index.ts",
-    "validate:generation-contract": "tsx batch/llm-validation/run-contract-validation.ts",
-    "validate:extract-claims": "tsx batch/llm-validation/run-claim-extraction.ts",
-    "validate:run-selection": "tsx batch/llm-validation/run-threshold-selection.ts",
-    "test:llm-validation": "node --import tsx --test tests/llmValidation/*.test.ts"
+    "test:research:ml": "python3 -m unittest discover -s tests/research/ml -p 'test_*.py' -v",
+    "test:research": "npm run test:research:llm && npm run test:research:ml"
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.1079.0",

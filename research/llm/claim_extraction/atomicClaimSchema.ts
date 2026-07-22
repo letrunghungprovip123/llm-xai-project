@@ -18,6 +18,8 @@ import { postprocessAtomicClaims } from "./claimPostprocessor";
 import type { GenerationTextDocument } from "./generationTextAdapter";
 import { locateExactSourceSpan } from "./generationTextAdapter";
 
+type JsonRecord = Record<string, unknown>;
+
 export const ATOMIC_CLAIM_EXTRACTOR_VERSION = "atomic_claim_extractor_v2.1.0";
 export const ATOMIC_CLAIM_PROMPT_VERSION = "atomic_claim_extraction_prompt_v3";
 
@@ -98,20 +100,21 @@ export function validateAndNormalizeClaimPayload(
   value: unknown,
   document: GenerationTextDocument,
 ): AtomicClaimExtractionPayload {
-  if (!isPlainObject(value) || !Array.isArray(value.claims)) {
+  const canonicalValue = canonicalizeProviderPayload(value, document);
+  if (!isPlainObject(canonicalValue) || !Array.isArray(canonicalValue.claims)) {
     throw new ClaimExtractionValidationError(
       "RESPONSE_SCHEMA_INVALID",
       "Provider payload must contain a claims array.",
     );
   }
-  if (value.claims.length > 60) {
+  if (canonicalValue.claims.length > 60) {
     throw new ClaimExtractionValidationError(
       "RESPONSE_SCHEMA_INVALID",
       "Claim count exceeded the safety limit of 60.",
     );
   }
 
-  const llmDrafts = value.claims.map((item, index) =>
+  const llmDrafts = canonicalValue.claims.map((item, index) =>
     parseClaimDraft(item, index, document),
   );
   const processed = postprocessAtomicClaims(llmDrafts, document);
@@ -126,6 +129,331 @@ export function validateAndNormalizeClaimPayload(
     claims: processed.claims,
     postprocess_metrics: processed.metrics,
   };
+}
+
+// Provider output is canonicalized deterministically before strict validation.
+// This is part of the extractor contract, not a dataset-specific repair path.
+function canonicalizeProviderPayload(
+  value: unknown,
+  document: GenerationTextDocument,
+): unknown {
+  if (!isPlainObject(value) || !Array.isArray(value.claims)) return value;
+
+  let changed = false;
+  const claims = value.claims.map((rawClaim) => {
+    if (!isPlainObject(rawClaim)) return rawClaim;
+
+    const claim: JsonRecord = { ...rawClaim };
+    if (canonicalizeNumericFields(claim)) changed = true;
+    if (canonicalizeDirectionalSubject(claim, document)) changed = true;
+    if (canonicalizeKnownSemantics(claim)) changed = true;
+    if (anchorToUniqueDeclaredSourceSlot(claim, document)) changed = true;
+    return claim;
+  });
+
+  return changed ? { ...value, claims } : value;
+}
+
+function canonicalizeNumericFields(claim: JsonRecord): boolean {
+  const claimType = readLooseString(claim.claim_type);
+  const sourceText = readLooseString(claim.source_text);
+  const numericValueText = readLooseString(claim.numeric_value_text);
+  const numericRole = readLooseString(claim.numeric_role);
+  let changed = false;
+
+  if (!numericValueText) {
+    if (readLooseString(claim.numeric_unit)) {
+      claim.numeric_unit = "";
+      changed = true;
+    }
+
+    if (numericRole && numericRole !== "not_applicable") {
+      if (claimType === "numeric") {
+        retypeQualitativeNumericClaim(claim, sourceText);
+      } else {
+        claim.numeric_role = "not_applicable";
+        claim.numeric_unit = "";
+      }
+      changed = true;
+    }
+    return changed;
+  }
+
+  if (!isSupportedFiniteNumber(numericValueText)) {
+    if (claimType === "numeric") {
+      retypeQualitativeNumericClaim(claim, sourceText);
+    } else {
+      clearNumericFields(claim);
+    }
+    return true;
+  }
+
+  if (!numericRole || numericRole === "not_applicable") {
+    claim.numeric_role = inferProviderNumericRole(claim, sourceText);
+    return true;
+  }
+
+  return changed;
+}
+
+function retypeQualitativeNumericClaim(
+  claim: JsonRecord,
+  sourceText: string,
+): void {
+  const normalized = normalizeVietnamese(sourceText);
+
+  if (normalized.includes("gan nguong")) {
+    claim.claim_type = "uncertainty";
+    claim.subject_type = "prediction";
+    claim.direction = "unknown";
+    claim.magnitude = "unknown";
+    claim.causal_strength = "none";
+  } else if (
+    normalized.includes("duoi nguong")
+    || normalized.includes("rat thap")
+    || normalized.includes("xac suat thap")
+    || normalized.includes("nguy co thap")
+    || normalized.includes("rui ro thap")
+  ) {
+    claim.claim_type = "prediction";
+    claim.subject_type = "prediction";
+    claim.direction = "decrease_risk";
+    claim.magnitude = "not_applicable";
+    claim.causal_strength = "none";
+  } else {
+    claim.claim_type = "uncertainty";
+    claim.subject_type = "prediction";
+    claim.direction = "unknown";
+    claim.magnitude = "unknown";
+    claim.causal_strength = "none";
+  }
+
+  claim.feature_id = "";
+  claim.concept_id = "";
+  clearNumericFields(claim);
+}
+
+function clearNumericFields(claim: JsonRecord): void {
+  claim.numeric_value_text = "";
+  claim.numeric_unit = "";
+  claim.numeric_role = "not_applicable";
+}
+
+function inferProviderNumericRole(
+  claim: JsonRecord,
+  sourceText: string,
+): string {
+  const claimType = readLooseString(claim.claim_type);
+  const subjectType = readLooseString(claim.subject_type);
+  const normalized = normalizeVietnamese(sourceText);
+
+  if (claimType === "ranking") return "rank";
+  if (subjectType === "prediction" && normalized.includes("nguong")) {
+    return "decision_threshold";
+  }
+  if (subjectType === "prediction") return "prediction_score";
+  if (subjectType === "feature") return "feature_value";
+  return "other";
+}
+
+function canonicalizeDirectionalSubject(
+  claim: JsonRecord,
+  document: GenerationTextDocument,
+): boolean {
+  const claimType = readLooseString(claim.claim_type);
+  if (
+    claimType !== "feature_direction"
+    && claimType !== "concept_direction"
+  ) {
+    return false;
+  }
+
+  const featureId = readLooseString(claim.feature_id);
+  const conceptId = readLooseString(claim.concept_id);
+  const subjectType = readLooseString(claim.subject_type);
+  const factorId = readLooseString(claim.source_factor_id);
+  const declared = collectDeclaredIds(document, factorId);
+
+  if (claimType === "feature_direction") {
+    const valid =
+      subjectType === "feature"
+      && Boolean(featureId)
+      && declared.features.includes(featureId)
+      && !conceptId;
+    if (valid) return false;
+
+    if (declared.features.length === 1) {
+      claim.subject_type = "feature";
+      claim.feature_id = declared.features[0] ?? "";
+      claim.concept_id = "";
+      return true;
+    }
+
+    retypeAsDistributedEvidence(claim);
+    return true;
+  }
+
+  const valid =
+    subjectType === "concept"
+    && Boolean(conceptId)
+    && declared.concepts.includes(conceptId)
+    && !featureId;
+  if (valid) return false;
+
+  if (declared.concepts.length === 1) {
+    claim.subject_type = "concept";
+    claim.concept_id = declared.concepts[0] ?? "";
+    claim.feature_id = "";
+    return true;
+  }
+
+  retypeAsDistributedEvidence(claim);
+  return true;
+}
+
+function collectDeclaredIds(
+  document: GenerationTextDocument,
+  factorId: string,
+): { features: string[]; concepts: string[] } {
+  const factors = document.factor_metadata.filter(
+    (factor) => !factorId || factor.source_factor_id === factorId,
+  );
+
+  return {
+    features: uniqueStrings(
+      factors.flatMap((factor) => factor.declared_feature_ids),
+    ),
+    concepts: uniqueStrings(
+      factors.flatMap((factor) => factor.declared_concept_ids),
+    ),
+  };
+}
+
+function retypeAsDistributedEvidence(claim: JsonRecord): void {
+  claim.claim_type = "distributed_evidence";
+  claim.subject_type = "evidence";
+  claim.feature_id = "";
+  claim.concept_id = "";
+}
+
+function canonicalizeKnownSemantics(claim: JsonRecord): boolean {
+  const section = readLooseString(claim.source_section);
+  const claimType = readLooseString(claim.claim_type);
+  const sourceText = readLooseString(claim.source_text);
+  const normalizedText = normalizeVietnamese(sourceText);
+  let changed = false;
+
+  if (claimType === "prediction") {
+    const explicitDirection = explicitPredictionDirection(normalizedText);
+    if (explicitDirection && claim.direction !== explicitDirection) {
+      claim.direction = explicitDirection;
+      changed = true;
+    }
+  }
+
+  if (
+    section === "safe_summary"
+    && saysNoEvidenceWasIdentified(normalizedText)
+  ) {
+    claim.claim_type = "uncertainty";
+    claim.subject_type = "evidence";
+    claim.source_factor_id = "";
+    claim.feature_id = "";
+    claim.concept_id = "";
+    claim.direction = "unknown";
+    changed = true;
+  }
+
+  return changed;
+}
+
+function anchorToUniqueDeclaredSourceSlot(
+  claim: JsonRecord,
+  document: GenerationTextDocument,
+): boolean {
+  const sourceText = readLooseString(claim.source_text);
+  if (!sourceText) return false;
+
+  const section = readLooseString(claim.source_section);
+  const factorId = readLooseString(claim.source_factor_id) || null;
+  const candidates = document.section_spans.filter(
+    (span) =>
+      span.source_section === section
+      && span.source_factor_id === factorId,
+  );
+
+  if (isExactWithinAnySpan(sourceText, candidates, document)) return false;
+  if (candidates.length !== 1) return false;
+
+  const target = candidates[0];
+  if (!target) return false;
+  claim.source_text = document.generation_text.slice(target.start, target.end);
+  return true;
+}
+
+function isExactWithinAnySpan(
+  sourceText: string,
+  spans: GenerationTextDocument["section_spans"],
+  document: GenerationTextDocument,
+): boolean {
+  return spans.some((span) => {
+    const start = document.generation_text.indexOf(sourceText, span.start);
+    const end = start + sourceText.length;
+    return start >= span.start && end <= span.end;
+  });
+}
+
+function isSupportedFiniteNumber(value: string): boolean {
+  const trimmed = value.trim();
+  const numberText = trimmed.endsWith("%")
+    ? trimmed.slice(0, -1).trim()
+    : trimmed;
+  return parseStrictFiniteNumber(numberText) !== null;
+}
+
+function explicitPredictionDirection(
+  text: string,
+): "increase_risk" | "decrease_risk" | null {
+  const lowRisk = [
+    "rui ro thap",
+    "rui ro tin dung la thap",
+    "nguy co thap",
+    "low default risk",
+    "low risk of default",
+  ].some((phrase) => text.includes(phrase));
+  const highRisk = [
+    "rui ro cao",
+    "rui ro tin dung la cao",
+    "rui ro tin dung cao",
+    "nguy co cao",
+    "high default risk",
+    "high risk of default",
+  ].some((phrase) => text.includes(phrase));
+
+  if (lowRisk === highRisk) return null;
+  return lowRisk ? "decrease_risk" : "increase_risk";
+}
+
+function saysNoEvidenceWasIdentified(text: string): boolean {
+  return text.includes("khong co yeu to duoc xac dinh")
+    || text.includes("khong co bang chung cu the");
+}
+
+function normalizeVietnamese(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase();
+}
+
+function uniqueStrings(values: readonly string[]): string[] {
+  return [...new Set(values.filter((value) => value.length > 0))];
+}
+
+function readLooseString(value: unknown): string {
+  return typeof value === "string" ? value.trim() : "";
 }
 
 function parseClaimDraft(

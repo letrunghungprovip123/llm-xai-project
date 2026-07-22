@@ -4,15 +4,21 @@
     "target": "ES2022",
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "lib": ["ES2022", "DOM"],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
     "noEmit": true
   },
   "include": [
     "research/**/*.ts",
     "contracts/**/*.ts",
-    "batch/**/*.ts",
     "tests/llmValidation/**/*.ts",
     "tests/research/**/*.ts"
   ],
-  "exclude": ["node_modules", "dist", "legacy"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "legacy"
+  ]
 }
