@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "browser_e2e": true,
+    "console": true,
+    "data_guard": true,
+    "exports": true,
+    "i18n": true,
+    "layout": true,
+    "source_isolation": true,
+    "traceability": true
+  },
+  "passed": true,
+  "schema_version": "multidataset_dashboard_v3_validation_v1"
+}

@@ -1,0 +1,25 @@
+{
+  "config_fingerprints": {},
+  "dataset_id": "freddie_sflld_2024",
+  "input_fingerprints": {
+    "raw_source": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263"
+  },
+  "invariants": {
+    "all_origination_ids_have_performance": "PASS",
+    "expected_schema_widths": "PASS",
+    "four_quarters_present": "PASS",
+    "origination_loan_ids_unique": "PASS",
+    "performance_ids_resolve_to_origination": "PASS",
+    "performance_loan_ids_sorted": "PASS",
+    "quarter_identity_consistent": "PASS"
+  },
+  "output_fingerprints": {
+    "freddie_sflld_2024_intake_audit_v1.json": "3c52fb09320bb404177a8781d01f23e65abcc2fd837f16ab3beb9fd263410341",
+    "freddie_sflld_2024_raw_manifest_v1.json": "0f8643532ee745c9e395c88d8ce6949e593f39fcc2af37d38eec87614a2e7fb6"
+  },
+  "patch_id": "0005",
+  "schema_version": "stage_receipt_v1",
+  "stage": "freddie_sflld_raw_intake",
+  "stage_version": "v1",
+  "status": "PASS"
+}

@@ -1,0 +1,57 @@
+{
+  "files": {
+    "analytical_release_validation.json": {
+      "byte_count": 1364,
+      "sha256": "575d0a8a15d73ef0061ab7301fb1346547093ab63967cc5b29d0c7a17c3d8ab2"
+    },
+    "environment_lock.json": {
+      "byte_count": 1156,
+      "sha256": "161f7a4519a8c2cf04ba7497697c5d33fcb970aa4bdc8f18204edb9b2c84fe76"
+    },
+    "findings_registry.csv": {
+      "byte_count": 1313,
+      "sha256": "72f9535c047335d6c1c0d02f763be573be22b55fd8783d02f0ab6e6e959ac3e2"
+    },
+    "limitations_registry.csv": {
+      "byte_count": 3074,
+      "sha256": "cc0023d670cb2a6aeac6f3ae88ec7036f0b40894f6c5f296532c07d8561acbb8"
+    },
+    "release_metric_dictionary.csv": {
+      "byte_count": 2480,
+      "sha256": "47a08ccfe23dda6d339aba9a928a952cf4cb94abc5fd1b2d8ce04d6a7399cb04"
+    },
+    "report_numbers.json": {
+      "byte_count": 274813,
+      "sha256": "28aab06f57356a6ab938d06f313228a1964c1cf30fc606f28e30d2cc8e29721d"
+    },
+    "report_source_index.csv": {
+      "byte_count": 167594,
+      "sha256": "3ce97085eb8ac5bbc7c84f0d6e4ee69ffb4b06a338850c1d535ab1d8142729d2"
+    },
+    "research_question_registry.csv": {
+      "byte_count": 413,
+      "sha256": "f437f44ac0268301c1f6aef5e1ad35413fb7c24a0acf44f33e38eb27b7ef2d9a"
+    },
+    "source_artifact_index.csv": {
+      "byte_count": 10145,
+      "sha256": "bf7b0c4ccb97bab62a8c3363103af5fa5758f4e68bcd3c110975dce47bf62c19"
+    },
+    "source_tree_identity.json": {
+      "byte_count": 17945,
+      "sha256": "f2c6aa98ebd3ea3ede2605634af3b6bc2ec9423a0232c7b94146450165db6a62"
+    }
+  },
+  "finding_count": 8,
+  "gate": "CERTIFIED_MULTIDATASET_ANALYTICAL_RELEASE_READY",
+  "limitation_count": 11,
+  "parent_input_lock": {
+    "path": "data/reports/llm_validation/multidataset_replication_v1/m28_analytical_release_input_lock_v1/multidataset_analytical_release_input_lock.json",
+    "sha256": "3332681a85e118c61a1f0fc42eda2dddc8dcc35982deffe5922c85a9adba566f"
+  },
+  "producer": "M28B_0035",
+  "release_id": "certified_multidataset_analytical_release_v1",
+  "replication_scope": "MODEL_REVISION_UNKNOWN",
+  "report_number_count": 275,
+  "schema_version": "certified_multidataset_analytical_release_manifest_v1",
+  "scientific_truth_frozen": true
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": "claim_subtype_taxonomy_report_v1",
+  "source_claim_schema_version": "claims_v2",
+  "target_claim_schema_version": "claims_v3",
+  "source_claims_path": "data/reports/llm_validation/validation_v1/claim_finalization_v1/claims_final.jsonl",
+  "source_claims_sha256": "9b53bae17359f3f43415b62f0c7d9f6d9cbda21f2dcac43081bea93d406763f4",
+  "source_claim_count": 14680,
+  "broad_claim_count": 2107,
+  "broad_type_counts": {
+    "distributed_evidence": 297,
+    "limitation": 237,
+    "magnitude": 24,
+    "prediction": 751,
+    "recommendation": 77,
+    "uncertainty": 721
+  },
+  "subtype_counts": {
+    "distributed_evidence": {
+      "CROSS_SECTION_SYNTHESIS": 95,
+      "DISTRIBUTED_SHAP_MASS": 11,
+      "MIXED_DIRECTIONS": 18,
+      "MULTIPLE_CONCEPTS": 15,
+      "MULTIPLE_FEATURES": 158
+    },
+    "limitation": {
+      "INCOMPLETE_EVIDENCE": 3,
+      "MODEL_NOT_CERTAIN": 2,
+      "NON_CAUSAL": 232,
+      "NOT_FINANCIAL_ADVICE": 0,
+      "NOT_SOLE_DECISION_BASIS": 0
+    },
+    "magnitude": {
+      "COMPARATIVE_STRENGTH": 2,
+      "CONCEPT_STRENGTH": 3,
+      "FEATURE_STRENGTH": 17,
+      "OVERALL_BALANCE": 2
+    },
+    "prediction": {
+      "OVERALL_LABEL": 294,
+      "OVERALL_PREDICTION_SUMMARY": 259,
+      "OVERALL_PROBABILITY": 47,
+      "THRESHOLD_COMPARISON": 151
+    },
+    "recommendation": {
+      "CAUTION_IN_DECISION_USE": 15,
+      "HUMAN_REVIEW": 0,
+      "PRESCRIPTIVE_FINANCIAL_ACTION": 56,
+      "REQUEST_MORE_INFORMATION": 6
+    },
+    "uncertainty": {
+      "CONFIDENCE_STRENGTH": 5,
+      "EVIDENCE_SCOPE_UNCERTAINTY": 51,
+      "MODEL_PREDICTION_NOT_OUTCOME": 104,
+      "NO_GUARANTEE": 116,
+      "PROBABILITY_HEDGE": 445
+    }
+  },
+  "classification_method": {
+    "implementation": "research/ts/claim_finalization/claimSubtype.ts",
+    "input_dimensions": [
+      "claim_type",
+      "source_section",
+      "source_text",
+      "subject_type",
+      "feature_id",
+      "concept_id",
+      "direction",
+      "numeric_role",
+      "numeric_unit"
+    ],
+    "catch_all_subtype_for_metric_ready_broad_claims": false
+  }
+}

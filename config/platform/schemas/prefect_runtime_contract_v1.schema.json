@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-xai.local/schemas/prefect_runtime_contract_v1.schema.json",
+  "title": "ResearchOps Prefect runtime contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "prefect_version",
+    "api_url",
+    "internal_api_url",
+    "database",
+    "messaging",
+    "work_pool",
+    "queues",
+    "policies"
+  ],
+  "properties": {
+    "schema_version": {"const": "prefect_runtime_contract_v1"},
+    "status": {"const": "ACTIVE"},
+    "prefect_version": {"const": "3.7.8"},
+    "api_url": {"type": "string", "pattern": "^https?://"},
+    "internal_api_url": {"type": "string", "pattern": "^https?://"},
+    "database": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["database_name", "user_name", "migration_owner", "managed_by"],
+      "properties": {
+        "database_name": {"type": "string", "minLength": 1},
+        "user_name": {"type": "string", "minLength": 1},
+        "migration_owner": {"const": "prefect"},
+        "managed_by": {"const": "prefect_cli"}
+      }
+    },
+    "messaging": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["broker", "cache", "redis_database", "docket_database"],
+      "properties": {
+        "broker": {"const": "prefect_redis.messaging"},
+        "cache": {"const": "prefect_redis.messaging"},
+        "redis_database": {"type": "integer", "minimum": 0},
+        "docket_database": {"type": "integer", "minimum": 0}
+      }
+    },
+    "work_pool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "description", "concurrency_limit"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "type": {"const": "process"},
+        "description": {"type": "string", "minLength": 1},
+        "concurrency_limit": {"type": "integer", "minimum": 1}
+      }
+    },
+    "queues": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "priority", "concurrency_limit", "purpose"],
+        "properties": {
+          "name": {"enum": ["release", "provider-llm", "cpu-heavy", "verification"]},
+          "priority": {"type": "integer", "minimum": 1},
+          "concurrency_limit": {"type": "integer", "minimum": 1},
+          "purpose": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "migration_on_server_start",
+        "separate_background_services",
+        "worker_limit",
+        "provider_default_schedule",
+        "release_default_schedule"
+      ],
+      "properties": {
+        "migration_on_server_start": {"const": false},
+        "separate_background_services": {"const": true},
+        "worker_limit": {"type": "integer", "minimum": 1},
+        "provider_default_schedule": {"const": false},
+        "release_default_schedule": {"const": false}
+      }
+    }
+  }
+}

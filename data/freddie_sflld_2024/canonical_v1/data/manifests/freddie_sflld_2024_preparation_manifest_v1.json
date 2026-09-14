@@ -1,0 +1,230 @@
+{
+  "artifacts": {
+    "concept_registry_yaml": {
+      "path": "ml/registry/concept_registry.yaml",
+      "required": true,
+      "sha256": "8396d7097c6e1937b227e24935c9c3d2930df3709c3eda00e6a92b1cec6e3c1c"
+    },
+    "feature_matrix": {
+      "path": "data/processed/feature_matrix_full.parquet",
+      "required": true,
+      "sha256": "1f7aeae20fa4816eec167aad73351d89613528915784edb94e8757a48d3bcbec"
+    },
+    "feature_registry_csv": {
+      "path": "ml/registry/feature_registry.csv",
+      "required": true,
+      "sha256": "b4937e99534f3bd05264880bc33faa000148237fe80a91ce718db0a7bf192b04"
+    },
+    "feature_registry_yaml": {
+      "path": "ml/registry/feature_registry.yaml",
+      "required": true,
+      "sha256": "1f8e99e87a4334d1c3e7a619ee564a7df5769244fc7f18b354d3705d53bd85fe"
+    },
+    "target": {
+      "path": "data/processed/target_full.parquet",
+      "required": true,
+      "sha256": "8a76ca047c30c3b624aa352cb3f51cb74c5257981bf1f56411a6470ed43a1064"
+    }
+  },
+  "dataset_fingerprint": "0815744a1dc3e7fdbc78a663e15b21c7d48e69a0f20fd0df862a98a5c252b86a",
+  "dataset_id": "freddie_sflld_2024",
+  "dataset_version": "standard_vintage_2024_v1",
+  "excluded_features": {
+    "amortization_type": "constant_in_2024_vintage",
+    "first_payment_date": "target_horizon_anchor_not_model_predictor",
+    "harp_indicator": "constant_in_2024_vintage",
+    "interest_only_indicator": "constant_in_2024_vintage",
+    "loan_identifier": "identity_only",
+    "maturity_date": "redundant_with_term_and_calendar_context",
+    "msa_or_metropolitan_division": "high_cardinality_extended_track_only",
+    "postal_code": "high_cardinality_geography_excluded_primary",
+    "pre_harp_loan_identifier": "all_missing_in_2024_vintage",
+    "prepayment_penalty_indicator": "constant_in_2024_vintage",
+    "seller_name": "institution_fingerprint_extended_track_only",
+    "vantagescore_4_0": "not_available_9999_for_all_2024_rows"
+  },
+  "feature_statistics": {
+    "channel": {
+      "concept": "origination_context",
+      "data_kind": "categorical",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 3
+    },
+    "classic_fico": {
+      "concept": "borrower_creditworthiness",
+      "data_kind": "numeric",
+      "missing_rate": 0.0003338534113353847,
+      "non_null_count": 1036037,
+      "unique_count": 285
+    },
+    "first_time_homebuyer_indicator": {
+      "concept": "borrower_structure",
+      "data_kind": "binary",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 2
+    },
+    "loan_purpose": {
+      "concept": "loan_terms",
+      "data_kind": "categorical",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 3
+    },
+    "mortgage_insurance_percentage": {
+      "concept": "leverage",
+      "data_kind": "numeric",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 12
+    },
+    "number_of_borrowers": {
+      "concept": "borrower_structure",
+      "data_kind": "numeric",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 5
+    },
+    "number_of_units": {
+      "concept": "property_collateral",
+      "data_kind": "categorical",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 4
+    },
+    "occupancy_status": {
+      "concept": "property_collateral",
+      "data_kind": "categorical",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 3
+    },
+    "original_cltv": {
+      "concept": "leverage",
+      "data_kind": "numeric",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 127
+    },
+    "original_dti": {
+      "concept": "affordability",
+      "data_kind": "numeric",
+      "missing_rate": 1.0613836776558473e-05,
+      "non_null_count": 1036372,
+      "unique_count": 65
+    },
+    "original_interest_rate": {
+      "concept": "loan_terms",
+      "data_kind": "numeric",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 2462
+    },
+    "original_loan_term": {
+      "concept": "loan_terms",
+      "data_kind": "numeric",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 128
+    },
+    "original_ltv": {
+      "concept": "leverage",
+      "data_kind": "numeric",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 124
+    },
+    "original_upb": {
+      "concept": "loan_terms",
+      "data_kind": "numeric",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 1304
+    },
+    "property_state": {
+      "concept": "geography",
+      "data_kind": "categorical",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 54
+    },
+    "property_type": {
+      "concept": "property_collateral",
+      "data_kind": "categorical",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 5
+    },
+    "property_valuation_method": {
+      "concept": "property_collateral",
+      "data_kind": "categorical",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 3
+    },
+    "special_eligibility_program": {
+      "concept": "origination_context",
+      "data_kind": "categorical",
+      "missing_rate": 0.8735467486440823,
+      "non_null_count": 131054,
+      "unique_count": 3
+    },
+    "super_conforming_flag": {
+      "concept": "leverage",
+      "data_kind": "binary",
+      "missing_rate": 0.0,
+      "non_null_count": 1036383,
+      "unique_count": 2
+    }
+  },
+  "fingerprint_inputs": {
+    "adapter_code_sha256": "803dfd5d6ba883c42bece998a4204f6161902d0464195a934c69daaf102d9483",
+    "concept_registry_sha256": "ad33358701eedd35051be091337361df2ad440bd85c6eb4ff4408cb3db2d2121",
+    "dataset_id": "freddie_sflld_2024",
+    "dataset_version": "standard_vintage_2024_v1",
+    "feature_policy_sha256": "f0905e46117bdf5dbd88697ffb688e4543bdf27151e491ef0a6301f9ad030c58",
+    "raw_source_sha256": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263",
+    "schema_version": "freddie_dataset_fingerprint_v1",
+    "target_protocol_sha256": "7f0582758f948087bfc3a5d643ad99ea8400f19788d793d44828a8ee1b62c157"
+  },
+  "invariants": {
+    "eligible_target_only": "PASS",
+    "feature_policy_exact": "PASS",
+    "feature_target_identity_match": "PASS",
+    "performance_leakage_absent": "PASS",
+    "semantic_registry_complete": "PASS",
+    "target_count_matches_m12a": "PASS",
+    "unique_source_entity_id": "PASS",
+    "upstream_receipts_verified": "PASS"
+  },
+  "negative": 1030811,
+  "performance_feature_policy": "forbidden_from_model_matrix",
+  "performance_features_in_X": [],
+  "positive": 5572,
+  "primary_feature_count": 19,
+  "primary_features": [
+    "classic_fico",
+    "first_time_homebuyer_indicator",
+    "mortgage_insurance_percentage",
+    "number_of_units",
+    "occupancy_status",
+    "original_cltv",
+    "original_dti",
+    "original_upb",
+    "original_ltv",
+    "original_interest_rate",
+    "channel",
+    "property_state",
+    "property_type",
+    "loan_purpose",
+    "original_loan_term",
+    "number_of_borrowers",
+    "super_conforming_flag",
+    "special_eligibility_program",
+    "property_valuation_method"
+  ],
+  "raw_source_sha256": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263",
+  "rows": 1036383,
+  "schema_version": "freddie_preparation_manifest_v1"
+}

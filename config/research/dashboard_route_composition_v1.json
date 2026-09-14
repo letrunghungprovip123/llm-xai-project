@@ -1,0 +1,196 @@
+{
+  "schema_version": "dashboard_route_composition_v1",
+  "status": "ACTIVE_POST_IMPLEMENTATION",
+  "source_contract": "config/research/dashboard_contract_v2.json",
+  "source_contract_status": "FROZEN_BEFORE_DASH_IMPLEMENTATION",
+  "physical_page_count": 7,
+  "conceptual_section_count": 9,
+  "required_gates": [
+    "REPORT_WRITING_READY",
+    "BASELINE_COMPARISON_READY",
+    "VISUALIZATION_DATA_V2_READY"
+  ],
+  "physical_pages": [
+    {
+      "page_id": "overview",
+      "route": "/",
+      "conceptual_sections": [
+        "executive_overview"
+      ],
+      "rq_ids": [
+        "RQ1"
+      ],
+      "required_views": [
+        "executive_summary",
+        "primary_kpis",
+        "release_status"
+      ],
+      "required_datasets": [
+        "certified_report_numbers",
+        "dashboard_kpis",
+        "omnibus_tests",
+        "option_performance",
+        "release_metadata"
+      ]
+    },
+    {
+      "page_id": "effectiveness",
+      "route": "/effectiveness",
+      "conceptual_sections": [
+        "performance_reliability",
+        "statistical_evidence"
+      ],
+      "rq_ids": [
+        "RQ1",
+        "RQ2"
+      ],
+      "required_views": [
+        "performance",
+        "reliability",
+        "statistics"
+      ],
+      "required_datasets": [
+        "case_heterogeneity_summary",
+        "complete_case_omnibus_tests",
+        "conditional_paired_tests",
+        "descriptive_statistics",
+        "omnibus_tests",
+        "option_performance",
+        "paired_tests",
+        "pipeline_failures",
+        "statistical_sensitivity_summary",
+        "unusable_generations"
+      ]
+    },
+    {
+      "page_id": "mechanisms",
+      "route": "/mechanisms",
+      "conceptual_sections": [
+        "mechanisms_diagnostics"
+      ],
+      "rq_ids": [
+        "RQ2",
+        "RQ3"
+      ],
+      "required_views": [
+        "evidence_design",
+        "evidence_utilization",
+        "failure_diagnostics"
+      ],
+      "required_datasets": [
+        "evidence_design_summary",
+        "evidence_utilization_summary",
+        "mechanism_breakdowns",
+        "narrative_structure_summary",
+        "pipeline_failures",
+        "unusable_generations"
+      ]
+    },
+    {
+      "page_id": "decision",
+      "route": "/decision",
+      "conceptual_sections": [
+        "decision_studio"
+      ],
+      "rq_ids": [
+        "RQ4"
+      ],
+      "required_views": [
+        "certified_scenarios",
+        "pareto_tradeoffs",
+        "what_if"
+      ],
+      "required_datasets": [
+        "option_performance",
+        "recommendation_evidence",
+        "scenario_criterion_contributions",
+        "scenario_options"
+      ]
+    },
+    {
+      "page_id": "robustness",
+      "route": "/robustness",
+      "conceptual_sections": [
+        "validator_sensitivity",
+        "template_baseline_comparison"
+      ],
+      "rq_ids": [
+        "RQ5",
+        "RQ6"
+      ],
+      "required_views": [
+        "validator_sensitivity",
+        "template_baseline"
+      ],
+      "required_datasets": [
+        "baseline_generation_metrics",
+        "baseline_option_performance",
+        "llm_vs_template_case_pairs",
+        "llm_vs_template_summary",
+        "llm_vs_template_tests",
+        "validator_generation_pairs",
+        "validator_metric_summary",
+        "validator_sensitivity_tests"
+      ]
+    },
+    {
+      "page_id": "cases",
+      "route": "/cases",
+      "conceptual_sections": [
+        "case_explorer"
+      ],
+      "rq_ids": [
+        "RQ2",
+        "RQ3",
+        "RQ6"
+      ],
+      "required_views": [
+        "case_overview",
+        "evidence_trace",
+        "claim_trace"
+      ],
+      "required_datasets": [
+        "case_heterogeneity_summary",
+        "evidence_design_summary",
+        "evidence_utilization_summary",
+        "llm_vs_template_case_pairs",
+        "narrative_structure_summary",
+        "validator_generation_pairs"
+      ]
+    },
+    {
+      "page_id": "methods",
+      "route": "/methods",
+      "conceptual_sections": [
+        "reproducibility"
+      ],
+      "rq_ids": [
+        "RQ1",
+        "RQ2",
+        "RQ3",
+        "RQ4",
+        "RQ5",
+        "RQ6"
+      ],
+      "required_views": [
+        "release_lineage",
+        "methods",
+        "limitations"
+      ],
+      "required_datasets": [
+        "certified_report_numbers",
+        "metric_visibility_registry",
+        "release_metadata",
+        "research_question_registry",
+        "visualization_dictionary"
+      ]
+    }
+  ],
+  "invariants": [
+    "Every conceptual section is mapped exactly once.",
+    "Physical page RQ coverage equals the union of mapped conceptual sections.",
+    "Physical page datasets equal the union of mapped conceptual sections.",
+    "The seven physical routes are the dashboard runtime source of navigation identity.",
+    "The nine conceptual sections remain the research-content contract."
+  ]
+}

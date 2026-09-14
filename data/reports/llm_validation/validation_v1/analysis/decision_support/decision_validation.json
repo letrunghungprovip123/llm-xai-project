@@ -1,0 +1,209 @@
+{
+  "decision_version": "v1.1",
+  "input_gates": {
+    "metric_engineering": "ANALYTICAL_MART_READY",
+    "statistical_analysis": "STATISTICAL_CORE_READY",
+    "diagnostics": "DIAGNOSTICS_READY"
+  },
+  "check_count": 39,
+  "checks": {
+    "input_metric_gate": {
+      "expected": "ANALYTICAL_MART_READY",
+      "observed": "ANALYTICAL_MART_READY",
+      "passed": true
+    },
+    "input_statistical_gate": {
+      "expected": "STATISTICAL_CORE_READY",
+      "observed": "STATISTICAL_CORE_READY",
+      "passed": true
+    },
+    "input_diagnostic_gate": {
+      "expected": "DIAGNOSTICS_READY",
+      "observed": "DIAGNOSTICS_READY",
+      "passed": true
+    },
+    "input_diagnostic_version": {
+      "expected": "v1.1",
+      "observed": "v1.1",
+      "passed": true
+    },
+    "decision_option_row_count": {
+      "expected": 18,
+      "observed": 18,
+      "passed": true
+    },
+    "duplicate_decision_option_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "decision_option_key_set_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "decision_option_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "decision_option_loss_identity_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "decision_option_best_match_partition_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "scenario_count": {
+      "expected": 5,
+      "observed": 5,
+      "passed": true
+    },
+    "duplicate_scenario_rule_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "scenario_definition_key_set_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "scenario_definition_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "scenario_weight_sum_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "unknown_scenario_criteria": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "invalid_scenario_direction_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "criterion_score_key_set_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "criterion_score_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "pareto_key_set_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "pareto_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "ranking_key_set_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "ranking_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "recommendation_key_set_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "recommendation_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "recommendation_evidence_key_set_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "recommendation_evidence_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "scenario_ranking_row_count": {
+      "expected": 90,
+      "observed": 90,
+      "passed": true
+    },
+    "utility_rank_state_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "recommendation_reason_code_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "primary_recommendation_count": {
+      "expected": 5,
+      "observed": 5,
+      "passed": true
+    },
+    "recommendation_evidence_row_count": {
+      "expected": 85,
+      "observed": 85,
+      "passed": true
+    },
+    "normalized_value_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "ineligible_nonnull_utility_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "non_pareto_recommendation_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "utility_score_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "infinite_output_value_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "missing_validation_check_names": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "extra_validation_check_names": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    }
+  },
+  "failed_check_count": 0,
+  "passed": true,
+  "exit_gate": "DECISION_SUPPORT_READY"
+}

@@ -1,26 +1,187 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  --color-canvas: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f3f4f6;
+  --color-border: #e4e7ec;
+  --color-border-strong: #d0d5dd;
+  --color-text: #101828;
+  --color-text-secondary: #475467;
+  --color-text-muted: #667085;
+  --color-brand: #4f46e5;
+  --color-brand-hover: #4338ca;
+  --color-brand-soft: #eef2ff;
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --color-danger: #b42318;
+  --color-info: #2563eb;
+
+  --shell-sidebar-width: 224px;
+  --shell-sidebar-collapsed-width: 64px;
+  --shell-header-height: 60px;
+  --content-max-width: 1440px;
+
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+
+  /* Compatibility aliases: existing pages can migrate incrementally. */
+  --app-bg: var(--color-canvas);
+  --app-fg: var(--color-text);
+  --sidebar-bg: #fbfbfc;
+  --header-bg: rgb(255 255 255 / 0.88);
+  --panel-bg: var(--color-surface);
+  --panel-soft: var(--color-surface-subtle);
+  --panel-border: var(--color-border);
+  --panel-shadow: 0 1px 2px rgb(16 24 40 / 0.025);
+  --muted: var(--color-text-muted);
+  --brand: var(--color-brand);
+  --brand-soft: var(--color-brand-soft);
+  --code-bg: #f6f7f9;
+}
+
+/* OS preference is only the pre-hydration fallback. Once data-theme exists,
+   the portal theme is authoritative. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --color-canvas: #0b0d12;
+    --color-surface: #111318;
+    --color-surface-subtle: #171a21;
+    --color-border: #272b35;
+    --color-border-strong: #343946;
+    --color-text: #f5f7fa;
+    --color-text-secondary: #d0d5dd;
+    --color-text-muted: #98a2b3;
+    --color-brand: #818cf8;
+    --color-brand-hover: #a5b4fc;
+    --color-brand-soft: rgb(129 140 248 / 0.12);
+    --color-success: #4ade80;
+    --color-warning: #fbbf24;
+    --color-danger: #f87171;
+    --color-info: #60a5fa;
+    --sidebar-bg: #0f1117;
+    --header-bg: rgb(17 19 24 / 0.88);
+    --panel-shadow: none;
+    --code-bg: #0b0d11;
+  }
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-canvas: #0b0d12;
+  --color-surface: #111318;
+  --color-surface-subtle: #171a21;
+  --color-border: #272b35;
+  --color-border-strong: #343946;
+  --color-text: #f5f7fa;
+  --color-text-secondary: #d0d5dd;
+  --color-text-muted: #98a2b3;
+  --color-brand: #818cf8;
+  --color-brand-hover: #a5b4fc;
+  --color-brand-soft: rgb(129 140 248 / 0.12);
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+  --color-info: #60a5fa;
+  --sidebar-bg: #0f1117;
+  --header-bg: rgb(17 19 24 / 0.88);
+  --panel-shadow: none;
+  --code-bg: #0b0d11;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--color-canvas);
+  --color-foreground: var(--color-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--color-canvas);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-text);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: var(--color-brand-soft);
+}
+
+.ops-nav-menu {
+  font-size: 14px;
+}
+
+.ops-nav-menu.ant-menu-inline-collapsed > .ant-menu-item-group > .ant-menu-item-group-title {
+  display: none;
+}
+
+.ops-nav-menu .ant-menu-item-group-title {
+  padding: 13px 12px 6px !important;
+  color: var(--color-text-muted) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.ops-nav-menu .ant-menu-item,
+.ops-nav-menu .ant-menu-submenu-title {
+  margin-inline: 4px !important;
+  width: calc(100% - 8px) !important;
+}
+
+.ops-nav-menu .ant-menu-item-disabled {
+  opacity: 0.48;
+}
+
+.ops-nav-menu .ant-menu-submenu .ant-menu-item {
+  padding-left: 44px !important;
+}
+
+.panel {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--panel-shadow);
+}
+
+.ant-table-wrapper .ant-table {
+  background: transparent !important;
+}
+
+.ant-table-wrapper .ant-table-container {
+  border-radius: 0 !important;
+}
+
+.ant-tabs-nav {
+  margin-bottom: 0 !important;
+}
+
+.ant-tabs-content-holder {
+  padding-top: 18px;
 }

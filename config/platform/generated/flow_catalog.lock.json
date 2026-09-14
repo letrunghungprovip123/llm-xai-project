@@ -1,0 +1,1473 @@
+{
+  "schema_version": "flow_catalog_lock_v1",
+  "source_path": "config/platform/flows.yaml",
+  "source_sha256": "05eccd1146aca7f95b519c64e033595bf60edc0711e146e7ff92595d35ee5a89",
+  "catalog_sha256": "993ccda28378f8cecb47c7514ffef72ed91df55cae3bd7bb0513a14084e8494a",
+  "stage_registry_sha256": "8475d529b193fb3d605e2e57dadcc58290bcc6c5b2fd7db2a7664524bafb5948",
+  "flow_count": 15,
+  "executable_flow_count": 15,
+  "covered_stage_count": 42,
+  "catalog": {
+    "schema_version": "flow_catalog_v1",
+    "status": "ACTIVE",
+    "stage_registry_sha256": "8475d529b193fb3d605e2e57dadcc58290bcc6c5b2fd7db2a7664524bafb5948",
+    "flows": [
+      {
+        "id": "build_analytical_release",
+        "version": 1,
+        "title": "Build the certified analytical and report releases",
+        "description": "Builds the research data mart, metrics, statistics, diagnostics, decision support, validator sensitivity, thesis report, and deterministic baseline comparison.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_EXPENSIVE",
+        "work_queue": "release",
+        "approval_policies": [
+          "EXPENSIVE",
+          "RELEASE"
+        ],
+        "inputs": [
+          {
+            "name": "canonical_generations",
+            "contract": "canonical_generations",
+            "required": true,
+            "description": "Accepted canonical generations."
+          },
+          {
+            "name": "claim_measurement_release",
+            "contract": "claim_measurement_release",
+            "required": true,
+            "description": "Accepted claim-measurement release."
+          },
+          {
+            "name": "claim_validation_results",
+            "contract": "claim_validation_results",
+            "required": true,
+            "description": "Primary machine validation results."
+          },
+          {
+            "name": "evaluation_subset",
+            "contract": "evaluation_subset",
+            "required": true,
+            "description": "Frozen evaluation subset."
+          },
+          {
+            "name": "evidence_packages",
+            "contract": "evidence_packages",
+            "required": true,
+            "description": "Accepted evidence package release."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "baseline_comparison",
+            "stage_id": "release.baseline_comparison",
+            "required": true,
+            "work_queue": "release",
+            "input_mapping": {
+              "evidence": "evidence_packages",
+              "subset": "evaluation_subset"
+            },
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "data_mart",
+            "stage_id": "analytics.data_mart",
+            "required": true,
+            "work_queue": "cpu-heavy",
+            "input_mapping": {
+              "canonical": "canonical_generations",
+              "claim_release": "claim_measurement_release",
+              "evidence": "evidence_packages"
+            },
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "decision_support",
+            "stage_id": "analytics.decision_support",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "diagnostics",
+            "stage_id": "analytics.diagnostics",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "metrics",
+            "stage_id": "analytics.metrics",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "statistics",
+            "stage_id": "analytics.statistics",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "thesis_report",
+            "stage_id": "release.thesis_report",
+            "required": true,
+            "work_queue": "release",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "validator_sensitivity",
+            "stage_id": "analytics.validator_sensitivity",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {
+              "canonical": "canonical_generations",
+              "validation": "claim_validation_results"
+            },
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [
+          {
+            "from_node": "data_mart",
+            "from_output": "data_mart",
+            "to_node": "diagnostics",
+            "to_input": "data_mart"
+          },
+          {
+            "from_node": "data_mart",
+            "from_output": "data_mart",
+            "to_node": "metrics",
+            "to_input": "data_mart"
+          },
+          {
+            "from_node": "data_mart",
+            "from_output": "data_mart",
+            "to_node": "thesis_report",
+            "to_input": "data_mart"
+          },
+          {
+            "from_node": "decision_support",
+            "from_output": "decision",
+            "to_node": "thesis_report",
+            "to_input": "decision"
+          },
+          {
+            "from_node": "diagnostics",
+            "from_output": "diagnostics",
+            "to_node": "decision_support",
+            "to_input": "diagnostics"
+          },
+          {
+            "from_node": "diagnostics",
+            "from_output": "diagnostics",
+            "to_node": "thesis_report",
+            "to_input": "diagnostics"
+          },
+          {
+            "from_node": "metrics",
+            "from_output": "analytical_mart",
+            "to_node": "decision_support",
+            "to_input": "analytical_mart"
+          },
+          {
+            "from_node": "metrics",
+            "from_output": "analytical_mart",
+            "to_node": "diagnostics",
+            "to_input": "analytical_mart"
+          },
+          {
+            "from_node": "metrics",
+            "from_output": "analytical_mart",
+            "to_node": "statistics",
+            "to_input": "analytical_mart"
+          },
+          {
+            "from_node": "metrics",
+            "from_output": "analytical_mart",
+            "to_node": "thesis_report",
+            "to_input": "analytical_mart"
+          },
+          {
+            "from_node": "statistics",
+            "from_output": "statistics",
+            "to_node": "decision_support",
+            "to_input": "statistics"
+          },
+          {
+            "from_node": "statistics",
+            "from_output": "statistics",
+            "to_node": "diagnostics",
+            "to_input": "statistics"
+          },
+          {
+            "from_node": "statistics",
+            "from_output": "statistics",
+            "to_node": "thesis_report",
+            "to_input": "statistics"
+          },
+          {
+            "from_node": "thesis_report",
+            "from_output": "report",
+            "to_node": "baseline_comparison",
+            "to_input": "report"
+          },
+          {
+            "from_node": "validator_sensitivity",
+            "from_output": "sensitivity",
+            "to_node": "thesis_report",
+            "to_input": "sensitivity"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "analytical_mart",
+            "contract": "analytical_mart",
+            "from_node": "metrics",
+            "from_output": "analytical_mart",
+            "required": true,
+            "description": "Certified metric layer."
+          },
+          {
+            "name": "baseline_comparison_release",
+            "contract": "baseline_comparison_release",
+            "from_node": "baseline_comparison",
+            "from_output": "baseline",
+            "required": true,
+            "description": "Deterministic baseline comparison release."
+          },
+          {
+            "name": "decision_support_release",
+            "contract": "decision_support_release",
+            "from_node": "decision_support",
+            "from_output": "decision",
+            "required": true,
+            "description": "Decision support release."
+          },
+          {
+            "name": "diagnostics_release",
+            "contract": "diagnostics_release",
+            "from_node": "diagnostics",
+            "from_output": "diagnostics",
+            "required": true,
+            "description": "Diagnostics release."
+          },
+          {
+            "name": "research_data_mart",
+            "contract": "research_data_mart",
+            "from_node": "data_mart",
+            "from_output": "data_mart",
+            "required": true,
+            "description": "Certified row-level research data mart."
+          },
+          {
+            "name": "statistical_core",
+            "contract": "statistical_core",
+            "from_node": "statistics",
+            "from_output": "statistics",
+            "required": true,
+            "description": "Paired statistical core."
+          },
+          {
+            "name": "thesis_report_release",
+            "contract": "thesis_report_release",
+            "from_node": "thesis_report",
+            "from_output": "report",
+            "required": true,
+            "description": "Frozen thesis report source release."
+          },
+          {
+            "name": "validator_sensitivity_release",
+            "contract": "validator_sensitivity_release",
+            "from_node": "validator_sensitivity",
+            "from_output": "sensitivity",
+            "required": true,
+            "description": "Alternative validation sensitivity release."
+          }
+        ],
+        "terminal_gate": "BASELINE_COMPARISON_READY",
+        "tags": [
+          "analytics",
+          "release",
+          "statistics"
+        ],
+        "notes": []
+      },
+      {
+        "id": "build_claim_measurement_release",
+        "version": 1,
+        "title": "Extract, finalize, validate, and release atomic claim measurements",
+        "description": "Runs provider claim extraction, deterministic finalization, machine validation, optional human calibration, and immutable claim-measurement release packaging.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_PROVIDER_DEPENDENT",
+        "work_queue": "provider-llm",
+        "approval_policies": [
+          "EXPENSIVE",
+          "PROVIDER",
+          "RELEASE"
+        ],
+        "inputs": [
+          {
+            "name": "canonical_generations",
+            "contract": "canonical_generations",
+            "required": true,
+            "description": "Accepted canonical generation release."
+          },
+          {
+            "name": "evidence_packages",
+            "contract": "evidence_packages",
+            "required": true,
+            "description": "Accepted controlled evidence package release."
+          },
+          {
+            "name": "narrative_contract_results",
+            "contract": "narrative_contract_results",
+            "required": true,
+            "description": "Passed narrative contract evidence."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "calibration_evaluate",
+            "stage_id": "calibration.evaluate",
+            "required": false,
+            "condition": "enable_human_calibration",
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "calibration_prepare",
+            "stage_id": "calibration.prepare",
+            "required": false,
+            "condition": "enable_human_calibration",
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "claim_extract",
+            "stage_id": "claims.extract",
+            "required": true,
+            "work_queue": "provider-llm",
+            "input_mapping": {
+              "canonical": "canonical_generations",
+              "contract_results": "narrative_contract_results"
+            },
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "claim_measurement_release",
+            "stage_id": "release.claim_measurement",
+            "required": true,
+            "work_queue": "release",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "claim_validate",
+            "stage_id": "claims.validate",
+            "required": true,
+            "work_queue": "cpu-heavy",
+            "input_mapping": {
+              "canonical": "canonical_generations",
+              "evidence": "evidence_packages"
+            },
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "finalize_replay",
+            "stage_id": "claims.finalize_replay",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {
+              "canonical": "canonical_generations"
+            },
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "finalize_semantic",
+            "stage_id": "claims.finalize_semantic",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [
+          {
+            "from_node": "calibration_evaluate",
+            "from_output": "evaluation",
+            "to_node": "claim_measurement_release",
+            "to_input": "calibration"
+          },
+          {
+            "from_node": "calibration_prepare",
+            "from_output": "sample",
+            "to_node": "calibration_evaluate",
+            "to_input": "sample"
+          },
+          {
+            "from_node": "claim_extract",
+            "from_output": "claims",
+            "to_node": "finalize_replay",
+            "to_input": "claims"
+          },
+          {
+            "from_node": "claim_validate",
+            "from_output": "validation",
+            "to_node": "calibration_prepare",
+            "to_input": "validation"
+          },
+          {
+            "from_node": "claim_validate",
+            "from_output": "validation",
+            "to_node": "claim_measurement_release",
+            "to_input": "validation"
+          },
+          {
+            "from_node": "finalize_replay",
+            "from_output": "final_claims",
+            "to_node": "finalize_semantic",
+            "to_input": "historical"
+          },
+          {
+            "from_node": "finalize_semantic",
+            "from_output": "semantic_claims",
+            "to_node": "claim_validate",
+            "to_input": "claims"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "calibration_evaluation",
+            "contract": "calibration_evaluation",
+            "from_node": "calibration_evaluate",
+            "from_output": "evaluation",
+            "required": false,
+            "description": "Optional human calibration evaluation."
+          },
+          {
+            "name": "claim_measurement_release",
+            "contract": "claim_measurement_release",
+            "from_node": "claim_measurement_release",
+            "from_output": "release",
+            "required": true,
+            "description": "Immutable claim-measurement release."
+          },
+          {
+            "name": "claim_validation_results",
+            "contract": "claim_validation_results",
+            "from_node": "claim_validate",
+            "from_output": "validation",
+            "required": true,
+            "description": "Machine claim-validation results."
+          }
+        ],
+        "terminal_gate": "CLAIM_MEASUREMENT_RELEASE_READY",
+        "tags": [
+          "claims",
+          "release",
+          "validation"
+        ],
+        "notes": []
+      },
+      {
+        "id": "build_complete_release_bundle",
+        "version": 1,
+        "title": "Build complete immutable research release bundle",
+        "description": "Creates an immutable parent-artifact index without copying, promoting, or mutating scientific outputs.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_DETERMINISTIC",
+        "work_queue": "release",
+        "approval_policies": [
+          "RELEASE"
+        ],
+        "inputs": [
+          {
+            "name": "claim_measurement_release",
+            "contract": "claim_measurement_release",
+            "required": true,
+            "description": "Certified claim measurement release."
+          },
+          {
+            "name": "dashboard_i18n_certification",
+            "contract": "dashboard_i18n_certification",
+            "required": true,
+            "description": "Dashboard certification evidence."
+          },
+          {
+            "name": "mlflow_registration_receipt",
+            "contract": "mlflow_registration_receipt",
+            "required": false,
+            "description": "Optional verified MLflow registration receipt."
+          },
+          {
+            "name": "thesis_report_release",
+            "contract": "thesis_report_release",
+            "required": true,
+            "description": "Frozen thesis report release."
+          },
+          {
+            "name": "visualization_data_release",
+            "contract": "visualization_data_release",
+            "required": true,
+            "description": "Certified visualization data release."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "complete_bundle",
+            "stage_id": "release.complete_bundle",
+            "required": true,
+            "work_queue": "release",
+            "input_mapping": {
+              "claim_release": "claim_measurement_release",
+              "dashboard_certification": "dashboard_i18n_certification",
+              "mlflow_receipt": "mlflow_registration_receipt",
+              "thesis_report": "thesis_report_release",
+              "visualization_release": "visualization_data_release"
+            },
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [],
+        "outputs": [
+          {
+            "name": "complete_release_bundle",
+            "contract": "complete_release_bundle",
+            "from_node": "complete_bundle",
+            "from_output": "bundle",
+            "required": true,
+            "description": "Immutable complete release bundle index."
+          }
+        ],
+        "terminal_gate": "COMPLETE_RELEASE_BUNDLE_READY",
+        "tags": [
+          "bundle",
+          "release",
+          "researchops"
+        ],
+        "notes": [
+          "Candidate-to-champion promotion remains outside this flow."
+        ]
+      },
+      {
+        "id": "build_evidence_release",
+        "version": 1,
+        "title": "Build controlled evidence packages and evaluation subset",
+        "description": "Transforms Explanation IR into controlled S0-S5 evidence packages and the frozen evaluation subset.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_DETERMINISTIC",
+        "work_queue": "verification",
+        "approval_policies": [],
+        "inputs": [
+          {
+            "name": "explanation_ir",
+            "contract": "explanation_ir",
+            "required": true,
+            "description": "Accepted Explanation IR release."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "evaluation_subset",
+            "stage_id": "xai.evaluation_subset",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "evidence_packages",
+            "stage_id": "xai.evidence_packages",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {
+              "ir": "explanation_ir"
+            },
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [
+          {
+            "from_node": "evidence_packages",
+            "from_output": "evidence",
+            "to_node": "evaluation_subset",
+            "to_input": "evidence"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "evaluation_subset",
+            "contract": "evaluation_subset",
+            "from_node": "evaluation_subset",
+            "from_output": "subset",
+            "required": true,
+            "description": "Frozen evaluation subset."
+          },
+          {
+            "name": "evidence_packages",
+            "contract": "evidence_packages",
+            "from_node": "evidence_packages",
+            "from_output": "evidence",
+            "required": true,
+            "description": "Controlled evidence package release."
+          }
+        ],
+        "terminal_gate": "EVALUATION_SUBSET_READY",
+        "tags": [
+          "evaluation",
+          "evidence",
+          "xai"
+        ],
+        "notes": []
+      },
+      {
+        "id": "build_visualization_release",
+        "version": 1,
+        "title": "Build the certified visualization-data release",
+        "description": "Transforms accepted report and baseline releases into the immutable visualization-data-v2 bundle consumed by Dash.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_DETERMINISTIC",
+        "work_queue": "release",
+        "approval_policies": [
+          "RELEASE"
+        ],
+        "inputs": [
+          {
+            "name": "baseline_comparison_release",
+            "contract": "baseline_comparison_release",
+            "required": true,
+            "description": "Accepted deterministic baseline release."
+          },
+          {
+            "name": "thesis_report_release",
+            "contract": "thesis_report_release",
+            "required": true,
+            "description": "Accepted thesis report release."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "visualization_data",
+            "stage_id": "release.visualization_data",
+            "required": true,
+            "work_queue": "release",
+            "input_mapping": {
+              "baseline": "baseline_comparison_release",
+              "report": "thesis_report_release"
+            },
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [],
+        "outputs": [
+          {
+            "name": "visualization_data_release",
+            "contract": "visualization_data_release",
+            "from_node": "visualization_data",
+            "from_output": "visualization",
+            "required": true,
+            "description": "Certified visualization-data-v2 release."
+          }
+        ],
+        "terminal_gate": "VISUALIZATION_DATA_V2_READY",
+        "tags": [
+          "release",
+          "visualization"
+        ],
+        "notes": []
+      },
+      {
+        "id": "build_xai_release",
+        "version": 1,
+        "title": "Build and verify the model explanation release",
+        "description": "Produces SHAP/XAI evidence, checks XAI quality, and normalizes the explanation into Explanation IR.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_EXPENSIVE",
+        "work_queue": "cpu-heavy",
+        "approval_policies": [
+          "EXPENSIVE"
+        ],
+        "inputs": [
+          {
+            "name": "model_metrics",
+            "contract": "model_metrics",
+            "required": true,
+            "description": "Accepted model evaluation metrics."
+          },
+          {
+            "name": "model_ready_report",
+            "contract": "model_ready_report",
+            "required": true,
+            "description": "Passed model readiness report."
+          },
+          {
+            "name": "preprocessed_data",
+            "contract": "preprocessed_data",
+            "required": true,
+            "description": "Preprocessed model input data."
+          },
+          {
+            "name": "trained_model",
+            "contract": "trained_model",
+            "required": true,
+            "description": "Accepted model artifact."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "explanation_ir",
+            "stage_id": "xai.explanation_ir",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "xai_generate",
+            "stage_id": "xai.generate",
+            "required": true,
+            "work_queue": "cpu-heavy",
+            "input_mapping": {
+              "model": "trained_model",
+              "model_ready": "model_ready_report",
+              "preprocessed": "preprocessed_data"
+            },
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "xai_quality",
+            "stage_id": "xai.quality",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {
+              "metrics": "model_metrics"
+            },
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [
+          {
+            "from_node": "xai_generate",
+            "from_output": "xai",
+            "to_node": "explanation_ir",
+            "to_input": "xai"
+          },
+          {
+            "from_node": "xai_generate",
+            "from_output": "xai",
+            "to_node": "xai_quality",
+            "to_input": "xai"
+          },
+          {
+            "from_node": "xai_quality",
+            "from_output": "quality",
+            "to_node": "explanation_ir",
+            "to_input": "quality"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "explanation_ir",
+            "contract": "explanation_ir",
+            "from_node": "explanation_ir",
+            "from_output": "ir",
+            "required": true,
+            "description": "Normalized Explanation IR release."
+          },
+          {
+            "name": "xai_artifacts",
+            "contract": "xai_artifacts",
+            "from_node": "xai_generate",
+            "from_output": "xai",
+            "required": true,
+            "description": "Verified XAI artifact bundle."
+          },
+          {
+            "name": "xai_quality_report",
+            "contract": "xai_quality_report",
+            "from_node": "xai_quality",
+            "from_output": "quality",
+            "required": true,
+            "description": "XAI quality gate evidence."
+          }
+        ],
+        "terminal_gate": "EXPLANATION_IR_READY",
+        "tags": [
+          "ir",
+          "shap",
+          "xai"
+        ],
+        "notes": []
+      },
+      {
+        "id": "certify_dashboard_release",
+        "version": 1,
+        "title": "Certify bilingual dashboard presentation and exports",
+        "description": "Runs deterministic bilingual presentation and export certification against an immutable visualization-data release.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_DETERMINISTIC",
+        "work_queue": "release",
+        "approval_policies": [
+          "RELEASE"
+        ],
+        "inputs": [
+          {
+            "name": "visualization_data_release",
+            "contract": "visualization_data_release",
+            "required": true,
+            "description": "Certified visualization-data-v2 release."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "dashboard_i18n",
+            "stage_id": "dashboard.i18n_certification",
+            "required": true,
+            "work_queue": "release",
+            "input_mapping": {
+              "visualization": "visualization_data_release"
+            },
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [],
+        "outputs": [
+          {
+            "name": "dashboard_i18n_certification",
+            "contract": "dashboard_i18n_certification",
+            "from_node": "dashboard_i18n",
+            "from_output": "certification",
+            "required": true,
+            "description": "Bilingual dashboard certification evidence."
+          }
+        ],
+        "terminal_gate": "DASHBOARD_I18N_CERTIFIED",
+        "tags": [
+          "certification",
+          "dashboard",
+          "i18n"
+        ],
+        "notes": []
+      },
+      {
+        "id": "generate_llm_batch",
+        "version": 1,
+        "title": "Generate and canonicalize the governed LLM batch",
+        "description": "Runs provider generation under approval, aggregates outputs, preserves the optional DeepSeek compatibility branch, canonicalizes generations, and validates narrative contracts.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_PROVIDER_DEPENDENT",
+        "work_queue": "provider-llm",
+        "approval_policies": [
+          "PROVIDER"
+        ],
+        "inputs": [
+          {
+            "name": "evaluation_subset",
+            "contract": "evaluation_subset",
+            "required": true,
+            "description": "Frozen evaluation subset."
+          },
+          {
+            "name": "evidence_packages",
+            "contract": "evidence_packages",
+            "required": true,
+            "description": "Accepted controlled evidence package release."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "canonicalize",
+            "stage_id": "llm.canonicalize",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "contract_validate",
+            "stage_id": "llm.contract_validate",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "deepseek_compatibility",
+            "stage_id": "llm.filter_deepseek",
+            "required": false,
+            "condition": "enable_deepseek_compatibility",
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "llm_aggregate",
+            "stage_id": "llm.aggregate",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "llm_generate",
+            "stage_id": "llm.generate",
+            "required": true,
+            "work_queue": "provider-llm",
+            "input_mapping": {
+              "evidence": "evidence_packages",
+              "subset": "evaluation_subset"
+            },
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [
+          {
+            "from_node": "canonicalize",
+            "from_output": "canonical",
+            "to_node": "contract_validate",
+            "to_input": "canonical"
+          },
+          {
+            "from_node": "llm_aggregate",
+            "from_output": "aggregated",
+            "to_node": "canonicalize",
+            "to_input": "aggregated"
+          },
+          {
+            "from_node": "llm_aggregate",
+            "from_output": "aggregated",
+            "to_node": "deepseek_compatibility",
+            "to_input": "aggregated"
+          },
+          {
+            "from_node": "llm_generate",
+            "from_output": "generations",
+            "to_node": "llm_aggregate",
+            "to_input": "raw"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "aggregated_generations",
+            "contract": "aggregated_generations",
+            "from_node": "llm_aggregate",
+            "from_output": "aggregated",
+            "required": true,
+            "description": "Aggregated generation release."
+          },
+          {
+            "name": "canonical_generations",
+            "contract": "canonical_generations",
+            "from_node": "canonicalize",
+            "from_output": "canonical",
+            "required": true,
+            "description": "Canonical 648-cell generation release."
+          },
+          {
+            "name": "filtered_generations",
+            "contract": "filtered_generations",
+            "from_node": "deepseek_compatibility",
+            "from_output": "filtered",
+            "required": false,
+            "description": "Optional compatibility output."
+          },
+          {
+            "name": "narrative_contract_results",
+            "contract": "narrative_contract_results",
+            "from_node": "contract_validate",
+            "from_output": "contract_results",
+            "required": true,
+            "description": "Narrative contract validation evidence."
+          },
+          {
+            "name": "raw_generations",
+            "contract": "raw_generations",
+            "from_node": "llm_generate",
+            "from_output": "generations",
+            "required": true,
+            "description": "Raw provider generation records."
+          }
+        ],
+        "terminal_gate": "NARRATIVE_CONTRACT_READY",
+        "tags": [
+          "canonicalization",
+          "llm",
+          "provider"
+        ],
+        "notes": []
+      },
+      {
+        "id": "prefect_acceptance_fixture",
+        "version": 1,
+        "title": "Run deterministic Prefect acceptance fixture",
+        "description": "Isolated non-scientific fixture for execution, retry, idempotency, contract-failure, and cancellation acceptance.",
+        "status": "OPTIONAL",
+        "execution_mode": "RUN_DETERMINISTIC",
+        "work_queue": "verification",
+        "approval_policies": [],
+        "inputs": [],
+        "nodes": [
+          {
+            "node_id": "acceptance",
+            "stage_id": "ops.prefect_acceptance",
+            "required": false,
+            "condition": "enable_acceptance_fixture",
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {
+              "simulation": "simulation",
+              "sleep_seconds": "sleep_seconds"
+            }
+          }
+        ],
+        "edges": [],
+        "outputs": [
+          {
+            "name": "orchestration_acceptance_result",
+            "contract": "orchestration_acceptance_result",
+            "from_node": "acceptance",
+            "from_output": "result",
+            "required": true,
+            "description": "Isolated deterministic orchestration acceptance result."
+          }
+        ],
+        "terminal_gate": "PREFECT_ACCEPTANCE_READY",
+        "tags": [
+          "acceptance",
+          "prefect",
+          "researchops"
+        ],
+        "notes": [
+          "The enable_acceptance_fixture parameter must be true for execution."
+        ]
+      },
+      {
+        "id": "prefect_approval_acceptance_fixture",
+        "version": 1,
+        "title": "Run protected Prefect approval fixture",
+        "description": "Isolated non-scientific fixture for suspend, resume, approval, rejection, and expiry acceptance.",
+        "status": "OPTIONAL",
+        "execution_mode": "RUN_EXPENSIVE",
+        "work_queue": "verification",
+        "approval_policies": [
+          "EXPENSIVE"
+        ],
+        "inputs": [],
+        "nodes": [
+          {
+            "node_id": "protected_acceptance",
+            "stage_id": "ops.prefect_approval_acceptance",
+            "required": false,
+            "condition": "enable_approval_acceptance",
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {
+              "simulation": "simulation",
+              "sleep_seconds": "sleep_seconds"
+            }
+          }
+        ],
+        "edges": [],
+        "outputs": [
+          {
+            "name": "orchestration_approval_acceptance_result",
+            "contract": "orchestration_approval_acceptance_result",
+            "from_node": "protected_acceptance",
+            "from_output": "result",
+            "required": true,
+            "description": "Protected orchestration acceptance result."
+          }
+        ],
+        "terminal_gate": "PREFECT_APPROVAL_ACCEPTANCE_READY",
+        "tags": [
+          "acceptance",
+          "approval",
+          "prefect",
+          "researchops"
+        ],
+        "notes": [
+          "The enable_approval_acceptance parameter must be true for execution."
+        ]
+      },
+      {
+        "id": "promote_model_version",
+        "version": 1,
+        "title": "Promote a governed MLflow model version",
+        "description": "Executes the Phase 7 candidate-to-champion policy through a durable Prefect deployment.",
+        "status": "ACTIVE",
+        "execution_mode": "PROMOTE_RELEASE",
+        "work_queue": "release",
+        "approval_policies": [],
+        "inputs": [],
+        "nodes": [
+          {
+            "node_id": "model_promotion",
+            "stage_id": "ops.model_promote",
+            "required": true,
+            "work_queue": "release",
+            "input_mapping": {},
+            "parameter_mapping": {
+              "actor": "actor",
+              "approval_id": "approval_id",
+              "idempotency_key": "idempotency_key",
+              "model_name": "model_name",
+              "policy_sha256": "policy_sha256",
+              "reason": "reason",
+              "request_id": "request_id",
+              "version": "version"
+            }
+          }
+        ],
+        "edges": [],
+        "outputs": [
+          {
+            "name": "model_promotion_receipt",
+            "contract": "model_promotion_receipt",
+            "from_node": "model_promotion",
+            "from_output": "receipt",
+            "required": true,
+            "description": "Immutable governed MLflow model promotion receipt."
+          }
+        ],
+        "terminal_gate": "MODEL_PROMOTION_COMPLETED",
+        "tags": [
+          "mlflow",
+          "model",
+          "promotion",
+          "researchops"
+        ],
+        "notes": [
+          "Only the current candidate can be promoted and waivers are forbidden by policy."
+        ]
+      },
+      {
+        "id": "promote_research_release",
+        "version": 1,
+        "title": "Promote a governed research release",
+        "description": "Executes the Phase 7 release promotion policy through a durable Prefect deployment.",
+        "status": "ACTIVE",
+        "execution_mode": "PROMOTE_RELEASE",
+        "work_queue": "release",
+        "approval_policies": [],
+        "inputs": [],
+        "nodes": [
+          {
+            "node_id": "release_promotion",
+            "stage_id": "ops.release_promote",
+            "required": true,
+            "work_queue": "release",
+            "input_mapping": {},
+            "parameter_mapping": {
+              "actor": "actor",
+              "approval_id": "approval_id",
+              "expected_status": "expected_status",
+              "idempotency_key": "idempotency_key",
+              "policy_sha256": "policy_sha256",
+              "reason": "reason",
+              "release_id": "release_id",
+              "request_id": "request_id",
+              "target_status": "target_status"
+            }
+          }
+        ],
+        "edges": [],
+        "outputs": [
+          {
+            "name": "release_promotion_receipt",
+            "contract": "release_promotion_receipt",
+            "from_node": "release_promotion",
+            "from_output": "receipt",
+            "required": true,
+            "description": "Immutable governed release promotion receipt."
+          }
+        ],
+        "terminal_gate": "RELEASE_PROMOTION_COMPLETED",
+        "tags": [
+          "promotion",
+          "release",
+          "researchops"
+        ],
+        "notes": [
+          "Target-scoped approval and gate authorization remain owned by the Phase 7 policy engine."
+        ]
+      },
+      {
+        "id": "register_verified_training_release",
+        "version": 1,
+        "title": "Register a verified training release in MLflow",
+        "description": "Bridges an immutable trained-model artifact to MLflow runs, Logged Models, Model Registry aliases, and an immutable registration receipt.",
+        "status": "OPTIONAL",
+        "execution_mode": "RUN_DETERMINISTIC",
+        "work_queue": "release",
+        "approval_policies": [],
+        "inputs": [
+          {
+            "name": "trained_models",
+            "contract": "trained_model",
+            "required": true,
+            "description": "Verified portable trained-model ArtifactManifestV3 package."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "mlflow_register",
+            "stage_id": "ops.mlflow_register",
+            "required": false,
+            "condition": "enable_mlflow_registration",
+            "work_queue": "release",
+            "input_mapping": {
+              "trained_models": "trained_models"
+            },
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [],
+        "outputs": [
+          {
+            "name": "registration_receipt",
+            "contract": "mlflow_registration_receipt",
+            "from_node": "mlflow_register",
+            "from_output": "receipt",
+            "required": true,
+            "description": "Immutable MLflow registration receipt."
+          }
+        ],
+        "terminal_gate": "MLFLOW_MODEL_REGISTERED",
+        "tags": [
+          "mlflow",
+          "registry",
+          "researchops"
+        ],
+        "notes": []
+      },
+      {
+        "id": "train_model_release",
+        "version": 1,
+        "title": "Train and verify the credit-risk model release",
+        "description": "Runs the governed data, feature, split, preprocessing, training, and model-readiness chain without registering the model in MLflow.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_EXPENSIVE",
+        "work_queue": "cpu-heavy",
+        "approval_policies": [
+          "EXPENSIVE"
+        ],
+        "inputs": [
+          {
+            "name": "raw_data",
+            "contract": "raw_home_credit_dataset",
+            "required": true,
+            "description": "Frozen Home Credit source dataset."
+          }
+        ],
+        "nodes": [
+          {
+            "node_id": "data_audit",
+            "stage_id": "data.audit",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {
+              "raw_data": "raw_data"
+            },
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "data_split",
+            "stage_id": "data.split",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "feature_engineering",
+            "stage_id": "data.feature_engineering",
+            "required": true,
+            "work_queue": "cpu-heavy",
+            "input_mapping": {
+              "raw_data": "raw_data"
+            },
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "feature_matrix",
+            "stage_id": "data.feature_matrix",
+            "required": true,
+            "work_queue": "cpu-heavy",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "model_ready",
+            "stage_id": "ml.model_ready_audit",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "model_training",
+            "stage_id": "ml.train",
+            "required": true,
+            "work_queue": "cpu-heavy",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "preprocessing",
+            "stage_id": "data.preprocessing",
+            "required": true,
+            "work_queue": "cpu-heavy",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          },
+          {
+            "node_id": "target_audit",
+            "stage_id": "data.target_audit",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {
+              "raw_data": "raw_data"
+            },
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [
+          {
+            "from_node": "data_audit",
+            "from_output": "audit",
+            "to_node": "target_audit",
+            "to_input": "data_audit"
+          },
+          {
+            "from_node": "data_split",
+            "from_output": "split",
+            "to_node": "preprocessing",
+            "to_input": "split"
+          },
+          {
+            "from_node": "feature_engineering",
+            "from_output": "features",
+            "to_node": "feature_matrix",
+            "to_input": "features"
+          },
+          {
+            "from_node": "feature_matrix",
+            "from_output": "matrix",
+            "to_node": "data_split",
+            "to_input": "matrix"
+          },
+          {
+            "from_node": "model_training",
+            "from_output": "metrics",
+            "to_node": "model_ready",
+            "to_input": "metrics"
+          },
+          {
+            "from_node": "model_training",
+            "from_output": "model",
+            "to_node": "model_ready",
+            "to_input": "model"
+          },
+          {
+            "from_node": "preprocessing",
+            "from_output": "preprocessed",
+            "to_node": "model_training",
+            "to_input": "preprocessed"
+          },
+          {
+            "from_node": "target_audit",
+            "from_output": "target_audit",
+            "to_node": "feature_engineering",
+            "to_input": "target_audit"
+          },
+          {
+            "from_node": "target_audit",
+            "from_output": "target_audit",
+            "to_node": "feature_matrix",
+            "to_input": "target_audit"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "model_metrics",
+            "contract": "model_metrics",
+            "from_node": "model_training",
+            "from_output": "metrics",
+            "required": true,
+            "description": "Verified model evaluation metrics."
+          },
+          {
+            "name": "model_ready_report",
+            "contract": "model_ready_report",
+            "from_node": "model_ready",
+            "from_output": "report",
+            "required": true,
+            "description": "Model readiness gate evidence."
+          },
+          {
+            "name": "trained_model",
+            "contract": "trained_model",
+            "from_node": "model_training",
+            "from_output": "model",
+            "required": true,
+            "description": "Verified fitted model bundle."
+          }
+        ],
+        "terminal_gate": "MODEL_READY",
+        "tags": [
+          "ml",
+          "release",
+          "training"
+        ],
+        "notes": []
+      },
+      {
+        "id": "verify_source_environment",
+        "version": 1,
+        "title": "Verify source and dependency environment",
+        "description": "Captures a deterministic report for source, lock, runtime, and platform contract availability.",
+        "status": "ACTIVE",
+        "execution_mode": "RUN_DETERMINISTIC",
+        "work_queue": "verification",
+        "approval_policies": [],
+        "inputs": [],
+        "nodes": [
+          {
+            "node_id": "verify_environment",
+            "stage_id": "ops.verify_source_environment",
+            "required": true,
+            "work_queue": "verification",
+            "input_mapping": {},
+            "parameter_mapping": {}
+          }
+        ],
+        "edges": [],
+        "outputs": [
+          {
+            "name": "environment_verification_report",
+            "contract": "environment_verification_report",
+            "from_node": "verify_environment",
+            "from_output": "report",
+            "required": true,
+            "description": "Verified source and dependency environment report."
+          }
+        ],
+        "terminal_gate": "SOURCE_ENVIRONMENT_VERIFIED",
+        "tags": [
+          "environment",
+          "researchops",
+          "verification"
+        ],
+        "notes": []
+      }
+    ]
+  }
+}

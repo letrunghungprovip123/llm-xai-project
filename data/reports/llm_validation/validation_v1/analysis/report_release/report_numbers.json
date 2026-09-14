@@ -1,0 +1,187 @@
+{
+  "claim_measurement_release_id": "claim_measurement_candidate_primary_v1",
+  "claim_status_counts": {
+    "CONTRADICTED": 25,
+    "NOT_APPLICABLE": 12,
+    "NOT_VERIFIABLE": 1018,
+    "SUPPORTED": 13540,
+    "UNSUPPORTED": 72
+  },
+  "complete_case_sensitivity": [
+    {
+      "effect": "model",
+      "interpretation": "Primary and complete-case significance conclusions agree.",
+      "primary_p_value": 0.0001032708234992,
+      "primary_partial_eta_squared": 0.2991349125650543,
+      "primary_significant": true,
+      "primary_subject_count": 36,
+      "sensitivity_p_value": 0.0042112281896356,
+      "sensitivity_partial_eta_squared": 0.2202533719953565,
+      "sensitivity_significant": true,
+      "sensitivity_subject_count": 27,
+      "significance_conclusion_stable": true
+    },
+    {
+      "effect": "evidence",
+      "interpretation": "Primary and complete-case significance conclusions agree.",
+      "primary_p_value": 3.602615651930294e-15,
+      "primary_partial_eta_squared": 0.6481724332772784,
+      "primary_significant": true,
+      "primary_subject_count": 36,
+      "sensitivity_p_value": 7.917793602411097e-24,
+      "sensitivity_partial_eta_squared": 0.8619712879184759,
+      "sensitivity_significant": true,
+      "sensitivity_subject_count": 27,
+      "significance_conclusion_stable": true
+    },
+    {
+      "effect": "model:evidence",
+      "interpretation": "Primary and complete-case significance conclusions agree.",
+      "primary_p_value": 3.185214842113703e-06,
+      "primary_partial_eta_squared": 0.2392504046671831,
+      "primary_significant": true,
+      "primary_subject_count": 36,
+      "sensitivity_p_value": 1.1114269768945937e-08,
+      "sensitivity_partial_eta_squared": 0.4045898276953163,
+      "sensitivity_significant": true,
+      "sensitivity_subject_count": 27,
+      "significance_conclusion_stable": true
+    }
+  ],
+  "denominators": {
+    "applicable_claims": 14655,
+    "final_atomic_claims": 14667,
+    "planned_llm_generations": 648,
+    "resolved_claims": 13637,
+    "unusable_llm_generations": 10,
+    "usable_llm_generations": 638
+  },
+  "primary_adjusted_significant_pair_count": 18,
+  "primary_metrics": {
+    "mean_end_to_end_operational_faithfulness": 0.8771319124675916,
+    "micro_conservative_faithfulness": 0.9239167519617878,
+    "micro_resolved_faithfulness": 0.9928869986067317,
+    "micro_verifiability": 0.9305356533606278,
+    "usability_rate": 0.9845679012345679
+  },
+  "primary_omnibus_tests": [
+    {
+      "alpha": 0.05,
+      "analysis_role": "PRIMARY",
+      "df_denominator": 70.0,
+      "df_denominator_corrected": 45.931397636533376,
+      "df_numerator": 2.0,
+      "df_numerator_corrected": 1.3123256467580964,
+      "effect": "model",
+      "evidence_level_count": 6,
+      "f_statistic": 14.93828431102826,
+      "greenhouse_geisser_epsilon": 0.6561628233790482,
+      "metric_id": "end_to_end_faithfulness_yield",
+      "model_level_count": 3,
+      "observation_count": 648,
+      "p_value_greenhouse_geisser": 0.0001032708234992,
+      "p_value_uncorrected": 3.955532319150259e-06,
+      "p_value_used": 0.0001032708234992,
+      "partial_eta_squared": 0.2991349125650543,
+      "significant": true,
+      "subject_count": 36,
+      "sum_squares_effect": 0.5670383690517603,
+      "sum_squares_error": 1.328555709852165,
+      "test_method": "two_way_repeated_measures_anova_greenhouse_geisser"
+    },
+    {
+      "alpha": 0.05,
+      "analysis_role": "PRIMARY",
+      "df_denominator": 175.0,
+      "df_denominator_corrected": 62.9588805655609,
+      "df_numerator": 5.0,
+      "df_numerator_corrected": 1.7988251590160256,
+      "effect": "evidence",
+      "evidence_level_count": 6,
+      "f_statistic": 64.48055044698587,
+      "greenhouse_geisser_epsilon": 0.3597650318032051,
+      "metric_id": "end_to_end_faithfulness_yield",
+      "model_level_count": 3,
+      "observation_count": 648,
+      "p_value_greenhouse_geisser": 3.602615651930294e-15,
+      "p_value_uncorrected": 6.668071349597849e-38,
+      "p_value_used": 3.602615651930294e-15,
+      "partial_eta_squared": 0.6481724332772784,
+      "significant": true,
+      "subject_count": 36,
+      "sum_squares_effect": 6.078376805501397,
+      "sum_squares_error": 3.299338897044008,
+      "test_method": "two_way_repeated_measures_anova_greenhouse_geisser"
+    },
+    {
+      "alpha": 0.05,
+      "analysis_role": "PRIMARY",
+      "df_denominator": 350.0,
+      "df_denominator_corrected": 102.09713090091104,
+      "df_numerator": 10.0,
+      "df_numerator_corrected": 2.917060882883173,
+      "effect": "model:evidence",
+      "evidence_level_count": 6,
+      "f_statistic": 11.007254180251005,
+      "greenhouse_geisser_epsilon": 0.2917060882883173,
+      "metric_id": "end_to_end_faithfulness_yield",
+      "model_level_count": 3,
+      "observation_count": 648,
+      "p_value_greenhouse_geisser": 3.185214842113703e-06,
+      "p_value_uncorrected": 2.405446123698924e-16,
+      "p_value_used": 3.185214842113703e-06,
+      "partial_eta_squared": 0.2392504046671831,
+      "significant": true,
+      "subject_count": 36,
+      "sum_squares_effect": 2.2465311872383107,
+      "sum_squares_error": 7.143342950543898,
+      "test_method": "two_way_repeated_measures_anova_greenhouse_geisser"
+    }
+  ],
+  "primary_planned_pair_count": 33,
+  "recommendations": [
+    {
+      "option_id": "qwen3_8b__S1",
+      "scenario_id": "QUALITY_FIRST",
+      "significant_disadvantage_count": 0.0,
+      "tested_comparator_count": 3.0,
+      "untested_comparator_count": 14.0,
+      "utility_score": 0.9985340445908102
+    },
+    {
+      "option_id": "deepseek_v4_flash__S2",
+      "scenario_id": "RELIABILITY_FIRST",
+      "significant_disadvantage_count": 0.0,
+      "tested_comparator_count": 3.0,
+      "untested_comparator_count": 14.0,
+      "utility_score": 0.9600843033709954
+    },
+    {
+      "option_id": "deepseek_v4_flash__S2",
+      "scenario_id": "BALANCED",
+      "significant_disadvantage_count": 0.0,
+      "tested_comparator_count": 3.0,
+      "untested_comparator_count": 14.0,
+      "utility_score": 0.8982529851874949
+    },
+    {
+      "option_id": "deepseek_v4_flash__S2",
+      "scenario_id": "EFFICIENCY_AWARE",
+      "significant_disadvantage_count": 0.0,
+      "tested_comparator_count": 3.0,
+      "untested_comparator_count": 14.0,
+      "utility_score": 0.8127337956349013
+    },
+    {
+      "option_id": "qwen3_8b__S1",
+      "scenario_id": "INDEPENDENCE_SENSITIVE",
+      "significant_disadvantage_count": 0.0,
+      "tested_comparator_count": 3.0,
+      "untested_comparator_count": 14.0,
+      "utility_score": 0.9560671992827136
+    }
+  ],
+  "reporting_scope": "operational faithfulness under the frozen project ontology and deterministic validator; not human ground truth",
+  "schema_version": "report_numbers_v1",
+  "validator_sensitivity_significant_test_count": 33
+}

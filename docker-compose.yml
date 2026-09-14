@@ -19,6 +19,531 @@ services:
     volumes:
       - chroma_data:/chroma/chroma
 
+  researchops-postgres:
+    image: postgres:16.14-alpine3.24
+    container_name: llm-xai-researchops-postgres
+    profiles: ["researchops-db", "researchops-mlflow", "researchops-mlflow-fresh", "researchops-prefect"]
+    environment:
+      POSTGRES_DB: ${RESEARCHOPS_POSTGRES_DB:-llm_xai_ops}
+      POSTGRES_USER: ${RESEARCHOPS_POSTGRES_USER:-researchops}
+      POSTGRES_PASSWORD: ${RESEARCHOPS_POSTGRES_PASSWORD:-researchops-local-password}
+    ports:
+      - "5433:5432"
+    volumes:
+      - researchops_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${RESEARCHOPS_POSTGRES_USER:-researchops} -d ${RESEARCHOPS_POSTGRES_DB:-llm_xai_ops}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  researchops-minio:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    container_name: llm-xai-researchops-minio
+    profiles: ["researchops-storage", "researchops-mlflow", "researchops-mlflow-fresh", "researchops-prefect"]
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${RESEARCHOPS_S3_ACCESS_KEY:-researchops}
+      MINIO_ROOT_PASSWORD: ${RESEARCHOPS_S3_SECRET_KEY:-researchops-local-password}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - researchops_minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  researchops-mlflow-db-init:
+    image: postgres:16.14-alpine3.24
+    container_name: llm-xai-researchops-mlflow-db-init
+    profiles: ["researchops-mlflow"]
+    depends_on:
+      researchops-postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_HOST: researchops-postgres
+      POSTGRES_PORT: 5432
+      RESEARCHOPS_POSTGRES_USER: ${RESEARCHOPS_POSTGRES_USER:-researchops}
+      RESEARCHOPS_POSTGRES_PASSWORD: ${RESEARCHOPS_POSTGRES_PASSWORD:-researchops-local-password}
+      MLFLOW_POSTGRES_DB: ${MLFLOW_POSTGRES_DB:-mlflow}
+      MLFLOW_POSTGRES_USER: ${MLFLOW_POSTGRES_USER:-mlflow_app}
+      MLFLOW_POSTGRES_PASSWORD: ${MLFLOW_POSTGRES_PASSWORD:-mlflow-local-password}
+    volumes:
+      - ./infra/researchops/mlflow/db-init.sh:/opt/researchops/db-init.sh:ro
+    entrypoint: ["/bin/sh", "/opt/researchops/db-init.sh"]
+    restart: "no"
+
+  researchops-mlflow-minio-init:
+    image: minio/mc:RELEASE.2025-08-13T08-35-41Z
+    container_name: llm-xai-researchops-mlflow-minio-init
+    profiles: ["researchops-mlflow"]
+    depends_on:
+      researchops-minio:
+        condition: service_healthy
+    environment:
+      MINIO_ENDPOINT: http://researchops-minio:9000
+      RESEARCHOPS_S3_ACCESS_KEY: ${RESEARCHOPS_S3_ACCESS_KEY:-researchops}
+      RESEARCHOPS_S3_SECRET_KEY: ${RESEARCHOPS_S3_SECRET_KEY:-researchops-local-password}
+      MLFLOW_S3_BUCKET: ${MLFLOW_S3_BUCKET:-llm-xai-mlflow}
+      MLFLOW_S3_ACCESS_KEY: ${MLFLOW_S3_ACCESS_KEY:-mlflow-app}
+      MLFLOW_S3_SECRET_KEY: ${MLFLOW_S3_SECRET_KEY:-mlflow-local-password}
+    volumes:
+      - ./infra/researchops/mlflow/minio-bootstrap.sh:/opt/researchops/minio-bootstrap.sh:ro
+    entrypoint: ["/bin/sh", "/opt/researchops/minio-bootstrap.sh"]
+    restart: "no"
+
+  researchops-mlflow-migrate:
+    build:
+      context: .
+      dockerfile: infra/researchops/mlflow/Dockerfile
+    image: llm-xai-researchops-mlflow:3.14.0
+    container_name: llm-xai-researchops-mlflow-migrate
+    profiles: ["researchops-mlflow"]
+    depends_on:
+      researchops-mlflow-db-init:
+        condition: service_completed_successfully
+      researchops-mlflow-minio-init:
+        condition: service_completed_successfully
+    environment:
+      MLFLOW_BACKEND_STORE_URI: ${MLFLOW_BACKEND_STORE_URI:-postgresql+psycopg://mlflow_app:mlflow-local-password@researchops-postgres:5432/mlflow}
+    entrypoint: ["/bin/sh", "-c"]
+    command: ['mlflow db upgrade "$${MLFLOW_BACKEND_STORE_URI}"']
+    restart: "no"
+
+  researchops-mlflow:
+    build:
+      context: .
+      dockerfile: infra/researchops/mlflow/Dockerfile
+    image: llm-xai-researchops-mlflow:3.14.0
+    container_name: llm-xai-researchops-mlflow
+    profiles: ["researchops-mlflow"]
+    depends_on:
+      researchops-mlflow-migrate:
+        condition: service_completed_successfully
+      researchops-mlflow-minio-init:
+        condition: service_completed_successfully
+    environment:
+      MLFLOW_BACKEND_STORE_URI: ${MLFLOW_BACKEND_STORE_URI:-postgresql+psycopg://mlflow_app:mlflow-local-password@researchops-postgres:5432/mlflow}
+      MLFLOW_ARTIFACTS_DESTINATION: ${MLFLOW_ARTIFACTS_DESTINATION:-s3://llm-xai-mlflow/mlartifacts}
+      MLFLOW_S3_ENDPOINT_URL: http://researchops-minio:9000
+      AWS_ACCESS_KEY_ID: ${MLFLOW_S3_ACCESS_KEY:-mlflow-app}
+      AWS_SECRET_ACCESS_KEY: ${MLFLOW_S3_SECRET_KEY:-mlflow-local-password}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-us-east-1}
+      MLFLOW_ALLOWED_HOSTS: ${MLFLOW_ALLOWED_HOSTS:-localhost:*,127.0.0.1:*,researchops-mlflow:*}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >-
+        mlflow server
+        --host 0.0.0.0
+        --port 5000
+        --backend-store-uri "$${MLFLOW_BACKEND_STORE_URI}"
+        --artifacts-destination "$${MLFLOW_ARTIFACTS_DESTINATION}"
+        --allowed-hosts "$${MLFLOW_ALLOWED_HOSTS}"
+    ports:
+      - "127.0.0.1:5000:5000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/version', timeout=3).read()"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+
+
+  researchops-prefect-db-init:
+    image: postgres:16.14-alpine3.24
+    container_name: llm-xai-researchops-prefect-db-init
+    profiles: ["researchops-prefect"]
+    depends_on:
+      researchops-postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_HOST: researchops-postgres
+      POSTGRES_PORT: 5432
+      RESEARCHOPS_POSTGRES_USER: ${RESEARCHOPS_POSTGRES_USER:-researchops}
+      RESEARCHOPS_POSTGRES_PASSWORD: ${RESEARCHOPS_POSTGRES_PASSWORD:-researchops-local-password}
+      PREFECT_POSTGRES_DB: ${PREFECT_POSTGRES_DB:-prefect}
+      PREFECT_POSTGRES_USER: ${PREFECT_POSTGRES_USER:-prefect_app}
+      PREFECT_POSTGRES_PASSWORD: ${PREFECT_POSTGRES_PASSWORD:-prefect-local-password}
+    volumes:
+      - ./infra/researchops/prefect/db-init.sh:/opt/researchops/db-init.sh:ro
+    entrypoint: ["/bin/sh", "/opt/researchops/db-init.sh"]
+    restart: "no"
+
+  researchops-prefect-redis:
+    image: redis:7.4-alpine
+    container_name: llm-xai-researchops-prefect-redis
+    profiles: ["researchops-prefect"]
+    command:
+      - /bin/sh
+      - -c
+      - exec redis-server --appendonly yes --requirepass "$${PREFECT_REDIS_PASSWORD}"
+    environment:
+      PREFECT_REDIS_PASSWORD: ${PREFECT_REDIS_PASSWORD:-prefect-local-password}
+    volumes:
+      - researchops_prefect_redis_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", 'redis-cli -a "$${PREFECT_REDIS_PASSWORD}" ping | grep -Fxq PONG']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  researchops-prefect-migrate:
+    build:
+      context: .
+      dockerfile: infra/researchops/prefect/Dockerfile
+    image: llm-xai-researchops-prefect:3.7.8
+    container_name: llm-xai-researchops-prefect-migrate
+    profiles: ["researchops-prefect"]
+    depends_on:
+      researchops-prefect-db-init:
+        condition: service_completed_successfully
+      researchops-prefect-redis:
+        condition: service_healthy
+    environment:
+      PREFECT_API_DATABASE_CONNECTION_URL: ${PREFECT_API_DATABASE_CONNECTION_URL:-postgresql+asyncpg://prefect_app:prefect-local-password@researchops-postgres:5432/prefect}
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["prefect server database upgrade -y"]
+    restart: "no"
+
+  researchops-prefect-server:
+    build:
+      context: .
+      dockerfile: infra/researchops/prefect/Dockerfile
+    image: llm-xai-researchops-prefect:3.7.8
+    container_name: llm-xai-researchops-prefect-server
+    profiles: ["researchops-prefect"]
+    depends_on:
+      researchops-prefect-migrate:
+        condition: service_completed_successfully
+      researchops-prefect-redis:
+        condition: service_healthy
+    environment:
+      PREFECT_API_DATABASE_CONNECTION_URL: ${PREFECT_API_DATABASE_CONNECTION_URL:-postgresql+asyncpg://prefect_app:prefect-local-password@researchops-postgres:5432/prefect}
+      PREFECT_API_DATABASE_MIGRATE_ON_START: "false"
+      PREFECT_SERVER_API_HOST: 0.0.0.0
+      PREFECT_SERVER_UI_API_URL: http://127.0.0.1:4200/api
+      PREFECT_MESSAGING_BROKER: prefect_redis.messaging
+      PREFECT_MESSAGING_CACHE: prefect_redis.messaging
+      PREFECT_SERVER_EVENTS_CAUSAL_ORDERING: prefect_redis.ordering
+      PREFECT_SERVER_CONCURRENCY_LEASE_STORAGE: prefect_redis.lease_storage
+      PREFECT_REDIS_MESSAGING_URL: ${PREFECT_REDIS_MESSAGING_URL:-redis://:prefect-local-password@researchops-prefect-redis:6379/0}
+      PREFECT_SERVER_DOCKET_URL: ${PREFECT_SERVER_DOCKET_URL:-redis://:prefect-local-password@researchops-prefect-redis:6379/1}
+    command: ["prefect", "server", "start", "--host", "0.0.0.0", "--port", "4200", "--no-services"]
+    ports:
+      - "127.0.0.1:4200:4200"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; assert u.urlopen('http://127.0.0.1:4200/api/health', timeout=3).read() == b'true'"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 30s
+    restart: unless-stopped
+
+  researchops-prefect-services:
+    build:
+      context: .
+      dockerfile: infra/researchops/prefect/Dockerfile
+    image: llm-xai-researchops-prefect:3.7.8
+    container_name: llm-xai-researchops-prefect-services
+    profiles: ["researchops-prefect"]
+    depends_on:
+      researchops-prefect-server:
+        condition: service_healthy
+    environment:
+      PREFECT_API_DATABASE_CONNECTION_URL: ${PREFECT_API_DATABASE_CONNECTION_URL:-postgresql+asyncpg://prefect_app:prefect-local-password@researchops-postgres:5432/prefect}
+      PREFECT_API_DATABASE_MIGRATE_ON_START: "false"
+      PREFECT_MESSAGING_BROKER: prefect_redis.messaging
+      PREFECT_MESSAGING_CACHE: prefect_redis.messaging
+      PREFECT_SERVER_EVENTS_CAUSAL_ORDERING: prefect_redis.ordering
+      PREFECT_SERVER_CONCURRENCY_LEASE_STORAGE: prefect_redis.lease_storage
+      PREFECT_REDIS_MESSAGING_URL: ${PREFECT_REDIS_MESSAGING_URL:-redis://:prefect-local-password@researchops-prefect-redis:6379/0}
+      PREFECT_SERVER_DOCKET_URL: ${PREFECT_SERVER_DOCKET_URL:-redis://:prefect-local-password@researchops-prefect-redis:6379/1}
+    command: ["prefect", "server", "services", "start"]
+    restart: unless-stopped
+
+  researchops-prefect-bootstrap:
+    build:
+      context: .
+      dockerfile: infra/researchops/prefect/Dockerfile
+    image: llm-xai-researchops-prefect:3.7.8
+    container_name: llm-xai-researchops-prefect-bootstrap
+    profiles: ["researchops-prefect"]
+    depends_on:
+      researchops-prefect-server:
+        condition: service_healthy
+      researchops-prefect-services:
+        condition: service_started
+    environment:
+      PREFECT_API_URL: http://researchops-prefect-server:4200/api
+      PREFECT_INTERNAL_API_URL: http://researchops-prefect-server:4200/api
+      PREFECT_API_DATABASE_CONNECTION_URL: ${PREFECT_API_DATABASE_CONNECTION_URL:-postgresql+asyncpg://prefect_app:prefect-local-password@researchops-postgres:5432/prefect}
+      PREFECT_REDIS_MESSAGING_URL: ${PREFECT_REDIS_MESSAGING_URL:-redis://:prefect-local-password@researchops-prefect-redis:6379/0}
+      PREFECT_SERVER_DOCKET_URL: ${PREFECT_SERVER_DOCKET_URL:-redis://:prefect-local-password@researchops-prefect-redis:6379/1}
+      PREFECT_WORK_POOL_NAME: ${PREFECT_WORK_POOL_NAME:-researchops-local-process}
+      PREFECT_VERSION: ${PREFECT_VERSION:-3.7.8}
+    volumes:
+      - ./:/workspace:ro
+    entrypoint: ["/bin/sh", "/workspace/infra/researchops/prefect/bootstrap.sh"]
+    restart: "no"
+
+  researchops-prefect-artifact-bootstrap:
+    build:
+      context: .
+      dockerfile: infra/researchops/prefect/Dockerfile
+    image: llm-xai-researchops-prefect:3.7.8
+    container_name: llm-xai-researchops-prefect-artifact-bootstrap
+    profiles: ["researchops-prefect"]
+    depends_on:
+      researchops-minio:
+        condition: service_healthy
+    environment:
+      RESEARCHOPS_S3_BUCKET: ${RESEARCHOPS_S3_BUCKET:-llm-xai-researchops}
+      RESEARCHOPS_S3_ENDPOINT: http://researchops-minio:9000
+      RESEARCHOPS_S3_ACCESS_KEY: ${RESEARCHOPS_S3_ACCESS_KEY:-researchops}
+      RESEARCHOPS_S3_SECRET_KEY: ${RESEARCHOPS_S3_SECRET_KEY:-researchops-local-password}
+      RESEARCHOPS_S3_REGION: ${RESEARCHOPS_S3_REGION:-us-east-1}
+      RESEARCHOPS_S3_USE_SSL: "false"
+      RESEARCHOPS_S3_KEY_PREFIX: ${RESEARCHOPS_S3_KEY_PREFIX:-researchops}
+    volumes:
+      - ./:/workspace:ro
+    working_dir: /workspace
+    command:
+      - python3
+      - -m
+      - research.python.researchops.artifacts
+      - bootstrap-s3
+    restart: "no"
+
+  researchops-prefect-deploy:
+    build:
+      context: .
+      dockerfile: infra/researchops/prefect/Dockerfile
+    image: llm-xai-researchops-prefect:3.7.8
+    container_name: llm-xai-researchops-prefect-deploy
+    profiles: ["researchops-prefect"]
+    depends_on:
+      researchops-prefect-bootstrap:
+        condition: service_completed_successfully
+    environment:
+      PREFECT_API_URL: http://researchops-prefect-server:4200/api
+      PREFECT_INTERNAL_API_URL: http://researchops-prefect-server:4200/api
+    volumes:
+      - ./:/workspace:ro
+    working_dir: /workspace
+    command:
+      - python3
+      - -m
+      - research.python.researchops.orchestration.prefect_adapter.deployment_cli
+      - bootstrap
+      - --report-path
+      - /tmp/prefect-deployments-bootstrap.json
+    restart: "no"
+
+  researchops-prefect-worker:
+    build:
+      context: .
+      dockerfile: infra/researchops/prefect/Dockerfile
+    image: llm-xai-researchops-prefect:3.7.8
+    container_name: llm-xai-researchops-prefect-worker
+    profiles: ["researchops-prefect"]
+    depends_on:
+      researchops-prefect-deploy:
+        condition: service_completed_successfully
+      researchops-prefect-artifact-bootstrap:
+        condition: service_completed_successfully
+    environment:
+      PREFECT_API_URL: http://researchops-prefect-server:4200/api
+      PREFECT_INTERNAL_API_URL: http://researchops-prefect-server:4200/api
+      PREFECT_WORK_POOL_NAME: ${PREFECT_WORK_POOL_NAME:-researchops-local-process}
+      PREFECT_WORKER_LIMIT: ${PREFECT_WORKER_LIMIT:-4}
+      PREFECT_WORKER_WEBSERVER_HOST: 0.0.0.0
+      PREFECT_WORKER_WEBSERVER_PORT: 8080
+      RESEARCHOPS_DATABASE_URL: ${RESEARCHOPS_INTERNAL_DATABASE_URL:-}
+      RESEARCHOPS_POSTGRES_DB: ${RESEARCHOPS_POSTGRES_DB:-llm_xai_ops}
+      RESEARCHOPS_POSTGRES_USER: ${RESEARCHOPS_POSTGRES_USER:-researchops}
+      RESEARCHOPS_POSTGRES_PASSWORD: ${RESEARCHOPS_POSTGRES_PASSWORD:-researchops-local-password}
+      RESEARCHOPS_ARTIFACT_PROFILE: ${RESEARCHOPS_ARTIFACT_PROFILE:-development-minio}
+      RESEARCHOPS_S3_BUCKET: ${RESEARCHOPS_S3_BUCKET:-llm-xai-researchops}
+      RESEARCHOPS_S3_ENDPOINT: http://researchops-minio:9000
+      RESEARCHOPS_S3_ACCESS_KEY: ${RESEARCHOPS_S3_ACCESS_KEY:-researchops}
+      RESEARCHOPS_S3_SECRET_KEY: ${RESEARCHOPS_S3_SECRET_KEY:-researchops-local-password}
+      RESEARCHOPS_S3_REGION: ${RESEARCHOPS_S3_REGION:-us-east-1}
+      RESEARCHOPS_S3_USE_SSL: "false"
+      RESEARCHOPS_S3_KEY_PREFIX: ${RESEARCHOPS_S3_KEY_PREFIX:-researchops}
+      MLFLOW_VERSION: ${MLFLOW_VERSION:-3.14.0}
+      MLFLOW_TRACKING_URI: http://researchops-mlflow:5000
+      MLFLOW_INTERNAL_TRACKING_URI: http://researchops-mlflow:5000
+      MLFLOW_BACKEND_STORE_URI: ${MLFLOW_BACKEND_STORE_URI:-postgresql+psycopg://mlflow_app:mlflow-local-password@researchops-postgres:5432/mlflow}
+      MLFLOW_ARTIFACTS_DESTINATION: ${MLFLOW_ARTIFACTS_DESTINATION:-s3://llm-xai-mlflow/mlartifacts}
+      MLFLOW_S3_ENDPOINT_URL: http://researchops-minio:9000
+      MLFLOW_S3_BUCKET: ${MLFLOW_S3_BUCKET:-llm-xai-mlflow}
+      MLFLOW_S3_ACCESS_KEY: ${MLFLOW_S3_ACCESS_KEY:-mlflow-app}
+      MLFLOW_S3_SECRET_KEY: ${MLFLOW_S3_SECRET_KEY:-mlflow-local-password}
+      AWS_ACCESS_KEY_ID: ${MLFLOW_S3_ACCESS_KEY:-mlflow-app}
+      AWS_SECRET_ACCESS_KEY: ${MLFLOW_S3_SECRET_KEY:-mlflow-local-password}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-us-east-1}
+      MLFLOW_ALLOWED_HOSTS: ${MLFLOW_ALLOWED_HOSTS:-localhost:*,127.0.0.1:*,researchops-mlflow:*}
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    command: ["/bin/sh", "/workspace/infra/researchops/prefect/worker-entrypoint.sh"]
+    ports:
+      - "127.0.0.1:9090:8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://127.0.0.1:8080/health', timeout=3).read()"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 20s
+    restart: unless-stopped
+
+  researchops-api:
+    build:
+      context: .
+      dockerfile: infra/researchops/api/Dockerfile
+    image: llm-xai-researchops-api:phase8
+    container_name: llm-xai-researchops-api
+    profiles: ["researchops-prefect"]
+    depends_on:
+      researchops-postgres:
+        condition: service_healthy
+      researchops-minio:
+        condition: service_healthy
+      researchops-mlflow:
+        condition: service_healthy
+      researchops-prefect-server:
+        condition: service_healthy
+    environment:
+      RESEARCHOPS_DATABASE_URL: ${RESEARCHOPS_INTERNAL_DATABASE_URL:-postgresql+psycopg://researchops:researchops-local-password@researchops-postgres:5432/llm_xai_ops}
+      RESEARCHOPS_ARTIFACT_PROFILE: ${RESEARCHOPS_ARTIFACT_PROFILE:-development-minio}
+      RESEARCHOPS_S3_BUCKET: ${RESEARCHOPS_S3_BUCKET:-llm-xai-researchops}
+      RESEARCHOPS_S3_ENDPOINT: http://researchops-minio:9000
+      RESEARCHOPS_S3_ACCESS_KEY: ${RESEARCHOPS_S3_ACCESS_KEY:-researchops}
+      RESEARCHOPS_S3_SECRET_KEY: ${RESEARCHOPS_S3_SECRET_KEY:-researchops-local-password}
+      RESEARCHOPS_S3_REGION: ${RESEARCHOPS_S3_REGION:-us-east-1}
+      RESEARCHOPS_S3_USE_SSL: "false"
+      RESEARCHOPS_S3_KEY_PREFIX: ${RESEARCHOPS_S3_KEY_PREFIX:-researchops}
+      PREFECT_API_URL: http://researchops-prefect-server:4200/api
+      MLFLOW_TRACKING_URI: http://researchops-mlflow:5000
+      MLFLOW_INTERNAL_TRACKING_URI: http://researchops-mlflow:5000
+      RESEARCHOPS_API_AUTH_MODE: ${RESEARCHOPS_API_AUTH_MODE:-local}
+      RESEARCHOPS_API_LOCAL_SUBJECT: ${RESEARCHOPS_API_LOCAL_SUBJECT:-local-developer}
+      RESEARCHOPS_API_LOCAL_ROLES: ${RESEARCHOPS_API_LOCAL_ROLES:-viewer,operator,reviewer,approver,release-manager,admin}
+      RESEARCHOPS_API_CURSOR_SECRET: ${RESEARCHOPS_API_CURSOR_SECRET:-researchops-local-cursor-secret-change-me}
+      RESEARCHOPS_API_DOCS_ENABLED: ${RESEARCHOPS_API_DOCS_ENABLED:-true}
+    ports:
+      - "127.0.0.1:8001:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://127.0.0.1:8000/healthz', timeout=3).read()"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 20s
+    restart: unless-stopped
+
+  researchops-mlflow-fresh-db-init:
+    image: postgres:16.14-alpine3.24
+    container_name: llm-xai-researchops-mlflow-fresh-db-init
+    profiles: ["researchops-mlflow-fresh"]
+    depends_on:
+      researchops-postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_HOST: researchops-postgres
+      POSTGRES_PORT: 5432
+      RESEARCHOPS_POSTGRES_USER: ${RESEARCHOPS_POSTGRES_USER:-researchops}
+      RESEARCHOPS_POSTGRES_PASSWORD: ${RESEARCHOPS_POSTGRES_PASSWORD:-researchops-local-password}
+      MLFLOW_POSTGRES_DB: ${MLFLOW_FRESH_POSTGRES_DB:-mlflow_phase5_acceptance}
+      MLFLOW_POSTGRES_USER: ${MLFLOW_FRESH_POSTGRES_USER:-mlflow_phase5_acceptance_app}
+      MLFLOW_POSTGRES_PASSWORD: ${MLFLOW_FRESH_POSTGRES_PASSWORD:-mlflow-phase5-acceptance-password}
+    volumes:
+      - ./infra/researchops/mlflow/db-init.sh:/opt/researchops/db-init.sh:ro
+    entrypoint: ["/bin/sh", "/opt/researchops/db-init.sh"]
+    restart: "no"
+
+  researchops-mlflow-fresh-minio-init:
+    image: minio/mc:RELEASE.2025-08-13T08-35-41Z
+    container_name: llm-xai-researchops-mlflow-fresh-minio-init
+    profiles: ["researchops-mlflow-fresh"]
+    depends_on:
+      researchops-minio:
+        condition: service_healthy
+    environment:
+      MINIO_ENDPOINT: http://researchops-minio:9000
+      RESEARCHOPS_S3_ACCESS_KEY: ${RESEARCHOPS_S3_ACCESS_KEY:-researchops}
+      RESEARCHOPS_S3_SECRET_KEY: ${RESEARCHOPS_S3_SECRET_KEY:-researchops-local-password}
+      MLFLOW_S3_BUCKET: ${MLFLOW_FRESH_S3_BUCKET:-llm-xai-mlflow-phase5-acceptance}
+      MLFLOW_S3_ACCESS_KEY: ${MLFLOW_FRESH_S3_ACCESS_KEY:-mlflow-phase5-acceptance}
+      MLFLOW_S3_SECRET_KEY: ${MLFLOW_FRESH_S3_SECRET_KEY:-mlflow-phase5-acceptance-password}
+    volumes:
+      - ./infra/researchops/mlflow/minio-bootstrap.sh:/opt/researchops/minio-bootstrap.sh:ro
+    entrypoint: ["/bin/sh", "/opt/researchops/minio-bootstrap.sh"]
+    restart: "no"
+
+  researchops-mlflow-fresh-migrate:
+    build:
+      context: .
+      dockerfile: infra/researchops/mlflow/Dockerfile
+    image: llm-xai-researchops-mlflow:3.14.0
+    container_name: llm-xai-researchops-mlflow-fresh-migrate
+    profiles: ["researchops-mlflow-fresh"]
+    depends_on:
+      researchops-mlflow-fresh-db-init:
+        condition: service_completed_successfully
+      researchops-mlflow-fresh-minio-init:
+        condition: service_completed_successfully
+    environment:
+      MLFLOW_BACKEND_STORE_URI: ${MLFLOW_FRESH_BACKEND_STORE_URI:-postgresql+psycopg://mlflow_phase5_acceptance_app:mlflow-phase5-acceptance-password@researchops-postgres:5432/mlflow_phase5_acceptance}
+    entrypoint: ["/bin/sh", "-c"]
+    command: ['mlflow db upgrade "$${MLFLOW_BACKEND_STORE_URI}"']
+    restart: "no"
+
+  researchops-mlflow-fresh:
+    build:
+      context: .
+      dockerfile: infra/researchops/mlflow/Dockerfile
+    image: llm-xai-researchops-mlflow:3.14.0
+    container_name: llm-xai-researchops-mlflow-fresh
+    profiles: ["researchops-mlflow-fresh"]
+    depends_on:
+      researchops-mlflow-fresh-migrate:
+        condition: service_completed_successfully
+      researchops-mlflow-fresh-minio-init:
+        condition: service_completed_successfully
+    environment:
+      MLFLOW_BACKEND_STORE_URI: ${MLFLOW_FRESH_BACKEND_STORE_URI:-postgresql+psycopg://mlflow_phase5_acceptance_app:mlflow-phase5-acceptance-password@researchops-postgres:5432/mlflow_phase5_acceptance}
+      MLFLOW_ARTIFACTS_DESTINATION: ${MLFLOW_FRESH_ARTIFACTS_DESTINATION:-s3://llm-xai-mlflow-phase5-acceptance/mlartifacts}
+      MLFLOW_S3_ENDPOINT_URL: http://researchops-minio:9000
+      AWS_ACCESS_KEY_ID: ${MLFLOW_FRESH_S3_ACCESS_KEY:-mlflow-phase5-acceptance}
+      AWS_SECRET_ACCESS_KEY: ${MLFLOW_FRESH_S3_SECRET_KEY:-mlflow-phase5-acceptance-password}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-us-east-1}
+      MLFLOW_ALLOWED_HOSTS: localhost:*,127.0.0.1:*,researchops-mlflow-fresh:*
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >-
+        mlflow server
+        --host 0.0.0.0
+        --port 5000
+        --backend-store-uri "$${MLFLOW_BACKEND_STORE_URI}"
+        --artifacts-destination "$${MLFLOW_ARTIFACTS_DESTINATION}"
+        --allowed-hosts "$${MLFLOW_ALLOWED_HOSTS}"
+    ports:
+      - "127.0.0.1:5001:5000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/version', timeout=3).read()"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+    restart: "no"
+
 volumes:
   postgres_data:
   chroma_data:
+  researchops_postgres_data:
+  researchops_minio_data:
+  researchops_prefect_redis_data:

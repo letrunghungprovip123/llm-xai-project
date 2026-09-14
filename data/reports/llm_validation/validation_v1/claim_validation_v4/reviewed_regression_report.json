@@ -1,0 +1,18 @@
+{
+  "schema_version": "claim_validation_reviewed_regression_report_v1",
+  "generated_at": "2026-07-23T15:03:15.693Z",
+  "corpus_count": 260,
+  "measurement_bug_count": 257,
+  "preserved_experimental_contradiction_count": 3,
+  "outcome_counts": {
+    "AGGREGATE_MIXED": 161,
+    "CORRECTED_DIRECTION": 4,
+    "DROPPED": 15,
+    "FACT_CONSISTENT_UNCERTAINTY": 63,
+    "NON_PREDICTION_ROUTE": 14,
+    "PRESERVED_CONTRADICTION": 3
+  },
+  "test_passed": true,
+  "pass": true,
+  "test_output_tail": "✔ reviewed 260-case corpus repairs 257 measurement bugs and preserves 3 errors (929.089875ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1386.605833\n"
+}

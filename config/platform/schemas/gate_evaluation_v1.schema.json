@@ -1,0 +1,330 @@
+{
+  "$defs": {
+    "GateAdapterIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "GateAdapterIdentity",
+      "type": "object"
+    },
+    "GateCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Check Id",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "expected": {
+          "default": null,
+          "title": "Expected"
+        },
+        "observed": {
+          "default": null,
+          "title": "Observed"
+        },
+        "severity": {
+          "default": "ERROR",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "check_id",
+        "passed"
+      ],
+      "title": "GateCheck",
+      "type": "object"
+    },
+    "GateEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "manifest_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Manifest Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "manifest_sha256"
+      ],
+      "title": "GateEvidence",
+      "type": "object"
+    },
+    "GatePolicyIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "GatePolicyIdentity",
+      "type": "object"
+    },
+    "GateScope": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "pipeline_run",
+            "stage_run",
+            "artifact",
+            "release",
+            "model_version"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ],
+      "title": "GateScope",
+      "type": "object"
+    },
+    "GateSource": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Artifact Id"
+        },
+        "manifest_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Manifest Sha256"
+        },
+        "contract": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Contract",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contract"
+      ],
+      "title": "GateSource",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "gate_evaluation_v1",
+      "default": "gate_evaluation_v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "gate_id": {
+      "pattern": "^[A-Z][A-Z0-9_]*$",
+      "title": "Gate Id",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/GateScope"
+    },
+    "outcome": {
+      "enum": [
+        "PASSED",
+        "FAILED"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "blocking": {
+      "default": true,
+      "title": "Blocking",
+      "type": "boolean"
+    },
+    "severity": {
+      "default": "ERROR",
+      "enum": [
+        "INFO",
+        "WARNING",
+        "ERROR"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "adapter": {
+      "$ref": "#/$defs/GateAdapterIdentity"
+    },
+    "policy": {
+      "$ref": "#/$defs/GatePolicyIdentity"
+    },
+    "source": {
+      "$ref": "#/$defs/GateSource"
+    },
+    "evidence": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/GateEvidence"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "expected": {
+      "additionalProperties": true,
+      "title": "Expected",
+      "type": "object"
+    },
+    "observed": {
+      "additionalProperties": true,
+      "title": "Observed",
+      "type": "object"
+    },
+    "checks": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/GateCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "source_contracts": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Contracts",
+      "type": "array"
+    },
+    "source_evaluation_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Evaluation Ids",
+      "type": "array"
+    },
+    "origin_pipeline_run_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Origin Pipeline Run Id"
+    },
+    "origin_stage_run_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Origin Stage Run Id"
+    },
+    "evaluated_at": {
+      "format": "date-time",
+      "title": "Evaluated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "gate_id",
+    "scope",
+    "outcome",
+    "adapter",
+    "policy",
+    "source",
+    "evaluated_at"
+  ],
+  "title": "GateEvaluationDraft",
+  "type": "object"
+}

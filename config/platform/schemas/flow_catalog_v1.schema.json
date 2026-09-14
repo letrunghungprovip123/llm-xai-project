@@ -1,0 +1,344 @@
+{
+  "$defs": {
+    "FlowDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_policies": {
+          "default": [],
+          "items": {
+            "enum": [
+              "EXPENSIVE",
+              "PROVIDER",
+              "RELEASE"
+            ],
+            "type": "string"
+          },
+          "title": "Approval Policies",
+          "type": "array"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "edges": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/FlowEdge"
+          },
+          "title": "Edges",
+          "type": "array"
+        },
+        "execution_mode": {
+          "enum": [
+            "VERIFY_ONLY",
+            "RUN_DETERMINISTIC",
+            "RUN_EXPENSIVE",
+            "RUN_PROVIDER_DEPENDENT",
+            "PROMOTE_RELEASE"
+          ],
+          "title": "Execution Mode",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "inputs": {
+          "items": {
+            "$ref": "#/$defs/FlowInput"
+          },
+          "title": "Inputs",
+          "type": "array"
+        },
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/FlowNode"
+          },
+          "title": "Nodes",
+          "type": "array"
+        },
+        "notes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        },
+        "outputs": {
+          "items": {
+            "$ref": "#/$defs/FlowOutput"
+          },
+          "title": "Outputs",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "ACTIVE",
+            "OPTIONAL",
+            "PLANNED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "tags": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "terminal_gate": {
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "title": "Terminal Gate",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "work_queue": {
+          "enum": [
+            "release",
+            "provider-llm",
+            "cpu-heavy",
+            "verification"
+          ],
+          "title": "Work Queue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "title",
+        "description",
+        "status",
+        "execution_mode",
+        "work_queue",
+        "inputs",
+        "nodes",
+        "outputs",
+        "terminal_gate"
+      ],
+      "title": "FlowDefinition",
+      "type": "object"
+    },
+    "FlowEdge": {
+      "additionalProperties": false,
+      "properties": {
+        "from_node": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "From Node",
+          "type": "string"
+        },
+        "from_output": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "From Output",
+          "type": "string"
+        },
+        "to_input": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "To Input",
+          "type": "string"
+        },
+        "to_node": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "To Node",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from_node",
+        "from_output",
+        "to_node",
+        "to_input"
+      ],
+      "title": "FlowEdge",
+      "type": "object"
+    },
+    "FlowInput": {
+      "additionalProperties": false,
+      "properties": {
+        "contract": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Contract",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "name": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "contract",
+        "description"
+      ],
+      "title": "FlowInput",
+      "type": "object"
+    },
+    "FlowNode": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Condition"
+        },
+        "input_mapping": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Input Mapping",
+          "type": "object"
+        },
+        "node_id": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Node Id",
+          "type": "string"
+        },
+        "parameter_mapping": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Parameter Mapping",
+          "type": "object"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "stage_id": {
+          "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$",
+          "title": "Stage Id",
+          "type": "string"
+        },
+        "work_queue": {
+          "enum": [
+            "release",
+            "provider-llm",
+            "cpu-heavy",
+            "verification"
+          ],
+          "title": "Work Queue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "node_id",
+        "stage_id",
+        "work_queue"
+      ],
+      "title": "FlowNode",
+      "type": "object"
+    },
+    "FlowOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "contract": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Contract",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "from_node": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "From Node",
+          "type": "string"
+        },
+        "from_output": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "From Output",
+          "type": "string"
+        },
+        "name": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "contract",
+        "from_node",
+        "from_output",
+        "description"
+      ],
+      "title": "FlowOutput",
+      "type": "object"
+    }
+  },
+  "$id": "https://llm-xai.local/schemas/flow_catalog_v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "flows": {
+      "items": {
+        "$ref": "#/$defs/FlowDefinition"
+      },
+      "title": "Flows",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "flow_catalog_v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stage_registry_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Stage Registry Sha256",
+      "type": "string"
+    },
+    "status": {
+      "const": "ACTIVE",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "stage_registry_sha256",
+    "flows"
+  ],
+  "title": "ResearchOps Flow Catalog v1",
+  "type": "object"
+}

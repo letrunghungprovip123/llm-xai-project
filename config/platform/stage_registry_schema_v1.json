@@ -1,0 +1,369 @@
+{
+  "$defs": {
+    "ArtifactBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "contract": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Contract",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "discovery_glob": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Discovery Glob"
+        },
+        "discovery_globs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Discovery Globs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "contract"
+      ],
+      "title": "ArtifactBinding",
+      "type": "object"
+    },
+    "BehaviorSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "deterministic": {
+          "title": "Deterministic",
+          "type": "boolean"
+        },
+        "expensive": {
+          "title": "Expensive",
+          "type": "boolean"
+        },
+        "provider_required": {
+          "title": "Provider Required",
+          "type": "boolean"
+        },
+        "approval_policy": {
+          "enum": [
+            "NONE",
+            "EXPENSIVE",
+            "PROVIDER",
+            "RELEASE"
+          ],
+          "title": "Approval Policy",
+          "type": "string"
+        },
+        "timeout_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        },
+        "retries": {
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Retries",
+          "type": "integer"
+        },
+        "concurrency_group": {
+          "minLength": 1,
+          "title": "Concurrency Group",
+          "type": "string"
+        }
+      },
+      "required": [
+        "deterministic",
+        "expensive",
+        "provider_required",
+        "approval_policy",
+        "timeout_seconds",
+        "retries",
+        "concurrency_group"
+      ],
+      "title": "BehaviorSpec",
+      "type": "object"
+    },
+    "ResourceSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "cpu": {
+          "exclusiveMinimum": 0,
+          "title": "Cpu",
+          "type": "number"
+        },
+        "memory_mb": {
+          "exclusiveMinimum": 0,
+          "title": "Memory Mb",
+          "type": "integer"
+        },
+        "gpu": {
+          "title": "Gpu",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "cpu",
+        "memory_mb",
+        "gpu"
+      ],
+      "title": "ResourceSpec",
+      "type": "object"
+    },
+    "RuntimeSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "python",
+            "npm"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "executable": {
+          "minLength": 1,
+          "title": "Executable",
+          "type": "string"
+        },
+        "args": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Args",
+          "type": "array"
+        },
+        "working_directory": {
+          "default": ".",
+          "title": "Working Directory",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "executable",
+        "args"
+      ],
+      "title": "RuntimeSpec",
+      "type": "object"
+    },
+    "StageDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "owner": {
+          "pattern": "^[a-z][a-z0-9_-]*$",
+          "title": "Owner",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ACTIVE",
+            "OPTIONAL",
+            "LEGACY"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "runtime": {
+          "$ref": "#/$defs/RuntimeSpec"
+        },
+        "behavior": {
+          "$ref": "#/$defs/BehaviorSpec"
+        },
+        "inputs": {
+          "items": {
+            "$ref": "#/$defs/ArtifactBinding"
+          },
+          "title": "Inputs",
+          "type": "array"
+        },
+        "outputs": {
+          "items": {
+            "$ref": "#/$defs/ArtifactBinding"
+          },
+          "title": "Outputs",
+          "type": "array"
+        },
+        "verification": {
+          "$ref": "#/$defs/VerificationSpec"
+        },
+        "resources": {
+          "$ref": "#/$defs/ResourceSpec"
+        },
+        "secrets": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Secrets",
+          "type": "array"
+        },
+        "tags": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "legacy_dispatcher_stage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legacy Dispatcher Stage"
+        },
+        "notes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "title",
+        "owner",
+        "status",
+        "runtime",
+        "behavior",
+        "inputs",
+        "outputs",
+        "verification",
+        "resources"
+      ],
+      "title": "StageDefinition",
+      "type": "object"
+    },
+    "VerificationSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "success_gate": {
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "title": "Success Gate",
+          "type": "string"
+        },
+        "execution_gate": {
+          "default": "STAGE_EXECUTION_SUCCEEDED",
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "title": "Execution Gate",
+          "type": "string"
+        },
+        "adapter_id": {
+          "default": "execution_success_v1",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Adapter Id",
+          "type": "string"
+        },
+        "adapter_version": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Adapter Version",
+          "type": "integer"
+        },
+        "report_glob": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Report Glob"
+        },
+        "failure_evidence_globs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Failure Evidence Globs",
+          "type": "array"
+        },
+        "command": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RuntimeSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success_gate"
+      ],
+      "title": "VerificationSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "stage_registry_v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "ACTIVE",
+      "title": "Status",
+      "type": "string"
+    },
+    "stages": {
+      "items": {
+        "$ref": "#/$defs/StageDefinition"
+      },
+      "title": "Stages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "stages"
+  ],
+  "title": "StageRegistry",
+  "type": "object"
+}

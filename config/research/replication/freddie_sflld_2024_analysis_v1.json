@@ -1,0 +1,73 @@
+{
+  "schema_version": "freddie_analysis_protocol_v1",
+  "dataset_id": "freddie_sflld_2024",
+  "experiment_id": "freddie_sflld_2024_replication_v1",
+  "status": "FROZEN_BEFORE_FINAL_FREDDIE_ANALYSIS",
+  "historical_note": "This protocol is retrospectively formalized and frozen before final Freddie metric/statistical analysis; it is not a prospective preregistration.",
+  "provider_execution_allowed": false,
+  "population": {
+    "planned_generations": 648,
+    "canonical_cases": 36,
+    "models": 3,
+    "evidence_conditions": 6,
+    "conditions_per_case": 18,
+    "evidence_packages": 216
+  },
+  "measurement": {
+    "claim_schema_version": "claims_v3",
+    "validator_mode": "deterministic",
+    "validator_release": "deterministic_v4",
+    "allowed_validation_statuses": [
+      "SUPPORTED",
+      "UNSUPPORTED",
+      "CONTRADICTED",
+      "NOT_VERIFIABLE",
+      "NOT_APPLICABLE"
+    ]
+  },
+  "primary_endpoint": {
+    "metric_id": "end_to_end_faithfulness_yield",
+    "population": "all_planned_generations",
+    "usable_formula": "SUPPORTED / APPLICABLE",
+    "unusable_value": 0.0,
+    "inference_unit": "canonical_case"
+  },
+  "conditional_endpoints": {
+    "metric_ids": [
+      "resolved_faithfulness",
+      "verifiability",
+      "conservative_faithfulness"
+    ],
+    "unusable_handling": "MISSING_NOT_IMPUTED"
+  },
+  "experimental_factors": {
+    "model": "categorical",
+    "evidence_condition": "categorical",
+    "interaction": "model:evidence_condition",
+    "evidence_is_ordinal": false
+  },
+  "missingness": {
+    "primary_analysis": "retain_all_648_and_score_unusable_zero",
+    "conditional_analysis": "pairwise_complete_cases_without_imputation",
+    "complete_case_sensitivity": "derive_from_frozen_canonical_usability_matrix"
+  },
+  "cost_policy": {
+    "monetary_cost_comparison_ready": false,
+    "reason": "Self-hosted Qwen/Phi infrastructure cost is not fully reconstructed and comparable to provider API cost.",
+    "allowed_efficiency_fields": [
+      "latency_ms",
+      "input_token_count",
+      "output_token_count",
+      "total_token_count"
+    ]
+  },
+  "strata": [
+    "top_high_risk",
+    "low_risk",
+    "true_positive",
+    "false_positive",
+    "false_negative",
+    "near_threshold"
+  ],
+  "expected_stratum_count_each": 6
+}

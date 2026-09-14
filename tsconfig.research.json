@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "noEmit": true
+  },
+  "include": [
+    "research/**/*.ts",
+    "contracts/**/*.ts",
+    "tests/llmValidation/**/*.ts",
+    "tests/research/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "legacy"
+  ]
+}

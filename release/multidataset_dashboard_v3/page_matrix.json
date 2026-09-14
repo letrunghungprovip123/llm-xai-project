@@ -1,0 +1,23 @@
+{
+  "case_explorer_scopes": [
+    "HOME_CREDIT",
+    "FREDDIE"
+  ],
+  "comparison_scope": "CROSS_DATASET",
+  "locales": [
+    "vi"
+  ],
+  "pages": [
+    "/",
+    "/effectiveness",
+    "/mechanisms",
+    "/decision",
+    "/robustness",
+    "/cases",
+    "/methods"
+  ],
+  "study_scopes": [
+    "HOME_CREDIT",
+    "FREDDIE"
+  ]
+}

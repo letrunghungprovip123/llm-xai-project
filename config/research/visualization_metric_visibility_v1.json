@@ -1,0 +1,61 @@
+{
+  "schema_version": "visualization_metric_visibility_v1",
+  "status": "FROZEN_FOR_DASHBOARD_V2",
+  "tiers": {
+    "A_HEADLINE": [
+      "end_to_end_faithfulness_yield",
+      "p10_end_to_end_yield",
+      "usability_rate",
+      "conservative_faithfulness",
+      "verifiability",
+      "resolved_faithfulness",
+      "supported_claim_count",
+      "latency_seconds",
+      "total_token_count",
+      "supported_claims_per_1000_total_tokens",
+      "candidate_v4_delta"
+    ],
+    "B_EXPLANATORY": [
+      "not_verifiable_rate",
+      "unsupported_rate",
+      "contradiction_rate",
+      "selected_feature_mention_rate",
+      "concept_mention_rate",
+      "coverage",
+      "normalized_entropy",
+      "policy_compliance",
+      "output_word_count",
+      "safe_phrase_signal",
+      "failure_reason",
+      "distance_from_threshold"
+    ],
+    "C_INTERNAL_VALIDATION": [
+      "quality_metric_eligible",
+      "is_parse_success",
+      "is_schema_valid",
+      "is_first_attempt_success",
+      "is_strict_pipeline_success",
+      "was_retried",
+      "resolved_error_loss",
+      "claim_quality_loss",
+      "raw_minimum",
+      "raw_maximum",
+      "artifact_hash"
+    ],
+    "D_DISABLED_UNTIL_BETTER_DATA": [
+      "monetary_cost",
+      "template_provider_token_efficiency",
+      "precise_template_latency",
+      "human_naturalness",
+      "human_usefulness",
+      "human_trust",
+      "stochastic_stability"
+    ]
+  },
+  "deduplication_rules": [
+    {"keep": "resolved_faithfulness", "diagnostic_alias": "resolved_error_rate", "relationship": "1-x"},
+    {"keep": "verifiability", "diagnostic_alias": "not_verifiable_rate", "relationship": "1-x"},
+    {"keep": "supported_claims_per_second", "diagnostic_alias": "latency_per_supported_claim_seconds", "relationship": "reciprocal_when_positive"},
+    {"keep": "usability_rate", "diagnostic_aliases": ["truncation_rate", "parse_success_rate", "schema_valid_rate"], "relationship": "batch-specific shared failure pattern"}
+  ]
+}

@@ -1,0 +1,26 @@
+schema_version: freddie_concept_registry_v1
+concepts:
+  borrower_creditworthiness:
+    display_name: Chất lượng tín dụng người vay
+    description: Khả năng tín dụng được quan sát tại thời điểm khởi tạo khoản vay.
+  affordability:
+    display_name: Khả năng chi trả
+    description: Mức gánh nặng nghĩa vụ nợ so với thu nhập tại thời điểm khởi tạo.
+  leverage:
+    display_name: Đòn bẩy khoản vay
+    description: Mức vay so với giá trị tài sản và mức bảo hiểm thế chấp.
+  loan_terms:
+    display_name: Điều khoản khoản vay
+    description: Quy mô, lãi suất, kỳ hạn và mục đích khoản vay tại origination.
+  borrower_structure:
+    display_name: Cấu trúc người vay
+    description: Đặc điểm cấu trúc hồ sơ người vay không thuộc nhóm thuộc tính được bảo vệ.
+  property_collateral:
+    display_name: Tài sản bảo đảm
+    description: Đặc điểm tài sản, mục đích sử dụng và phương pháp định giá.
+  geography:
+    display_name: Khu vực địa lý
+    description: Khu vực cấp bang của tài sản bảo đảm.
+  origination_context:
+    display_name: Bối cảnh khởi tạo
+    description: Kênh khởi tạo và chương trình đủ điều kiện đặc biệt tại origination.

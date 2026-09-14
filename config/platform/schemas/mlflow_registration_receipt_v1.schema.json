@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mlflow_registration_receipt_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_name",
+    "source_model_artifact_id",
+    "source_model_manifest_sha256",
+    "experiment_id",
+    "parent_run_id",
+    "registered_model_name",
+    "candidate_version",
+    "mlflow_version",
+    "versions",
+    "created_at"
+  ],
+  "properties": {
+    "schema_name": {"const": "mlflow_registration_receipt_v1"},
+    "source_model_artifact_id": {"type": "string", "pattern": "^artifact_trained_model_"},
+    "source_model_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "experiment_id": {"type": "string", "minLength": 1},
+    "parent_run_id": {"type": "string", "minLength": 1},
+    "registered_model_name": {"const": "credit-risk-predictor"},
+    "candidate_version": {"type": "string", "minLength": 1},
+    "mlflow_version": {"const": "3.14.0"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "versions": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["model_name", "run_id", "model_uri", "tracking_key", "version", "selected_as_best", "aliases"],
+        "properties": {
+          "model_name": {"enum": ["logistic_regression", "random_forest", "hist_gradient_boosting"]},
+          "run_id": {"type": "string", "minLength": 1},
+          "model_uri": {"type": "string", "pattern": "^(models:/m-[A-Za-z0-9_-]+|runs:/)"},
+          "tracking_key": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "version": {"type": "string", "minLength": 1},
+          "selected_as_best": {"type": "boolean"},
+          "aliases": {"type": "array", "uniqueItems": true, "items": {"enum": ["candidate", "champion", "archived-reference"]}}
+        }
+      }
+    }
+  }
+}

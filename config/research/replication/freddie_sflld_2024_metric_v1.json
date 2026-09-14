@@ -1,0 +1,45 @@
+{
+  "schema_version": "freddie_metric_protocol_v1",
+  "dataset_id": "freddie_sflld_2024",
+  "experiment_id": "freddie_sflld_2024_replication_v1",
+  "status": "FROZEN",
+  "primary_metric": {
+    "metric_id": "end_to_end_faithfulness_yield",
+    "grain": "generation",
+    "planned_population": 648,
+    "usable_formula": "SUPPORTED / APPLICABLE",
+    "unusable_value": 0.0
+  },
+  "conditional_metrics": {
+    "resolved_faithfulness": "SUPPORTED / RESOLVED",
+    "verifiability": "RESOLVED / APPLICABLE",
+    "conservative_faithfulness": "SUPPORTED / APPLICABLE",
+    "unusable_handling": "NULL_NOT_ZERO"
+  },
+  "count_identities": {
+    "applicable": "TOTAL - NOT_APPLICABLE",
+    "applicable_partition": "SUPPORTED + UNSUPPORTED + CONTRADICTED + NOT_VERIFIABLE",
+    "resolved": "SUPPORTED + UNSUPPORTED + CONTRADICTED"
+  },
+  "option_aggregation": {
+    "grain": "model_id x evidence_level",
+    "expected_options": 18,
+    "planned_generations_per_option": 36,
+    "primary_mean_denominator": "all_36_planned_generations"
+  },
+  "monetary_cost": {
+    "comparison_ready": false,
+    "provider_api_cost_zero_is_not_total_cost": true,
+    "reason": "Self-hosted infrastructure cost is incomplete for Qwen/Phi and cannot be compared as monetary cost to provider API usage."
+  },
+  "allowed_efficiency_metrics": [
+    "latency_seconds",
+    "output_tokens_per_second",
+    "claims_per_second",
+    "supported_claims_per_second",
+    "latency_per_supported_claim_seconds",
+    "claims_per_1000_total_tokens",
+    "supported_claims_per_1000_total_tokens",
+    "output_tokens_per_supported_claim"
+  ]
+}

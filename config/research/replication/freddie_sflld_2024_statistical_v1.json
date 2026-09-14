@@ -1,0 +1,449 @@
+{
+  "bootstrap": {
+    "confidence": 0.95,
+    "iterations": 10000,
+    "method": "case_resampled_percentile",
+    "preserve_all_18_conditions_per_sampled_case": true,
+    "purpose": "effect_uncertainty_not_hypothesis_p_value",
+    "resampling_unit": "canonical_case",
+    "seed": 20260820
+  },
+  "complete_case_sensitivity": {
+    "case_set": "derive_from_m21_frozen_usability_matrix",
+    "metric": "conservative_faithfulness"
+  },
+  "conditional_metrics": [
+    "resolved_faithfulness",
+    "verifiability",
+    "conservative_faithfulness"
+  ],
+  "conditional_missingness": "PAIRWISE_COMPLETE_WITHOUT_IMPUTATION",
+  "dataset_id": "freddie_sflld_2024",
+  "experiment_id": "freddie_sflld_2024_replication_v1",
+  "factors": {
+    "evidence_condition": "categorical",
+    "evidence_is_ordinal": false,
+    "interaction": "model:evidence_condition",
+    "model": "categorical"
+  },
+  "historical_note": "Contrasts are retrospectively formalized and frozen before final Freddie statistical execution; they are not described as a prospective preregistration.",
+  "inference_unit": "canonical_case",
+  "omnibus": {
+    "alpha": 0.05,
+    "effect_size": "partial_eta_squared",
+    "effects": [
+      "model",
+      "evidence",
+      "model:evidence"
+    ],
+    "method": "two_factor_within_case_repeated_measures",
+    "sphericity_correction": "greenhouse_geisser"
+  },
+  "paired_tests": {
+    "alpha": 0.05,
+    "contrast_count": 33,
+    "contrasts": [
+      {
+        "condition_a": {
+          "evidence_level": "S0",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S0::qwen3_8b::deepseek_v4_flash"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S0",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S0::qwen3_8b::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S0",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S0::deepseek_v4_flash::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S1",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S1",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S1::qwen3_8b::deepseek_v4_flash"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S1",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S1",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S1::qwen3_8b::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S1",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S1",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S1::deepseek_v4_flash::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S2",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S2",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S2::qwen3_8b::deepseek_v4_flash"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S2",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S2",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S2::qwen3_8b::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S2",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S2",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S2::deepseek_v4_flash::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S3",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S3",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S3::qwen3_8b::deepseek_v4_flash"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S3",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S3",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S3::qwen3_8b::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S3",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S3",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S3::deepseek_v4_flash::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S4",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S4",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S4::qwen3_8b::deepseek_v4_flash"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S4",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S4",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S4::qwen3_8b::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S4",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S4",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S4::deepseek_v4_flash::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S5",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S5",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S5::qwen3_8b::deepseek_v4_flash"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S5",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S5",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S5::qwen3_8b::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S5",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S5",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "model_within_evidence",
+        "contrast_id": "model_within_evidence::S5::deepseek_v4_flash::phi4_mini_instruct"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S1",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "qwen3_8b"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::qwen3_8b::S1"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S2",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "qwen3_8b"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::qwen3_8b::S2"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S3",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "qwen3_8b"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::qwen3_8b::S3"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S4",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "qwen3_8b"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::qwen3_8b::S4"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S5",
+          "model_id": "qwen3_8b"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "qwen3_8b"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::qwen3_8b::S5"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S1",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::deepseek_v4_flash::S1"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S2",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::deepseek_v4_flash::S2"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S3",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::deepseek_v4_flash::S3"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S4",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::deepseek_v4_flash::S4"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S5",
+          "model_id": "deepseek_v4_flash"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "deepseek_v4_flash"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::deepseek_v4_flash::S5"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S1",
+          "model_id": "phi4_mini_instruct"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::phi4_mini_instruct::S1"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S2",
+          "model_id": "phi4_mini_instruct"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::phi4_mini_instruct::S2"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S3",
+          "model_id": "phi4_mini_instruct"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::phi4_mini_instruct::S3"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S4",
+          "model_id": "phi4_mini_instruct"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::phi4_mini_instruct::S4"
+      },
+      {
+        "condition_a": {
+          "evidence_level": "S5",
+          "model_id": "phi4_mini_instruct"
+        },
+        "condition_b": {
+          "evidence_level": "S0",
+          "model_id": "phi4_mini_instruct"
+        },
+        "contrast_family": "evidence_vs_s0",
+        "contrast_id": "evidence_vs_s0::phi4_mini_instruct::S5"
+      }
+    ],
+    "method": "wilcoxon_signed_rank",
+    "multiple_testing": "holm_within_contrast_family"
+  },
+  "primary_metric": "end_to_end_faithfulness_yield",
+  "schema_version": "freddie_statistical_protocol_v1",
+  "status": "FROZEN_BEFORE_STATISTICAL_EXECUTION"
+}

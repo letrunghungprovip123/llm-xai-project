@@ -1,0 +1,32 @@
+{
+  "schema_version": "dataset_profile_v1",
+  "dataset_id": "home_credit_default_risk",
+  "dataset_version": "v1",
+  "domain": "credit_risk",
+  "task_type": "binary_classification",
+  "entity": {
+    "entity_type": "credit_application",
+    "source_id_column": "SK_ID_CURR"
+  },
+  "target": {
+    "source_column": "TARGET",
+    "canonical_name": "target",
+    "positive_value": 1,
+    "negative_value": 0,
+    "semantic_name": "repayment_difficulty",
+    "prediction_horizon": null
+  },
+  "adapter": {
+    "adapter_id": "home_credit",
+    "adapter_version": "compat_v1"
+  },
+  "capabilities": {
+    "supports_stratified_split": true,
+    "supports_feature_level_xai": true,
+    "supports_semantic_registry": true,
+    "supports_case_strata": true,
+    "supports_adaptive_evidence": true,
+    "has_stable_entity_id": true,
+    "feature_count": 166
+  }
+}

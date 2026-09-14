@@ -1,0 +1,25 @@
+{
+  "dataset_id": "freddie_sflld_2024",
+  "invariants": {
+    "all_origination_ids_have_performance": "PASS",
+    "expected_schema_widths": "PASS",
+    "four_quarters_present": "PASS",
+    "origination_loan_ids_unique": "PASS",
+    "performance_ids_resolve_to_origination": "PASS",
+    "performance_loan_ids_sorted": "PASS",
+    "quarter_identity_consistent": "PASS"
+  },
+  "schema_version": "freddie_sflld_intake_audit_v1",
+  "source_sha256": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263",
+  "totals": {
+    "duplicate_origination_loan_ids": 0,
+    "loan_id_prefix_mismatch_rows": 0,
+    "malformed_rows": 0,
+    "max_reporting_period": "202603",
+    "min_reporting_period": "202401",
+    "origination_ids_without_performance": 0,
+    "origination_rows": 1048649,
+    "performance_orphan_rows": 0,
+    "performance_rows": 19704553
+  }
+}

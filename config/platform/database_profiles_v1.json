@@ -1,0 +1,23 @@
+{
+  "schema_version": "database_profiles_v1",
+  "status": "ACTIVE",
+  "profiles": {
+    "development-postgresql": {
+      "dialect": "postgresql+psycopg",
+      "database_role": "llm_xai_ops",
+      "url_environment_variable": "RESEARCHOPS_DATABASE_URL",
+      "owns_schema": true
+    },
+    "test-postgresql": {
+      "dialect": "postgresql+psycopg",
+      "database_role": "llm_xai_ops_test",
+      "url_environment_variable": "RESEARCHOPS_TEST_DATABASE_URL",
+      "owns_schema": true
+    }
+  },
+  "isolation": {
+    "mlflow_database": "mlflow",
+    "prefect_database": "prefect",
+    "shared_tables_forbidden": true
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "gate": "MULTIDATASET_DECISION_POLICY_LOCK_READY",
+  "independence_metric_comparable": true,
+  "m25_failure_profile": {
+    "byte_count": 3372,
+    "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/failure_profile_comparison.csv",
+    "sha256": "bc6f79e71c2a128b376d25296a422360eeb624967b52857fac6f3f5563bb53bf"
+  },
+  "m25_option_performance": {
+    "byte_count": 7836,
+    "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/cross_dataset_option_performance.csv",
+    "sha256": "7f3dfe7cc7f4eed0af79de5807b23476d55d63a9c1542bb53dbf8fb31f887b76"
+  },
+  "parent_m25_input_lock": {
+    "byte_count": 23525,
+    "path": "data/reports/llm_validation/multidataset_replication_v1/m25_input_lock_v1/multidataset_replication_input_lock.json",
+    "sha256": "dce497c2f9cab1574eb12fc9e7a5b73a010d7f37b55a62944316119f3f05098f"
+  },
+  "parent_m25_manifest": {
+    "byte_count": 2878,
+    "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/replication_manifest.json",
+    "sha256": "891d8e2fe13f09538637969267bd8bb8646b1a1869a990feeefbeeebba5b757b"
+  },
+  "parent_m25_validation": {
+    "byte_count": 5177,
+    "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/replication_validation.json",
+    "sha256": "d6c10919f1cb5574a14775d77d5ad78b5f052ad1568a4360a65f6e69865a4444"
+  },
+  "policy": {
+    "byte_count": 5251,
+    "path": "config/research/replication/multidataset_decision_policy_v1.json",
+    "sha256": "6f4db1a4b13d5a7a3bef845a3a692489e6cde9d75bca290c2b0823daca7ab423"
+  },
+  "policy_validation": {
+    "checks": {
+      "control_levels": {
+        "expected": [
+          "S0"
+        ],
+        "observed": [
+          "S0"
+        ],
+        "passed": true
+      },
+      "fallback_only_levels": {
+        "expected": [
+          "S5"
+        ],
+        "observed": [
+          "S5"
+        ],
+        "passed": true
+      },
+      "forbidden_scenario_criteria": {
+        "expected": [],
+        "observed": [],
+        "passed": true
+      },
+      "latency_hard_axis_allowed": {
+        "expected": false,
+        "observed": false,
+        "passed": true
+      },
+      "monetary_cost_allowed": {
+        "expected": false,
+        "observed": false,
+        "passed": true
+      },
+      "ni_endpoint": {
+        "expected": "end_to_end_faithfulness_yield",
+        "observed": "end_to_end_faithfulness_yield",
+        "passed": true
+      },
+      "ni_margin": {
+        "expected": 0.03,
+        "observed": 0.03,
+        "passed": true
+      },
+      "primary_candidate_levels": {
+        "expected": [
+          "S1",
+          "S2",
+          "S3",
+          "S4"
+        ],
+        "observed": [
+          "S1",
+          "S2",
+          "S3",
+          "S4"
+        ],
+        "passed": true
+      },
+      "scenario_ids": {
+        "expected": [
+          "QUALITY_FIRST",
+          "RELIABILITY_FIRST",
+          "BALANCED",
+          "EFFICIENCY_AWARE",
+          "INDEPENDENCE_SENSITIVE"
+        ],
+        "observed": [
+          "QUALITY_FIRST",
+          "RELIABILITY_FIRST",
+          "BALANCED",
+          "EFFICIENCY_AWARE",
+          "INDEPENDENCE_SENSITIVE"
+        ],
+        "passed": true
+      },
+      "scenario_weight_mismatches": {
+        "expected": [],
+        "observed": [],
+        "passed": true
+      },
+      "threshold_relaxation_allowed": {
+        "expected": false,
+        "observed": false,
+        "passed": true
+      }
+    },
+    "failed_check_count": 0,
+    "passed": true,
+    "resolved_scenarios": [
+      {
+        "disabled_reason": null,
+        "enabled": true,
+        "scenario_id": "QUALITY_FIRST"
+      },
+      {
+        "disabled_reason": null,
+        "enabled": true,
+        "scenario_id": "RELIABILITY_FIRST"
+      },
+      {
+        "disabled_reason": null,
+        "enabled": true,
+        "scenario_id": "BALANCED"
+      },
+      {
+        "disabled_reason": null,
+        "enabled": true,
+        "scenario_id": "EFFICIENCY_AWARE"
+      },
+      {
+        "disabled_reason": null,
+        "enabled": true,
+        "scenario_id": "INDEPENDENCE_SENSITIVE"
+      }
+    ]
+  },
+  "producer": "M26A_0030",
+  "provider_execution_allowed": false,
+  "resolved_scenarios": [
+    {
+      "disabled_reason": null,
+      "enabled": true,
+      "scenario_id": "QUALITY_FIRST"
+    },
+    {
+      "disabled_reason": null,
+      "enabled": true,
+      "scenario_id": "RELIABILITY_FIRST"
+    },
+    {
+      "disabled_reason": null,
+      "enabled": true,
+      "scenario_id": "BALANCED"
+    },
+    {
+      "disabled_reason": null,
+      "enabled": true,
+      "scenario_id": "EFFICIENCY_AWARE"
+    },
+    {
+      "disabled_reason": null,
+      "enabled": true,
+      "scenario_id": "INDEPENDENCE_SENSITIVE"
+    }
+  ],
+  "schema_version": "multidataset_decision_policy_lock_v1"
+}

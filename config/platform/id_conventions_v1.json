@@ -1,0 +1,75 @@
+{
+  "schema_version": "id_conventions_v1",
+  "status": "ACTIVE",
+  "public_ids_use_database_sequences": false,
+  "conventions": [
+    {
+      "name": "stage_id",
+      "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$",
+      "valid_examples": [
+        "ml.train",
+        "llm.generate",
+        "visualization.build"
+      ],
+      "description": "Stable dot-delimited operational stage identity."
+    },
+    {
+      "name": "pipeline_run_id",
+      "pattern": "^run_[0-9A-HJKMNP-TV-Z]{26}$",
+      "valid_examples": [
+        "run_01J00000000000000000000000"
+      ],
+      "description": "ULID-backed public pipeline-run identity."
+    },
+    {
+      "name": "stage_run_id",
+      "pattern": "^stage_run_[0-9A-HJKMNP-TV-Z]{26}$",
+      "valid_examples": [
+        "stage_run_01J00000000000000000000000"
+      ],
+      "description": "ULID-backed stage-attempt identity."
+    },
+    {
+      "name": "artifact_id",
+      "pattern": "^artifact_[a-z][a-z0-9_]*_[0-9A-HJKMNP-TV-Z]{26}$",
+      "valid_examples": [
+        "artifact_claim_validation_01J00000000000000000000000"
+      ],
+      "description": "Immutable artifact package identity."
+    },
+    {
+      "name": "release_id",
+      "pattern": "^[a-z][a-z0-9_-]*[-_]v[0-9]+$",
+      "valid_examples": [
+        "thesis-report-v1",
+        "visualization-data-v2"
+      ],
+      "description": "Human-readable versioned release identity."
+    },
+    {
+      "name": "gate_id",
+      "pattern": "^[A-Z][A-Z0-9_]*$",
+      "valid_examples": [
+        "DATA_MART_READY",
+        "REPORT_WRITING_READY"
+      ],
+      "description": "Stable machine-readable quality-gate identity."
+    },
+    {
+      "name": "case_id",
+      "pattern": "^case_[A-Za-z0-9_-]+$",
+      "valid_examples": [
+        "case_100002"
+      ],
+      "description": "Stable case identity derived from a source identifier."
+    },
+    {
+      "name": "environment_snapshot_id",
+      "pattern": "^env_[0-9A-HJKMNP-TV-Z]{26}$",
+      "valid_examples": [
+        "env_01J00000000000000000000000"
+      ],
+      "description": "Immutable runtime-environment snapshot identity."
+    }
+  ]
+}

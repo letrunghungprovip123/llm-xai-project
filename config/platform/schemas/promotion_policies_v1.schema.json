@@ -1,0 +1,208 @@
+{
+  "$defs": {
+    "ApprovalRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "policy": {
+          "minLength": 1,
+          "title": "Policy",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "separation_of_duties": {
+          "default": true,
+          "title": "Separation Of Duties",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "policy"
+      ],
+      "title": "ApprovalRequirement",
+      "type": "object"
+    },
+    "PromotionPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "approval": {
+          "$ref": "#/$defs/ApprovalRequirement"
+        },
+        "from_states": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "From States",
+          "type": "array"
+        },
+        "non_waivable_gates": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Non Waivable Gates",
+          "type": "array"
+        },
+        "policy_id": {
+          "pattern": "^[a-z0-9][a-z0-9_-]+$",
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "required_gates": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Required Gates",
+          "type": "array"
+        },
+        "side_effects": {
+          "$ref": "#/$defs/PromotionSideEffects",
+          "default": {
+            "mlflow_archive_alias": null,
+            "mlflow_candidate_alias": null,
+            "mlflow_champion_alias": null
+          }
+        },
+        "target_kinds": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Target Kinds",
+          "type": "array"
+        },
+        "target_type": {
+          "enum": [
+            "model_version",
+            "release"
+          ],
+          "title": "Target Type",
+          "type": "string"
+        },
+        "to_state": {
+          "minLength": 1,
+          "title": "To State",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "waived_to_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Waived To State"
+        },
+        "waiver_approval_policy": {
+          "default": "WAIVER",
+          "title": "Waiver Approval Policy",
+          "type": "string"
+        },
+        "waiver_mode": {
+          "default": "FORBIDDEN",
+          "enum": [
+            "FORBIDDEN",
+            "READY_WITH_LIMITATIONS"
+          ],
+          "title": "Waiver Mode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policy_id",
+        "version",
+        "target_type",
+        "target_kinds",
+        "from_states",
+        "to_state",
+        "required_gates",
+        "approval"
+      ],
+      "title": "PromotionPolicy",
+      "type": "object"
+    },
+    "PromotionSideEffects": {
+      "additionalProperties": false,
+      "properties": {
+        "mlflow_archive_alias": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mlflow Archive Alias"
+        },
+        "mlflow_candidate_alias": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mlflow Candidate Alias"
+        },
+        "mlflow_champion_alias": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mlflow Champion Alias"
+        }
+      },
+      "title": "PromotionSideEffects",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "policies": {
+      "items": {
+        "$ref": "#/$defs/PromotionPolicy"
+      },
+      "title": "Policies",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "promotion_policies_v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "ACTIVE",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "policies"
+  ],
+  "title": "PromotionPolicyCatalog",
+  "type": "object"
+}

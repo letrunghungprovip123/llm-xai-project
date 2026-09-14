@@ -1,0 +1,7 @@
+# ResearchOps Phase 8 HTTP control plane
+-r requirements-researchops.txt
+fastapi==0.139.2
+uvicorn[standard]==0.48.0
+httpx==0.28.1
+pydantic-settings==2.14.1
+PyJWT[crypto]==2.13.0

@@ -1,0 +1,156 @@
+{
+  "schema_version": "llm_replication_protocol_v1",
+  "protocol_id": "home_credit_to_freddie_replication_v1",
+  "status": "FROZEN_BEFORE_FREDDIE_LLM_EXECUTION",
+  "source_experiment": {
+    "dataset_id": "home_credit_default_risk",
+    "experiment_id": "home_credit_experiment_v1",
+    "historical_planned_generations": 648,
+    "historical_usable_generations": 638,
+    "historical_unusable_generations": 10,
+    "historical_usable_by_model": {
+      "qwen3_8b": 216,
+      "deepseek_v4_flash": 213,
+      "phi4_mini_instruct": 209
+    },
+    "note": "Historical usable counts are replication evidence only; Freddie usable counts are observed, never forced to these values.",
+    "historical_unusable_by_model": {
+      "qwen3_8b": 0,
+      "deepseek_v4_flash": 3,
+      "phi4_mini_instruct": 7
+    }
+  },
+  "generation": {
+    "models": [
+      {
+        "model_id": "qwen3_8b",
+        "provider": "huggingface",
+        "runtime": "vllm",
+        "remote_model_id": "Qwen/Qwen3-8B",
+        "output_constraint_mode": "json_schema",
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      {
+        "model_id": "deepseek_v4_flash",
+        "provider": "deepseek",
+        "runtime": "api",
+        "remote_model_id": "deepseek-v4-flash",
+        "output_constraint_mode": "json_object"
+      },
+      {
+        "model_id": "phi4_mini_instruct",
+        "provider": "huggingface",
+        "runtime": "vllm",
+        "remote_model_id": "microsoft/Phi-4-mini-instruct",
+        "output_constraint_mode": "json_schema"
+      }
+    ],
+    "evidence_levels": [
+      "S0",
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5"
+    ],
+    "repeat_ids": [
+      1
+    ],
+    "prompt_version": "prompt_v1",
+    "output_schema_version": "1.0",
+    "experiment_stage": "evaluation",
+    "decoding": {
+      "temperature": 0.2,
+      "top_p": 1.0,
+      "max_tokens": 2000,
+      "frequency_penalty": 0,
+      "presence_penalty": 0
+    },
+    "execution": {
+      "timeout_ms": 120000,
+      "max_retries": 2,
+      "retry_delay_ms": 2000,
+      "base_seed": 20260710,
+      "checkpoint_every": 10,
+      "default_concurrency": 1,
+      "resume_rule": "reuse_only_existing_generation_that_satisfies_common_isGenerationUsable"
+    },
+    "matrix": {
+      "canonical_cases": 36,
+      "evidence_conditions": 6,
+      "models": 3,
+      "repeats": 1,
+      "planned_generations": 648
+    },
+    "usability_predicate": [
+      "runtime.status == SUCCESS",
+      "runtime.empty_response != true",
+      "runtime.truncated_response != true",
+      "runtime.finish_reason != length",
+      "schema.raw_json_parse_success == true",
+      "schema.schema_valid == true",
+      "schema.missing_required_field_count == 0",
+      "schema.validation_error_count == 0",
+      "parsed_output != null"
+    ]
+  },
+  "claim_measurement": {
+    "extractor_id": "deepseek_atomic_claim_extractor",
+    "extractor_model_id": "deepseek-v4-flash",
+    "extractor_version": "atomic_claim_extractor_v2.1.0",
+    "extractor_prompt_version": "atomic_claim_extraction_prompt_v3",
+    "extractor_decoding": {
+      "temperature": 0,
+      "top_p": 1,
+      "max_tokens": 3000,
+      "timeout_ms": 120000,
+      "max_retries": 3,
+      "retry_delay_ms": 1000
+    },
+    "provider_policy": "stored-first",
+    "semantic_finalization": {
+      "freddie_mode": "generic_semantic_migration_without_home_credit_review_fixture",
+      "historical_home_credit_review_fixture_role": "regression_only"
+    },
+    "validator": {
+      "mode": "deterministic",
+      "labels": [
+        "SUPPORTED",
+        "NOT_VERIFIABLE",
+        "UNSUPPORTED",
+        "CONTRADICTED",
+        "NOT_APPLICABLE"
+      ],
+      "provider_calls": false
+    },
+    "extractor_prompt_sha256": "6c571dbe10b12e2f1b933fca366ae5f8b900520a330a9a36111ff9c477fb2553"
+  },
+  "analysis": {
+    "analysis_plan_id": "llm_xai_thesis_analysis_v1",
+    "statistical_unit": "generation repeated within canonical case",
+    "primary_metric": "end_to_end_faithfulness_yield",
+    "primary_population": "all planned LLM generations",
+    "unusable_primary_handling": "operational_penalty_zero",
+    "secondary_unusable_handling": "missing_never_imputed_to_zero",
+    "primary_factors": [
+      "model",
+      "evidence_condition",
+      "model:evidence_condition"
+    ],
+    "paired_unit": "case_id",
+    "multiple_testing": "Holm within planned contrast family",
+    "claim_rows_independent": false,
+    "evidence_is_ordinal": false,
+    "primary_omnibus": "two-factor within-case repeated-measures ANOVA with Greenhouse-Geisser correction",
+    "primary_post_hoc": "pre-specified case-paired Wilcoxon signed-rank tests",
+    "complete_case_sensitivity": "repeat factorial analysis on cases with all 18 usable conditions"
+  },
+  "protocol_evidence": {
+    "generation_runtime": "research/ts/narrative/config.ts + modelRegistry.ts + generation.ts",
+    "historical_matrix": "tests/research/ts/goldenArtifacts.test.ts + config/research/analysis_plan_v1.json",
+    "claim_measurement": "research/ts/claim_extraction/atomicClaimSchema.ts + deepseekAtomicClaimExtractor.ts + config/research/claim_measurement_release_v1.json",
+    "analysis": "config/research/analysis_plan_v1.json"
+  }
+}

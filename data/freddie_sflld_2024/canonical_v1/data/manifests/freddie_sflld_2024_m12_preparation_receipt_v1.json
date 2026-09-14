@@ -1,0 +1,40 @@
+{
+  "config_fingerprints": {
+    "adapter_code": "803dfd5d6ba883c42bece998a4204f6161902d0464195a934c69daaf102d9483",
+    "concept_registry": "ad33358701eedd35051be091337361df2ad440bd85c6eb4ff4408cb3db2d2121",
+    "dataset_profile": "738e8009d7ab93e9e45a77248fab3ca8449174185d32e97b26316bddc3a01e73",
+    "feature_policy": "f0905e46117bdf5dbd88697ffb688e4543bdf27151e491ef0a6301f9ad030c58",
+    "target_protocol": "7f0582758f948087bfc3a5d643ad99ea8400f19788d793d44828a8ee1b62c157"
+  },
+  "dataset_id": "freddie_sflld_2024",
+  "input_fingerprints": {
+    "m11_receipt": "ebb08e52ce06338ead21d5bab73233070c9faea60959b722680bb8ee8a9227a0",
+    "m12a_target_receipt": "3ac7bffb81a326c30ee88e7d37b1ce20f1fda28cccce238270a872025ae00506",
+    "raw_source": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263"
+  },
+  "invariants": {
+    "eligible_target_only": "PASS",
+    "feature_policy_exact": "PASS",
+    "feature_target_identity_match": "PASS",
+    "performance_leakage_absent": "PASS",
+    "semantic_registry_complete": "PASS",
+    "target_count_matches_m12a": "PASS",
+    "unique_source_entity_id": "PASS",
+    "upstream_receipts_verified": "PASS"
+  },
+  "output_fingerprints": {
+    "canonical_dataset_bundle_freddie_sflld_2024_v1.json": "2228d2fa02bcee020553b09d171ee2e12dbf8368d2fd7948d10827072cb5a74a",
+    "concept_registry.yaml": "8396d7097c6e1937b227e24935c9c3d2930df3709c3eda00e6a92b1cec6e3c1c",
+    "feature_matrix_full.parquet": "1f7aeae20fa4816eec167aad73351d89613528915784edb94e8757a48d3bcbec",
+    "feature_registry.csv": "b4937e99534f3bd05264880bc33faa000148237fe80a91ce718db0a7bf192b04",
+    "feature_registry.yaml": "1f8e99e87a4334d1c3e7a619ee564a7df5769244fc7f18b354d3705d53bd85fe",
+    "freddie_sflld_2024_preparation_manifest_v1.json": "7c830b77107fb9f60c724e603529f101d7070b39e10c822612d7d62d453c4d5e",
+    "freddie_sflld_2024_replication_profile_report_v1.json": "de3f9a3b3a70df6c18b5349a75514524a9c4ef2d9c71fe3be57670707d0b3fa2",
+    "target_full.parquet": "8a76ca047c30c3b624aa352cb3f51cb74c5257981bf1f56411a6470ed43a1064"
+  },
+  "patch_id": "0007",
+  "schema_version": "stage_receipt_v1",
+  "stage": "freddie_sflld_preparation",
+  "stage_version": "v1",
+  "status": "PASS"
+}

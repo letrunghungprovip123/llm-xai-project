@@ -1,0 +1,187 @@
+{
+  "certified_report_files": [
+    {
+      "byte_count": 352954,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/generation_metrics.csv",
+      "sha256": "8aeaf54d6c71612f46da7fd6a84b5e0a402c4fa342cbf9634009f1e6b86a591d"
+    },
+    {
+      "byte_count": 11810,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/metric_dictionary.csv",
+      "sha256": "11e9e692979770db4b57fae442bc225bafc6656e0c4cc9af7a34452effcf0440"
+    },
+    {
+      "byte_count": 1345,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/omnibus_tests.csv",
+      "sha256": "51f8893ba335effcfb90d68a9e563551ce2374cf9c632b62fb844006b1b89292"
+    },
+    {
+      "byte_count": 9350,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/paired_tests.csv",
+      "sha256": "f603f9614a5c71e9b72ab2e0ddca8a701a457e19d042ad2b1eeab6ca3f45d684"
+    },
+    {
+      "byte_count": 26148,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/conditional_paired_tests.csv",
+      "sha256": "6611a73a653b31bdc49da20ab54228c1f57d003209ffe62c78e7118272ea1090"
+    },
+    {
+      "byte_count": 1390,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/complete_case_omnibus_tests.csv",
+      "sha256": "e13a8a207563a928c6e48f913387ab30398d39908d3f1bda14b7e0e41a81634b"
+    },
+    {
+      "byte_count": 756,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/sensitivity_summary.csv",
+      "sha256": "fa92490fd4864892c35cd098ea76c3bf88f147899ff3029f1e87d3505318c8e7"
+    },
+    {
+      "byte_count": 3438,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/unusable_generations.csv",
+      "sha256": "95f42b5d0893fe75e8ae3023cf3aa9c8f0286ac9b570cd117feba334f68c37b5"
+    },
+    {
+      "byte_count": 4300,
+      "path": "data/reports/llm_validation/validation_v1/analysis/diagnostics/pipeline_failures.csv",
+      "sha256": "08c328ebb565ffd401e42c559aaaa6c060a659264cde77394df44e13818de0da"
+    },
+    {
+      "byte_count": 7626,
+      "path": "data/reports/llm_validation/validation_v1/analysis/decision_support/recommendations.csv",
+      "sha256": "ae27d0b19a1534bf847c33476a43c17e49dfbc22087edba63bd5edf756477841"
+    },
+    {
+      "byte_count": 14178,
+      "path": "data/reports/llm_validation/validation_v1/analysis/validator_sensitivity/validator_metric_summary.csv",
+      "sha256": "5a639574830dad6ba9949b4a4822876e9a6291a37cf1225d00ffc17a6707ecb2"
+    },
+    {
+      "byte_count": 12251,
+      "path": "data/reports/llm_validation/validation_v1/analysis/validator_sensitivity/validator_sensitivity_tests.csv",
+      "sha256": "02431c173ada4ba688f589b0a6bf4568db1d4c3efeb7a0d1197acd4507e265c2"
+    }
+  ],
+  "claim_measurement_release": {
+    "analysis_version": "validation_v1",
+    "decision": {
+      "primary_condition": "candidate",
+      "rationale": [
+        "All currently certified data-mart, metric, statistical, diagnostic, decision-support and visualization outputs were generated from the candidate artifacts.",
+        "The available V4 release verdict is REJECTED because its real-human-calibration gate C6 did not pass.",
+        "The selection preserves reproducible lineage and does not assert that candidate labels are human ground truth or intrinsically superior to V4."
+      ],
+      "sensitivity_condition": "v4"
+    },
+    "human_calibration": {
+      "reporting_consequence": "Results must be described as operational validator-based faithfulness, not absolute truth, human equivalence or human-level quality.",
+      "status": "NOT_COMPLETED"
+    },
+    "interpretation_scope": "operational_faithfulness_under_project_ontology",
+    "official": {
+      "artifacts": {
+        "final_claims": {
+          "path": "data/reports/llm_validation/validation_v1/claim_finalization_candidate/claims_final.jsonl",
+          "record_count": 14667,
+          "sha256": "89d90150df82c01f1b5557a9fbd27d26c405c0f5f5402bdbfeed93105c478cfe"
+        },
+        "generation_summaries": {
+          "path": "data/reports/llm_validation/validation_v1/claim_validation_candidate/generation_validation_summary.jsonl",
+          "record_count": 648,
+          "sha256": "4aca7dfee7801f8d7d6ddf9622230f02732c60c0b3a55cf61f8573dd32574855"
+        },
+        "validation_results": {
+          "path": "data/reports/llm_validation/validation_v1/claim_validation_candidate/claim_validation_results.jsonl",
+          "record_count": 14667,
+          "sha256": "5e8b0f05cde4042715025b2c7aeb783af05d7e0578b827b9c85e1435e91f59d5"
+        }
+      },
+      "finalizer_version": "claim_finalizer_v2.0.0",
+      "numeric_policy_version": "numeric_tolerance_policy_v1",
+      "policy_version": "claim_validation_policy_v1",
+      "reason_taxonomy_version": "claim_validation_reason_codes_v1",
+      "status_counts": {
+        "CONTRADICTED": 25,
+        "NOT_APPLICABLE": 12,
+        "NOT_VERIFIABLE": 1018,
+        "SUPPORTED": 13540,
+        "UNSUPPORTED": 72
+      },
+      "validator_version": "claim_validator_v4.0.0"
+    },
+    "release_id": "claim_measurement_candidate_primary_v1",
+    "release_status": "READY_WITH_LIMITATIONS",
+    "schema_version": "claim_measurement_release_v1",
+    "sensitivity": {
+      "artifacts": {
+        "final_claims": {
+          "path": "data/reports/llm_validation/validation_v1/claim_finalization_v4/claims_final.jsonl",
+          "record_count": 14667,
+          "sha256": "b34571aabe28c1ddd49e231bd8093b8151965d42c86e1146c547df5e8cd92533"
+        },
+        "generation_summaries": {
+          "path": "data/reports/llm_validation/validation_v1/claim_validation_v4/generation_validation_summary.jsonl",
+          "record_count": 648,
+          "sha256": "f70a38d357dfd550ccfbd683e3e96a938d7e3b491d109c5cf6f3cfae77fcfdf5"
+        },
+        "validation_results": {
+          "path": "data/reports/llm_validation/validation_v1/claim_validation_v4/claim_validation_results.jsonl",
+          "record_count": 14667,
+          "sha256": "2e338006805191aeebb0f43bf8ce95e29ead49f3df27749a04c7f25eebf6cc4c"
+        }
+      },
+      "release_reason": "human calibration gate C6 did not pass",
+      "release_verdict": "REJECTED",
+      "role": "SENSITIVITY_ONLY",
+      "status_counts": {
+        "CONTRADICTED": 25,
+        "NOT_APPLICABLE": 12,
+        "NOT_VERIFIABLE": 601,
+        "SUPPORTED": 13923,
+        "UNSUPPORTED": 106
+      }
+    }
+  },
+  "gate_statuses": {
+    "data_mart": {
+      "exit_gate": "DATA_MART_READY",
+      "failed_check_count": 0,
+      "passed": true
+    },
+    "decision_support": {
+      "exit_gate": "DECISION_SUPPORT_READY",
+      "failed_check_count": 0,
+      "passed": true
+    },
+    "diagnostics": {
+      "exit_gate": "DIAGNOSTICS_READY",
+      "failed_check_count": 0,
+      "passed": true
+    },
+    "metrics": {
+      "exit_gate": "ANALYTICAL_MART_READY",
+      "failed_check_count": 0,
+      "passed": true
+    },
+    "statistics": {
+      "exit_gate": "STATISTICAL_CORE_READY",
+      "failed_check_count": 0,
+      "passed": true
+    },
+    "validator_sensitivity": {
+      "exit_gate": "VALIDATOR_SENSITIVITY_READY",
+      "failed_check_count": 0,
+      "passed": true
+    }
+  },
+  "git_branch": "refactor/validation-foundation-v1",
+  "git_status_before_release": "",
+  "release_id": "thesis_report_v1",
+  "report_contracts": [
+    "config/research/analysis_plan_v1.json",
+    "docs/research/analysis_plan_v1.md",
+    "docs/research/reporting_contract_v1.md"
+  ],
+  "schema_version": "thesis_report_release_manifest_v1",
+  "source_commit": "321beda351c5828950faf719c50aa9d90f92a6db",
+  "source_tree_sha256": "1c8fddaa925c9df2c38bb0c15e378fe1ab769cc684f8a5e8eceec578b8ce2ba2"
+}

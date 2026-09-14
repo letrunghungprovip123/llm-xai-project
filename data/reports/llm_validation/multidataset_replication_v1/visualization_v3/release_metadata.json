@@ -1,0 +1,19 @@
+{
+  "dataset_scopes": [
+    "HOME_CREDIT",
+    "FREDDIE",
+    "CROSS_DATASET",
+    "GLOBAL"
+  ],
+  "parent_release_id": "certified_multidataset_analytical_release_v1",
+  "release_id": "visualization-data-v3",
+  "replication_scope": "MODEL_REVISION_UNKNOWN",
+  "robust_recommendation_status": "NO_ROBUST_RECOMMENDATION",
+  "schema_version": "multidataset_visualization_v3_release_metadata_v1",
+  "scientific_recomputation_allowed": false,
+  "study_scopes": [
+    "HOME_CREDIT",
+    "FREDDIE"
+  ],
+  "visualization_version": "v3.0"
+}

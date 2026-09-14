@@ -1,0 +1,2209 @@
+schema_version: stage_registry_v1
+status: ACTIVE
+stages:
+- id: data.audit
+  version: 2
+  title: Audit raw Home Credit data
+  owner: data-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:data-audit
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: raw_data
+    contract: raw_home_credit_dataset
+    required: true
+  outputs:
+  - name: audit
+    contract: data_audit_report
+    required: true
+    discovery_globs:
+    - data/manifests/raw_file_manifest.json
+    - data/manifests/batch_1_summary.json
+    - data/reports/raw_schema_summary.csv
+    - data/reports/raw_schema_audit_report.md
+    - data/reports/relationship_audit_report.md
+    - data/reports/batch_1_summary.md
+  verification:
+    success_gate: RAW_DATA_AUDIT_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: data/manifests/batch_1_summary.json
+    failure_evidence_globs:
+    - data/manifests/raw_file_manifest.json
+    - data/manifests/batch_1_summary.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - data
+  - audit
+  notes: []
+  legacy_dispatcher_stage: ml:data-audit
+- id: data.target_audit
+  version: 2
+  title: Audit target and anomalies
+  owner: data-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:target-audit
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: raw_data
+    contract: raw_home_credit_dataset
+    required: true
+  - name: data_audit
+    contract: data_audit_report
+    required: true
+  outputs:
+  - name: target_audit
+    contract: target_audit_report
+    required: true
+    discovery_globs:
+    - data/manifests/batch_a2_target_missing_audit_summary.json
+    - data/reports/target_audit_report.md
+    - data/reports/missing_summary.csv
+    - data/reports/anomaly_summary.csv
+    - data/reports/missing_anomaly_report.md
+    - data/reports/batch_a2_target_missing_audit_summary.md
+  verification:
+    success_gate: TARGET_AUDIT_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: data/manifests/batch_a2_target_missing_audit_summary.json
+    failure_evidence_globs:
+    - data/manifests/batch_a2_target_missing_audit_summary.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - data
+  - audit
+  notes: []
+  legacy_dispatcher_stage: ml:target-audit
+- id: data.feature_engineering
+  version: 2
+  title: Build governed feature groups
+  owner: ml-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:features
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: true
+    provider_required: false
+    approval_policy: EXPENSIVE
+    timeout_seconds: 7200
+    retries: 0
+    concurrency_group: cpu-heavy
+  inputs:
+  - name: raw_data
+    contract: raw_home_credit_dataset
+    required: true
+  - name: target_audit
+    contract: target_audit_report
+    required: true
+  outputs:
+  - name: features
+    contract: feature_groups
+    required: true
+    discovery_globs:
+    - data/interim/*_features.parquet
+    - data/manifests/batch_b_feature_engineering_summary.json
+    - data/reports/feature_group_build_report.md
+    - data/reports/batch_b_feature_engineering_summary.md
+  verification:
+    success_gate: FEATURE_ENGINEERING_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: data/manifests/batch_b_feature_engineering_summary.json
+    failure_evidence_globs:
+    - data/manifests/batch_b_feature_engineering_summary.json
+  resources:
+    cpu: 2
+    memory_mb: 8192
+    gpu: false
+  secrets: []
+  tags:
+  - ml
+  - features
+  notes: []
+  legacy_dispatcher_stage: ml:features
+- id: data.feature_matrix
+  version: 2
+  title: Construct model feature matrix
+  owner: ml-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:matrix
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: true
+    provider_required: false
+    approval_policy: EXPENSIVE
+    timeout_seconds: 7200
+    retries: 0
+    concurrency_group: cpu-heavy
+  inputs:
+  - name: features
+    contract: feature_groups
+    required: true
+  - name: target_audit
+    contract: target_audit_report
+    required: true
+  outputs:
+  - name: matrix
+    contract: feature_matrix
+    required: true
+    discovery_globs:
+    - data/processed/feature_matrix_full.parquet
+    - data/processed/target_full.parquet
+    - ml/registry/feature_registry.csv
+    - ml/registry/feature_registry.yaml
+    - ml/registry/model_feature_columns.json
+    - ml/registry/model_feature_metadata.json
+    - data/manifests/batch_c_feature_matrix_registry_summary.json
+    - data/reports/feature_matrix_registry_report.md
+    - data/reports/batch_c_feature_matrix_registry_summary.md
+  verification:
+    success_gate: FEATURE_MATRIX_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: data/manifests/batch_c_feature_matrix_registry_summary.json
+    failure_evidence_globs:
+    - data/manifests/batch_c_feature_matrix_registry_summary.json
+  resources:
+    cpu: 2
+    memory_mb: 8192
+    gpu: false
+  secrets: []
+  tags:
+  - ml
+  - matrix
+  notes: []
+  legacy_dispatcher_stage: ml:matrix
+- id: data.split
+  version: 2
+  title: Create stratified data split
+  owner: ml-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:split
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: matrix
+    contract: feature_matrix
+    required: true
+  outputs:
+  - name: split
+    contract: data_split
+    required: true
+    discovery_globs:
+    - data/processed/splits/*.parquet
+    - data/manifests/split_manifest.json
+    - data/manifests/batch_d_leakage_split_summary.json
+    - data/reports/leakage_audit_report.md
+    - data/reports/split_report.md
+    - data/reports/batch_d_leakage_split_summary.md
+  verification:
+    success_gate: DATA_SPLIT_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: data/manifests/split_manifest.json
+    failure_evidence_globs:
+    - data/manifests/split_manifest.json
+    - data/manifests/batch_d_leakage_split_summary.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - ml
+  - split
+  notes: []
+  legacy_dispatcher_stage: ml:split
+- id: data.preprocessing
+  version: 2
+  title: Fit and apply preprocessing
+  owner: ml-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:preprocess
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: true
+    provider_required: false
+    approval_policy: EXPENSIVE
+    timeout_seconds: 7200
+    retries: 0
+    concurrency_group: cpu-heavy
+  inputs:
+  - name: split
+    contract: data_split
+    required: true
+  outputs:
+  - name: preprocessed
+    contract: preprocessed_data
+    required: true
+    discovery_globs:
+    - data/processed/model_ready/**/*.parquet
+    - artifacts/preprocessing/*.joblib
+    - ml/registry/preprocessed_feature_*.json
+    - data/manifests/preprocessing_manifest.json
+    - data/manifests/batch_e_preprocessing_summary.json
+    - data/reports/preprocessing_report.md
+    - data/reports/batch_e_preprocessing_summary.md
+  verification:
+    success_gate: PREPROCESSING_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: data/manifests/preprocessing_manifest.json
+    failure_evidence_globs:
+    - data/manifests/batch_e_input_validation_failed.json
+    - data/manifests/batch_e_target_validation_failed.json
+    - data/manifests/preprocessing_manifest.json
+  resources:
+    cpu: 2
+    memory_mb: 8192
+    gpu: false
+  secrets: []
+  tags:
+  - ml
+  - preprocessing
+  notes: []
+  legacy_dispatcher_stage: ml:preprocess
+- id: ml.train
+  version: 2
+  title: Train and evaluate credit-risk models
+  owner: ml-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:train
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: true
+    provider_required: false
+    approval_policy: EXPENSIVE
+    timeout_seconds: 14400
+    retries: 0
+    concurrency_group: cpu-heavy
+  inputs:
+  - name: preprocessed
+    contract: preprocessed_data
+    required: true
+  outputs:
+  - name: model
+    contract: trained_model
+    required: true
+    discovery_globs:
+    - artifacts/models/*.joblib
+    - data/manifests/model_training_manifest.json
+    - ml/registry/model_registry.json
+  - name: metrics
+    contract: model_metrics
+    required: true
+    discovery_globs:
+    - data/reports/model_metrics_summary.csv
+    - data/reports/model_training_report.md
+  verification:
+    success_gate: MODEL_TRAINING_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: model_training_manifest_v1
+    adapter_version: 1
+    report_glob: data/manifests/model_training_manifest.json
+    failure_evidence_globs:
+    - data/manifests/model_training_manifest.json
+  resources:
+    cpu: 4
+    memory_mb: 12288
+    gpu: false
+  secrets: []
+  tags:
+  - ml
+  - training
+  notes: []
+  legacy_dispatcher_stage: ml:train
+- id: ml.model_ready_audit
+  version: 2
+  title: Verify model-ready release
+  owner: ml-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:model-ready-audit
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: model
+    contract: trained_model
+    required: true
+  - name: metrics
+    contract: model_metrics
+    required: true
+  outputs:
+  - name: report
+    contract: model_ready_report
+    required: true
+    discovery_globs:
+    - data/manifests/model_ready_audit_manifest.json
+    - data/reports/model_ready_audit/**
+  verification:
+    success_gate: MODEL_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: model_ready_report_v1
+    adapter_version: 1
+    report_glob: data/manifests/model_ready_audit_manifest.json
+    failure_evidence_globs:
+    - data/manifests/model_ready_audit_manifest.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - ml
+  - verification
+  notes: []
+  legacy_dispatcher_stage: ml:model-ready-audit
+- id: xai.generate
+  version: 2
+  title: Generate SHAP/XAI artifacts
+  owner: xai-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:xai
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: true
+    provider_required: false
+    approval_policy: EXPENSIVE
+    timeout_seconds: 14400
+    retries: 0
+    concurrency_group: cpu-heavy
+  inputs:
+  - name: model
+    contract: trained_model
+    required: true
+  - name: model_ready
+    contract: model_ready_report
+    required: true
+  - name: preprocessed
+    contract: preprocessed_data
+    required: true
+  outputs:
+  - name: xai
+    contract: xai_artifacts
+    required: true
+    discovery_globs:
+    - data/manifests/xai_evidence_manifest.json
+    - data/reports/xai/**
+  verification:
+    success_gate: XAI_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: xai_manifest_v1
+    adapter_version: 1
+    report_glob: data/manifests/xai_evidence_manifest.json
+    failure_evidence_globs:
+    - data/manifests/xai_evidence_manifest.json
+  resources:
+    cpu: 4
+    memory_mb: 12288
+    gpu: false
+  secrets: []
+  tags:
+  - xai
+  - shap
+  notes: []
+  legacy_dispatcher_stage: ml:xai
+- id: xai.quality
+  version: 2
+  title: Validate XAI quality
+  owner: xai-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:xai-quality
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: xai
+    contract: xai_artifacts
+    required: true
+  - name: metrics
+    contract: model_metrics
+    required: true
+  outputs:
+  - name: quality
+    contract: xai_quality_report
+    required: true
+    discovery_globs:
+    - data/manifests/xai_evidence_quality_manifest.json
+    - data/reports/xai_quality/**
+  verification:
+    success_gate: XAI_QUALITY_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: xai_quality_report_v1
+    adapter_version: 1
+    report_glob: data/manifests/xai_evidence_quality_manifest.json
+    failure_evidence_globs:
+    - data/manifests/xai_evidence_quality_manifest.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - xai
+  - quality
+  notes: []
+  legacy_dispatcher_stage: ml:xai-quality
+- id: xai.explanation_ir
+  version: 2
+  title: Build normalized Explanation IR
+  owner: xai-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:ir
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: xai
+    contract: xai_artifacts
+    required: true
+  - name: quality
+    contract: xai_quality_report
+    required: true
+  outputs:
+  - name: ir
+    contract: explanation_ir
+    required: true
+    discovery_globs:
+    - artifacts/**/explanation_ir*.jsonl
+    - data/manifests/explanation_ir_v2_manifest_evaluation.json
+  verification:
+    success_gate: EXPLANATION_IR_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: data/manifests/explanation_ir_v2_manifest_evaluation.json
+    failure_evidence_globs:
+    - data/manifests/explanation_ir_v2_manifest_evaluation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - xai
+  - ir
+  notes: []
+  legacy_dispatcher_stage: ml:ir
+- id: xai.evidence_packages
+  version: 2
+  title: Build controlled S0-S5 evidence packages
+  owner: xai-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:evidence
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: ir
+    contract: explanation_ir
+    required: true
+  outputs:
+  - name: evidence
+    contract: evidence_packages
+    required: true
+    discovery_globs:
+    - artifacts/**/evidence_packages*.jsonl
+    - data/manifests/evidence_exposure_manifest_evaluation.json
+  verification:
+    success_gate: EVIDENCE_PACKAGES_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: data/manifests/evidence_exposure_manifest_evaluation.json
+    failure_evidence_globs:
+    - data/manifests/evidence_exposure_manifest_evaluation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - xai
+  - evidence
+  notes: []
+  legacy_dispatcher_stage: ml:evidence
+- id: xai.evaluation_subset
+  version: 2
+  title: Select canonical evaluation subset
+  owner: xai-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - ml:evidence-subset
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: evidence
+    contract: evidence_packages
+    required: true
+  outputs:
+  - name: subset
+    contract: evaluation_subset
+    required: true
+    discovery_globs:
+    - artifacts/**/evaluation_subset*.json
+    - data/manifests/evidence_exposure_manifest_evaluation.json
+  verification:
+    success_gate: EVALUATION_SUBSET_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: data/manifests/evidence_exposure_manifest_evaluation.json
+    failure_evidence_globs:
+    - data/manifests/evidence_exposure_manifest_evaluation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - xai
+  - evaluation
+  notes: []
+  legacy_dispatcher_stage: ml:evidence-subset
+- id: llm.generate
+  version: 2
+  title: Generate LLM narratives
+  owner: llm-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:generate
+    working_directory: .
+  behavior:
+    deterministic: false
+    expensive: true
+    provider_required: true
+    approval_policy: PROVIDER
+    timeout_seconds: 21600
+    retries: 1
+    concurrency_group: provider-llm
+  inputs:
+  - name: evidence
+    contract: evidence_packages
+    required: true
+  - name: subset
+    contract: evaluation_subset
+    required: true
+  outputs:
+  - name: generations
+    contract: raw_generations
+    required: true
+    discovery_glob: artifacts/**/generations/**
+  verification:
+    success_gate: LLM_GENERATION_COMPLETE
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: generation_manifest_v1
+    adapter_version: 1
+    report_glob: data/manifests/llm_explanation_manifest_evaluation_llm_api.json
+    failure_evidence_globs:
+    - data/manifests/llm_explanation_manifest_evaluation_llm_api.json
+  resources:
+    cpu: 2
+    memory_mb: 4096
+    gpu: false
+  secrets:
+  - DEEPSEEK_API_KEY
+  - VLLM_API_KEY
+  tags:
+  - llm
+  - provider
+  notes: []
+  legacy_dispatcher_stage: llm:generate
+- id: llm.aggregate
+  version: 2
+  title: Aggregate generation outputs
+  owner: llm-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:aggregate
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: raw
+    contract: raw_generations
+    required: true
+  outputs:
+  - name: aggregated
+    contract: aggregated_generations
+    required: true
+    discovery_glob: artifacts/**/aggregated_generations*.jsonl
+  verification:
+    success_gate: GENERATION_AGGREGATION_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: artifacts/**/aggregated_generations*.jsonl
+    failure_evidence_globs: []
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - llm
+  - aggregation
+  notes: []
+  legacy_dispatcher_stage: llm:aggregate
+- id: llm.filter_deepseek
+  version: 2
+  title: Filter historical DeepSeek generations
+  owner: llm-pipeline
+  status: OPTIONAL
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:filter-deepseek
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: aggregated
+    contract: aggregated_generations
+    required: true
+  outputs:
+  - name: filtered
+    contract: filtered_generations
+    required: true
+    discovery_glob: artifacts/**/filtered_generations*.jsonl
+  verification:
+    success_gate: FILTERED_GENERATIONS_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: artifacts/**/filtered_generations*.jsonl
+    failure_evidence_globs: []
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - llm
+  - compatibility
+  notes:
+  - Optional compatibility stage; not a required edge in the golden path.
+  legacy_dispatcher_stage: llm:filter-deepseek
+- id: llm.canonicalize
+  version: 2
+  title: Build canonical generation index
+  owner: llm-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:canonicalize
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: aggregated
+    contract: aggregated_generations
+    required: true
+  outputs:
+  - name: canonical
+    contract: canonical_generations
+    required: true
+    discovery_glob: artifacts/**/canonical_generation*.jsonl
+  verification:
+    success_gate: CANONICAL_GENERATIONS_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: artifacts/**/canonical_generation*.jsonl
+    failure_evidence_globs: []
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - llm
+  - canonicalization
+  notes: []
+  legacy_dispatcher_stage: llm:canonicalize
+- id: llm.contract_validate
+  version: 2
+  title: Validate narrative contracts
+  owner: llm-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:contract
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: canonical
+    contract: canonical_generations
+    required: true
+  outputs:
+  - name: contract_results
+    contract: narrative_contract_results
+    required: true
+    discovery_glob: artifacts/**/contract_validation*.jsonl
+  verification:
+    success_gate: NARRATIVE_CONTRACT_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: artifacts/**/contract_validation*.jsonl
+    failure_evidence_globs:
+    - artifacts/**/contract_validation*.jsonl
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - llm
+  - contracts
+  notes: []
+  legacy_dispatcher_stage: llm:contract
+- id: claims.extract
+  version: 2
+  title: Extract atomic claims
+  owner: claim-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:claims
+    working_directory: .
+  behavior:
+    deterministic: false
+    expensive: true
+    provider_required: true
+    approval_policy: PROVIDER
+    timeout_seconds: 21600
+    retries: 1
+    concurrency_group: provider-llm
+  inputs:
+  - name: canonical
+    contract: canonical_generations
+    required: true
+  - name: contract_results
+    contract: narrative_contract_results
+    required: true
+  outputs:
+  - name: claims
+    contract: extracted_claims
+    required: true
+    discovery_glob: artifacts/**/claims_extracted*.jsonl
+  verification:
+    success_gate: ATOMIC_CLAIMS_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: artifacts/**/claims_extracted*.jsonl
+    failure_evidence_globs: []
+  resources:
+    cpu: 2
+    memory_mb: 4096
+    gpu: false
+  secrets:
+  - DEEPSEEK_API_KEY
+  tags:
+  - claims
+  - provider
+  notes:
+  - Stored-only replay can be used for deterministic regression without provider calls.
+  legacy_dispatcher_stage: llm:claims
+- id: claims.finalize_replay
+  version: 2
+  title: Finalize claims through stored-response replay
+  owner: claim-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:claims-finalize
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: canonical
+    contract: canonical_generations
+    required: true
+  - name: claims
+    contract: extracted_claims
+    required: true
+  outputs:
+  - name: final_claims
+    contract: final_claims
+    required: true
+    discovery_glob: artifacts/**/final_claims*.jsonl
+  verification:
+    success_gate: FINAL_CLAIMS_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: artifacts/**/final_claims*.jsonl
+    failure_evidence_globs: []
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - claims
+  - finalization
+  notes: []
+  legacy_dispatcher_stage: llm:claims-finalize
+- id: claims.finalize_semantic
+  version: 2
+  title: Apply semantic claim finalization
+  owner: claim-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:claims-finalize-v3
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: historical
+    contract: final_claims
+    required: true
+  outputs:
+  - name: semantic_claims
+    contract: semantic_final_claims
+    required: true
+    discovery_glob: artifacts/**/semantic_final_claims*.jsonl
+  verification:
+    success_gate: SEMANTIC_FINAL_CLAIMS_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: manifest_status_v1
+    adapter_version: 1
+    report_glob: artifacts/**/semantic_final_claims*.jsonl
+    failure_evidence_globs: []
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - claims
+  - finalization
+  notes: []
+  legacy_dispatcher_stage: llm:claims-finalize-v3
+- id: claims.validate
+  version: 2
+  title: Run deterministic claim validation
+  owner: claim-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:validate
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: true
+    provider_required: false
+    approval_policy: EXPENSIVE
+    timeout_seconds: 14400
+    retries: 0
+    concurrency_group: cpu-heavy
+  inputs:
+  - name: claims
+    contract: semantic_final_claims
+    required: true
+  - name: canonical
+    contract: canonical_generations
+    required: true
+  - name: evidence
+    contract: evidence_packages
+    required: true
+  outputs:
+  - name: validation
+    contract: claim_validation_results
+    required: true
+    discovery_glob: data/reports/llm_validation/**/claim_validation_results.jsonl
+  verification:
+    success_gate: CLAIM_VALIDATION_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: claim_validation_release_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/claim_validation_results.jsonl
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/claim_validation_results.jsonl
+  resources:
+    cpu: 2
+    memory_mb: 8192
+    gpu: false
+  secrets: []
+  tags:
+  - claims
+  - validation
+  notes: []
+  legacy_dispatcher_stage: llm:validate
+- id: calibration.prepare
+  version: 2
+  title: Prepare human calibration sample
+  owner: claim-pipeline
+  status: OPTIONAL
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:prepare-validation-calibration
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: validation
+    contract: claim_validation_results
+    required: true
+  outputs:
+  - name: sample
+    contract: calibration_sample
+    required: true
+    discovery_glob: data/reports/llm_validation/**/calibration_sample*
+  verification:
+    success_gate: CALIBRATION_SAMPLE_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/calibration_sample*
+    failure_evidence_globs: []
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - claims
+  - calibration
+  notes: []
+  legacy_dispatcher_stage: llm:prepare-validation-calibration
+- id: calibration.evaluate
+  version: 2
+  title: Evaluate human calibration labels
+  owner: claim-pipeline
+  status: OPTIONAL
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:evaluate-validation-calibration
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: sample
+    contract: calibration_sample
+    required: true
+  outputs:
+  - name: evaluation
+    contract: calibration_evaluation
+    required: true
+    discovery_glob: data/reports/llm_validation/**/calibration_report.json
+  verification:
+    success_gate: CALIBRATION_EVALUATION_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/calibration_report.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/calibration_report.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - claims
+  - calibration
+  notes: []
+  legacy_dispatcher_stage: llm:evaluate-validation-calibration
+- id: release.claim_measurement
+  version: 2
+  title: Verify claim-measurement release
+  owner: claim-pipeline
+  status: ACTIVE
+  runtime:
+    type: npm
+    executable: npm
+    args:
+    - run
+    - research
+    - --
+    - llm:verify-validation-release
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: RELEASE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: validation
+    contract: claim_validation_results
+    required: true
+  - name: calibration
+    contract: calibration_evaluation
+    required: false
+  outputs:
+  - name: release
+    contract: claim_measurement_release
+    required: true
+    discovery_glob: data/reports/llm_validation/**/claim_validation_release.json
+  verification:
+    success_gate: CLAIM_MEASUREMENT_RELEASE_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: claim_validation_release_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/claim_validation_release.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/claim_validation_release.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - claims
+  - release
+  notes: []
+  legacy_dispatcher_stage: llm:verify-validation-release
+- id: analytics.data_mart
+  version: 2
+  title: Build research data mart
+  owner: analytics-pipeline
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.data_mart.main
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: true
+    provider_required: false
+    approval_policy: EXPENSIVE
+    timeout_seconds: 7200
+    retries: 0
+    concurrency_group: cpu-heavy
+  inputs:
+  - name: claim_release
+    contract: claim_measurement_release
+    required: true
+  - name: canonical
+    contract: canonical_generations
+    required: true
+  - name: evidence
+    contract: evidence_packages
+    required: true
+  outputs:
+  - name: data_mart
+    contract: research_data_mart
+    required: true
+    discovery_glob: data/reports/llm_validation/**/data_mart/**
+  verification:
+    success_gate: DATA_MART_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/data_mart/data_mart_validation.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/data_mart/data_mart_validation.json
+  resources:
+    cpu: 2
+    memory_mb: 8192
+    gpu: false
+  secrets: []
+  tags:
+  - analytics
+  - data-mart
+  notes: []
+- id: analytics.metrics
+  version: 2
+  title: Engineer generation and option metrics
+  owner: analytics-pipeline
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.metric_engineering.main
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: data_mart
+    contract: research_data_mart
+    required: true
+  outputs:
+  - name: analytical_mart
+    contract: analytical_mart
+    required: true
+    discovery_glob: data/reports/llm_validation/**/data_mart/**
+  verification:
+    success_gate: ANALYTICAL_MART_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/data_mart/metric_validation.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/data_mart/metric_validation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - analytics
+  - metrics
+  notes: []
+- id: analytics.statistics
+  version: 2
+  title: Build statistical core
+  owner: analytics-pipeline
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.statistical_analysis.main
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: analytical_mart
+    contract: analytical_mart
+    required: true
+  outputs:
+  - name: statistics
+    contract: statistical_core
+    required: true
+    discovery_glob: data/reports/llm_validation/**/statistical_analysis/**
+  verification:
+    success_gate: STATISTICAL_CORE_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/statistical_analysis/statistical_validation.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/statistical_analysis/statistical_validation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - analytics
+  - statistics
+  notes: []
+- id: analytics.diagnostics
+  version: 2
+  title: Build mechanism and failure diagnostics
+  owner: analytics-pipeline
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.diagnostics.main
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: data_mart
+    contract: research_data_mart
+    required: true
+  - name: analytical_mart
+    contract: analytical_mart
+    required: true
+  - name: statistics
+    contract: statistical_core
+    required: true
+  outputs:
+  - name: diagnostics
+    contract: diagnostics_release
+    required: true
+    discovery_glob: data/reports/llm_validation/**/diagnostics/**
+  verification:
+    success_gate: DIAGNOSTICS_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/diagnostics/diagnostic_validation.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/diagnostics/diagnostic_validation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - analytics
+  - diagnostics
+  notes: []
+- id: analytics.decision_support
+  version: 2
+  title: Build decision-support scenarios
+  owner: analytics-pipeline
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.decision_support.main
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: analytical_mart
+    contract: analytical_mart
+    required: true
+  - name: statistics
+    contract: statistical_core
+    required: true
+  - name: diagnostics
+    contract: diagnostics_release
+    required: true
+  outputs:
+  - name: decision
+    contract: decision_support_release
+    required: true
+    discovery_glob: data/reports/llm_validation/**/decision_support/**
+  verification:
+    success_gate: DECISION_SUPPORT_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/decision_support/decision_validation.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/decision_support/decision_validation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - analytics
+  - decision
+  notes: []
+- id: analytics.validator_sensitivity
+  version: 2
+  title: Build validator sensitivity analysis
+  owner: analytics-pipeline
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.validator_sensitivity.main
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: validation
+    contract: claim_validation_results
+    required: true
+  - name: canonical
+    contract: canonical_generations
+    required: true
+  outputs:
+  - name: sensitivity
+    contract: validator_sensitivity_release
+    required: true
+    discovery_glob: data/reports/llm_validation/**/validator_sensitivity/**
+  verification:
+    success_gate: VALIDATOR_SENSITIVITY_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/validator_sensitivity/validator_sensitivity_validation.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/validator_sensitivity/validator_sensitivity_validation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - analytics
+  - sensitivity
+  notes: []
+- id: release.thesis_report
+  version: 2
+  title: Freeze thesis analytical release
+  owner: release-pipeline
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.report_release.main
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: RELEASE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: data_mart
+    contract: research_data_mart
+    required: true
+  - name: analytical_mart
+    contract: analytical_mart
+    required: true
+  - name: statistics
+    contract: statistical_core
+    required: true
+  - name: diagnostics
+    contract: diagnostics_release
+    required: true
+  - name: decision
+    contract: decision_support_release
+    required: true
+  - name: sensitivity
+    contract: validator_sensitivity_release
+    required: true
+  outputs:
+  - name: report
+    contract: thesis_report_release
+    required: true
+    discovery_globs:
+    - data/reports/llm_validation/**/report_release/report_numbers.json
+    - data/reports/llm_validation/**/report_release/report_source_index.csv
+    - data/reports/llm_validation/**/report_release/report_release_manifest.json
+    - data/reports/llm_validation/**/report_release/report_readiness_validation.json
+  verification:
+    success_gate: REPORT_WRITING_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/report_release/report_readiness_validation.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/report_release/report_readiness_validation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - release
+  - thesis
+  notes: []
+- id: release.baseline_comparison
+  version: 2
+  title: Build deterministic Template Baseline comparison
+  owner: release-pipeline
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.baseline_comparison.main
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: RELEASE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: report
+    contract: thesis_report_release
+    required: true
+  - name: evidence
+    contract: evidence_packages
+    required: true
+  - name: subset
+    contract: evaluation_subset
+    required: true
+  outputs:
+  - name: baseline
+    contract: baseline_comparison_release
+    required: true
+    discovery_glob: data/reports/llm_validation/**/baseline_comparison/**
+  verification:
+    success_gate: BASELINE_COMPARISON_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/baseline_comparison/baseline_comparison_validation.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/baseline_comparison/baseline_comparison_validation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - release
+  - baseline
+  notes: []
+- id: release.visualization_data
+  version: 2
+  title: Build certified visualization-data-v2 release
+  owner: release-pipeline
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.visualization_v2.main
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: RELEASE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: report
+    contract: thesis_report_release
+    required: true
+  - name: baseline
+    contract: baseline_comparison_release
+    required: true
+  outputs:
+  - name: visualization
+    contract: visualization_data_release
+    required: true
+    discovery_glob: data/reports/llm_validation/**/visualization_v2/**
+  verification:
+    success_gate: VISUALIZATION_DATA_V2_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: data/reports/llm_validation/**/visualization_v2/visualization_validation.json
+    failure_evidence_globs:
+    - data/reports/llm_validation/**/visualization_v2/visualization_validation.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - release
+  - visualization
+  notes: []
+- id: dashboard.i18n_certification
+  version: 2
+  title: Certify dashboard bilingual presentation and exports
+  owner: dashboard
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.dashboard.i18n.certify
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: RELEASE
+    timeout_seconds: 3600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: visualization
+    contract: visualization_data_release
+    required: true
+  outputs:
+  - name: certification
+    contract: dashboard_i18n_certification
+    required: true
+    discovery_glob: release/thesis_dashboard_v1/tests/i18n_certification/i18n_certification_summary.json
+  verification:
+    success_gate: DASHBOARD_I18N_CERTIFIED
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: dashboard_i18n_certification_v1
+    adapter_version: 1
+    report_glob: release/thesis_dashboard_v1/tests/i18n_certification/i18n_certification_summary.json
+    failure_evidence_globs:
+    - release/thesis_dashboard_v1/tests/i18n_certification/i18n_certification_summary.json
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets: []
+  tags:
+  - dashboard
+  - i18n
+  - certification
+  notes: []
+- id: ops.mlflow_register
+  version: 3
+  title: Register verified trained models in MLflow and publish receipt
+  owner: researchops
+  status: OPTIONAL
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.researchops.orchestration.stage_commands
+    - mlflow-register
+    working_directory: .
+  behavior:
+    deterministic: false
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 3600
+    retries: 2
+    concurrency_group: mlflow-registry
+  inputs:
+  - name: trained_models
+    contract: trained_model
+    required: true
+  outputs:
+  - name: receipt
+    contract: mlflow_registration_receipt
+    required: true
+    discovery_glob: artifacts/researchops/**/mlflow_registration_receipt.json
+  verification:
+    success_gate: MLFLOW_MODEL_REGISTERED
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: mlflow_registration_receipt_v1
+    adapter_version: 1
+    report_glob: artifacts/researchops/**/mlflow_registration_receipt.json
+    failure_evidence_globs: []
+  resources:
+    cpu: 1
+    memory_mb: 2048
+    gpu: false
+  secrets:
+  - RESEARCHOPS_ARTIFACT_PROFILE
+  - RESEARCHOPS_DATABASE_URL
+  - RESEARCHOPS_S3_BUCKET
+  - RESEARCHOPS_S3_ENDPOINT
+  - RESEARCHOPS_S3_ACCESS_KEY
+  - RESEARCHOPS_S3_SECRET_KEY
+  - RESEARCHOPS_S3_REGION
+  - RESEARCHOPS_S3_USE_SSL
+  - RESEARCHOPS_S3_KEY_PREFIX
+  - MLFLOW_VERSION
+  - MLFLOW_TRACKING_URI
+  - MLFLOW_INTERNAL_TRACKING_URI
+  - MLFLOW_BACKEND_STORE_URI
+  - MLFLOW_ARTIFACTS_DESTINATION
+  - MLFLOW_S3_ENDPOINT_URL
+  - MLFLOW_S3_BUCKET
+  - MLFLOW_S3_ACCESS_KEY
+  - MLFLOW_S3_SECRET_KEY
+  - AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY
+  - AWS_DEFAULT_REGION
+  - MLFLOW_ALLOWED_HOSTS
+  tags:
+  - researchops
+  - mlflow
+  - registry
+  notes:
+  - The stage is idempotent by tracking key but not pure because it mutates MLflow
+    registry state.
+  - Champion promotion is deliberately excluded from this stage.
+  - Phase 5 remains the owner of the canonical immutable MLflow receipt; Phase 6 verifies
+    and links that existing artifact without repackaging it.
+- id: ops.verify_source_environment
+  version: 2
+  title: Verify source and dependency environment
+  owner: researchops
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.researchops.orchestration.stage_commands
+    - verify-environment
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 300
+    retries: 0
+    concurrency_group: verification
+  inputs: []
+  outputs:
+  - name: report
+    contract: environment_verification_report
+    required: true
+    discovery_glob: .researchops/runs/**/environment_verification_report.json
+  verification:
+    success_gate: SOURCE_ENVIRONMENT_VERIFIED
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: environment_verification_v1
+    adapter_version: 1
+    report_glob: .researchops/runs/**/environment_verification_report.json
+    failure_evidence_globs:
+    - .researchops/runs/**/environment_verification_report.json
+  resources:
+    cpu: 0.5
+    memory_mb: 512
+    gpu: false
+  secrets: []
+  tags:
+  - researchops
+  - verification
+  - environment
+  notes: []
+- id: release.complete_bundle
+  version: 2
+  title: Build immutable complete release bundle index
+  owner: researchops
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.researchops.orchestration.stage_commands
+    - build-complete-bundle
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: RELEASE
+    timeout_seconds: 600
+    retries: 0
+    concurrency_group: verification
+  inputs:
+  - name: claim_release
+    contract: claim_measurement_release
+    required: true
+  - name: thesis_report
+    contract: thesis_report_release
+    required: true
+  - name: visualization_release
+    contract: visualization_data_release
+    required: true
+  - name: dashboard_certification
+    contract: dashboard_i18n_certification
+    required: true
+  - name: mlflow_receipt
+    contract: mlflow_registration_receipt
+    required: false
+  outputs:
+  - name: bundle
+    contract: complete_release_bundle
+    required: true
+    discovery_glob: .researchops/runs/**/complete_release_bundle.json
+  verification:
+    success_gate: COMPLETE_RELEASE_BUNDLE_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: complete_release_bundle_v1
+    adapter_version: 1
+    report_glob: .researchops/runs/**/complete_release_bundle.json
+    failure_evidence_globs:
+    - .researchops/runs/**/complete_release_bundle.json
+  resources:
+    cpu: 0.5
+    memory_mb: 512
+    gpu: false
+  secrets: []
+  tags:
+  - researchops
+  - release
+  - bundle
+  notes:
+  - This stage indexes immutable parents and never promotes or mutates a release.
+- id: ops.prefect_acceptance
+  version: 2
+  title: Run deterministic Prefect orchestration acceptance fixture
+  owner: researchops
+  status: OPTIONAL
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.researchops.orchestration.stage_commands
+    - acceptance-fixture
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 600
+    retries: 2
+    concurrency_group: verification
+  inputs: []
+  outputs:
+  - name: result
+    contract: orchestration_acceptance_result
+    required: true
+    discovery_glob: .researchops/runs/**/orchestration_acceptance_result.json
+  verification:
+    success_gate: PREFECT_ACCEPTANCE_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: execution_success_v1
+    adapter_version: 1
+    report_glob: .researchops/runs/**/orchestration_acceptance_result.json
+    failure_evidence_globs: []
+  resources:
+    cpu: 0.25
+    memory_mb: 256
+    gpu: false
+  secrets: []
+  tags:
+  - researchops
+  - prefect
+  - acceptance
+  notes:
+  - Used only by isolated Phase 6 live acceptance; never part of scientific output.
+- id: ops.prefect_approval_acceptance
+  version: 2
+  title: Run protected Prefect approval acceptance fixture
+  owner: researchops
+  status: OPTIONAL
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.researchops.orchestration.stage_commands
+    - approval-acceptance-fixture
+    working_directory: .
+  behavior:
+    deterministic: true
+    expensive: true
+    provider_required: false
+    approval_policy: EXPENSIVE
+    timeout_seconds: 600
+    retries: 0
+    concurrency_group: verification
+  inputs: []
+  outputs:
+  - name: result
+    contract: orchestration_approval_acceptance_result
+    required: true
+    discovery_glob: .researchops/runs/**/orchestration_approval_acceptance_result.json
+  verification:
+    success_gate: PREFECT_APPROVAL_ACCEPTANCE_READY
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: execution_success_v1
+    adapter_version: 1
+    report_glob: .researchops/runs/**/orchestration_approval_acceptance_result.json
+    failure_evidence_globs: []
+  resources:
+    cpu: 0.25
+    memory_mb: 256
+    gpu: false
+  secrets: []
+  tags:
+  - researchops
+  - prefect
+  - acceptance
+  - approval
+  notes:
+  - Used only to prove suspend, resume, approval, and rejection semantics.
+- id: ops.release_promote
+  version: 1
+  title: Promote a governed research release
+  owner: researchops
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.researchops.orchestration.stage_commands
+    - release-promote
+    working_directory: .
+  behavior:
+    deterministic: false
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 600
+    retries: 0
+    concurrency_group: release-promotion
+  inputs: []
+  outputs:
+  - name: receipt
+    contract: release_promotion_receipt
+    required: true
+    discovery_glob: .researchops/runs/**/release_promotion_receipt.json
+  verification:
+    success_gate: RELEASE_PROMOTION_COMPLETED
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: .researchops/runs/**/release_promotion_receipt.json
+    failure_evidence_globs:
+    - .researchops/runs/**/release_promotion_receipt.json
+  resources:
+    cpu: 0.5
+    memory_mb: 512
+    gpu: false
+  secrets:
+  - RESEARCHOPS_DATABASE_URL
+  tags:
+  - researchops
+  - promotion
+  - release
+  notes:
+  - Governed target approval is validated by the Phase 7 promotion policy engine.
+- id: ops.model_promote
+  version: 1
+  title: Promote a governed MLflow candidate to champion
+  owner: researchops
+  status: ACTIVE
+  runtime:
+    type: python
+    executable: python3
+    args:
+    - -m
+    - research.python.researchops.orchestration.stage_commands
+    - model-promote
+    working_directory: .
+  behavior:
+    deterministic: false
+    expensive: false
+    provider_required: false
+    approval_policy: NONE
+    timeout_seconds: 600
+    retries: 0
+    concurrency_group: release-promotion
+  inputs: []
+  outputs:
+  - name: receipt
+    contract: model_promotion_receipt
+    required: true
+    discovery_glob: .researchops/runs/**/model_promotion_receipt.json
+  verification:
+    success_gate: MODEL_PROMOTION_COMPLETED
+    execution_gate: STAGE_EXECUTION_SUCCEEDED
+    adapter_id: standard_check_report_v1
+    adapter_version: 1
+    report_glob: .researchops/runs/**/model_promotion_receipt.json
+    failure_evidence_globs:
+    - .researchops/runs/**/model_promotion_receipt.json
+  resources:
+    cpu: 0.5
+    memory_mb: 512
+    gpu: false
+  secrets:
+  - RESEARCHOPS_DATABASE_URL
+  - MLFLOW_TRACKING_URI
+  - MLFLOW_INTERNAL_TRACKING_URI
+  tags:
+  - researchops
+  - promotion
+  - model
+  - mlflow
+  notes:
+  - External MLflow mutation is recorded by a durable promotion decision and can enter FAILED_PARTIAL.

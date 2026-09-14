@@ -1,0 +1,152 @@
+{
+  "base_url": "http://127.0.0.1:61969",
+  "console_errors": [],
+  "export": {
+    "expected_scope": "CROSS_DATASET",
+    "passed": true,
+    "report_number_id": "dataset::HOME_CREDIT::mean_e2e",
+    "suggested_filename": "llm_xai_methods_cross_dataset.zip"
+  },
+  "layout": [
+    {
+      "bodyScrollWidth": 1366,
+      "clientWidth": 1366,
+      "passed": true,
+      "route": "/",
+      "scrollWidth": 1366
+    },
+    {
+      "bodyScrollWidth": 1366,
+      "clientWidth": 1366,
+      "passed": true,
+      "route": "/effectiveness",
+      "scrollWidth": 1366
+    },
+    {
+      "bodyScrollWidth": 1366,
+      "clientWidth": 1366,
+      "passed": true,
+      "route": "/mechanisms",
+      "scrollWidth": 1366
+    },
+    {
+      "bodyScrollWidth": 1366,
+      "clientWidth": 1366,
+      "passed": true,
+      "route": "/decision",
+      "scrollWidth": 1366
+    },
+    {
+      "bodyScrollWidth": 1366,
+      "clientWidth": 1366,
+      "passed": true,
+      "route": "/robustness",
+      "scrollWidth": 1366
+    },
+    {
+      "bodyScrollWidth": 1366,
+      "clientWidth": 1366,
+      "passed": true,
+      "route": "/cases",
+      "scrollWidth": 1366
+    },
+    {
+      "bodyScrollWidth": 1366,
+      "clientWidth": 1366,
+      "passed": true,
+      "route": "/methods",
+      "scrollWidth": 1366
+    }
+  ],
+  "locale_checks": [
+    {
+      "locale": "vi",
+      "passed": true
+    }
+  ],
+  "network_errors": [],
+  "page_errors": [],
+  "pages": [
+    {
+      "passed": true,
+      "route": "/"
+    },
+    {
+      "markers": [
+        "Reliability Map",
+        "Statistical evidence"
+      ],
+      "passed": true,
+      "route": "/effectiveness"
+    },
+    {
+      "markers": [
+        "100% Faithfulness Accounting",
+        "Claim diagnostics"
+      ],
+      "passed": true,
+      "route": "/mechanisms"
+    },
+    {
+      "markers": [
+        "NO_ROBUST_RECOMMENDATION",
+        "CONTROL",
+        "FALLBACK_ONLY"
+      ],
+      "passed": true,
+      "route": "/decision"
+    },
+    {
+      "markers": [
+        "PRIMARY_CERTIFIED",
+        "SENSITIVITY_ONLY",
+        "NOT_MATERIALIZED_IN_VISUALIZATION_DATA_V3"
+      ],
+      "passed": true,
+      "route": "/robustness"
+    },
+    {
+      "markers": [
+        "NOT_AVAILABLE_IN_M28_AUTHORIZED_LINEAGE"
+      ],
+      "passed": true,
+      "route": "/cases"
+    },
+    {
+      "markers": [
+        "MODEL_REVISION_UNKNOWN",
+        "NO_ROBUST_RECOMMENDATION",
+        "certified_multidataset_analytical_release_v1"
+      ],
+      "passed": true,
+      "route": "/methods"
+    }
+  ],
+  "passed": true,
+  "scope_checks": [
+    {
+      "passed": true,
+      "scope_label": "Home Credit"
+    },
+    {
+      "passed": true,
+      "scope_label": "Freddie Mac"
+    },
+    {
+      "passed": true,
+      "scope_label": "Cross-dataset"
+    },
+    {
+      "passed": true,
+      "scope_label": "Case Explorer exact Freddie deep-link"
+    },
+    {
+      "passed": true,
+      "scope_label": "Case Explorer local Home Credit reconciliation"
+    }
+  ],
+  "viewport": {
+    "height": 768,
+    "width": 1366
+  }
+}

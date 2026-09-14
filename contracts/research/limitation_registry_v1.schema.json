@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"limitation_registry_v1",
+  "type":"object",
+  "required":["limitation_id","category","scope","severity","status","statement","affected_claims","mitigation","source_evidence"],
+  "properties":{
+    "limitation_id":{"type":"string","minLength":1},
+    "category":{"type":"string","minLength":1},
+    "scope":{"type":"string","minLength":1},
+    "severity":{"type":"string","enum":["LOW","MEDIUM","HIGH"]},
+    "status":{"type":"string","enum":["ACTIVE","RESOLVED","NOT_APPLICABLE"]},
+    "statement":{"type":"string","minLength":1},
+    "affected_claims":{"type":"string","minLength":1},
+    "mitigation":{"type":"string","minLength":1},
+    "source_evidence":{"type":"string","minLength":1}
+  },
+  "additionalProperties":false
+}

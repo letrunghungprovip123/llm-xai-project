@@ -1,0 +1,80 @@
+{
+  "schema_version": "claim_measurement_release_v1",
+  "release_id": "claim_measurement_candidate_primary_v1",
+  "release_status": "READY_WITH_LIMITATIONS",
+  "analysis_version": "validation_v1",
+  "interpretation_scope": "operational_faithfulness_under_project_ontology",
+  "decision": {
+    "primary_condition": "candidate",
+    "sensitivity_condition": "v4",
+    "rationale": [
+      "All currently certified data-mart, metric, statistical, diagnostic, decision-support and visualization outputs were generated from the candidate artifacts.",
+      "The available V4 release verdict is REJECTED because its real-human-calibration gate C6 did not pass.",
+      "The selection preserves reproducible lineage and does not assert that candidate labels are human ground truth or intrinsically superior to V4."
+    ]
+  },
+  "human_calibration": {
+    "status": "NOT_COMPLETED",
+    "reporting_consequence": "Results must be described as operational validator-based faithfulness, not absolute truth, human equivalence or human-level quality."
+  },
+  "official": {
+    "finalizer_version": "claim_finalizer_v2.0.0",
+    "validator_version": "claim_validator_v4.0.0",
+    "policy_version": "claim_validation_policy_v1",
+    "reason_taxonomy_version": "claim_validation_reason_codes_v1",
+    "numeric_policy_version": "numeric_tolerance_policy_v1",
+    "artifacts": {
+      "final_claims": {
+        "path": "data/reports/llm_validation/validation_v1/claim_finalization_candidate/claims_final.jsonl",
+        "sha256": "89d90150df82c01f1b5557a9fbd27d26c405c0f5f5402bdbfeed93105c478cfe",
+        "record_count": 14667
+      },
+      "validation_results": {
+        "path": "data/reports/llm_validation/validation_v1/claim_validation_candidate/claim_validation_results.jsonl",
+        "sha256": "5e8b0f05cde4042715025b2c7aeb783af05d7e0578b827b9c85e1435e91f59d5",
+        "record_count": 14667
+      },
+      "generation_summaries": {
+        "path": "data/reports/llm_validation/validation_v1/claim_validation_candidate/generation_validation_summary.jsonl",
+        "sha256": "4aca7dfee7801f8d7d6ddf9622230f02732c60c0b3a55cf61f8573dd32574855",
+        "record_count": 648
+      }
+    },
+    "status_counts": {
+      "SUPPORTED": 13540,
+      "NOT_VERIFIABLE": 1018,
+      "UNSUPPORTED": 72,
+      "CONTRADICTED": 25,
+      "NOT_APPLICABLE": 12
+    }
+  },
+  "sensitivity": {
+    "role": "SENSITIVITY_ONLY",
+    "release_verdict": "REJECTED",
+    "release_reason": "human calibration gate C6 did not pass",
+    "artifacts": {
+      "final_claims": {
+        "path": "data/reports/llm_validation/validation_v1/claim_finalization_v4/claims_final.jsonl",
+        "sha256": "b34571aabe28c1ddd49e231bd8093b8151965d42c86e1146c547df5e8cd92533",
+        "record_count": 14667
+      },
+      "validation_results": {
+        "path": "data/reports/llm_validation/validation_v1/claim_validation_v4/claim_validation_results.jsonl",
+        "sha256": "2e338006805191aeebb0f43bf8ce95e29ead49f3df27749a04c7f25eebf6cc4c",
+        "record_count": 14667
+      },
+      "generation_summaries": {
+        "path": "data/reports/llm_validation/validation_v1/claim_validation_v4/generation_validation_summary.jsonl",
+        "sha256": "f70a38d357dfd550ccfbd683e3e96a938d7e3b491d109c5cf6f3cfae77fcfdf5",
+        "record_count": 648
+      }
+    },
+    "status_counts": {
+      "SUPPORTED": 13923,
+      "NOT_VERIFIABLE": 601,
+      "UNSUPPORTED": 106,
+      "CONTRADICTED": 25,
+      "NOT_APPLICABLE": 12
+    }
+  }
+}

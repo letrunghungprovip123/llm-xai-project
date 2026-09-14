@@ -1,0 +1,393 @@
+{
+  "schema_version": "claim_validation_summary_v3",
+  "result_count": 14667,
+  "execution_status_counts": {
+    "SUCCESS": 14667
+  },
+  "validation_status_counts": {
+    "CONTRADICTED": 25,
+    "NOT_APPLICABLE": 12,
+    "NOT_VERIFIABLE": 1018,
+    "SUPPORTED": 13540,
+    "UNSUPPORTED": 72
+  },
+  "reason_code_counts": {
+    "CONCEPT_NOT_FOUND_IN_EVIDENCE": 65,
+    "DIRECTION_MIXED_OR_UNKNOWN": 162,
+    "DIRECTION_REVERSED": 15,
+    "EXACT_MATCH": 7908,
+    "MAGNITUDE_MATCH": 15,
+    "MAGNITUDE_OVERSTATED": 4,
+    "MAGNITUDE_SEMANTICS_UNSUPPORTED": 3,
+    "MAGNITUDE_SOURCE_MISSING": 1,
+    "NORMALIZED_MATCH": 5098,
+    "NUMERIC_OUTSIDE_TOLERANCE": 3,
+    "NUMERIC_ROLE_UNSUPPORTED": 165,
+    "NUMERIC_SOURCE_MISSING": 73,
+    "POLICY_RULE_NOT_APPLICABLE": 12,
+    "PREDICTION_LABEL_MISMATCH": 3,
+    "PREDICTION_VALUE_UNAVAILABLE": 2,
+    "RANK_SOURCE_MISSING": 6,
+    "RANKING_UNSUPPORTED": 3,
+    "SEMANTIC_SOURCE_UNFROZEN": 36,
+    "SEMANTIC_SUBTYPE_UNRESOLVED": 570,
+    "TOLERANCE_MATCH": 519,
+    "UNCERTAINTY_NOT_GROUNDED": 4
+  },
+  "reason_family_counts": {
+    "CONCEPT": 65,
+    "DIRECTION": 177,
+    "MAGNITUDE": 8,
+    "MATCH": 13540,
+    "NUMERIC": 241,
+    "POLICY": 618,
+    "PREDICTION": 5,
+    "RANKING": 9,
+    "UNCERTAINTY": 4
+  },
+  "hard_safety_count": 0,
+  "by_model": [
+    {
+      "key": "deepseek_v4_flash",
+      "result_count": 5386,
+      "semantic_denominator": 5386,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 4884,
+        "UNSUPPORTED": 4,
+        "CONTRADICTED": 4,
+        "NOT_VERIFIABLE": 484,
+        "NOT_APPLICABLE": 10
+      },
+      "supported_rate": 0.9067953954697363
+    },
+    {
+      "key": "phi4_mini_instruct",
+      "result_count": 4371,
+      "semantic_denominator": 4371,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 4009,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 21,
+        "NOT_VERIFIABLE": 341,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.9171814230153283
+    },
+    {
+      "key": "qwen3_8b",
+      "result_count": 4910,
+      "semantic_denominator": 4910,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 4647,
+        "UNSUPPORTED": 68,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 193,
+        "NOT_APPLICABLE": 2
+      },
+      "supported_rate": 0.9464358452138493
+    }
+  ],
+  "by_evidence_level": [
+    {
+      "key": "S0",
+      "result_count": 390,
+      "semantic_denominator": 390,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 268,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 2,
+        "NOT_VERIFIABLE": 120,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.6871794871794872
+    },
+    {
+      "key": "S1",
+      "result_count": 2779,
+      "semantic_denominator": 2779,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 2506,
+        "UNSUPPORTED": 1,
+        "CONTRADICTED": 12,
+        "NOT_VERIFIABLE": 259,
+        "NOT_APPLICABLE": 1
+      },
+      "supported_rate": 0.9017632241813602
+    },
+    {
+      "key": "S2",
+      "result_count": 2640,
+      "semantic_denominator": 2640,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 2531,
+        "UNSUPPORTED": 33,
+        "CONTRADICTED": 2,
+        "NOT_VERIFIABLE": 74,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.9587121212121212
+    },
+    {
+      "key": "S3",
+      "result_count": 2554,
+      "semantic_denominator": 2554,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 2401,
+        "UNSUPPORTED": 32,
+        "CONTRADICTED": 1,
+        "NOT_VERIFIABLE": 120,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.9400939702427564
+    },
+    {
+      "key": "S4",
+      "result_count": 4024,
+      "semantic_denominator": 4024,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 3740,
+        "UNSUPPORTED": 2,
+        "CONTRADICTED": 5,
+        "NOT_VERIFIABLE": 266,
+        "NOT_APPLICABLE": 11
+      },
+      "supported_rate": 0.9294234592445328
+    },
+    {
+      "key": "S5",
+      "result_count": 2280,
+      "semantic_denominator": 2280,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 2094,
+        "UNSUPPORTED": 4,
+        "CONTRADICTED": 3,
+        "NOT_VERIFIABLE": 179,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.9184210526315789
+    }
+  ],
+  "by_claim_type": [
+    {
+      "key": "concept_direction",
+      "result_count": 635,
+      "semantic_denominator": 635,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 462,
+        "UNSUPPORTED": 11,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 162,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.7275590551181103
+    },
+    {
+      "key": "concept_presence",
+      "result_count": 1294,
+      "semantic_denominator": 1294,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 1240,
+        "UNSUPPORTED": 54,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.9582689335394127
+    },
+    {
+      "key": "distributed_evidence",
+      "result_count": 303,
+      "semantic_denominator": 303,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 238,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 54,
+        "NOT_APPLICABLE": 11
+      },
+      "supported_rate": 0.7854785478547854
+    },
+    {
+      "key": "feature_direction",
+      "result_count": 4377,
+      "semantic_denominator": 4377,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 4362,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 15,
+        "NOT_VERIFIABLE": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.9965729952021933
+    },
+    {
+      "key": "feature_presence",
+      "result_count": 5223,
+      "semantic_denominator": 5223,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 5223,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 1
+    },
+    {
+      "key": "limitation",
+      "result_count": 372,
+      "semantic_denominator": 372,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 174,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 197,
+        "NOT_APPLICABLE": 1
+      },
+      "supported_rate": 0.46774193548387094
+    },
+    {
+      "key": "magnitude",
+      "result_count": 26,
+      "semantic_denominator": 26,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 15,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 4,
+        "NOT_VERIFIABLE": 7,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.5769230769230769
+    },
+    {
+      "key": "numeric",
+      "result_count": 988,
+      "semantic_denominator": 988,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 747,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 3,
+        "NOT_VERIFIABLE": 238,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.7560728744939271
+    },
+    {
+      "key": "prediction",
+      "result_count": 722,
+      "semantic_denominator": 722,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 607,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 3,
+        "NOT_VERIFIABLE": 112,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.8407202216066482
+    },
+    {
+      "key": "ranking",
+      "result_count": 64,
+      "semantic_denominator": 64,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 55,
+        "UNSUPPORTED": 3,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 6,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.859375
+    },
+    {
+      "key": "recommendation",
+      "result_count": 77,
+      "semantic_denominator": 77,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 0,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 77,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0
+    },
+    {
+      "key": "uncertainty",
+      "result_count": 586,
+      "semantic_denominator": 586,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 417,
+        "UNSUPPORTED": 4,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 165,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.71160409556314
+    }
+  ],
+  "by_claim_origin": [
+    {
+      "key": "derived_numeric",
+      "result_count": 404,
+      "semantic_denominator": 404,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 309,
+        "UNSUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 95,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.7648514851485149
+    },
+    {
+      "key": "deterministic_metadata",
+      "result_count": 6517,
+      "semantic_denominator": 6517,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 6463,
+        "UNSUPPORTED": 54,
+        "CONTRADICTED": 0,
+        "NOT_VERIFIABLE": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "supported_rate": 0.9917139788246125
+    },
+    {
+      "key": "llm",
+      "result_count": 7746,
+      "semantic_denominator": 7746,
+      "execution_error_count": 0,
+      "status_counts": {
+        "SUPPORTED": 6768,
+        "UNSUPPORTED": 18,
+        "CONTRADICTED": 25,
+        "NOT_VERIFIABLE": 923,
+        "NOT_APPLICABLE": 12
+      },
+      "supported_rate": 0.8737412858249419
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "counts": {
+    "bootstrap_seeds": 3,
+    "datasets": 2,
+    "options_per_dataset": 18,
+    "primary_contrasts_per_dataset": 33
+  },
+  "files": {
+    "bootstrap_option_sensitivity.csv": {
+      "byte_count": 22545,
+      "sha256": "a3e0d9247e4f04b7185335437e45f8eb46ddc873526d327124bb7d798a537165"
+    },
+    "bootstrap_sensitivity.csv": {
+      "byte_count": 48611,
+      "sha256": "630561b90aa88a69c04fc1edcacd05d45a9ebc08b1233ee357a956652ad7ccd4"
+    },
+    "bootstrap_sensitivity_summary.csv": {
+      "byte_count": 6588,
+      "sha256": "1a6380bdf88cdb06cabee9c2a09bcae76d308f85b78bf7a61eafe212901dd589"
+    },
+    "claim_type_sensitivity.csv": {
+      "byte_count": 32796,
+      "sha256": "11d0bcb30238a6bad5d94a96120fd6360dd8d7d3b2d69d4c814d7445b9a853eb"
+    },
+    "claim_type_sensitivity_lanes.csv": {
+      "byte_count": 713,
+      "sha256": "b466fa1b90799e77e68cab14c3524cf48f57b218e54d9718081fc3a2fb5839f2"
+    },
+    "human_calibration_status.json": {
+      "byte_count": 174,
+      "sha256": "8fd4b4bf79569967a1b11da06a3b45c3853f4a274d3530adaf6a85f48ae46225"
+    },
+    "margin_sensitivity.csv": {
+      "byte_count": 6873,
+      "sha256": "1e7c2cd5b0df91f843d82e4f013cb8bde06cdca977fdfb3bbc41f675a4c5b3dd"
+    },
+    "margin_sensitivity_summary.csv": {
+      "byte_count": 395,
+      "sha256": "032c8aeb3d00d9c75ecc24f35f014894fde6a8d6edf543091283e110bb58a45b"
+    },
+    "metric_sensitivity.csv": {
+      "byte_count": 20545,
+      "sha256": "b5759cc0ac533a596f514e99348541a9a584e45b9f0fe2ea74f32d89b4859015"
+    },
+    "population_contrast_sensitivity.csv": {
+      "byte_count": 11933,
+      "sha256": "b55f27409091ba9b8114e2c6cd82ba010ca8bead89544835187c075a0c5a7eaf"
+    },
+    "population_effect_sensitivity.csv": {
+      "byte_count": 1112,
+      "sha256": "49be06b9db5f0eeb7bd48a125cb8c7b58caf9c6e319f29331d5bd48c67e1b9ca"
+    },
+    "population_sensitivity.csv": {
+      "byte_count": 4527,
+      "sha256": "fa7a2bb4dc68621f7b36a678aee3e12f7576862def66245b8c8aef1b269e30f2"
+    },
+    "recommendation_sensitivity.csv": {
+      "byte_count": 484,
+      "sha256": "8f32bbb4e362335d6522605f191478e16ba0403d38631a7b77e965f816f8060c"
+    },
+    "robustness_summary.csv": {
+      "byte_count": 876,
+      "sha256": "37271bda7f899ad2a627a19d383e277889dd80d16c16ee72b8ff26a0214a3fa6"
+    },
+    "robustness_validation.json": {
+      "byte_count": 1679,
+      "sha256": "5853ad7404f448b8230364f9654d2366c69606e55bf963f2507785d499aee0ec"
+    },
+    "template_baseline_status.json": {
+      "byte_count": 241,
+      "sha256": "daa982534f3602a5358d3460234189b11974dced4beac8ee6acae5af1a88ef88"
+    },
+    "validator_sensitivity_status.json": {
+      "byte_count": 193,
+      "sha256": "7a7e1fadf47ce26091d75621a5512d1b7bbe153e29da6aea9a53175fa7678d03"
+    }
+  },
+  "gate": "MULTIDATASET_ROBUSTNESS_READY",
+  "parent_input_lock": {
+    "path": "data/reports/llm_validation/multidataset_replication_v1/m27_robustness_input_lock_v1/multidataset_robustness_input_lock.json",
+    "sha256": "ea4c5cac7f28eb8ff72ce76dc2e32d72082cc04dc17e33958e2949e8a0ac82f2"
+  },
+  "primary_margin": 0.03,
+  "primary_metric": "end_to_end_faithfulness_yield",
+  "producer": "M27B_0033",
+  "protocol": {
+    "path": "config/research/replication/multidataset_robustness_v1.json",
+    "sha256": "e70418df0429add39bf92972f6d467eaa2bed0186f5e7a9e642b32aed73101c2"
+  },
+  "readiness": {
+    "human_calibration": {
+      "reason": "No adjudicated multi-dataset human-calibration release is an M27 parent.",
+      "status": "NOT_PERFORMED"
+    },
+    "template_baseline": {
+      "reason": "Certified common-renderer template outputs are not present for both datasets.",
+      "status": "NOT_READY"
+    },
+    "validator_sensitivity": {
+      "reason": "Comparable certified alternative-validator outputs are not present for both datasets.",
+      "status": "NOT_AVAILABLE"
+    }
+  },
+  "schema_version": "multidataset_robustness_manifest_v1"
+}

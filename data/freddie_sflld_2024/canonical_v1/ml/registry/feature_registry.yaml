@@ -1,0 +1,402 @@
+features:
+  channel:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: origination_context
+    concept_display_name: Bối cảnh khởi tạo
+    data_kind: categorical
+    description: Kênh qua đó khoản vay được khởi tạo.
+    direction_prior: unknown
+    display_name: Kênh khởi tạo khoản vay
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: string
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 3
+    unit: category
+    value_type: categorical
+  classic_fico:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: borrower_creditworthiness
+    concept_display_name: Chất lượng tín dụng người vay
+    data_kind: numeric
+    description: Điểm tín dụng Classic FICO sử dụng tại thời điểm khởi tạo khoản vay.
+    direction_prior: lower_increases_risk
+    display_name: Điểm tín dụng FICO
+    formatting_rule: default
+    missing_rate: 0.0003338534113353847
+    mutable: false
+    non_null_count: 1036037
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 285
+    unit: score
+    value_type: score
+  first_time_homebuyer_indicator:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: borrower_structure
+    concept_display_name: Cấu trúc người vay
+    data_kind: binary
+    description: Chỉ báo hồ sơ thuộc người mua nhà lần đầu tại origination.
+    direction_prior: unknown
+    display_name: Người mua nhà lần đầu
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 2
+    unit: binary
+    value_type: binary_indicator
+  loan_purpose:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: loan_terms
+    concept_display_name: Điều khoản khoản vay
+    data_kind: categorical
+    description: Mục đích khoản vay tại origination.
+    direction_prior: unknown
+    display_name: Mục đích khoản vay
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: string
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 3
+    unit: category
+    value_type: categorical
+  mortgage_insurance_percentage:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: leverage
+    concept_display_name: Đòn bẩy khoản vay
+    data_kind: numeric
+    description: Tỷ lệ phần trăm bảo hiểm thế chấp ban đầu.
+    direction_prior: unknown
+    display_name: Tỷ lệ bảo hiểm thế chấp
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 12
+    unit: percent
+    value_type: percentage
+  number_of_borrowers:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: borrower_structure
+    concept_display_name: Cấu trúc người vay
+    data_kind: numeric
+    description: Số người vay được ghi nhận trên khoản vay.
+    direction_prior: unknown
+    display_name: Số người vay
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 5
+    unit: count
+    value_type: count
+  number_of_units:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: property_collateral
+    concept_display_name: Tài sản bảo đảm
+    data_kind: categorical
+    description: Số đơn vị nhà ở của tài sản bảo đảm.
+    direction_prior: unknown
+    display_name: Số đơn vị nhà ở
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: string
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 4
+    unit: category
+    value_type: categorical
+  occupancy_status:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: property_collateral
+    concept_display_name: Tài sản bảo đảm
+    data_kind: categorical
+    description: Tài sản là nơi ở chính, nhà đầu tư hay nhà thứ hai.
+    direction_prior: unknown
+    display_name: Tình trạng sử dụng tài sản
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: string
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 3
+    unit: category
+    value_type: categorical
+  original_cltv:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: leverage
+    concept_display_name: Đòn bẩy khoản vay
+    data_kind: numeric
+    description: Combined loan-to-value tại thời điểm khởi tạo.
+    direction_prior: higher_increases_risk
+    display_name: CLTV ban đầu
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 127
+    unit: percent
+    value_type: percentage
+  original_dti:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: affordability
+    concept_display_name: Khả năng chi trả
+    data_kind: numeric
+    description: Debt-to-income ratio tại thời điểm khởi tạo.
+    direction_prior: higher_increases_risk
+    display_name: DTI ban đầu
+    formatting_rule: default
+    missing_rate: 1.0613836776558473e-05
+    mutable: false
+    non_null_count: 1036372
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 65
+    unit: percent
+    value_type: percentage
+  original_interest_rate:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: loan_terms
+    concept_display_name: Điều khoản khoản vay
+    data_kind: numeric
+    description: Lãi suất ghi trên khoản vay tại origination.
+    direction_prior: higher_increases_risk
+    display_name: Lãi suất ban đầu
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 2462
+    unit: percent
+    value_type: percentage
+  original_loan_term:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: loan_terms
+    concept_display_name: Điều khoản khoản vay
+    data_kind: numeric
+    description: Kỳ hạn khoản vay ban đầu tính bằng tháng.
+    direction_prior: unknown
+    display_name: Kỳ hạn khoản vay ban đầu
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 128
+    unit: months
+    value_type: duration
+  original_ltv:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: leverage
+    concept_display_name: Đòn bẩy khoản vay
+    data_kind: numeric
+    description: Loan-to-value tại thời điểm khởi tạo.
+    direction_prior: higher_increases_risk
+    display_name: LTV ban đầu
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 124
+    unit: percent
+    value_type: percentage
+  original_upb:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: loan_terms
+    concept_display_name: Điều khoản khoản vay
+    data_kind: numeric
+    description: Original unpaid principal balance tại origination.
+    direction_prior: unknown
+    display_name: Dư nợ gốc ban đầu
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 1304
+    unit: USD
+    value_type: amount
+  property_state:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: geography
+    concept_display_name: Khu vực địa lý
+    data_kind: categorical
+    description: Bang hoặc lãnh thổ nơi tài sản bảo đảm tọa lạc.
+    direction_prior: unknown
+    display_name: Bang của tài sản
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: string
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 54
+    unit: state_code
+    value_type: categorical
+  property_type:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: property_collateral
+    concept_display_name: Tài sản bảo đảm
+    data_kind: categorical
+    description: Loại hình tài sản bảo đảm tại origination.
+    direction_prior: unknown
+    display_name: Loại tài sản
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: string
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 5
+    unit: category
+    value_type: categorical
+  property_valuation_method:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: property_collateral
+    concept_display_name: Tài sản bảo đảm
+    data_kind: categorical
+    description: Phương pháp định giá tài sản được sử dụng tại origination.
+    direction_prior: unknown
+    display_name: Phương pháp định giá tài sản
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: string
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 3
+    unit: category
+    value_type: categorical
+  special_eligibility_program:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: origination_context
+    concept_display_name: Bối cảnh khởi tạo
+    data_kind: categorical
+    description: Mã chương trình đủ điều kiện đặc biệt; giá trị thiếu có nghĩa Not
+      Available hoặc Not Applicable theo layout nguồn.
+    direction_prior: unknown
+    display_name: Chương trình đủ điều kiện đặc biệt
+    formatting_rule: default
+    missing_rate: 0.8735467486440823
+    mutable: false
+    non_null_count: 131054
+    pandas_dtype: string
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 3
+    unit: category
+    value_type: categorical
+  super_conforming_flag:
+    allowed_for_model: true
+    allowed_in_recommendation: false
+    allowed_in_user_explanation: true
+    concept: leverage
+    concept_display_name: Đòn bẩy khoản vay
+    data_kind: binary
+    description: Chỉ báo khoản vay thuộc phạm vi super-conforming.
+    direction_prior: unknown
+    display_name: Khoản vay super-conforming
+    formatting_rule: default
+    missing_rate: 0.0
+    mutable: false
+    non_null_count: 1036383
+    pandas_dtype: float64
+    sensitive: false
+    source_feature_file: orig_2024Q*.txt
+    source_table: freddie_sflld_origination
+    unique_count: 2
+    unit: binary
+    value_type: binary_indicator
+schema_version: freddie_feature_registry_v1

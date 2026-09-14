@@ -1,0 +1,282 @@
+{
+  "schema_version": "lifecycle_states_v1",
+  "status": "ACTIVE",
+  "resources": [
+    {
+      "resource": "pipeline_run",
+      "initial_state": "PENDING",
+      "states": [
+        "PENDING",
+        "WAITING_APPROVAL",
+        "RUNNING",
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "terminal_states": [
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "transitions": [
+        {
+          "from": "PENDING",
+          "to": "WAITING_APPROVAL"
+        },
+        {
+          "from": "PENDING",
+          "to": "RUNNING"
+        },
+        {
+          "from": "PENDING",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "WAITING_APPROVAL",
+          "to": "RUNNING"
+        },
+        {
+          "from": "WAITING_APPROVAL",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "SUCCEEDED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "FAILED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "WAITING_APPROVAL"
+        },
+        {
+          "from": "WAITING_APPROVAL",
+          "to": "FAILED"
+        }
+      ]
+    },
+    {
+      "resource": "stage_run",
+      "initial_state": "PENDING",
+      "states": [
+        "PENDING",
+        "WAITING_APPROVAL",
+        "RUNNING",
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "terminal_states": [
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "transitions": [
+        {
+          "from": "PENDING",
+          "to": "WAITING_APPROVAL"
+        },
+        {
+          "from": "PENDING",
+          "to": "RUNNING"
+        },
+        {
+          "from": "PENDING",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "WAITING_APPROVAL",
+          "to": "RUNNING"
+        },
+        {
+          "from": "WAITING_APPROVAL",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "SUCCEEDED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "FAILED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "WAITING_APPROVAL"
+        },
+        {
+          "from": "WAITING_APPROVAL",
+          "to": "FAILED"
+        }
+      ]
+    },
+    {
+      "resource": "artifact",
+      "initial_state": "DRAFT",
+      "states": [
+        "DRAFT",
+        "UPLOADED",
+        "VERIFIED",
+        "CERTIFIED",
+        "REJECTED",
+        "SUPERSEDED"
+      ],
+      "terminal_states": [
+        "REJECTED",
+        "SUPERSEDED"
+      ],
+      "transitions": [
+        {
+          "from": "DRAFT",
+          "to": "UPLOADED"
+        },
+        {
+          "from": "DRAFT",
+          "to": "REJECTED"
+        },
+        {
+          "from": "UPLOADED",
+          "to": "VERIFIED"
+        },
+        {
+          "from": "UPLOADED",
+          "to": "REJECTED"
+        },
+        {
+          "from": "VERIFIED",
+          "to": "CERTIFIED"
+        },
+        {
+          "from": "VERIFIED",
+          "to": "REJECTED"
+        },
+        {
+          "from": "CERTIFIED",
+          "to": "SUPERSEDED"
+        }
+      ]
+    },
+    {
+      "resource": "release",
+      "initial_state": "DRAFT",
+      "states": [
+        "DRAFT",
+        "CANDIDATE",
+        "READY_WITH_LIMITATIONS",
+        "CERTIFIED",
+        "REJECTED",
+        "SUPERSEDED"
+      ],
+      "terminal_states": [
+        "REJECTED",
+        "SUPERSEDED"
+      ],
+      "transitions": [
+        {
+          "from": "DRAFT",
+          "to": "CANDIDATE"
+        },
+        {
+          "from": "DRAFT",
+          "to": "REJECTED"
+        },
+        {
+          "from": "CANDIDATE",
+          "to": "READY_WITH_LIMITATIONS"
+        },
+        {
+          "from": "CANDIDATE",
+          "to": "CERTIFIED"
+        },
+        {
+          "from": "CANDIDATE",
+          "to": "REJECTED"
+        },
+        {
+          "from": "READY_WITH_LIMITATIONS",
+          "to": "CERTIFIED"
+        },
+        {
+          "from": "READY_WITH_LIMITATIONS",
+          "to": "REJECTED"
+        },
+        {
+          "from": "READY_WITH_LIMITATIONS",
+          "to": "SUPERSEDED"
+        },
+        {
+          "from": "CERTIFIED",
+          "to": "SUPERSEDED"
+        }
+      ]
+    },
+    {
+      "resource": "gate_result",
+      "initial_state": "PENDING",
+      "states": [
+        "PENDING",
+        "PASSED",
+        "FAILED",
+        "WAIVED"
+      ],
+      "terminal_states": [
+        "PASSED",
+        "FAILED",
+        "WAIVED"
+      ],
+      "transitions": [
+        {
+          "from": "PENDING",
+          "to": "PASSED"
+        },
+        {
+          "from": "PENDING",
+          "to": "FAILED"
+        },
+        {
+          "from": "FAILED",
+          "to": "WAIVED"
+        }
+      ]
+    },
+    {
+      "resource": "approval",
+      "initial_state": "REQUESTED",
+      "states": [
+        "REQUESTED",
+        "APPROVED",
+        "REJECTED",
+        "EXPIRED"
+      ],
+      "terminal_states": [
+        "APPROVED",
+        "REJECTED",
+        "EXPIRED"
+      ],
+      "transitions": [
+        {
+          "from": "REQUESTED",
+          "to": "APPROVED"
+        },
+        {
+          "from": "REQUESTED",
+          "to": "REJECTED"
+        },
+        {
+          "from": "REQUESTED",
+          "to": "EXPIRED"
+        }
+      ]
+    }
+  ]
+}

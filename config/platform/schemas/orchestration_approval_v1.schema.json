@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/researchops/orchestration_approval_v1.schema.json",
+  "title": "Orchestration Approval V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "pipeline_run_id", "node_id", "stage_id", "policy", "status",
+    "requested_by", "requested_at", "decided_by", "decided_at", "reason",
+    "expires_at", "details"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^approval_"},
+    "pipeline_run_id": {"type": ["string", "null"]},
+    "node_id": {"type": ["string", "null"]},
+    "stage_id": {"type": ["string", "null"]},
+    "policy": {"type": "string", "minLength": 1},
+    "status": {"enum": ["REQUESTED", "APPROVED", "REJECTED", "EXPIRED"]},
+    "requested_by": {"type": "string", "minLength": 1},
+    "requested_at": {"type": ["string", "null"]},
+    "decided_by": {"type": ["string", "null"]},
+    "decided_at": {"type": ["string", "null"]},
+    "reason": {"type": ["string", "null"]},
+    "expires_at": {"type": ["string", "null"]},
+    "details": {"type": "object"}
+  }
+}

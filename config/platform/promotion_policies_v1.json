@@ -1,0 +1,209 @@
+{
+  "schema_version": "promotion_policies_v1",
+  "status": "ACTIVE",
+  "policies": [
+    {
+      "policy_id": "model_champion_promotion",
+      "version": 1,
+      "target_type": "model_version",
+      "target_kinds": [
+        "credit-risk-predictor"
+      ],
+      "from_states": [
+        "CANDIDATE"
+      ],
+      "to_state": "CHAMPION",
+      "required_gates": [
+        "MODEL_READY",
+        "XAI_QUALITY_READY",
+        "MLFLOW_MODEL_REGISTERED"
+      ],
+      "non_waivable_gates": [
+        "MODEL_READY",
+        "XAI_QUALITY_READY",
+        "MLFLOW_MODEL_REGISTERED"
+      ],
+      "waiver_mode": "FORBIDDEN",
+      "waived_to_state": null,
+      "waiver_approval_policy": "WAIVER",
+      "approval": {
+        "required": true,
+        "policy": "MODEL_PROMOTION",
+        "separation_of_duties": true
+      },
+      "side_effects": {
+        "mlflow_candidate_alias": "candidate",
+        "mlflow_champion_alias": "champion",
+        "mlflow_archive_alias": "archived-reference"
+      }
+    },
+    {
+      "policy_id": "claim_measurement_release_promotion",
+      "version": 1,
+      "target_type": "release",
+      "target_kinds": [
+        "claim_measurement_release"
+      ],
+      "from_states": [
+        "CANDIDATE",
+        "READY_WITH_LIMITATIONS"
+      ],
+      "to_state": "CERTIFIED",
+      "required_gates": [
+        "CLAIM_MEASUREMENT_RELEASE_READY"
+      ],
+      "non_waivable_gates": [],
+      "waiver_mode": "READY_WITH_LIMITATIONS",
+      "waived_to_state": "READY_WITH_LIMITATIONS",
+      "waiver_approval_policy": "WAIVER",
+      "approval": {
+        "required": true,
+        "policy": "RELEASE",
+        "separation_of_duties": true
+      },
+      "side_effects": {}
+    },
+    {
+      "policy_id": "thesis_report_release_promotion",
+      "version": 1,
+      "target_type": "release",
+      "target_kinds": [
+        "thesis_report",
+        "thesis_report_release"
+      ],
+      "from_states": [
+        "CANDIDATE",
+        "READY_WITH_LIMITATIONS"
+      ],
+      "to_state": "CERTIFIED",
+      "required_gates": [
+        "REPORT_WRITING_READY"
+      ],
+      "non_waivable_gates": [],
+      "waiver_mode": "READY_WITH_LIMITATIONS",
+      "waived_to_state": "READY_WITH_LIMITATIONS",
+      "waiver_approval_policy": "WAIVER",
+      "approval": {
+        "required": true,
+        "policy": "RELEASE",
+        "separation_of_duties": true
+      },
+      "side_effects": {}
+    },
+    {
+      "policy_id": "baseline_release_promotion",
+      "version": 1,
+      "target_type": "release",
+      "target_kinds": [
+        "baseline_comparison_release"
+      ],
+      "from_states": [
+        "CANDIDATE",
+        "READY_WITH_LIMITATIONS"
+      ],
+      "to_state": "CERTIFIED",
+      "required_gates": [
+        "BASELINE_COMPARISON_READY"
+      ],
+      "non_waivable_gates": [],
+      "waiver_mode": "READY_WITH_LIMITATIONS",
+      "waived_to_state": "READY_WITH_LIMITATIONS",
+      "waiver_approval_policy": "WAIVER",
+      "approval": {
+        "required": true,
+        "policy": "RELEASE",
+        "separation_of_duties": true
+      },
+      "side_effects": {}
+    },
+    {
+      "policy_id": "visualization_release_promotion",
+      "version": 1,
+      "target_type": "release",
+      "target_kinds": [
+        "visualization_data_release"
+      ],
+      "from_states": [
+        "CANDIDATE",
+        "READY_WITH_LIMITATIONS"
+      ],
+      "to_state": "CERTIFIED",
+      "required_gates": [
+        "VISUALIZATION_DATA_V2_READY"
+      ],
+      "non_waivable_gates": [],
+      "waiver_mode": "READY_WITH_LIMITATIONS",
+      "waived_to_state": "READY_WITH_LIMITATIONS",
+      "waiver_approval_policy": "WAIVER",
+      "approval": {
+        "required": true,
+        "policy": "RELEASE",
+        "separation_of_duties": true
+      },
+      "side_effects": {}
+    },
+    {
+      "policy_id": "dashboard_release_promotion",
+      "version": 1,
+      "target_type": "release",
+      "target_kinds": [
+        "dashboard_i18n_certification"
+      ],
+      "from_states": [
+        "CANDIDATE"
+      ],
+      "to_state": "CERTIFIED",
+      "required_gates": [
+        "DASHBOARD_I18N_CERTIFIED"
+      ],
+      "non_waivable_gates": [
+        "DASHBOARD_I18N_CERTIFIED"
+      ],
+      "waiver_mode": "FORBIDDEN",
+      "waived_to_state": null,
+      "waiver_approval_policy": "WAIVER",
+      "approval": {
+        "required": true,
+        "policy": "RELEASE",
+        "separation_of_duties": true
+      },
+      "side_effects": {}
+    },
+    {
+      "policy_id": "complete_research_release_promotion",
+      "version": 1,
+      "target_type": "release",
+      "target_kinds": [
+        "complete_release_bundle"
+      ],
+      "from_states": [
+        "CANDIDATE",
+        "READY_WITH_LIMITATIONS"
+      ],
+      "to_state": "CERTIFIED",
+      "required_gates": [
+        "CLAIM_MEASUREMENT_RELEASE_READY",
+        "REPORT_WRITING_READY",
+        "BASELINE_COMPARISON_READY",
+        "VISUALIZATION_DATA_V2_READY",
+        "DASHBOARD_I18N_CERTIFIED",
+        "MLFLOW_MODEL_REGISTERED",
+        "COMPLETE_RELEASE_BUNDLE_READY"
+      ],
+      "non_waivable_gates": [
+        "DASHBOARD_I18N_CERTIFIED",
+        "MLFLOW_MODEL_REGISTERED",
+        "COMPLETE_RELEASE_BUNDLE_READY"
+      ],
+      "waiver_mode": "READY_WITH_LIMITATIONS",
+      "waived_to_state": "READY_WITH_LIMITATIONS",
+      "waiver_approval_policy": "WAIVER",
+      "approval": {
+        "required": true,
+        "policy": "RELEASE",
+        "separation_of_duties": true
+      },
+      "side_effects": {}
+    }
+  ]
+}

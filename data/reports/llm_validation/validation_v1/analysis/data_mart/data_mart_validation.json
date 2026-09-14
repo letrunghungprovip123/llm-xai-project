@@ -1,0 +1,358 @@
+{
+  "check_count": 53,
+  "checks": {
+    "case_count": {
+      "expected": 36,
+      "observed": 36,
+      "passed": true
+    },
+    "case_critical_null_row_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "cases_without_complete_s0_s5_packages": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_count": {
+      "expected": 14667,
+      "observed": 14667,
+      "passed": true
+    },
+    "claim_critical_null_row_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_generation_identity_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_measurement_release_status": {
+      "expected": [
+        "READY",
+        "READY_WITH_LIMITATIONS"
+      ],
+      "observed": "READY_WITH_LIMITATIONS",
+      "passed": true
+    },
+    "claim_validation_execution_error_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_validation_identity_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claims_on_unusable_generations": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_case_evidence_package_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_case_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_claim_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_evidence_item_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_evidence_level_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_evidence_package_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_generation_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_generation_matrix_key_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_generation_summary_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_model_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_validation_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "evidence_item_package_orphan_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "evidence_level_count": {
+      "expected": 6,
+      "observed": 6,
+      "passed": true
+    },
+    "evidence_level_set": {
+      "expected": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "observed": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "passed": true
+    },
+    "evidence_package_count": {
+      "expected": 216,
+      "observed": 216,
+      "passed": true
+    },
+    "evidence_package_critical_null_row_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_case_orphan_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_claim_count_reconciliation": {
+      "expected": 14667,
+      "observed": 14667,
+      "passed": true
+    },
+    "generation_count": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "generation_critical_null_row_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_evidence_level_orphan_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_model_evidence_matrix": {
+      "expected": {
+        "deepseek_v4_flash::S0": 36,
+        "deepseek_v4_flash::S1": 36,
+        "deepseek_v4_flash::S2": 36,
+        "deepseek_v4_flash::S3": 36,
+        "deepseek_v4_flash::S4": 36,
+        "deepseek_v4_flash::S5": 36,
+        "phi4_mini_instruct::S0": 36,
+        "phi4_mini_instruct::S1": 36,
+        "phi4_mini_instruct::S2": 36,
+        "phi4_mini_instruct::S3": 36,
+        "phi4_mini_instruct::S4": 36,
+        "phi4_mini_instruct::S5": 36,
+        "qwen3_8b::S0": 36,
+        "qwen3_8b::S1": 36,
+        "qwen3_8b::S2": 36,
+        "qwen3_8b::S3": 36,
+        "qwen3_8b::S4": 36,
+        "qwen3_8b::S5": 36
+      },
+      "observed": {
+        "deepseek_v4_flash::S0": 36,
+        "deepseek_v4_flash::S1": 36,
+        "deepseek_v4_flash::S2": 36,
+        "deepseek_v4_flash::S3": 36,
+        "deepseek_v4_flash::S4": 36,
+        "deepseek_v4_flash::S5": 36,
+        "phi4_mini_instruct::S0": 36,
+        "phi4_mini_instruct::S1": 36,
+        "phi4_mini_instruct::S2": 36,
+        "phi4_mini_instruct::S3": 36,
+        "phi4_mini_instruct::S4": 36,
+        "phi4_mini_instruct::S5": 36,
+        "qwen3_8b::S0": 36,
+        "qwen3_8b::S1": 36,
+        "qwen3_8b::S2": 36,
+        "qwen3_8b::S3": 36,
+        "qwen3_8b::S4": 36,
+        "qwen3_8b::S5": 36
+      },
+      "passed": true
+    },
+    "generation_model_orphan_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_package_identity_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_package_orphan_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_summary_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "inconsistent_case_metadata_across_packages": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "input_claim_count": {
+      "expected": 14667,
+      "observed": 14667,
+      "passed": true
+    },
+    "input_evidence_package_count": {
+      "expected": 216,
+      "observed": 216,
+      "passed": true
+    },
+    "input_generation_count": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "input_generation_summary_count": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "input_validation_result_count": {
+      "expected": 14667,
+      "observed": 14667,
+      "passed": true
+    },
+    "missing_validation_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "model_count": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "orphan_validation_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "single_primary_claim_release": {
+      "expected": "candidate",
+      "observed": "candidate",
+      "passed": true
+    },
+    "stratum_balance": {
+      "expected": {
+        "false_negative": 6,
+        "false_positive": 6,
+        "low_risk": 6,
+        "near_threshold": 6,
+        "top_high_risk": 6,
+        "true_positive": 6
+      },
+      "observed": {
+        "false_negative": 6,
+        "false_positive": 6,
+        "low_risk": 6,
+        "near_threshold": 6,
+        "top_high_risk": 6,
+        "true_positive": 6
+      },
+      "passed": true
+    },
+    "unusable_generation_count": {
+      "expected": 10,
+      "observed": 10,
+      "passed": true
+    },
+    "unusable_generations_with_claims": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "usable_generation_count": {
+      "expected": 638,
+      "observed": 638,
+      "passed": true
+    },
+    "usable_generations_without_claims": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "validation_status_counts": {
+      "expected": {
+        "CONTRADICTED": 25,
+        "NOT_APPLICABLE": 12,
+        "NOT_VERIFIABLE": 1018,
+        "SUPPORTED": 13540,
+        "UNSUPPORTED": 72
+      },
+      "observed": {
+        "CONTRADICTED": 25,
+        "NOT_APPLICABLE": 12,
+        "NOT_VERIFIABLE": 1018,
+        "SUPPORTED": 13540,
+        "UNSUPPORTED": 72
+      },
+      "passed": true
+    },
+    "validation_status_partition_reconciliation": {
+      "expected": 14667,
+      "observed": 14667,
+      "passed": true
+    }
+  },
+  "claim_measurement_release_id": "claim_measurement_candidate_primary_v1",
+  "claim_measurement_release_status": "READY_WITH_LIMITATIONS",
+  "data_mart_version": "1.1",
+  "exit_gate": "DATA_MART_READY",
+  "failed_check_count": 0,
+  "interpretation_scope": "operational_faithfulness_under_project_ontology",
+  "passed": true
+}

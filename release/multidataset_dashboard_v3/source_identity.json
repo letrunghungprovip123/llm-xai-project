@@ -1,0 +1,256 @@
+{
+  "file_count": 50,
+  "files": [
+    {
+      "byte_count": 2147,
+      "path": "research/python/dashboard/app_v3.py",
+      "sha256": "eba969b11a0dfafda6f849e89ac397a8af238f3a9edbf010c182bfbc051831fc"
+    },
+    {
+      "byte_count": 139109,
+      "path": "research/python/dashboard/assets/app.css",
+      "sha256": "211fcf6e553cf8b35627b6261e0bf2ae8650057cc50da3b777d4079e012d596a"
+    },
+    {
+      "byte_count": 1625,
+      "path": "research/python/dashboard/assets/clientside.js",
+      "sha256": "414eab4ab057c731fb8f750d7b9a11fcd55675d27dab6aa5068f0bfe1bcfc95c"
+    },
+    {
+      "byte_count": 149,
+      "path": "research/python/dashboard/assets/plotly_config.js",
+      "sha256": "97e5d2a221feb0482b4bf04d15914bcdeab308c17136323a7df396b4abe61b5b"
+    },
+    {
+      "byte_count": 391,
+      "path": "research/python/dashboard/assets/print.css",
+      "sha256": "ae76a04fccf3035dfbc3a14d3f5e1b4052a051375c51c0550f1143045271d43c"
+    },
+    {
+      "byte_count": 924,
+      "path": "research/python/dashboard/components/empty_state.py",
+      "sha256": "0da62426c8644e39cb3df16a26a362796819b5ccc2920057965e2bd4ac9b9397"
+    },
+    {
+      "byte_count": 3514,
+      "path": "research/python/dashboard/i18n/__init__.py",
+      "sha256": "4af9cb1f1a24a5f0f0a520725c12f6ea718a3ae2eab0914f6231baafba389678"
+    },
+    {
+      "byte_count": 194,
+      "path": "research/python/dashboard/i18n/__main__.py",
+      "sha256": "362e1a410ccc030cda4ddd8b464724e7b4457af545a68ef4a761dc3ed753b68a"
+    },
+    {
+      "byte_count": 8289,
+      "path": "research/python/dashboard/i18n/ag_grid_locale.py",
+      "sha256": "9518695d6444b94aface3672a455a789797a2a832f830e1bbb5176ab01647757"
+    },
+    {
+      "byte_count": 87382,
+      "path": "research/python/dashboard/i18n/catalogs/en.json",
+      "sha256": "cf4712c4ead319915134943f7a5b4ecc45b5472affe102733522f380ffe64ef5"
+    },
+    {
+      "byte_count": 107566,
+      "path": "research/python/dashboard/i18n/catalogs/vi.json",
+      "sha256": "1d9877ddc3149cd3cb4ef78d0aac9074d87fc8b3caf7554de2df8fbf73e30735"
+    },
+    {
+      "byte_count": 18605,
+      "path": "research/python/dashboard/i18n/certification.py",
+      "sha256": "1e9ab5bd63e670125f74d71054202bac2e616f529ed65d62bf035c55dc6110b9"
+    },
+    {
+      "byte_count": 2768,
+      "path": "research/python/dashboard/i18n/certify.py",
+      "sha256": "3a57d07688dad728f4ddbda0a23e1484619aabb80512be3bb910a9e22583d3e8"
+    },
+    {
+      "byte_count": 7589,
+      "path": "research/python/dashboard/i18n/component_locale.py",
+      "sha256": "fe41cccdc57391a73309f98c88125c0ee3689d2a45b23aa4923f14a7252b1731"
+    },
+    {
+      "byte_count": 3894,
+      "path": "research/python/dashboard/i18n/domain_labels.py",
+      "sha256": "49f0cb4c71e4797bdbae1a134320255a510e8a538bb93f9c138895440cfd3d1d"
+    },
+    {
+      "byte_count": 4552,
+      "path": "research/python/dashboard/i18n/formatters.py",
+      "sha256": "d597462f04eb2f25cc9b2b2b1ce7d3fca8872457a71835f96c05f4a64be319b6"
+    },
+    {
+      "byte_count": 1728,
+      "path": "research/python/dashboard/i18n/locale.py",
+      "sha256": "c141e90a7f3078944bd40b5922ab72aaa0de328e899c994bcf6cadf87c71c906"
+    },
+    {
+      "byte_count": 1746,
+      "path": "research/python/dashboard/i18n/locale_state.py",
+      "sha256": "0e0aecdb4923e13f48b3db5bd4ade8a11fa183807f87648ceedc54d3d1cdc9fe"
+    },
+    {
+      "byte_count": 15513,
+      "path": "research/python/dashboard/i18n/methods_labels.py",
+      "sha256": "97a7696815eb2549bfa8fc714204a01fe2c9d24e8e85e78af190a9353606d99c"
+    },
+    {
+      "byte_count": 1416,
+      "path": "research/python/dashboard/i18n/page_metadata.py",
+      "sha256": "5cd20474c79e631d48dc770a0feb9d24624e7b1dc5e3f91073f6ec73d55a02b0"
+    },
+    {
+      "byte_count": 4781,
+      "path": "research/python/dashboard/i18n/plotly_locale.py",
+      "sha256": "4ddb1e4e6f9b0984ab22603a7c67e3f1679955f2d284d33cb60bb98a540a19fe"
+    },
+    {
+      "byte_count": 5669,
+      "path": "research/python/dashboard/i18n/translator.py",
+      "sha256": "d4d0e2ee1353e0ff427e7a5d1ff3dbebf39785f3cfd33563f0856f25fe751156"
+    },
+    {
+      "byte_count": 295,
+      "path": "research/python/dashboard/i18n/types.py",
+      "sha256": "b871d133ec99a9b79db90aa01c0eaf626b977d1a60a0bd6c5a9a47a3c73f3afa"
+    },
+    {
+      "byte_count": 3377,
+      "path": "research/python/dashboard/i18n/validation.py",
+      "sha256": "7a5f27eb6013b9666d1196117bae16cafcca8f9248710eac6e3148c1268b6aa1"
+    },
+    {
+      "byte_count": 90,
+      "path": "research/python/dashboard/v3/__init__.py",
+      "sha256": "706665a23f8628072760c7fecf1dc05b1945a4462638e714753014240521ed87"
+    },
+    {
+      "byte_count": 41057,
+      "path": "research/python/dashboard/v3/callbacks.py",
+      "sha256": "c8ad0b7afac88458128141e9edfd71aee6420f32adce9e79d59b39960bc70c09"
+    },
+    {
+      "byte_count": 21734,
+      "path": "research/python/dashboard/v3/cases_model.py",
+      "sha256": "74dbeb10cad7c4b42184d6fa862ae39da23b04fda6eb46ff474103e83e5bc564"
+    },
+    {
+      "byte_count": 821,
+      "path": "research/python/dashboard/v3/contracts.py",
+      "sha256": "aa8fe89414d219120d7f3025a4b9414d75f94e34ba109606a4fc2296212b3606"
+    },
+    {
+      "byte_count": 14149,
+      "path": "research/python/dashboard/v3/decision_model.py",
+      "sha256": "fb80167118348a9740863dc08ec30e15f721d06bb8824b9eebd635d03af5bbb4"
+    },
+    {
+      "byte_count": 8713,
+      "path": "research/python/dashboard/v3/effectiveness_model.py",
+      "sha256": "8a220564f259d882b3a6279a9775f99b0abefdb9e8440ac8309c6fb8caad2683"
+    },
+    {
+      "byte_count": 4390,
+      "path": "research/python/dashboard/v3/exports.py",
+      "sha256": "a3c9f5ea736e28f777af0d9095e69bf764ef7daff01020b72784637204397ab9"
+    },
+    {
+      "byte_count": 77492,
+      "path": "research/python/dashboard/v3/figures.py",
+      "sha256": "f2a2cda20ac13d7d5941f778d06d24802714cf722336f313d73f193a80cc8878"
+    },
+    {
+      "byte_count": 24519,
+      "path": "research/python/dashboard/v3/final_certification.py",
+      "sha256": "68c767deef79432b6c01f0e541336bf76015e4fd4b5e20633fb9a510c8c4f738"
+    },
+    {
+      "byte_count": 10120,
+      "path": "research/python/dashboard/v3/i18n.py",
+      "sha256": "910b0afa6a429810f322a23fb864c6c30184b6d9c074716d44546a7e2c58b3c9"
+    },
+    {
+      "byte_count": 6828,
+      "path": "research/python/dashboard/v3/mechanisms_model.py",
+      "sha256": "153871e732155f59b7a21de058517bb31473cee5768aa008ae82c14540e0c8c3"
+    },
+    {
+      "byte_count": 9654,
+      "path": "research/python/dashboard/v3/methods_model.py",
+      "sha256": "9b1e54934b9a7495678dd891dcad830d8f9488cbaac066ffa3a4ed3ed11cf43b"
+    },
+    {
+      "byte_count": 9611,
+      "path": "research/python/dashboard/v3/overview_model.py",
+      "sha256": "e69fc759286b523ad11fcfe5e9774d93674a27aa63243de50c68e6dec973f576"
+    },
+    {
+      "byte_count": 364,
+      "path": "research/python/dashboard/v3/pages/__init__.py",
+      "sha256": "7ddad2974a9b278075c3eeb475e114caba170b0c1b7a2f528dbd6ee0bb7c5ae4"
+    },
+    {
+      "byte_count": 25271,
+      "path": "research/python/dashboard/v3/pages/cases.py",
+      "sha256": "f31de02ec09c99526f397c6314ec79273f07d8d706a34794831ed70c0928a36a"
+    },
+    {
+      "byte_count": 32214,
+      "path": "research/python/dashboard/v3/pages/decision.py",
+      "sha256": "a2d1cd5b3eb1231368a7309aa816977a3a75847c658a469c03421a3ad0b6e4ac"
+    },
+    {
+      "byte_count": 26624,
+      "path": "research/python/dashboard/v3/pages/effectiveness.py",
+      "sha256": "79287259193c26c8075c627bb1c9cb75e9917dbaba1b482cd7ca966584084b48"
+    },
+    {
+      "byte_count": 20569,
+      "path": "research/python/dashboard/v3/pages/mechanisms.py",
+      "sha256": "998344d62d8a091f035dbf695de6204fd07d2f80760cfe5c300c29c46b8d49b8"
+    },
+    {
+      "byte_count": 25760,
+      "path": "research/python/dashboard/v3/pages/methods.py",
+      "sha256": "b627da4d31e94edab07cc9efc92e01a2a45637b3d38edd1d0ba5ff21db936641"
+    },
+    {
+      "byte_count": 20097,
+      "path": "research/python/dashboard/v3/pages/overview.py",
+      "sha256": "0c1bbc7f0c58391b797d615561e4adc30e2493b5e89166a9fc13b1972ff0dfdd"
+    },
+    {
+      "byte_count": 25893,
+      "path": "research/python/dashboard/v3/pages/robustness.py",
+      "sha256": "88d60aa3ec934fd0a9f29f7ea194942dd56d9dcf05dc4263857509c029c0a90b"
+    },
+    {
+      "byte_count": 2081,
+      "path": "research/python/dashboard/v3/release_guard.py",
+      "sha256": "5476514c51a5ee753844af872e245af6788445a50e15bb364a32cd82dc5f3c72"
+    },
+    {
+      "byte_count": 3260,
+      "path": "research/python/dashboard/v3/repository.py",
+      "sha256": "fafaf2b9193e14be44d07139cc1750b9036ec91e47261e9a4532350759da11c0"
+    },
+    {
+      "byte_count": 8193,
+      "path": "research/python/dashboard/v3/robustness_model.py",
+      "sha256": "2e49e4aa7d1ad0535fb8266f7cd29f0a1a75ce56ec7183f3fd218eefbd7e9857"
+    },
+    {
+      "byte_count": 990,
+      "path": "research/python/dashboard/v3/settings.py",
+      "sha256": "03bbc88afe40c9e8f44e4103a6b9f61881b214e4ef9e257dd59f157874cdc414"
+    },
+    {
+      "byte_count": 6246,
+      "path": "research/python/dashboard/v3/shell.py",
+      "sha256": "7cb8c4400c8231d2d29350d007c55f4517502e41d80650fe184045b9d3c9d34e"
+    }
+  ],
+  "source_tree_sha256": "6fbc24e8ff109e0372fd9be3b1473b95fe40e890d1e3afdda4e97edfca1d9e26"
+}

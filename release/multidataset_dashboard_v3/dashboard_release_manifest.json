@@ -1,0 +1,79 @@
+{
+  "files": {
+    "browser_e2e_report.json": {
+      "byte_count": 3053,
+      "sha256": "46870599fe8a51a7e81cc6ed1c3c5d95cfdb939ee21f505a18a3503872b8e107"
+    },
+    "dashboard_release_validation.json": {
+      "byte_count": 287,
+      "sha256": "31b72f7db5afbbbec03d96bd2b7f48ca07fc801058d3c1d3e8b2455b55e1c9f8"
+    },
+    "dashboard_server.log": {
+      "byte_count": 20010,
+      "sha256": "1b0a6dcf0c05ed180212b7b3530402d84e112d9cc71228a7bd47c936331accba"
+    },
+    "environment.json": {
+      "byte_count": 379,
+      "sha256": "525de3d4d52a6beef3d09fed79a786fc2810315ca266139080b1dc1217f3f020"
+    },
+    "i18n_audit.json": {
+      "byte_count": 94,
+      "sha256": "4fa1104215386c584eb1d03e713f2f5d68662e1ff27b5bb033046c9ac31eaffc"
+    },
+    "page_matrix.json": {
+      "byte_count": 328,
+      "sha256": "2dcb2190012f495e5a0d875bcb60429df28377c33f896acf33df65a854f19080"
+    },
+    "screenshots/01_overview_cross.png": {
+      "byte_count": 256853,
+      "sha256": "70d77210c161a5c93035eff183abc21170b8d3596a7f897e9de62b82247bb976"
+    },
+    "screenshots/02_effectiveness.png": {
+      "byte_count": 241899,
+      "sha256": "c44718dcf03f5f1ef47e27e640a62739e3fd7ba01b11be8317c714d8db484e69"
+    },
+    "screenshots/03_mechanisms.png": {
+      "byte_count": 156707,
+      "sha256": "1648ca55f58a07a365e4a942617dc185289a9b04f140e0e0fa696b7385a612f0"
+    },
+    "screenshots/04_decision.png": {
+      "byte_count": 380612,
+      "sha256": "1d3145503613d2f4a242755f67a72cf608137aae5f8f39936e12b29765978007"
+    },
+    "screenshots/05_robustness.png": {
+      "byte_count": 244389,
+      "sha256": "f7326e816aac31c5962c588ac3308c67d068041076a0b6b8d96466c0745adbd2"
+    },
+    "screenshots/06_cases.png": {
+      "byte_count": 234413,
+      "sha256": "b4028a18eb4cc8674f4d1b296fc3a1f3e2e70473a831ff3b0f85b39ab1b31477"
+    },
+    "screenshots/07_methods.png": {
+      "byte_count": 185935,
+      "sha256": "1437708c9cd0afaa5210c681b123f029e289bf2083b1325b3e879e9c8721f543"
+    },
+    "source_identity.json": {
+      "byte_count": 9366,
+      "sha256": "0d91edb59cb7d7d1a5a35e158213467b681a8f4c74f8109e21049648cf878abc"
+    },
+    "source_isolation_audit.json": {
+      "byte_count": 41,
+      "sha256": "0adf2161214843baf9b6ed41e8cfad06e2c8474843e04ca775077787e2174b89"
+    },
+    "source_trace_audit.json": {
+      "byte_count": 144,
+      "sha256": "6daedde3f1fa27542ea1ec338453d926d5e8849ca15e9c1d644e0d485cb2d1c8"
+    }
+  },
+  "input_identity": {
+    "source_tree_sha256": "6fbc24e8ff109e0372fd9be3b1473b95fe40e890d1e3afdda4e97edfca1d9e26",
+    "visualization_manifest_sha256": "b49f2cc2a9febfe7b2303e9fdc37582ae2a9a98ca7e0ccb982e2b01a5f88cfe7"
+  },
+  "release_id": "llm-xai-multidataset-dashboard-v3",
+  "replication_scope": "MODEL_REVISION_UNKNOWN",
+  "robust_recommendation_status": "NO_ROBUST_RECOMMENDATION",
+  "schema_version": "multidataset_dashboard_v3_manifest_v1",
+  "scientific_parent_release_id": "certified_multidataset_analytical_release_v1",
+  "status": "FINAL_CERTIFIED",
+  "visualization_parent_release_id": "visualization-data-v3"
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": "claim_validation_manifest_v3",
+  "validation_schema_version": "claim_validation_v4",
+  "validator_version": "claim_validator_v4.0.0",
+  "policy_version": "claim_validation_policy_v1",
+  "reason_taxonomy_version": "claim_validation_reason_codes_v1",
+  "numeric_policy_version": "numeric_tolerance_policy_v1",
+  "source_commit": "c505221c9c58665a08da38352e69de805efe9f47",
+  "run_mode": "FULL",
+  "started_at": "2026-07-23T14:51:55.850Z",
+  "ended_at": "2026-07-23T14:52:02.007Z",
+  "determinism": {
+    "validator_mode": "DETERMINISTIC",
+    "provider_calls": false,
+    "hidden_ir_used": false,
+    "result_timestamp_is_version_constant": true,
+    "stable_order": "claim_id_ascending",
+    "smoke_selector": null
+  },
+  "inputs": {
+    "finalized_claims": {
+      "path": "data/reports/llm_validation/validation_v1/claim_finalization_v4/claims_final.jsonl",
+      "sha256": "b34571aabe28c1ddd49e231bd8093b8151965d42c86e1146c547df5e8cd92533",
+      "record_count": 14667
+    },
+    "canonical_generation_index": {
+      "path": "data/reports/llm_validation/validation_v1/canonicalization/generation_index.jsonl",
+      "sha256": "252edae8dd920c259a1da74d7b2f09b26558b994e01b3cd29dd60c0d6f9086ec",
+      "record_count": 648
+    },
+    "canonical_evidence_packages": {
+      "path": "data/reports/llm_validation/validation_v1/canonicalization/evidence_packages_36.jsonl",
+      "sha256": "37c25b261d496e7c9bf50a62141f93b5544a45af43208918d0eaf589d6307117",
+      "record_count": 216
+    }
+  },
+  "cohort": {
+    "official_input_claim_count": 14667,
+    "selected_claim_count": 14667,
+    "selected_claim_ids": null,
+    "smoke_limit": null,
+    "main_generations": 648,
+    "usable_generations": 638,
+    "unusable_generations": 10,
+    "template_baseline_generations": null
+  },
+  "reconciliation": {
+    "input_claim_count": 14667,
+    "output_result_count": 14667,
+    "unique_input_claim_ids": 14667,
+    "unique_output_claim_ids": 14667,
+    "unique_validation_ids": 14667,
+    "missing_claim_ids": [],
+    "unexpected_claim_ids": []
+  },
+  "status_counts": {
+    "CONTRADICTED": 25,
+    "NOT_APPLICABLE": 12,
+    "NOT_VERIFIABLE": 601,
+    "SUPPORTED": 13923,
+    "UNSUPPORTED": 106
+  },
+  "reason_code_counts": {
+    "CONCEPT_NOT_FOUND_IN_EVIDENCE": 65,
+    "DIRECTION_MIXED_OR_UNKNOWN": 162,
+    "DIRECTION_REVERSED": 15,
+    "EXACT_MATCH": 8288,
+    "MAGNITUDE_MATCH": 15,
+    "MAGNITUDE_OVERSTATED": 4,
+    "MAGNITUDE_SEMANTICS_UNSUPPORTED": 6,
+    "MAGNITUDE_SOURCE_MISSING": 1,
+    "NORMALIZED_MATCH": 5101,
+    "NUMERIC_OUTSIDE_TOLERANCE": 3,
+    "NUMERIC_ROLE_UNSUPPORTED": 165,
+    "NUMERIC_SOURCE_MISSING": 73,
+    "POLICY_RULE_NOT_APPLICABLE": 12,
+    "PREDICTION_LABEL_MISMATCH": 3,
+    "PREDICTION_VALUE_UNAVAILABLE": 10,
+    "RANK_SOURCE_MISSING": 6,
+    "RANKING_UNSUPPORTED": 3,
+    "SEMANTIC_SOURCE_UNFROZEN": 178,
+    "TOLERANCE_MATCH": 519,
+    "UNCERTAINTY_NOT_GROUNDED": 38
+  },
+  "execution_error_count": 0,
+  "outputs": {
+    "claim_validation_results": {
+      "path": "claim_validation_results.jsonl",
+      "sha256": "2e338006805191aeebb0f43bf8ce95e29ead49f3df27749a04c7f25eebf6cc4c",
+      "byte_count": 44722631,
+      "record_count": 14667
+    },
+    "validation_execution_errors": {
+      "path": "validation_execution_errors.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_count": 0,
+      "record_count": 0
+    },
+    "claim_validation_summary": {
+      "path": "claim_validation_summary.json",
+      "sha256": "a346df02595f00eb82178073dc98a7018a6234d7b59fddb514656d5e54d2f49b",
+      "byte_count": 9762,
+      "record_count": null
+    },
+    "reason_code_counts": {
+      "path": "reason_code_counts.csv",
+      "sha256": "61d0c9f849cccce34fc129fb6267b67f0c464f06727da3e4cf749b43e2f547a5",
+      "byte_count": 1314,
+      "record_count": 20
+    },
+    "generation_validation_summary": {
+      "path": "generation_validation_summary.jsonl",
+      "sha256": "f70a38d357dfd550ccfbd683e3e96a938d7e3b491d109c5cf6f3cfae77fcfdf5",
+      "byte_count": 296031,
+      "record_count": 648
+    }
+  }
+}

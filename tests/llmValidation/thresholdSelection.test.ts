@@ -8,12 +8,12 @@ import {
   pairedStratifiedNonInferiority,
   runThresholdSelection,
   wilsonInterval,
-} from "../../src/server/llmValidation/selection/thresholdSelection";
+} from "../../research/ts/selection/index";
 import type {
   ConfigurationCandidate,
   PairedQualityObservation,
-} from "../../src/types/validation-selection";
-import type { EvidenceLevel } from "../../src/types/llm-validation";
+} from "../../contracts/validation-selection";
+import type { EvidenceLevel } from "../../contracts/llm-validation";
 
 function candidate(
   id: string,
@@ -138,4 +138,3 @@ test("knee uses actual token burden for S1-S4 and is supporting evidence only", 
   assert.equal(knee?.evidence_level, "S2");
   assert.equal(knee?.role, "SUPPORTING_EVIDENCE_ONLY");
 });
-

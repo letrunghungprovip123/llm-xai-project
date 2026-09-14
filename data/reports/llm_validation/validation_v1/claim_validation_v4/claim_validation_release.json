@@ -1,0 +1,61 @@
+{
+  "schema_version": "claim_validation_release_v1",
+  "generated_at": "2026-07-23T15:06:13.189Z",
+  "inputs": {
+    "validation_directory": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next-refactor/data/reports/llm_validation/validation_v1/claim_validation_v4",
+    "regression_report": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next-refactor/data/reports/llm_validation/validation_v1/claim_validation_v4/reviewed_regression_report.json",
+    "coverage_summary": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next-refactor/data/reports/llm_validation/validation_v1/claim_validation_v4/coverage/coverage-summary.json",
+    "mutation_report": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next-refactor/data/reports/llm_validation/validation_v1/claim_validation_v4/mutation_report.json",
+    "deterministic_comparison": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next-refactor/data/reports/llm_validation/validation_v1/claim_validation_v4/determinism_report.json",
+    "human_calibration_report": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next-refactor/data/reports/llm_validation/validation_v1/claim_validation_v4/human_calibration/calibration_report.json"
+  },
+  "machine_derived": true,
+  "result_count": 14667,
+  "generation_summary_count": 648,
+  "execution_error_count": 0,
+  "s0_supported_counts": {
+    "feature_presence": 0,
+    "feature_direction": 0,
+    "concept_presence": 0,
+    "concept_direction": 0,
+    "ranking": 0,
+    "magnitude": 0
+  },
+  "schema_failure_count": 0,
+  "schema_failure_examples": [],
+  "output_hashes_valid": true,
+  "gates": {
+    "C1": {
+      "pass": true,
+      "evidence": "Experimental integrity and frozen cohort"
+    },
+    "C2": {
+      "pass": true,
+      "evidence": "Reviewed claim-measurement regression"
+    },
+    "C3": {
+      "pass": true,
+      "evidence": "Evidence exposure and semantic invariants"
+    },
+    "C4": {
+      "pass": true,
+      "evidence": "V4 result schema and fact consistency"
+    },
+    "C5": {
+      "pass": true,
+      "evidence": "Coverage, mutation and deterministic A/B proof"
+    },
+    "C6": {
+      "pass": false,
+      "evidence": "Real human calibration thresholds"
+    },
+    "C7": {
+      "pass": true,
+      "evidence": "Release interface and artifact hashes"
+    }
+  },
+  "CLAIM_VALIDATION_BATCH_COMPLETION_SCORE": "0.000",
+  "completion_score": 0,
+  "metric_ready": false,
+  "verdict": "REJECTED"
+}

@@ -1,0 +1,44 @@
+{
+  "artifacts": {
+    "concept_registry_yaml": {
+      "path": "ml/registry/concept_registry.yaml",
+      "required": true,
+      "sha256": "8396d7097c6e1937b227e24935c9c3d2930df3709c3eda00e6a92b1cec6e3c1c"
+    },
+    "feature_matrix": {
+      "path": "data/processed/feature_matrix_full.parquet",
+      "required": true,
+      "sha256": "1f7aeae20fa4816eec167aad73351d89613528915784edb94e8757a48d3bcbec"
+    },
+    "feature_registry_csv": {
+      "path": "ml/registry/feature_registry.csv",
+      "required": true,
+      "sha256": "b4937e99534f3bd05264880bc33faa000148237fe80a91ce718db0a7bf192b04"
+    },
+    "feature_registry_yaml": {
+      "path": "ml/registry/feature_registry.yaml",
+      "required": true,
+      "sha256": "1f8e99e87a4334d1c3e7a619ee564a7df5769244fc7f18b354d3705d53bd85fe"
+    },
+    "target": {
+      "path": "data/processed/target_full.parquet",
+      "required": true,
+      "sha256": "8a76ca047c30c3b624aa352cb3f51cb74c5257981bf1f56411a6470ed43a1064"
+    }
+  },
+  "dataset_fingerprint": "0815744a1dc3e7fdbc78a663e15b21c7d48e69a0f20fd0df862a98a5c252b86a",
+  "dataset_id": "freddie_sflld_2024",
+  "dataset_profile_sha256": "e0b9c1749c0e7d706ff3d50d2d90cf5a321eda00caa8bc35f028617972f9769a",
+  "dataset_version": "standard_vintage_2024_v1",
+  "provenance": {
+    "adapter_id": "freddie_sflld",
+    "adapter_version": "standard_2024_v1",
+    "artifact_paths_relative_to_source_root": true,
+    "artifact_source_root_locator": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next-refactor/data/freddie_sflld_2024/canonical_v1",
+    "fingerprint_method": "raw_target_feature_semantics_adapter_hash_v1",
+    "m11_receipt_fingerprint": "2d9c4e94809f91294976a32ac943df027b14dfd8bb57327d92e25b4b1cbee15b",
+    "m12a_target_receipt_fingerprint": "69d2ac8e0d39862d4457aec90364b04856ac9977cc7977f89772e22a95a5db72",
+    "raw_source_sha256": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263"
+  },
+  "schema_version": "canonical_dataset_bundle_v1"
+}

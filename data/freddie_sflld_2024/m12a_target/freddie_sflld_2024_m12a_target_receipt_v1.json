@@ -1,0 +1,37 @@
+{
+  "config_fingerprints": {
+    "target_protocol": "7f0582758f948087bfc3a5d643ad99ea8400f19788d793d44828a8ee1b62c157"
+  },
+  "dataset_id": "freddie_sflld_2024",
+  "input_fingerprints": {
+    "m11_receipt": "ebb08e52ce06338ead21d5bab73233070c9faea60959b722680bb8ee8a9227a0",
+    "raw_source": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263"
+  },
+  "invariants": {
+    "all_performance_rows_consumed": "PASS",
+    "horizon_anchored_to_origination_first_payment": "PASS",
+    "m11_receipt_verified": "PASS",
+    "negative_target_nonempty": "PASS",
+    "one_target_record_per_loan": "PASS",
+    "positive_target_nonempty": "PASS",
+    "quarter_partitions_complete": "PASS",
+    "raw_loan_age_not_used_for_horizon": "PASS",
+    "target_values_binary_or_censored": "PASS"
+  },
+  "output_fingerprints": {
+    "freddie_target_12m_2024Q1_stats_v1.json": "74686e1492c3f135c3948617d2084b7e968a946450ed46456d07f74d5554d057",
+    "freddie_target_12m_2024Q1_v1.csv": "88f8cf79659ab982c177f6667d3b01f109c7ff2e195508aa6e914a57e61f75fd",
+    "freddie_target_12m_2024Q2_stats_v1.json": "b19fbfd3436043d67a86a8e4e8080855b98d098d7cd50581cfc323df73e14fe9",
+    "freddie_target_12m_2024Q2_v1.csv": "436aeac16aca3edc326285c523c5ce672b8ea175c45889420c53dea3ad2efbe0",
+    "freddie_target_12m_2024Q3_stats_v1.json": "c1c3ea4dc29bfa992d22fe9db74ab0ad7dee1eceb772f51fbc8b01d7e98bce42",
+    "freddie_target_12m_2024Q3_v1.csv": "4023805ff05b54db632690e2d8a40de400b9f8a12e7d0c121a25b8b4dd3aee89",
+    "freddie_target_12m_2024Q4_stats_v1.json": "b90060ee415c2438fdb2642b2652a6661e84d27b50abe76a9b9f676b5abeb34c",
+    "freddie_target_12m_2024Q4_v1.csv": "d9789bdfee51adb8cfabfb22ae426357e0958536abac84b293f2a28647a6cde7",
+    "freddie_target_12m_manifest_v1.json": "513e9d79bd74887d14a0bf9a758b1879f00b5369b0778cee7fed7d1cfe6e3535"
+  },
+  "patch_id": "0006",
+  "schema_version": "stage_receipt_v1",
+  "stage": "freddie_sflld_target_12m",
+  "stage_version": "v1",
+  "status": "PASS"
+}

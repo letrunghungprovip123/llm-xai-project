@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "canonical_dataset_bundle_v1.schema.json",
+  "title": "Canonical Dataset Bundle V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "dataset_id", "dataset_version", "dataset_fingerprint",
+    "dataset_profile_sha256", "artifacts", "provenance"
+  ],
+  "properties": {
+    "schema_version": {"const": "canonical_dataset_bundle_v1"},
+    "dataset_id": {"type": "string", "minLength": 1},
+    "dataset_version": {"type": "string", "minLength": 1},
+    "dataset_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "dataset_profile_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifacts": {
+      "type": "object",
+      "required": [
+        "feature_matrix", "target", "feature_registry_csv",
+        "feature_registry_yaml", "concept_registry_yaml"
+      ],
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "required"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "required": {"type": "boolean"}
+        }
+      }
+    },
+    "provenance": {"type": "object"}
+  }
+}

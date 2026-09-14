@@ -1,0 +1,42 @@
+from enum import StrEnum
+
+
+class RunStatus(StrEnum):
+    PENDING = "PENDING"
+    WAITING_APPROVAL = "WAITING_APPROVAL"
+    RUNNING = "RUNNING"
+    SUCCEEDED = "SUCCEEDED"
+    FAILED = "FAILED"
+    CANCELLED = "CANCELLED"
+
+
+class ArtifactStatus(StrEnum):
+    DRAFT = "DRAFT"
+    UPLOADED = "UPLOADED"
+    VERIFIED = "VERIFIED"
+    CERTIFIED = "CERTIFIED"
+    REJECTED = "REJECTED"
+    SUPERSEDED = "SUPERSEDED"
+
+
+class ReleaseStatus(StrEnum):
+    DRAFT = "DRAFT"
+    CANDIDATE = "CANDIDATE"
+    READY_WITH_LIMITATIONS = "READY_WITH_LIMITATIONS"
+    CERTIFIED = "CERTIFIED"
+    REJECTED = "REJECTED"
+    SUPERSEDED = "SUPERSEDED"
+
+
+class GateStatus(StrEnum):
+    PENDING = "PENDING"
+    PASSED = "PASSED"
+    FAILED = "FAILED"
+    WAIVED = "WAIVED"
+
+
+class ApprovalStatus(StrEnum):
+    REQUESTED = "REQUESTED"
+    APPROVED = "APPROVED"
+    REJECTED = "REJECTED"
+    EXPIRED = "EXPIRED"

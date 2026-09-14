@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim_validation_reason_codes.schema.json",
+  "title": "Claim validation reason-code taxonomy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "taxonomy_version",
+    "status",
+    "reason_codes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "claim_validation_reason_codes_v1"
+    },
+    "taxonomy_version": {
+      "const": "claim_validation_reason_codes_v1"
+    },
+    "status": {
+      "const": "FROZEN"
+    },
+    "reason_codes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/reasonCode"
+      }
+    }
+  },
+  "$defs": {
+    "reasonCode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "family",
+        "description",
+        "execution_status",
+        "validation_status",
+        "allowed_claim_types",
+        "severity",
+        "primary_metric_effect",
+        "is_hard_safety_failure"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "family": {
+          "enum": [
+            "MATCH",
+            "PREDICTION",
+            "EXPOSURE",
+            "FEATURE",
+            "CONCEPT",
+            "DIRECTION",
+            "NUMERIC",
+            "RANKING",
+            "MAGNITUDE",
+            "UNCERTAINTY",
+            "POLICY",
+            "SYSTEM"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "execution_status": {
+          "enum": [
+            "SUCCESS",
+            "ERROR"
+          ]
+        },
+        "validation_status": {
+          "enum": [
+            "SUPPORTED",
+            "UNSUPPORTED",
+            "CONTRADICTED",
+            "NOT_VERIFIABLE",
+            "NOT_APPLICABLE",
+            null
+          ]
+        },
+        "allowed_claim_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/claimType"
+          }
+        },
+        "severity": {
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR",
+            "CRITICAL"
+          ]
+        },
+        "primary_metric_effect": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "EXCLUDED",
+            "ERROR"
+          ]
+        },
+        "is_hard_safety_failure": {
+          "type": "boolean"
+        }
+      }
+    },
+    "claimType": {
+      "enum": [
+        "prediction",
+        "feature_presence",
+        "feature_direction",
+        "concept_presence",
+        "concept_direction",
+        "magnitude",
+        "ranking",
+        "numeric",
+        "causal",
+        "uncertainty",
+        "distributed_evidence",
+        "recommendation",
+        "limitation"
+      ]
+    }
+  }
+}

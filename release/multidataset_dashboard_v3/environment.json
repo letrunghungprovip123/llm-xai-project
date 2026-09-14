@@ -1,0 +1,14 @@
+{
+  "browser_executable_fallback": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "machine": "arm64",
+  "packages": {
+    "dash": "4.4.1",
+    "dash-iconify": "0.1.2",
+    "dash-mantine-components": "2.8.0",
+    "pandas": "3.0.5",
+    "playwright": "1.61.0",
+    "plotly": "6.9.0"
+  },
+  "platform": "macOS-15.0-arm64-arm-64bit-Mach-O",
+  "python": "3.14.6"
+}

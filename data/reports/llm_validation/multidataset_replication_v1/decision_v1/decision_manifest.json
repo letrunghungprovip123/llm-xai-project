@@ -1,0 +1,62 @@
+{
+  "active_robust_pool_mode": "NONE",
+  "files": {
+    "cross_dataset_eligibility.csv": {
+      "byte_count": 1999,
+      "sha256": "15df8ff6a9b0a58f1ec52a4c9192603bdce91035ff3b7027021ff0bf30021969"
+    },
+    "dataset_option_assessment.csv": {
+      "byte_count": 10662,
+      "sha256": "f0cd65b0074da1140e88c70b111241c1255f7313e76bb386a539ee6b6d1113f5"
+    },
+    "decision_validation.json": {
+      "byte_count": 1391,
+      "sha256": "0c95270fcb703edd8f0e8a45e468ca54878e27e8c277a48a4c392078d5d01daa"
+    },
+    "noninferiority_results.csv": {
+      "byte_count": 3626,
+      "sha256": "7012f52dd01a3f83b7c2a298b5d4a48f0a6c2a4db3d26babea928c0733b1369d"
+    },
+    "pareto_frontier.csv": {
+      "byte_count": 2158,
+      "sha256": "a4be85fe4d5fcc23bb8d21b4ba78e74af6cd04c680a5addd440e32c7a2a3c37b"
+    },
+    "recommendation_evidence.csv": {
+      "byte_count": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "recommendations.csv": {
+      "byte_count": 576,
+      "sha256": "88b2beed4af2aa95027dd011eb83ab5af1aa0726c96f496e7f70b52067a2f2f6"
+    },
+    "scenario_criterion_contributions.csv": {
+      "byte_count": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "scenario_options.csv": {
+      "byte_count": 50244,
+      "sha256": "b13d02acc4374be47cdac3336d20b9869fda8caa2bf35dec1eb71c9038194217"
+    },
+    "scenario_rankings.csv": {
+      "byte_count": 50244,
+      "sha256": "b13d02acc4374be47cdac3336d20b9869fda8caa2bf35dec1eb71c9038194217"
+    }
+  },
+  "gate": "MULTIDATASET_DECISION_READY",
+  "independence_metric_comparable": true,
+  "parent_policy_lock": {
+    "path": "data/reports/llm_validation/multidataset_replication_v1/m26_policy_lock_v1/multidataset_decision_policy_lock.json",
+    "sha256": "529d86dbb9e1fa4fd3778c0aee00f3e8874b7750293bd954d9661d420ab351bb"
+  },
+  "policy": {
+    "path": "config/research/replication/multidataset_decision_policy_v1.json",
+    "sha256": "6f4db1a4b13d5a7a3bef845a3a692489e6cde9d75bca290c2b0823daca7ab423"
+  },
+  "producer": "M26B_0031",
+  "reference_best": {
+    "freddie": "qwen3_8b::S4",
+    "home_credit": "qwen3_8b::S1"
+  },
+  "schema_version": "multidataset_decision_manifest_v1",
+  "selected_robust_recommendation_count": 0
+}

@@ -1,0 +1,314 @@
+{
+  "schema_version": "gate_catalog_v1",
+  "status": "ACTIVE",
+  "gates": [
+    {
+      "gate_id": "STAGE_EXECUTION_SUCCEEDED",
+      "category": "ORCHESTRATION",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Stage command completed and all declared outputs were registered and verified."
+    },
+    {
+      "gate_id": "RAW_DATA_AUDIT_READY",
+      "category": "DATA",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Raw Data Audit Ready"
+    },
+    {
+      "gate_id": "TARGET_AUDIT_READY",
+      "category": "DATA",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Target Audit Ready"
+    },
+    {
+      "gate_id": "FEATURE_ENGINEERING_READY",
+      "category": "DATA",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Feature Engineering Ready"
+    },
+    {
+      "gate_id": "FEATURE_MATRIX_READY",
+      "category": "DATA",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Feature Matrix Ready"
+    },
+    {
+      "gate_id": "DATA_SPLIT_READY",
+      "category": "DATA",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Data Split Ready"
+    },
+    {
+      "gate_id": "PREPROCESSING_READY",
+      "category": "DATA",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Preprocessing Ready"
+    },
+    {
+      "gate_id": "MODEL_TRAINING_READY",
+      "category": "MODEL",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Model Training Ready"
+    },
+    {
+      "gate_id": "MODEL_READY",
+      "category": "MODEL",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Model Ready"
+    },
+    {
+      "gate_id": "XAI_READY",
+      "category": "XAI",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Xai Ready"
+    },
+    {
+      "gate_id": "XAI_QUALITY_READY",
+      "category": "XAI",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Xai Quality Ready"
+    },
+    {
+      "gate_id": "EXPLANATION_IR_READY",
+      "category": "XAI",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Explanation Ir Ready"
+    },
+    {
+      "gate_id": "EVIDENCE_PACKAGES_READY",
+      "category": "XAI",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Evidence Packages Ready"
+    },
+    {
+      "gate_id": "EVALUATION_SUBSET_READY",
+      "category": "XAI",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Evaluation Subset Ready"
+    },
+    {
+      "gate_id": "LLM_GENERATION_COMPLETE",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Llm Generation Complete"
+    },
+    {
+      "gate_id": "GENERATION_AGGREGATION_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Generation Aggregation Ready"
+    },
+    {
+      "gate_id": "FILTERED_GENERATIONS_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Filtered Generations Ready"
+    },
+    {
+      "gate_id": "CANONICAL_GENERATIONS_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Canonical Generations Ready"
+    },
+    {
+      "gate_id": "NARRATIVE_CONTRACT_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Narrative Contract Ready"
+    },
+    {
+      "gate_id": "ATOMIC_CLAIMS_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Atomic Claims Ready"
+    },
+    {
+      "gate_id": "FINAL_CLAIMS_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Final Claims Ready"
+    },
+    {
+      "gate_id": "SEMANTIC_FINAL_CLAIMS_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Semantic Final Claims Ready"
+    },
+    {
+      "gate_id": "CLAIM_VALIDATION_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Claim Validation Ready"
+    },
+    {
+      "gate_id": "CALIBRATION_SAMPLE_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Calibration Sample Ready"
+    },
+    {
+      "gate_id": "CALIBRATION_EVALUATION_READY",
+      "category": "LLM",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Calibration Evaluation Ready"
+    },
+    {
+      "gate_id": "CLAIM_MEASUREMENT_RELEASE_READY",
+      "category": "RELEASE",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Claim Measurement Release Ready"
+    },
+    {
+      "gate_id": "DATA_MART_READY",
+      "category": "ANALYTICS",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Data Mart Ready"
+    },
+    {
+      "gate_id": "METRICS_READY",
+      "category": "ANALYTICS",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Metrics Ready"
+    },
+    {
+      "gate_id": "ANALYTICAL_MART_READY",
+      "category": "ANALYTICS",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Analytical Mart Ready"
+    },
+    {
+      "gate_id": "STATISTICAL_CORE_READY",
+      "category": "ANALYTICS",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Statistical Core Ready"
+    },
+    {
+      "gate_id": "DIAGNOSTICS_READY",
+      "category": "ANALYTICS",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Diagnostics Ready"
+    },
+    {
+      "gate_id": "DECISION_SUPPORT_READY",
+      "category": "ANALYTICS",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Decision Support Ready"
+    },
+    {
+      "gate_id": "VALIDATOR_SENSITIVITY_READY",
+      "category": "ANALYTICS",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Validator Sensitivity Ready"
+    },
+    {
+      "gate_id": "REPORT_WRITING_READY",
+      "category": "RELEASE",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Report Writing Ready"
+    },
+    {
+      "gate_id": "BASELINE_COMPARISON_READY",
+      "category": "RELEASE",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Baseline Comparison Ready"
+    },
+    {
+      "gate_id": "VISUALIZATION_DATA_V2_READY",
+      "category": "RELEASE",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Visualization Data V2 Ready"
+    },
+    {
+      "gate_id": "DASHBOARD_I18N_CERTIFIED",
+      "category": "DASHBOARD",
+      "blocking_by_default": true,
+      "origin": "NATIVE",
+      "description": "Dashboard I18N Certified"
+    },
+    {
+      "gate_id": "MLFLOW_MODEL_REGISTERED",
+      "category": "MODEL",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "MLflow model version and immutable registration receipt are reconciled"
+    },
+    {
+      "gate_id": "SOURCE_ENVIRONMENT_VERIFIED",
+      "category": "SOURCE",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Source and dependency environment verified"
+    },
+    {
+      "gate_id": "COMPLETE_RELEASE_BUNDLE_READY",
+      "category": "RELEASE",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Complete immutable release bundle index ready"
+    },
+    {
+      "gate_id": "PREFECT_ACCEPTANCE_READY",
+      "category": "RELEASE",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Deterministic Prefect acceptance fixture passed"
+    },
+    {
+      "gate_id": "PREFECT_APPROVAL_ACCEPTANCE_READY",
+      "category": "RELEASE",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Protected Prefect approval acceptance fixture passed"
+    },
+    {
+      "gate_id": "MODEL_PROMOTION_COMPLETED",
+      "category": "MODEL",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Governed model champion promotion completed and reconciled."
+    },
+    {
+      "gate_id": "RELEASE_PROMOTION_COMPLETED",
+      "category": "RELEASE",
+      "blocking_by_default": true,
+      "origin": "PLATFORM_NORMALIZED",
+      "description": "Governed release lifecycle promotion completed."
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "schema_version": "multidataset_decision_policy_v1",
+  "status": "FROZEN_BEFORE_DECISION_EXECUTION",
+  "historical_note": "This multi-dataset decision policy is retrospectively formalized after within-dataset analysis and frozen before M26 recommendation execution. It is not a prospective preregistration and does not reuse the historical selection margin without redefining its endpoint semantics.",
+  "primary_endpoint": "end_to_end_faithfulness_yield",
+  "option_roles": {
+    "control_levels": [
+      "S0"
+    ],
+    "primary_candidate_levels": [
+      "S1",
+      "S2",
+      "S3",
+      "S4"
+    ],
+    "fallback_only_levels": [
+      "S5"
+    ]
+  },
+  "hard_gates_per_dataset": {
+    "planned_generation_count": 36,
+    "minimum_usability_rate": 0.9,
+    "maximum_micro_contradicted_rate": 0.01,
+    "maximum_micro_unsupported_rate": 0.05
+  },
+  "noninferiority": {
+    "endpoint": "end_to_end_faithfulness_yield",
+    "absolute_margin": 0.03,
+    "margin_interpretation": "3 percentage points on the E2E scale",
+    "confidence": 0.95,
+    "method": "paired_case_resampled_percentile_upper_bound",
+    "reference_best_rule": "highest mean E2E among hard-gate-passing S1-S4 candidates within each dataset",
+    "difference_direction": "reference_best_minus_candidate",
+    "decision_rule": "upper_95pct_bound <= absolute_margin",
+    "robust_rule": "candidate must be non-inferior independently on Home Credit AND Freddie",
+    "bootstrap": {
+      "iterations": 10000,
+      "home_credit_seed": 20260822,
+      "freddie_seed": 20260823,
+      "resampling_unit": "canonical_case",
+      "preserve_pairing": true
+    }
+  },
+  "pareto": {
+    "axes": [
+      {
+        "criterion_id": "worst_dataset_mean_e2e",
+        "direction": "MAX"
+      },
+      {
+        "criterion_id": "worst_dataset_p10_e2e",
+        "direction": "MAX"
+      },
+      {
+        "criterion_id": "minimum_dataset_usability",
+        "direction": "MAX"
+      },
+      {
+        "criterion_id": "maximum_dataset_mean_total_tokens",
+        "direction": "MIN"
+      }
+    ],
+    "monetary_cost_allowed": false,
+    "cross_dataset_latency_hard_axis_allowed": false
+  },
+  "scenarios": [
+    {
+      "scenario_id": "QUALITY_FIRST",
+      "requires_independence_metric": false,
+      "criteria": [
+        {
+          "criterion_id": "worst_dataset_mean_e2e",
+          "direction": "MAX",
+          "weight": 0.7
+        },
+        {
+          "criterion_id": "worst_dataset_p10_e2e",
+          "direction": "MAX",
+          "weight": 0.2
+        },
+        {
+          "criterion_id": "minimum_dataset_usability",
+          "direction": "MAX",
+          "weight": 0.1
+        }
+      ]
+    },
+    {
+      "scenario_id": "RELIABILITY_FIRST",
+      "requires_independence_metric": false,
+      "criteria": [
+        {
+          "criterion_id": "minimum_dataset_usability",
+          "direction": "MAX",
+          "weight": 0.5
+        },
+        {
+          "criterion_id": "worst_dataset_p10_e2e",
+          "direction": "MAX",
+          "weight": 0.3
+        },
+        {
+          "criterion_id": "maximum_dataset_resolved_error_rate",
+          "direction": "MIN",
+          "weight": 0.2
+        }
+      ]
+    },
+    {
+      "scenario_id": "BALANCED",
+      "requires_independence_metric": false,
+      "criteria": [
+        {
+          "criterion_id": "worst_dataset_mean_e2e",
+          "direction": "MAX",
+          "weight": 0.4
+        },
+        {
+          "criterion_id": "worst_dataset_p10_e2e",
+          "direction": "MAX",
+          "weight": 0.25
+        },
+        {
+          "criterion_id": "minimum_dataset_usability",
+          "direction": "MAX",
+          "weight": 0.2
+        },
+        {
+          "criterion_id": "maximum_dataset_mean_total_tokens",
+          "direction": "MIN",
+          "weight": 0.15
+        }
+      ]
+    },
+    {
+      "scenario_id": "EFFICIENCY_AWARE",
+      "requires_independence_metric": false,
+      "criteria": [
+        {
+          "criterion_id": "maximum_dataset_mean_total_tokens",
+          "direction": "MIN",
+          "weight": 0.5
+        },
+        {
+          "criterion_id": "worst_dataset_mean_e2e",
+          "direction": "MAX",
+          "weight": 0.3
+        },
+        {
+          "criterion_id": "minimum_dataset_usability",
+          "direction": "MAX",
+          "weight": 0.2
+        }
+      ]
+    },
+    {
+      "scenario_id": "INDEPENDENCE_SENSITIVE",
+      "requires_independence_metric": true,
+      "criteria": [
+        {
+          "criterion_id": "maximum_dataset_safe_phrase_match_rate",
+          "direction": "MIN",
+          "weight": 0.5
+        },
+        {
+          "criterion_id": "worst_dataset_mean_e2e",
+          "direction": "MAX",
+          "weight": 0.3
+        },
+        {
+          "criterion_id": "minimum_dataset_usability",
+          "direction": "MAX",
+          "weight": 0.2
+        }
+      ]
+    }
+  ],
+  "tie_breaks": [
+    "higher_utility",
+    "higher_worst_dataset_mean_e2e",
+    "higher_minimum_dataset_usability",
+    "lower_maximum_dataset_mean_total_tokens",
+    "lower_evidence_order",
+    "lexicographic_model_id"
+  ],
+  "no_winner_rule": "NO_ROBUST_RECOMMENDATION",
+  "threshold_relaxation_allowed": false,
+  "provider_execution_allowed": false
+}

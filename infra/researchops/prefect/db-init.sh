@@ -1,0 +1,53 @@
+#!/bin/sh
+set -eu
+
+: "${RESEARCHOPS_POSTGRES_USER:?}"
+: "${RESEARCHOPS_POSTGRES_PASSWORD:?}"
+: "${PREFECT_POSTGRES_DB:?}"
+: "${PREFECT_POSTGRES_USER:?}"
+: "${PREFECT_POSTGRES_PASSWORD:?}"
+: "${POSTGRES_HOST:=researchops-postgres}"
+: "${POSTGRES_PORT:=5432}"
+
+case "$PREFECT_POSTGRES_DB" in
+  *[!A-Za-z0-9_]*|'') echo "Invalid PREFECT_POSTGRES_DB" >&2; exit 2 ;;
+esac
+case "$PREFECT_POSTGRES_USER" in
+  *[!A-Za-z0-9_]*|'') echo "Invalid PREFECT_POSTGRES_USER" >&2; exit 2 ;;
+esac
+case "$PREFECT_POSTGRES_PASSWORD" in
+  *[!A-Za-z0-9_-]*|'') echo "PREFECT_POSTGRES_PASSWORD must be URL-safe" >&2; exit 2 ;;
+esac
+
+export PGPASSWORD="$RESEARCHOPS_POSTGRES_PASSWORD"
+until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+  -U "$RESEARCHOPS_POSTGRES_USER" -d postgres >/dev/null 2>&1; do
+  sleep 1
+done
+
+ROLE_EXISTS="$(psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+  -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -tAc \
+  "SELECT 1 FROM pg_roles WHERE rolname='${PREFECT_POSTGRES_USER}'")"
+if [ "$ROLE_EXISTS" != "1" ]; then
+  psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+    -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -v ON_ERROR_STOP=1 \
+    -c "CREATE ROLE \"${PREFECT_POSTGRES_USER}\" LOGIN PASSWORD '${PREFECT_POSTGRES_PASSWORD}'"
+else
+  psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+    -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -v ON_ERROR_STOP=1 \
+    -c "ALTER ROLE \"${PREFECT_POSTGRES_USER}\" WITH LOGIN PASSWORD '${PREFECT_POSTGRES_PASSWORD}'"
+fi
+
+DB_EXISTS="$(psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+  -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -tAc \
+  "SELECT 1 FROM pg_database WHERE datname='${PREFECT_POSTGRES_DB}'")"
+if [ "$DB_EXISTS" != "1" ]; then
+  createdb -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+    -U "$RESEARCHOPS_POSTGRES_USER" \
+    -O "$PREFECT_POSTGRES_USER" "$PREFECT_POSTGRES_DB"
+fi
+psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+  -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -v ON_ERROR_STOP=1 \
+  -c "ALTER DATABASE \"${PREFECT_POSTGRES_DB}\" OWNER TO \"${PREFECT_POSTGRES_USER}\""
+
+echo "PREFECT_DATABASE_BOOTSTRAP=PASS"

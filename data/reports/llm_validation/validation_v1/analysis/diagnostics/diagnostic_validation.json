@@ -1,0 +1,363 @@
+{
+  "diagnostic_version": "v1.1",
+  "input_gates": {
+    "data_mart": "DATA_MART_READY",
+    "metric_engineering": "ANALYTICAL_MART_READY",
+    "statistical_analysis": "STATISTICAL_CORE_READY"
+  },
+  "check_count": 63,
+  "checks": {
+    "input_data_mart_gate": {
+      "expected": "DATA_MART_READY",
+      "observed": "DATA_MART_READY",
+      "passed": true
+    },
+    "input_metric_gate": {
+      "expected": "ANALYTICAL_MART_READY",
+      "observed": "ANALYTICAL_MART_READY",
+      "passed": true
+    },
+    "input_statistical_gate": {
+      "expected": "STATISTICAL_CORE_READY",
+      "observed": "STATISTICAL_CORE_READY",
+      "passed": true
+    },
+    "claim_diagnostic_row_count": {
+      "expected": 14667,
+      "observed": 14667,
+      "passed": true
+    },
+    "duplicate_claim_diagnostic_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_source_identity_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "unknown_validation_statuses": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "claim_status_flag_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_status_partition_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "safe_phrase_eligibility_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "safe_phrase_exposure_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "safe_phrase_match_without_exposure_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "safe_phrase_match_without_eligibility_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_diagnostic_version_set": {
+      "expected": [
+        "v1.1"
+      ],
+      "observed": [
+        "v1.1"
+      ],
+      "passed": true
+    },
+    "duplicate_claim_safe_phrase_pair_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "expected_safe_phrase_match_pair_count": {
+      "expected": 3899,
+      "observed": 3899,
+      "passed": true
+    },
+    "missing_safe_phrase_match_pair_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "extra_safe_phrase_match_pair_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "safe_phrase_match_source_text_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "safe_phrase_match_item_metadata_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "safe_phrase_rule_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_best_match_reconciliation_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "exact_match_not_contained_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "high_overlap_below_threshold_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_diagnostic_row_count": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "duplicate_generation_diagnostic_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_source_identity_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_claim_count_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "supported_yield_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "pipeline_loss_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "not_verifiable_loss_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "unsupported_loss_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "contradiction_loss_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "resolved_error_loss_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_quality_loss_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "total_loss_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_loss_decomposition_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "supported_yield_metric_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "unusable_loss_rule_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_claim_type_partition_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_safe_phrase_state_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "usable_generation_count": {
+      "expected": 638,
+      "observed": 638,
+      "passed": true
+    },
+    "unusable_generation_count": {
+      "expected": 10,
+      "observed": 10,
+      "passed": true
+    },
+    "duplicate_claim_summary_key_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_summary_key_set_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_summary_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_summary_best_match_partition_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_summary_overall_count": {
+      "expected": 14667,
+      "observed": 14667,
+      "passed": true
+    },
+    "duplicate_generation_summary_key_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_summary_key_set_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_summary_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_summary_loss_identity_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_summary_overall_count": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "pipeline_failure_row_count": {
+      "expected": 10,
+      "observed": 10,
+      "passed": true
+    },
+    "duplicate_pipeline_failure_generation_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "pipeline_failure_generation_set": {
+      "expected": [
+        "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_280694_near_threshold",
+        "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_310672_near_threshold",
+        "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_441551_near_threshold",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_110178_true_positive",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_125223_low_risk",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_175570_false_negative",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_310672_near_threshold",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_342859_low_risk",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_449188_false_positive",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_452391_false_negative"
+      ],
+      "observed": [
+        "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_280694_near_threshold",
+        "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_310672_near_threshold",
+        "run_deepseek_eval_001__deepseek_v4_flash__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_441551_near_threshold",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_110178_true_positive",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_125223_low_risk",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_175570_false_negative",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_310672_near_threshold",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_342859_low_risk",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_449188_false_positive",
+        "run_phi4_mini_eval36_r1_pinned__phi4_mini_instruct__r1__pkg_S4_ir_xai_hist_gradient_boosting_v1_452391_false_negative"
+      ],
+      "passed": true
+    },
+    "pipeline_failure_category_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "pipeline_failure_non_s4_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "pipeline_failure_model_counts": {
+      "expected": {
+        "deepseek_v4_flash": 3,
+        "phi4_mini_instruct": 7,
+        "qwen3_8b": 0
+      },
+      "observed": {
+        "deepseek_v4_flash": 3,
+        "phi4_mini_instruct": 7,
+        "qwen3_8b": 0
+      },
+      "passed": true
+    },
+    "diagnostic_rate_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "infinite_output_value_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "missing_validation_check_names": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "extra_validation_check_names": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    }
+  },
+  "failed_check_count": 0,
+  "passed": true,
+  "exit_gate": "DIAGNOSTICS_READY"
+}

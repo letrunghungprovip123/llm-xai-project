@@ -1,0 +1,248 @@
+{
+  "base_gate": "DATA_MART_READY",
+  "check_count": 44,
+  "checks": {
+    "applicable_count_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "base_data_mart_gate": {
+      "expected": "DATA_MART_READY",
+      "observed": "DATA_MART_READY",
+      "passed": true
+    },
+    "claim_status_partition_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "claim_to_generation_status_reconciliation": {
+      "expected": {
+        "CONTRADICTED": 25,
+        "NOT_APPLICABLE": 12,
+        "NOT_VERIFIABLE": 1018,
+        "SUPPORTED": 13540,
+        "UNSUPPORTED": 72
+      },
+      "observed": {
+        "CONTRADICTED": 25,
+        "NOT_APPLICABLE": 12,
+        "NOT_VERIFIABLE": 1018,
+        "SUPPORTED": 13540,
+        "UNSUPPORTED": 72
+      },
+      "passed": true
+    },
+    "conservative_faithfulness_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "conservative_identity_mismatch_count": {
+      "details": "conservative = resolved faithfulness × verifiability",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "contradiction_rate_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "critical_identity_null_row_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_generation_metric_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_metric_dictionary_id_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "efficiency_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "end_to_end_faithfulness_yield_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "evidence_level_count": {
+      "expected": 6,
+      "observed": 6,
+      "passed": true
+    },
+    "extra_metric_dictionary_entries": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "faithfulness_error_flag_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_metric_count": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "generation_metric_identity_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_metric_source_count_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "generation_metric_source_runtime_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "infinite_metric_value_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "invalid_model_evidence_cell_size_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "metric_engineering_version_set": {
+      "expected": [
+        "1.0"
+      ],
+      "observed": [
+        "1.0"
+      ],
+      "passed": true
+    },
+    "missing_generation_metric_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "missing_metric_dictionary_entries": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "model_count": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "model_evidence_cell_count": {
+      "expected": 18,
+      "observed": 18,
+      "passed": true
+    },
+    "negative_efficiency_metric_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "not_verifiable_rate_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "orphan_generation_metric_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "quality_metric_eligible_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "rate_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "reliability_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "resolved_count_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "resolved_error_rate_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "resolved_faithfulness_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "source_claim_count": {
+      "expected": 14667,
+      "observed": 14667,
+      "passed": true
+    },
+    "source_generation_count": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "strict_all_supported_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "unsupported_rate_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "unusable_generation_count": {
+      "expected": 10,
+      "observed": 10,
+      "passed": true
+    },
+    "unusable_generation_nonnull_quality_metric_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "unusable_generation_nonzero_yield_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "usable_generation_count": {
+      "expected": 638,
+      "observed": 638,
+      "passed": true
+    },
+    "verifiability_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    }
+  },
+  "exit_gate": "ANALYTICAL_MART_READY",
+  "failed_check_count": 0,
+  "metric_engineering_version": "1.0",
+  "metric_gate": "METRICS_READY",
+  "passed": true
+}

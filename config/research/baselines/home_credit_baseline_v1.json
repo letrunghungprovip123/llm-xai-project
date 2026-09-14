@@ -1,0 +1,27 @@
+{
+  "schema_version": "home_credit_baseline_lock_v1",
+  "dataset_id": "home_credit_default_risk",
+  "scientific_truths": {
+    "application_rows": 307511,
+    "engineered_feature_count": 166,
+    "model_ready_feature_count": 213,
+    "split_rows": {
+      "train": 215257,
+      "valid": 46127,
+      "test": 46127
+    },
+    "selected_model": "hist_gradient_boosting",
+    "xai_case_count": 120,
+    "evaluation_case_count": 36,
+    "full_evidence_package_count": 720,
+    "selected_evidence_package_count": 216,
+    "planned_generation_count": 648,
+    "usable_generation_count": 638,
+    "unusable_generation_count": 10
+  },
+  "policy": {
+    "historical_artifacts_are_immutable": true,
+    "historical_ids_are_not_rewritten": true,
+    "legacy_pipeline_remains_available_during_migration": true
+  }
+}

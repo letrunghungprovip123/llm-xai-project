@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"report_source_index_v1",
+  "type":"object",
+  "required":["report_number_id","family","dataset_scope","metric_id","population_id","denominator","unit","analysis_lane","source_artifact_id","source_sha256","source_field","aggregation","source_path","value_json","source_filter_json"],
+  "properties":{
+    "report_number_id":{"type":"string","minLength":1},
+    "family":{"type":"string","minLength":1},
+    "dataset_scope":{"type":"string","enum":["HOME_CREDIT","FREDDIE","CROSS_DATASET","GLOBAL"]},
+    "metric_id":{"type":"string","minLength":1},
+    "population_id":{"type":"string","minLength":1},
+    "denominator":{"type":["integer","number","null"]},
+    "unit":{"type":"string","minLength":1},
+    "analysis_lane":{"type":"string","enum":["PRIMARY","SECONDARY","SENSITIVITY","DIAGNOSTIC","DECISION","REPLICATION","LIMITATION"]},
+    "source_artifact_id":{"type":"string","minLength":1},
+    "source_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "source_field":{"type":"string","minLength":1},
+    "aggregation":{"type":"string","enum":["DIRECT_SINGLE_ROW","COUNT_ROWS","SUM","MEAN"]},
+    "source_path":{"type":"string","minLength":1},
+    "value_json":{"type":"string"},
+    "source_filter_json":{"type":"string"}
+  },
+  "additionalProperties":true
+}

@@ -1,0 +1,454 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim_validation_v3.schema.json",
+  "title": "Claim validation result v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "validation_id",
+    "claim_id",
+    "generation_id",
+    "case_id",
+    "model_id",
+    "evidence_level",
+    "repeat_id",
+    "claim_type",
+    "execution_status",
+    "validation_status",
+    "reason_code",
+    "validator_mode",
+    "validator_version",
+    "policy_version",
+    "created_at",
+    "claims_input_path",
+    "claims_input_sha256",
+    "generation_index_path",
+    "generation_index_sha256",
+    "evidence_packages_path",
+    "evidence_packages_sha256",
+    "source_evidence_id",
+    "package_id",
+    "source_ir_id",
+    "expected",
+    "observed",
+    "message",
+    "normalizations_applied",
+    "source_record_keys",
+    "error"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "claim_validation_v3"
+    },
+    "validation_id": {
+      "type": "string",
+      "pattern": "^validation_[a-f0-9]{64}$"
+    },
+    "claim_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_level": {
+      "enum": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ]
+    },
+    "repeat_id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "claim_type": {
+      "enum": [
+        "prediction",
+        "feature_presence",
+        "feature_direction",
+        "concept_presence",
+        "concept_direction",
+        "magnitude",
+        "ranking",
+        "numeric",
+        "causal",
+        "uncertainty",
+        "distributed_evidence",
+        "recommendation",
+        "limitation"
+      ]
+    },
+    "execution_status": {
+      "enum": [
+        "SUCCESS",
+        "ERROR"
+      ]
+    },
+    "validation_status": {
+      "enum": [
+        "SUPPORTED",
+        "UNSUPPORTED",
+        "CONTRADICTED",
+        "NOT_VERIFIABLE",
+        "NOT_APPLICABLE",
+        null
+      ]
+    },
+    "reason_code": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]+$"
+    },
+    "validator_mode": {
+      "enum": [
+        "DETERMINISTIC",
+        "SEMANTIC",
+        "HUMAN_ADJUDICATED"
+      ]
+    },
+    "validator_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$"
+    },
+    "claims_input_path": {
+      "$ref": "#/$defs/projectRelativePath"
+    },
+    "claims_input_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "generation_index_path": {
+      "$ref": "#/$defs/projectRelativePath"
+    },
+    "generation_index_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "evidence_packages_path": {
+      "$ref": "#/$defs/projectRelativePath"
+    },
+    "evidence_packages_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "source_evidence_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "package_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "source_ir_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected": {
+      "$ref": "#/$defs/factValues"
+    },
+    "observed": {
+      "$ref": "#/$defs/factValues"
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalizations_applied": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_record_keys": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "error": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/executionError"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "execution_status": {
+            "const": "SUCCESS"
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "properties": {
+              "source_evidence_id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "properties": {
+              "package_id": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "properties": {
+          "validation_status": {
+            "enum": [
+              "SUPPORTED",
+              "UNSUPPORTED",
+              "CONTRADICTED",
+              "NOT_VERIFIABLE",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "reason_code": {
+            "not": {
+              "enum": [
+                "INVALID_CLAIM_SHAPE",
+                "CLAIM_JOIN_FAILED",
+                "GENERATION_JOIN_FAILED",
+                "EVIDENCE_JOIN_FAILED",
+                "POLICY_LOAD_FAILED",
+                "NORMALIZATION_FAILED",
+                "UNSUPPORTED_CLAIM_TYPE",
+                "OUTPUT_SCHEMA_FAILED"
+              ]
+            }
+          },
+          "error": {
+            "const": null
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "validation_status": {
+            "const": null
+          },
+          "reason_code": {
+            "enum": [
+              "INVALID_CLAIM_SHAPE",
+              "CLAIM_JOIN_FAILED",
+              "GENERATION_JOIN_FAILED",
+              "EVIDENCE_JOIN_FAILED",
+              "POLICY_LOAD_FAILED",
+              "NORMALIZATION_FAILED",
+              "UNSUPPORTED_CLAIM_TYPE",
+              "OUTPUT_SCHEMA_FAILED"
+            ]
+          },
+          "error": {
+            "$ref": "#/$defs/executionError"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "projectRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))[^\\u0000]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "factValues": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prediction_label",
+        "probability",
+        "numeric_value",
+        "numeric_unit",
+        "numeric_role",
+        "feature_id",
+        "concept_id",
+        "direction",
+        "magnitude",
+        "rank",
+        "certainty",
+        "causal_strength",
+        "exposure_status"
+      ],
+      "properties": {
+        "prediction_label": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "probability": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "numeric_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "numeric_unit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "numeric_role": {
+          "enum": [
+            "prediction_score",
+            "decision_threshold",
+            "feature_value",
+            "rank",
+            "other",
+            null
+          ]
+        },
+        "feature_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "concept_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "direction": {
+          "enum": [
+            "increase_risk",
+            "decrease_risk",
+            "mixed",
+            "neutral",
+            "unknown",
+            null
+          ]
+        },
+        "magnitude": {
+          "enum": [
+            "weak",
+            "moderate",
+            "strong",
+            "unknown",
+            null
+          ]
+        },
+        "rank": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "certainty": {
+          "enum": [
+            "deterministic",
+            "probabilistic",
+            "hedged",
+            "unknown",
+            null
+          ]
+        },
+        "causal_strength": {
+          "enum": [
+            "associational",
+            "causal",
+            "none",
+            "unknown",
+            null
+          ]
+        },
+        "exposure_status": {
+          "enum": [
+            "EXPOSED",
+            "NOT_EXPOSED",
+            "SOURCE_MISSING",
+            "NOT_APPLICABLE",
+            null
+          ]
+        }
+      }
+    },
+    "executionError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "error_code",
+        "error_message",
+        "failed_stage"
+      ],
+      "properties": {
+        "error_code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "error_message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failed_stage": {
+          "enum": [
+            "INPUT_SCHEMA",
+            "CLAIM_JOIN",
+            "GENERATION_JOIN",
+            "EVIDENCE_JOIN",
+            "POLICY_LOAD",
+            "NORMALIZATION",
+            "VALIDATION",
+            "OUTPUT_SCHEMA"
+          ]
+        }
+      }
+    }
+  }
+}

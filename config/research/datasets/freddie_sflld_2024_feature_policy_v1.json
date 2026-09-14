@@ -1,0 +1,232 @@
+{
+  "schema_version": "freddie_feature_policy_v1",
+  "dataset_id": "freddie_sflld_2024",
+  "source_layout": "release_47_origination_31_fields",
+  "source_id_column": "loan_identifier",
+  "primary_features": [
+    {
+      "feature_name": "classic_fico",
+      "display_name": "Điểm tín dụng FICO",
+      "description": "Điểm tín dụng Classic FICO sử dụng tại thời điểm khởi tạo khoản vay.",
+      "concept": "borrower_creditworthiness",
+      "data_kind": "numeric",
+      "value_type": "score",
+      "unit": "score",
+      "normalization": {"kind": "numeric", "missing_tokens": ["9999"], "min": 300, "max": 850},
+      "direction_prior": "lower_increases_risk"
+    },
+    {
+      "feature_name": "first_time_homebuyer_indicator",
+      "display_name": "Người mua nhà lần đầu",
+      "description": "Chỉ báo hồ sơ thuộc người mua nhà lần đầu tại origination.",
+      "concept": "borrower_structure",
+      "data_kind": "binary",
+      "value_type": "binary_indicator",
+      "unit": "binary",
+      "normalization": {"kind": "binary", "mapping": {"Y": 1, "N": 0}, "missing_tokens": ["9", ""]},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "mortgage_insurance_percentage",
+      "display_name": "Tỷ lệ bảo hiểm thế chấp",
+      "description": "Tỷ lệ phần trăm bảo hiểm thế chấp ban đầu.",
+      "concept": "leverage",
+      "data_kind": "numeric",
+      "value_type": "percentage",
+      "unit": "percent",
+      "normalization": {"kind": "numeric", "missing_tokens": ["999", ""], "min": 0, "max": 100},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "number_of_units",
+      "display_name": "Số đơn vị nhà ở",
+      "description": "Số đơn vị nhà ở của tài sản bảo đảm.",
+      "concept": "property_collateral",
+      "data_kind": "categorical",
+      "value_type": "categorical",
+      "unit": "category",
+      "normalization": {"kind": "categorical", "missing_tokens": ["99", ""], "allowed_values": ["1", "2", "3", "4"]},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "occupancy_status",
+      "display_name": "Tình trạng sử dụng tài sản",
+      "description": "Tài sản là nơi ở chính, nhà đầu tư hay nhà thứ hai.",
+      "concept": "property_collateral",
+      "data_kind": "categorical",
+      "value_type": "categorical",
+      "unit": "category",
+      "normalization": {"kind": "categorical", "missing_tokens": ["9", ""], "allowed_values": ["P", "I", "S"]},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "original_cltv",
+      "display_name": "CLTV ban đầu",
+      "description": "Combined loan-to-value tại thời điểm khởi tạo.",
+      "concept": "leverage",
+      "data_kind": "numeric",
+      "value_type": "percentage",
+      "unit": "percent",
+      "normalization": {"kind": "numeric", "missing_tokens": ["999", ""], "min": 0, "max": 300},
+      "direction_prior": "higher_increases_risk"
+    },
+    {
+      "feature_name": "original_dti",
+      "display_name": "DTI ban đầu",
+      "description": "Debt-to-income ratio tại thời điểm khởi tạo.",
+      "concept": "affordability",
+      "data_kind": "numeric",
+      "value_type": "percentage",
+      "unit": "percent",
+      "normalization": {"kind": "numeric", "missing_tokens": ["999", ""], "min": 0, "max": 100},
+      "direction_prior": "higher_increases_risk"
+    },
+    {
+      "feature_name": "original_upb",
+      "display_name": "Dư nợ gốc ban đầu",
+      "description": "Original unpaid principal balance tại origination.",
+      "concept": "loan_terms",
+      "data_kind": "numeric",
+      "value_type": "amount",
+      "unit": "USD",
+      "normalization": {"kind": "numeric", "missing_tokens": [""], "min_exclusive": 0},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "original_ltv",
+      "display_name": "LTV ban đầu",
+      "description": "Loan-to-value tại thời điểm khởi tạo.",
+      "concept": "leverage",
+      "data_kind": "numeric",
+      "value_type": "percentage",
+      "unit": "percent",
+      "normalization": {"kind": "numeric", "missing_tokens": ["999", ""], "min": 0, "max": 300},
+      "direction_prior": "higher_increases_risk"
+    },
+    {
+      "feature_name": "original_interest_rate",
+      "display_name": "Lãi suất ban đầu",
+      "description": "Lãi suất ghi trên khoản vay tại origination.",
+      "concept": "loan_terms",
+      "data_kind": "numeric",
+      "value_type": "percentage",
+      "unit": "percent",
+      "normalization": {"kind": "numeric", "missing_tokens": [""], "min_exclusive": 0, "max": 30},
+      "direction_prior": "higher_increases_risk"
+    },
+    {
+      "feature_name": "channel",
+      "display_name": "Kênh khởi tạo khoản vay",
+      "description": "Kênh qua đó khoản vay được khởi tạo.",
+      "concept": "origination_context",
+      "data_kind": "categorical",
+      "value_type": "categorical",
+      "unit": "category",
+      "normalization": {"kind": "categorical", "missing_tokens": ["9", ""], "allowed_values": ["B", "C", "R"]},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "property_state",
+      "display_name": "Bang của tài sản",
+      "description": "Bang hoặc lãnh thổ nơi tài sản bảo đảm tọa lạc.",
+      "concept": "geography",
+      "data_kind": "categorical",
+      "value_type": "categorical",
+      "unit": "state_code",
+      "normalization": {"kind": "categorical_regex", "missing_tokens": [""], "regex": "^[A-Z]{2}$"},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "property_type",
+      "display_name": "Loại tài sản",
+      "description": "Loại hình tài sản bảo đảm tại origination.",
+      "concept": "property_collateral",
+      "data_kind": "categorical",
+      "value_type": "categorical",
+      "unit": "category",
+      "normalization": {"kind": "categorical", "missing_tokens": ["99", ""], "allowed_values": ["CO", "CP", "MH", "PU", "SF"]},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "loan_purpose",
+      "display_name": "Mục đích khoản vay",
+      "description": "Mục đích khoản vay tại origination.",
+      "concept": "loan_terms",
+      "data_kind": "categorical",
+      "value_type": "categorical",
+      "unit": "category",
+      "normalization": {"kind": "categorical", "missing_tokens": ["9", ""], "allowed_values": ["C", "N", "P"]},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "original_loan_term",
+      "display_name": "Kỳ hạn khoản vay ban đầu",
+      "description": "Kỳ hạn khoản vay ban đầu tính bằng tháng.",
+      "concept": "loan_terms",
+      "data_kind": "numeric",
+      "value_type": "duration",
+      "unit": "months",
+      "normalization": {"kind": "numeric", "missing_tokens": [""], "min_exclusive": 0, "max": 600},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "number_of_borrowers",
+      "display_name": "Số người vay",
+      "description": "Số người vay được ghi nhận trên khoản vay.",
+      "concept": "borrower_structure",
+      "data_kind": "numeric",
+      "value_type": "count",
+      "unit": "count",
+      "normalization": {"kind": "numeric", "missing_tokens": ["99", ""], "min": 1, "max": 20},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "super_conforming_flag",
+      "display_name": "Khoản vay super-conforming",
+      "description": "Chỉ báo khoản vay thuộc phạm vi super-conforming.",
+      "concept": "leverage",
+      "data_kind": "binary",
+      "value_type": "binary_indicator",
+      "unit": "binary",
+      "normalization": {"kind": "binary", "mapping": {"Y": 1, "N": 0}, "missing_tokens": [""]},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "special_eligibility_program",
+      "display_name": "Chương trình đủ điều kiện đặc biệt",
+      "description": "Mã chương trình đủ điều kiện đặc biệt; giá trị thiếu có nghĩa Not Available hoặc Not Applicable theo layout nguồn.",
+      "concept": "origination_context",
+      "data_kind": "categorical",
+      "value_type": "categorical",
+      "unit": "category",
+      "normalization": {"kind": "categorical", "missing_tokens": [""], "allowed_values": ["H", "F", "R"]},
+      "direction_prior": "unknown"
+    },
+    {
+      "feature_name": "property_valuation_method",
+      "display_name": "Phương pháp định giá tài sản",
+      "description": "Phương pháp định giá tài sản được sử dụng tại origination.",
+      "concept": "property_collateral",
+      "data_kind": "categorical",
+      "value_type": "categorical",
+      "unit": "category",
+      "normalization": {"kind": "categorical", "missing_tokens": ["7", ""], "allowed_values": ["1", "2", "4"]},
+      "direction_prior": "unknown"
+    }
+  ],
+  "excluded_features": {
+    "first_payment_date": "target_horizon_anchor_not_model_predictor",
+    "maturity_date": "redundant_with_term_and_calendar_context",
+    "msa_or_metropolitan_division": "high_cardinality_extended_track_only",
+    "prepayment_penalty_indicator": "constant_in_2024_vintage",
+    "amortization_type": "constant_in_2024_vintage",
+    "postal_code": "high_cardinality_geography_excluded_primary",
+    "loan_identifier": "identity_only",
+    "seller_name": "institution_fingerprint_extended_track_only",
+    "pre_harp_loan_identifier": "all_missing_in_2024_vintage",
+    "harp_indicator": "constant_in_2024_vintage",
+    "interest_only_indicator": "constant_in_2024_vintage",
+    "vantagescore_4_0": "not_available_9999_for_all_2024_rows"
+  },
+  "performance_feature_policy": "forbidden_from_model_matrix"
+}

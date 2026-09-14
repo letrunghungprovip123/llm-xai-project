@@ -1,0 +1,56 @@
+{
+  "schema_version": "multidataset_robustness_protocol_v1",
+  "protocol_id": "home_credit_freddie_robustness_v1",
+  "status": "FROZEN_BEFORE_ROBUSTNESS_EXECUTION",
+  "historical_note": "This robustness protocol is retrospectively formalized after M26 certification and frozen before M27 execution; it is not a prospective preregistration. Sensitivity lanes cannot replace certified primary M22-M26 results.",
+  "provider_execution_allowed": false,
+  "primary_metric": "end_to_end_faithfulness_yield",
+  "analysis_statuses": ["PRIMARY_CERTIFIED", "SENSITIVITY_ONLY"],
+  "population_lanes": [
+    {"lane_id": "PRIMARY_PLANNED", "analysis_status": "PRIMARY_CERTIFIED", "case_set": "all_36_canonical_cases", "unusable_e2e": 0.0},
+    {"lane_id": "COMPLETE_CASE", "analysis_status": "SENSITIVITY_ONLY", "case_set": "derive_from_certified_usability_topology", "unusable_e2e": null}
+  ],
+  "metric_lanes": [
+    {"metric_id": "end_to_end_faithfulness_yield", "analysis_status": "PRIMARY_CERTIFIED"},
+    {"metric_id": "resolved_faithfulness", "analysis_status": "SENSITIVITY_ONLY"},
+    {"metric_id": "verifiability", "analysis_status": "SENSITIVITY_ONLY"},
+    {"metric_id": "conservative_faithfulness", "analysis_status": "SENSITIVITY_ONLY"}
+  ],
+  "noninferiority_margin_lanes": [
+    {"margin": 0.02, "lane_id": "STRICT_002", "analysis_status": "SENSITIVITY_ONLY"},
+    {"margin": 0.03, "lane_id": "PRIMARY_003", "analysis_status": "PRIMARY_CERTIFIED"},
+    {"margin": 0.05, "lane_id": "RELAXED_005", "analysis_status": "SENSITIVITY_ONLY"}
+  ],
+  "bootstrap_sensitivity": {
+    "iterations": 10000,
+    "confidence": 0.95,
+    "resampling_unit": "canonical_case",
+    "seed_registry": [20260824, 20260825, 20260826],
+    "cross_dataset_resampling": "independent_study_case_resampling",
+    "claim_resampling_allowed": false
+  },
+  "claim_type_exclusion_lanes": [
+    {"lane_id": "ALL_APPLICABLE", "exclude_claim_types": [], "analysis_status": "PRIMARY_CERTIFIED"},
+    {"lane_id": "EXCLUDE_CAUSAL", "exclude_claim_types": ["causal"], "analysis_status": "SENSITIVITY_ONLY"},
+    {"lane_id": "EXCLUDE_NUMERIC", "exclude_claim_types": ["numeric"], "analysis_status": "SENSITIVITY_ONLY"},
+    {"lane_id": "EXCLUDE_RECOMMENDATION", "exclude_claim_types": ["recommendation"], "analysis_status": "SENSITIVITY_ONLY"},
+    {"lane_id": "EXCLUDE_LIMITATION", "exclude_claim_types": ["limitation"], "analysis_status": "SENSITIVITY_ONLY"}
+  ],
+  "readiness": {
+    "validator_sensitivity": "requires_certified_comparable_alternative_validator_outputs_for_both_datasets",
+    "template_baseline": "requires_certified_common_renderer_outputs_for_both_datasets",
+    "human_calibration": "optional_not_blocking"
+  },
+  "stability_dimensions": ["population", "metric", "margin", "bootstrap", "claim_type", "decision"],
+  "allowed_summary_flags": [
+    "PRIMARY_STABLE",
+    "DIRECTION_STABLE",
+    "POPULATION_SENSITIVE",
+    "METRIC_SENSITIVE",
+    "MARGIN_SENSITIVE",
+    "BOOTSTRAP_BOUNDARY_SENSITIVE",
+    "CLAIM_TYPE_SENSITIVE",
+    "INCONCLUSIVE",
+    "NOT_APPLICABLE"
+  ]
+}

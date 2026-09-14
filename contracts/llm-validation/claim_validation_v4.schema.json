@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim_validation_v4.schema.json",
+  "title": "Claim validation result v4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "validation_id", "claim_id", "parent_claim_id",
+    "generation_id", "case_id", "model_id", "evidence_level", "repeat_id",
+    "claim_type", "claim_subtype", "claim_schema_version",
+    "finalizer_version", "finalization_policy_version",
+    "execution_status", "validation_status", "evidence_status",
+    "policy_status", "validation_coverage", "reason_code",
+    "primary_reason_code", "reason_codes", "validator_mode",
+    "validator_version", "policy_version", "created_at",
+    "claims_input_path", "claims_input_sha256", "generation_index_path",
+    "generation_index_sha256", "evidence_packages_path",
+    "evidence_packages_sha256", "source_evidence_id", "package_id",
+    "source_ir_id", "expected", "observed", "message",
+    "normalizations_applied", "source_record_keys", "unresolved_facts",
+    "numeric_comparison", "feature_exposure_status",
+    "concept_exposure_status", "error"
+  ],
+  "properties": {
+    "schema_version": {"const": "claim_validation_v4"},
+    "validation_id": {"type": "string", "pattern": "^validation_[a-f0-9]{64}$"},
+    "claim_id": {"type": "string", "minLength": 1},
+    "parent_claim_id": {"type": ["string", "null"]},
+    "generation_id": {"type": "string", "minLength": 1},
+    "case_id": {"type": "string", "minLength": 1},
+    "model_id": {"type": "string", "minLength": 1},
+    "evidence_level": {"enum": ["S0", "S1", "S2", "S3", "S4", "S5"]},
+    "repeat_id": {"type": "integer", "minimum": 1},
+    "claim_type": {"$ref": "#/$defs/claimType"},
+    "claim_subtype": {"type": "string", "minLength": 1},
+    "claim_schema_version": {"const": "claims_v3"},
+    "finalizer_version": {"type": "string", "minLength": 1},
+    "finalization_policy_version": {"type": "string", "minLength": 1},
+    "execution_status": {"enum": ["SUCCESS", "ERROR"]},
+    "validation_status": {"$ref": "#/$defs/nullableEvidenceStatus"},
+    "evidence_status": {"$ref": "#/$defs/nullableEvidenceStatus"},
+    "policy_status": {
+      "enum": ["COMPLIANT", "VIOLATION", "NOT_APPLICABLE", null]
+    },
+    "validation_coverage": {
+      "enum": [
+        "DETERMINISTIC", "SEMANTIC_REQUIRED", "HUMAN_ADJUDICATED",
+        "UNVALIDATED"
+      ]
+    },
+    "reason_code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]+$"},
+    "primary_reason_code": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]+$"
+    },
+    "reason_codes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]+$"}
+    },
+    "validator_mode": {
+      "enum": ["DETERMINISTIC", "SEMANTIC", "HUMAN_ADJUDICATED"]
+    },
+    "validator_version": {"type": "string", "minLength": 1},
+    "policy_version": {"type": "string", "minLength": 1},
+    "created_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$"
+    },
+    "claims_input_path": {"$ref": "#/$defs/projectRelativePath"},
+    "claims_input_sha256": {"$ref": "#/$defs/sha256"},
+    "generation_index_path": {"$ref": "#/$defs/projectRelativePath"},
+    "generation_index_sha256": {"$ref": "#/$defs/sha256"},
+    "evidence_packages_path": {"$ref": "#/$defs/projectRelativePath"},
+    "evidence_packages_sha256": {"$ref": "#/$defs/sha256"},
+    "source_evidence_id": {"type": ["string", "null"]},
+    "package_id": {"type": ["string", "null"]},
+    "source_ir_id": {"type": "string", "minLength": 1},
+    "expected": {"$ref": "#/$defs/factValues"},
+    "observed": {"$ref": "#/$defs/factValues"},
+    "message": {"type": "string", "minLength": 1},
+    "normalizations_applied": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "source_record_keys": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "unresolved_facts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "numeric_comparison": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/numericComparison"}
+      ]
+    },
+    "feature_exposure_status": {"$ref": "#/$defs/exposureState"},
+    "concept_exposure_status": {"$ref": "#/$defs/exposureState"},
+    "error": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/executionError"}
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"execution_status": {"const": "SUCCESS"}}},
+      "then": {
+        "anyOf": [
+          {"properties": {"source_evidence_id": {"type": "string"}}},
+          {"properties": {"package_id": {"type": "string"}}}
+        ],
+        "properties": {
+          "validation_status": {"$ref": "#/$defs/evidenceStatus"},
+          "evidence_status": {"$ref": "#/$defs/evidenceStatus"},
+          "policy_status": {
+            "enum": ["COMPLIANT", "VIOLATION", "NOT_APPLICABLE"]
+          },
+          "error": {"const": null}
+        }
+      },
+      "else": {
+        "properties": {
+          "validation_status": {"const": null},
+          "evidence_status": {"const": null},
+          "policy_status": {"const": null},
+          "validation_coverage": {"const": "UNVALIDATED"},
+          "error": {"$ref": "#/$defs/executionError"}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "claimType": {
+      "enum": [
+        "prediction", "feature_presence", "feature_direction",
+        "concept_presence", "concept_direction", "magnitude", "ranking",
+        "numeric", "causal", "uncertainty", "distributed_evidence",
+        "recommendation", "limitation"
+      ]
+    },
+    "evidenceStatus": {
+      "enum": [
+        "SUPPORTED", "UNSUPPORTED", "CONTRADICTED", "NOT_VERIFIABLE",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "nullableEvidenceStatus": {
+      "enum": [
+        "SUPPORTED", "UNSUPPORTED", "CONTRADICTED", "NOT_VERIFIABLE",
+        "NOT_APPLICABLE", null
+      ]
+    },
+    "exposureState": {
+      "enum": [
+        "NOT_EXPOSED", "EXPOSED_FORBIDDEN", "EXPOSED_ALLOWED",
+        "SOURCE_MISSING", "NOT_APPLICABLE"
+      ]
+    },
+    "projectRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))[^\\u0000]+$"
+    },
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "factValues": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prediction_label", "probability", "numeric_value", "numeric_unit",
+        "numeric_role", "feature_id", "concept_id", "direction",
+        "magnitude", "rank", "certainty", "causal_strength",
+        "exposure_status"
+      ],
+      "properties": {
+        "prediction_label": {"type": ["string", "null"]},
+        "probability": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "numeric_value": {"type": ["number", "null"]},
+        "numeric_unit": {"type": ["string", "null"]},
+        "numeric_role": {
+          "enum": [
+            "prediction_score", "decision_threshold", "feature_value",
+            "rank", "other", null
+          ]
+        },
+        "feature_id": {"type": ["string", "null"]},
+        "concept_id": {"type": ["string", "null"]},
+        "direction": {
+          "enum": [
+            "increase_risk", "decrease_risk", "mixed", "neutral",
+            "unknown", null
+          ]
+        },
+        "magnitude": {
+          "enum": ["weak", "moderate", "strong", "unknown", null]
+        },
+        "rank": {"type": ["integer", "null"], "minimum": 1},
+        "certainty": {
+          "enum": [
+            "deterministic", "probabilistic", "hedged", "unknown", null
+          ]
+        },
+        "causal_strength": {
+          "enum": ["associational", "causal", "none", "unknown", null]
+        },
+        "exposure_status": {
+          "enum": [
+            "EXPOSED", "NOT_EXPOSED", "SOURCE_MISSING",
+            "NOT_APPLICABLE", null
+          ]
+        }
+      }
+    },
+    "numericComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["difference", "tolerance", "tolerance_policy_id"],
+      "properties": {
+        "difference": {"type": "number", "minimum": 0},
+        "tolerance": {"type": "number", "minimum": 0},
+        "tolerance_policy_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "executionError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["error_code", "error_message", "failed_stage"],
+      "properties": {
+        "error_code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "error_message": {"type": "string", "minLength": 1},
+        "failed_stage": {
+          "enum": [
+            "INPUT_SCHEMA", "CLAIM_JOIN", "GENERATION_JOIN",
+            "EVIDENCE_JOIN", "POLICY_LOAD", "NORMALIZATION", "VALIDATION",
+            "OUTPUT_SCHEMA"
+          ]
+        }
+      }
+    }
+  }
+}

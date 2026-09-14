@@ -1,0 +1,660 @@
+{
+  "contracts": {
+    "finding_registry": {
+      "byte_count": 783,
+      "path": "contracts/research/finding_registry_v1.schema.json",
+      "sha256": "8205bf3f12b466d9043dbe7a5220157ff50335d55957ce39937c802d29555978"
+    },
+    "limitation_registry": {
+      "byte_count": 799,
+      "path": "contracts/research/limitation_registry_v1.schema.json",
+      "sha256": "208689868789f45ef4c6edf6fa3a77381c17fa74139e6c45564dda11a4b6c43f"
+    },
+    "report_number": {
+      "byte_count": 1236,
+      "path": "contracts/research/report_number_v1.schema.json",
+      "sha256": "33a034305ece17513c5de862114eb62a2af0a8d3e2e69c9107dcb7ed8a5a2852"
+    },
+    "report_source_index": {
+      "byte_count": 1342,
+      "path": "contracts/research/report_source_index_v1.schema.json",
+      "sha256": "26314623ba63382e4e4c2362fb08df180ec2f44488b922982dce86f7dc0f5ba9"
+    }
+  },
+  "gate": "MULTIDATASET_ANALYTICAL_RELEASE_INPUT_LOCK_READY",
+  "git": {
+    "branch": "refactor/validation-foundation-v1",
+    "head": "cda3019992217ca8ca09238e1070a2cf10b1adc3",
+    "status_porcelain": " M research/python/diagnostics/build.py\n M research/python/diagnostics/claim_diagnostics.py\n M research/python/diagnostics/generation_diagnostics.py\n M research/python/diagnostics/load.py\n M research/python/metric_engineering/build.py\n M research/python/metric_engineering/load.py\n M research/python/metric_engineering/validate.py\n M research/python/statistical_analysis/build.py\n M research/python/statistical_analysis/inference.py\n M research/python/statistical_analysis/load.py\n M research/python/statistical_analysis/validate.py\n?? research/python/statistical_analysis/bootstrap.py"
+  },
+  "parent_artifacts": {
+    "m25_input_lock": {
+      "byte_count": 23525,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/m25_input_lock_v1/multidataset_replication_input_lock.json",
+      "sha256": "dce497c2f9cab1574eb12fc9e7a5b73a010d7f37b55a62944316119f3f05098f"
+    },
+    "m25_manifest": {
+      "byte_count": 2878,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/replication_manifest.json",
+      "sha256": "891d8e2fe13f09538637969267bd8bb8646b1a1869a990feeefbeeebba5b757b"
+    },
+    "m25_validation": {
+      "byte_count": 5177,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/replication_validation.json",
+      "sha256": "d6c10919f1cb5574a14775d77d5ad78b5f052ad1568a4360a65f6e69865a4444"
+    },
+    "m26_manifest": {
+      "byte_count": 2288,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/decision_manifest.json",
+      "sha256": "06ff341fcc2d11e3ef1df0876332b70e6517c8be4da6cc86a33c7714038244d7"
+    },
+    "m26_policy_lock": {
+      "byte_count": 4850,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/m26_policy_lock_v1/multidataset_decision_policy_lock.json",
+      "sha256": "529d86dbb9e1fa4fd3778c0aee00f3e8874b7750293bd954d9661d420ab351bb"
+    },
+    "m26_validation": {
+      "byte_count": 1391,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/decision_validation.json",
+      "sha256": "0c95270fcb703edd8f0e8a45e468ca54878e27e8c277a48a4c392078d5d01daa"
+    },
+    "m27::human_calibration_status.json": {
+      "byte_count": 174,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/human_calibration_status.json",
+      "sha256": "8fd4b4bf79569967a1b11da06a3b45c3853f4a274d3530adaf6a85f48ae46225"
+    },
+    "m27::margin_sensitivity_summary.csv": {
+      "byte_count": 395,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/margin_sensitivity_summary.csv",
+      "sha256": "032c8aeb3d00d9c75ecc24f35f014894fde6a8d6edf543091283e110bb58a45b"
+    },
+    "m27::metric_sensitivity.csv": {
+      "byte_count": 20545,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/metric_sensitivity.csv",
+      "sha256": "b5759cc0ac533a596f514e99348541a9a584e45b9f0fe2ea74f32d89b4859015"
+    },
+    "m27::population_contrast_sensitivity.csv": {
+      "byte_count": 11933,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/population_contrast_sensitivity.csv",
+      "sha256": "b55f27409091ba9b8114e2c6cd82ba010ca8bead89544835187c075a0c5a7eaf"
+    },
+    "m27::population_effect_sensitivity.csv": {
+      "byte_count": 1112,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/population_effect_sensitivity.csv",
+      "sha256": "49be06b9db5f0eeb7bd48a125cb8c7b58caf9c6e319f29331d5bd48c67e1b9ca"
+    },
+    "m27::recommendation_sensitivity.csv": {
+      "byte_count": 484,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/recommendation_sensitivity.csv",
+      "sha256": "8f32bbb4e362335d6522605f191478e16ba0403d38631a7b77e965f816f8060c"
+    },
+    "m27::robustness_summary.csv": {
+      "byte_count": 876,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/robustness_summary.csv",
+      "sha256": "37271bda7f899ad2a627a19d383e277889dd80d16c16ee72b8ff26a0214a3fa6"
+    },
+    "m27::template_baseline_status.json": {
+      "byte_count": 241,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/template_baseline_status.json",
+      "sha256": "daa982534f3602a5358d3460234189b11974dced4beac8ee6acae5af1a88ef88"
+    },
+    "m27::validator_sensitivity_status.json": {
+      "byte_count": 193,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/validator_sensitivity_status.json",
+      "sha256": "7a7e1fadf47ce26091d75621a5512d1b7bbe153e29da6aea9a53175fa7678d03"
+    },
+    "m27_input_lock": {
+      "byte_count": 9039,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/m27_robustness_input_lock_v1/multidataset_robustness_input_lock.json",
+      "sha256": "ea4c5cac7f28eb8ff72ce76dc2e32d72082cc04dc17e33958e2949e8a0ac82f2"
+    },
+    "m27_manifest": {
+      "byte_count": 3929,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/robustness_manifest.json",
+      "sha256": "4ce25548c6a544d87b52e93d7236504c5ccaf4763d61b36a1435237f73795f65"
+    },
+    "m27_validation": {
+      "byte_count": 1679,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/robustness_validation.json",
+      "sha256": "5853ad7404f448b8230364f9654d2366c69606e55bf963f2507785d499aee0ec"
+    }
+  },
+  "producer": "M28A_0034",
+  "protocol": {
+    "byte_count": 2251,
+    "path": "config/research/replication/multidataset_analytical_release_v1.json",
+    "sha256": "18da555aa2180bcec90405ad3f17f1320a74729bcd2b40ff38c490d2d023fe98"
+  },
+  "provider_execution_allowed": false,
+  "release_id": "certified_multidataset_analytical_release_v1",
+  "schema_version": "multidataset_analytical_release_input_lock_v1",
+  "scientific_recomputation_allowed": false,
+  "source_artifacts": {
+    "freddie_claim_diagnostics": {
+      "byte_count": 14091959,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/diagnostics_v1/claim_diagnostics.csv",
+      "row_count": 12309,
+      "sha256": "aedc674ae391903f33a1e55a57be07128eb7de6ef48eacbe771634992f902fd4"
+    },
+    "freddie_generation_metrics": {
+      "byte_count": 690526,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/metric_v1/generation_metrics.csv",
+      "row_count": 648,
+      "sha256": "a732d02fc199747688e9dc922c3a041288da789b707c1da9cc6033ad4e5b7ff1"
+    },
+    "home_credit_claim_diagnostics": {
+      "byte_count": 8160869,
+      "path": "data/reports/llm_validation/validation_v1/analysis/diagnostics/claim_diagnostics.csv",
+      "row_count": 14667,
+      "sha256": "22aff7845f0b6602c655a4dcae2ec63e3ab56f99a4cd6ff8f534be068314abb4"
+    },
+    "home_credit_generation_metrics": {
+      "byte_count": 352954,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/generation_metrics.csv",
+      "row_count": 648,
+      "sha256": "8aeaf54d6c71612f46da7fd6a84b5e0a402c4fa342cbf9634009f1e6b86a591d"
+    },
+    "m25_contrast_concordance": {
+      "byte_count": 7485,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/contrast_concordance.csv",
+      "sha256": "5e81e11e0363aa91cd66247ef48db84e9ed3d88d4c21f13c627ed83fc9d7cf30"
+    },
+    "m25_rank_stability": {
+      "byte_count": 157,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/rank_stability.csv",
+      "sha256": "a514cf333eb15da9506e9fc38a86b02a6f94aa78676a1b79431b1454b0c9d43f"
+    },
+    "m26_dataset_option_assessment": {
+      "byte_count": 10662,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/dataset_option_assessment.csv",
+      "sha256": "f0cd65b0074da1140e88c70b111241c1255f7313e76bb386a539ee6b6d1113f5"
+    },
+    "m26_noninferiority_results": {
+      "byte_count": 3626,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/noninferiority_results.csv",
+      "sha256": "7012f52dd01a3f83b7c2a298b5d4a48f0a6c2a4db3d26babea928c0733b1369d"
+    },
+    "m26_recommendations": {
+      "byte_count": 576,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/recommendations.csv",
+      "sha256": "88b2beed4af2aa95027dd011eb83ab5af1aa0726c96f496e7f70b52067a2f2f6"
+    },
+    "m26_scenario_options": {
+      "byte_count": 50244,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/scenario_options.csv",
+      "sha256": "b13d02acc4374be47cdac3336d20b9869fda8caa2bf35dec1eb71c9038194217"
+    }
+  },
+  "source_identity": {
+    "file_count": 93,
+    "files": [
+      {
+        "byte_count": 2272,
+        "path": "config/research/replication/freddie_sflld_2024_analysis_v1.json",
+        "sha256": "a1367e9c2eceab89de002730176d60ba21ce8861fda764d49db6a04842e009ca"
+      },
+      {
+        "byte_count": 1646,
+        "path": "config/research/replication/freddie_sflld_2024_diagnostics_v1.json",
+        "sha256": "97cc7c6a67293e114b5c49130cd2963a4296396dd1b9b3dfa662a8328f495861"
+      },
+      {
+        "byte_count": 1598,
+        "path": "config/research/replication/freddie_sflld_2024_metric_v1.json",
+        "sha256": "fb1b3724fc62e47a790e8800153b7b7448f140042be8bb6c5aa9efc6bdbad01c"
+      },
+      {
+        "byte_count": 13510,
+        "path": "config/research/replication/freddie_sflld_2024_statistical_v1.json",
+        "sha256": "0ff606b99f186e39abf70373975702e912d06be3d214c7f306b8583fe52ab8e1"
+      },
+      {
+        "byte_count": 2251,
+        "path": "config/research/replication/multidataset_analytical_release_v1.json",
+        "sha256": "18da555aa2180bcec90405ad3f17f1320a74729bcd2b40ff38c490d2d023fe98"
+      },
+      {
+        "byte_count": 5251,
+        "path": "config/research/replication/multidataset_decision_policy_v1.json",
+        "sha256": "6f4db1a4b13d5a7a3bef845a3a692489e6cde9d75bca290c2b0823daca7ab423"
+      },
+      {
+        "byte_count": 4169,
+        "path": "config/research/replication/multidataset_replication_v1.json",
+        "sha256": "67070e807edb66d3c252d1c416f450c38bba592363e1a5e01b02750b817bfec2"
+      },
+      {
+        "byte_count": 3062,
+        "path": "config/research/replication/multidataset_robustness_v1.json",
+        "sha256": "e70418df0429add39bf92972f6d467eaa2bed0186f5e7a9e642b32aed73101c2"
+      },
+      {
+        "byte_count": 22841,
+        "path": "config/research/ts-validation/metric_dictionary.json",
+        "sha256": "bc712e31974466527c416146148d3da90da635303b2e16dd8a25bffbead06de4"
+      },
+      {
+        "byte_count": 783,
+        "path": "contracts/research/finding_registry_v1.schema.json",
+        "sha256": "8205bf3f12b466d9043dbe7a5220157ff50335d55957ce39937c802d29555978"
+      },
+      {
+        "byte_count": 799,
+        "path": "contracts/research/limitation_registry_v1.schema.json",
+        "sha256": "208689868789f45ef4c6edf6fa3a77381c17fa74139e6c45564dda11a4b6c43f"
+      },
+      {
+        "byte_count": 1236,
+        "path": "contracts/research/report_number_v1.schema.json",
+        "sha256": "33a034305ece17513c5de862114eb62a2af0a8d3e2e69c9107dcb7ed8a5a2852"
+      },
+      {
+        "byte_count": 1342,
+        "path": "contracts/research/report_source_index_v1.schema.json",
+        "sha256": "26314623ba63382e4e4c2362fb08df180ec2f44488b922982dce86f7dc0f5ba9"
+      },
+      {
+        "byte_count": 68,
+        "path": "research/python/analytical_release/__init__.py",
+        "sha256": "3884268b32c7e64949f0cc2ec426de79f436b4a2d2c28666b52a612d1cca5858"
+      },
+      {
+        "byte_count": 24903,
+        "path": "research/python/analytical_release/build.py",
+        "sha256": "78a2450c4e18ed16b4e4d89bf023e875fd5e33bb5e8ba63c3c840ee8e524767b"
+      },
+      {
+        "byte_count": 3481,
+        "path": "research/python/analytical_release/input_lock.py",
+        "sha256": "ec9bdcd0b978753bae0e325b84ed1c18ade38f872ed031604c53404390d0f6d4"
+      },
+      {
+        "byte_count": 4546,
+        "path": "research/python/analytical_release/source_identity.py",
+        "sha256": "9d24ab7330b56966d3a42cd5e508bf59d3d3e83ee34cd3d58d2dbb9d21f0c39e"
+      },
+      {
+        "byte_count": 74,
+        "path": "research/python/diagnostics/__init__.py",
+        "sha256": "1b12cada60c951322fe9d227283e1f5e7767ac3c4339a11ea0ba057261eac807"
+      },
+      {
+        "byte_count": 4450,
+        "path": "research/python/diagnostics/build.py",
+        "sha256": "835fb72e71b22d71deb02635c8ec8d56383d216ca7c6319e17ee7efd5125ee9a"
+      },
+      {
+        "byte_count": 4508,
+        "path": "research/python/diagnostics/claim_diagnostics.py",
+        "sha256": "fc2ea5b7b1933d021394b90f74c0009752edcb2c195281bd5d4d7e2f7eb9eb93"
+      },
+      {
+        "byte_count": 8139,
+        "path": "research/python/diagnostics/config.py",
+        "sha256": "e128292bacd193a1b8f5def2d4abe51380eb9f66f105eba677ff4aad5f1987dc"
+      },
+      {
+        "byte_count": 10647,
+        "path": "research/python/diagnostics/generation_diagnostics.py",
+        "sha256": "3aedabed1e86413617c82f49ab6c6ace0b54d78b525578828deebe1b0c4b7605"
+      },
+      {
+        "byte_count": 6443,
+        "path": "research/python/diagnostics/load.py",
+        "sha256": "afa27c231d6590ca4aadd8654ab2f2bcf26f7ff78ec4c5964ec5975e102103fb"
+      },
+      {
+        "byte_count": 796,
+        "path": "research/python/diagnostics/main.py",
+        "sha256": "c209dff93c37c333cd0e0f2f250ac4a0544a9454a091b413dc83bdd109a680f2"
+      },
+      {
+        "byte_count": 16449,
+        "path": "research/python/diagnostics/safe_phrase.py",
+        "sha256": "cd0917741b55532e54afcf55f4434c613830c6af0b1f0f3b9ecbb995a8e3e2fa"
+      },
+      {
+        "byte_count": 12824,
+        "path": "research/python/diagnostics/summarize.py",
+        "sha256": "c540d87735feda6c8f462a5378b9708f644ff1646c0316096db5b6704540559e"
+      },
+      {
+        "byte_count": 1313,
+        "path": "research/python/diagnostics/text_normalization.py",
+        "sha256": "070e9684375b93a4480869c45ebe6ca4907858d3620e3dac167fa0f08b4c4df7"
+      },
+      {
+        "byte_count": 9168,
+        "path": "research/python/diagnostics/validate.py",
+        "sha256": "ed3778fef9f8e965d2ce6b65d9356d4d8685b44718732f891833c9236eee4b68"
+      },
+      {
+        "byte_count": 6540,
+        "path": "research/python/diagnostics/validation_claims.py",
+        "sha256": "c956caf49916c620697a574effe169210d268a5fcba485c936230a038e6f5923"
+      },
+      {
+        "byte_count": 3479,
+        "path": "research/python/diagnostics/validation_common.py",
+        "sha256": "6cfb4fc7857bbb7996517feae35d3770192059d13372d2f769da8b3890ec0834"
+      },
+      {
+        "byte_count": 17239,
+        "path": "research/python/diagnostics/validation_generations.py",
+        "sha256": "8f973525905d9b822f359084fe30ad855dabef8d828d17129c2efbf10d5a6560"
+      },
+      {
+        "byte_count": 19444,
+        "path": "research/python/diagnostics/validation_safe_phrase.py",
+        "sha256": "734b6987ea53e5846621248451cf6beaec23f582f6c7bc26b2ee3336e4415acc"
+      },
+      {
+        "byte_count": 4903,
+        "path": "research/python/diagnostics/validation_summaries.py",
+        "sha256": "48f576681d1560429a0bacbdac9ea1cbd659e6a82240e4ddaba06bbb6d81c489"
+      },
+      {
+        "byte_count": 63,
+        "path": "research/python/metric_engineering/__init__.py",
+        "sha256": "3ddd6e832a4d3f14badec8f9ee34d33cffd786116ad682440aab01ade95be721"
+      },
+      {
+        "byte_count": 2463,
+        "path": "research/python/metric_engineering/build.py",
+        "sha256": "982f60158b996f3641303005de7f866d2c157ca3f14ed593f9ec3c12ba1fc346"
+      },
+      {
+        "byte_count": 3942,
+        "path": "research/python/metric_engineering/config.py",
+        "sha256": "88ff18e7f43542631b8f39f29b4d58c558bae2447e06a810ff1122a184c65ae9"
+      },
+      {
+        "byte_count": 1692,
+        "path": "research/python/metric_engineering/efficiency.py",
+        "sha256": "6c7c07cbc7211bfdad96549603a4f86860516e5eb942b8b16bada6a2e11beee3"
+      },
+      {
+        "byte_count": 3601,
+        "path": "research/python/metric_engineering/load.py",
+        "sha256": "583aca4e1e956471331aad4c511c6df6e340dddfe97b991a34afcc07cade5c5b"
+      },
+      {
+        "byte_count": 755,
+        "path": "research/python/metric_engineering/main.py",
+        "sha256": "2f1e3f2a71edb1753b3d90ad6d5287bde09944c29a3df6db5b7f36abfe7e8f83"
+      },
+      {
+        "byte_count": 13389,
+        "path": "research/python/metric_engineering/metric_dictionary.py",
+        "sha256": "318a45f926b4004b9a89d6c39fab70dcb851120443b3475073ca6af5e6826cc4"
+      },
+      {
+        "byte_count": 2647,
+        "path": "research/python/metric_engineering/quality.py",
+        "sha256": "7d68977bf299f63a43e05e750fc5c1ae931b8abbffb5d7a679d17fd55e7c01cd"
+      },
+      {
+        "byte_count": 1281,
+        "path": "research/python/metric_engineering/reliability.py",
+        "sha256": "75bfd78373ba467a89820f26a6f70e279074efc71740add7786772c341509f1c"
+      },
+      {
+        "byte_count": 24282,
+        "path": "research/python/metric_engineering/validate.py",
+        "sha256": "96e771299bf73173ac580ca1e396688897521836c358a17864572e6f30504fba"
+      },
+      {
+        "byte_count": 82,
+        "path": "research/python/robustness/__init__.py",
+        "sha256": "76c33326ac0ca2bc6b6630b92b24580c10f437b24c930e6f254d0ff518f1b550"
+      },
+      {
+        "byte_count": 15071,
+        "path": "research/python/robustness/build.py",
+        "sha256": "b55f21a10731476fdf9cd7acb297bb053fde704da8d2d9761040101d1b5e48fe"
+      },
+      {
+        "byte_count": 3030,
+        "path": "research/python/robustness/common.py",
+        "sha256": "ba0d133c4f5f3aa5e0cdba9b0aa4e0d9fbd6b184c59f9243a3f94a9afd1dc821"
+      },
+      {
+        "byte_count": 7661,
+        "path": "research/python/robustness/input_lock.py",
+        "sha256": "ab5d475e089e61c5052761f47f3569b70c7f19467f2a09649f739a846a3efcd4"
+      },
+      {
+        "byte_count": 72,
+        "path": "research/python/statistical_analysis/__init__.py",
+        "sha256": "ca1c5f93b87b76e990e28e649a9a4c8237c3c3a91935479711c023e20f314a3c"
+      },
+      {
+        "byte_count": 4957,
+        "path": "research/python/statistical_analysis/bootstrap.py",
+        "sha256": "00d8ff09ba8cf27eecbfff4cc4dc1a38adf85e9b434ef1c59ff912d9dc1a7c84"
+      },
+      {
+        "byte_count": 6095,
+        "path": "research/python/statistical_analysis/build.py",
+        "sha256": "d6341b6adc0b6408a7897f98ad668e47d6dc3b1350d33db05b583b2312bc12eb"
+      },
+      {
+        "byte_count": 4872,
+        "path": "research/python/statistical_analysis/config.py",
+        "sha256": "cf9fc16ee97f3fe6f17f94ceefe4ec7ee5d27437454acc01aa06a418e2cf32d3"
+      },
+      {
+        "byte_count": 4285,
+        "path": "research/python/statistical_analysis/descriptive.py",
+        "sha256": "71bb6e6d647e5f889d9ae786393dd63ac094722be72cc8a718f29787bdcd8387"
+      },
+      {
+        "byte_count": 20359,
+        "path": "research/python/statistical_analysis/inference.py",
+        "sha256": "23daa8acd92082b370ab5d7437f201c6dc388bc7aca2f2089846e533a37d6aa1"
+      },
+      {
+        "byte_count": 4165,
+        "path": "research/python/statistical_analysis/load.py",
+        "sha256": "829d6948d740251ad347190d62e7a98c0dd70a95dd0650d636a7a42364f70b45"
+      },
+      {
+        "byte_count": 825,
+        "path": "research/python/statistical_analysis/main.py",
+        "sha256": "b633ba513073b6d64efd127e348aee36ca61d8efd556de398f9a67fe5b0c40e8"
+      },
+      {
+        "byte_count": 3889,
+        "path": "research/python/statistical_analysis/prepare.py",
+        "sha256": "4656212a77490b196c03fdc3959ee8ae6fb314d9edbd63420ed1b194d7079d40"
+      },
+      {
+        "byte_count": 23693,
+        "path": "research/python/statistical_analysis/validate.py",
+        "sha256": "44dd2cc60f5707cc9e0c58a75324b5e8cbab99c0100df6c70cb5a86920651e27"
+      },
+      {
+        "byte_count": 8028,
+        "path": "scripts/research/freddie_m21_data_mart_0021.py",
+        "sha256": "aab5845e7aa97249129566a1ee6150ba6b4333e19836bcce6a9d36b61689901d"
+      },
+      {
+        "byte_count": 1279,
+        "path": "scripts/research/freddie_m21_m23_common_0020.sh",
+        "sha256": "c93bc96a71e1447679adf8d204939640d9c34efecfc1fd52f1d1c8ce1a747b12"
+      },
+      {
+        "byte_count": 12273,
+        "path": "scripts/research/freddie_m22_metrics_0023.py",
+        "sha256": "40b3aa615ae7b9f123b1485f680a51550eaa96b445ec1fa57d202559b7f0aceb"
+      },
+      {
+        "byte_count": 16388,
+        "path": "scripts/research/freddie_m23_statistics_0025.py",
+        "sha256": "5ccd3565db2c55cfb5431f1fd061e3013a34a2282e58f4bc823ff05325acc30f"
+      },
+      {
+        "byte_count": 19731,
+        "path": "scripts/research/freddie_m24_diagnostics_0027.py",
+        "sha256": "83a2162b7ccc2dfb92b04da39927ed556be5db09ba502868af589e81836e729a"
+      },
+      {
+        "byte_count": 12120,
+        "path": "scripts/research/freddie_m24_diagnostics_input_lock_0026.py",
+        "sha256": "1a8c4b77c6bce6b8f53f716692ed0bda52149a55e5f262823654b6a003711207"
+      },
+      {
+        "byte_count": 1399,
+        "path": "scripts/research/freddie_m24_m26_common_0026.sh",
+        "sha256": "63b8877b8dcc22f83641f9bdd4ef87c0e695b7691cd39c2f72043ce03769e008"
+      },
+      {
+        "byte_count": 16412,
+        "path": "scripts/research/multidataset_m25_input_lock_0028.py",
+        "sha256": "5eb05a10c34ab703f445f4e64e86e3c1bdb395eb4221f8624327f7ddf8d902c6"
+      },
+      {
+        "byte_count": 18657,
+        "path": "scripts/research/multidataset_m25_replication_0029.py",
+        "sha256": "c9cfb0ced2bd71afa207e533c7b8ab62533aa292b284f8f017e353e0709b2d32"
+      },
+      {
+        "byte_count": 23526,
+        "path": "scripts/research/multidataset_m26_decision_0031.py",
+        "sha256": "a70d628d34b4649e2713f8aacb55c9bcf81f4bca08178afe3f06e865bec3df0a"
+      },
+      {
+        "byte_count": 5946,
+        "path": "scripts/research/multidataset_m26_policy_lock_0030.py",
+        "sha256": "9d04ddb02bd6360c663bc87f4918c2b2d54f65fdd9e8a366e9e33110877e993d"
+      },
+      {
+        "byte_count": 987,
+        "path": "scripts/research/multidataset_m27_m28_common_0032.sh",
+        "sha256": "ac9a4fddedb7861cbdccb103fc0f2b3a61fe3e5f914f39739e79764ad1d5a80c"
+      },
+      {
+        "byte_count": 17368,
+        "path": "scripts/research/multidataset_m27_robustness_0033.py",
+        "sha256": "6fc20d114007f5eb47ce7de4e194ccebc32773e36e5a3f36d247872164c92889"
+      },
+      {
+        "byte_count": 2084,
+        "path": "scripts/research/multidataset_m27_robustness_input_lock_0032.py",
+        "sha256": "0ea5ee5f0f9f2d03cfc8c35cb94bd9a84098d36c30908f87e6ce8b1fc0cf9d4b"
+      },
+      {
+        "byte_count": 10080,
+        "path": "scripts/research/multidataset_m28_analytical_release_0035.py",
+        "sha256": "7344568fd1ee9082071b5040a3295760bfacf1941844b7e09f9d3f8362f25aa5"
+      },
+      {
+        "byte_count": 1311,
+        "path": "scripts/research/multidataset_m28_analytical_release_input_lock_0034.py",
+        "sha256": "acfad6f8fae607ed8a099b19f52839d2020d3a62bd01949e9e56be81e69f2db5"
+      },
+      {
+        "byte_count": 535,
+        "path": "scripts/research/run_freddie_m21_data_mart_0021.sh",
+        "sha256": "0075f97e6883bd9797d78c813de7b4a890165a0a12c97758fae8ebd973f2eefb"
+      },
+      {
+        "byte_count": 627,
+        "path": "scripts/research/run_freddie_m21_m23_0020_0025.sh",
+        "sha256": "4deade56696e1cefe7fe0bb982aace7d7e7ee990c585719732dcd7ee518f81d2"
+      },
+      {
+        "byte_count": 1099,
+        "path": "scripts/research/run_freddie_m21a_input_lock_0020.sh",
+        "sha256": "50e55694b8aac8e653e4b38121688220176d11158da3a874e3c0e1c1f57dafd7"
+      },
+      {
+        "byte_count": 142,
+        "path": "scripts/research/run_freddie_m21b_data_mart_0021.sh",
+        "sha256": "6e190e0210d037f3a4eca31568e819feb768eea4072698ade655f065e56d3b78"
+      },
+      {
+        "byte_count": 873,
+        "path": "scripts/research/run_freddie_m22a_metric_input_lock_0022.sh",
+        "sha256": "424801512626a4c16acadd140d1e097606f6e6c7f9f2e09132446a9b176a2f5c"
+      },
+      {
+        "byte_count": 539,
+        "path": "scripts/research/run_freddie_m22b_metrics_0023.sh",
+        "sha256": "cb3ba3960858e0f3094e4a97244231e30cbafe666391d1b42ba4afa60202f983"
+      },
+      {
+        "byte_count": 847,
+        "path": "scripts/research/run_freddie_m23a_statistical_input_lock_0024.sh",
+        "sha256": "2539db0e65cd8d8dabe8d0292e093d897aaf8df15000d53689727ddd095e4f21"
+      },
+      {
+        "byte_count": 623,
+        "path": "scripts/research/run_freddie_m23b_statistics_0025.sh",
+        "sha256": "8cbdf7e59e205c5799b8da6c9d1a32d626d10f61bd06d94c4d882a1b5de6aa03"
+      },
+      {
+        "byte_count": 927,
+        "path": "scripts/research/run_freddie_m24a_diagnostics_input_lock_0026.sh",
+        "sha256": "51305f08bbca5a2d3921a3e83f4ed869252bb173795a500de0829240eed2e4ad"
+      },
+      {
+        "byte_count": 524,
+        "path": "scripts/research/run_freddie_m24b_diagnostics_0027.sh",
+        "sha256": "f488fd6814fc78d7b90fd5a4beea6461a7291262b415e2778a69d69cbbe6177d"
+      },
+      {
+        "byte_count": 563,
+        "path": "scripts/research/run_multidataset_m25_m26_hotfix_0028a.sh",
+        "sha256": "0a5986494b1639a8d8aec5d99eb600cad67911703af25d3ebf704e3f4663e2ef"
+      },
+      {
+        "byte_count": 1275,
+        "path": "scripts/research/run_multidataset_m25a_input_lock_0028.sh",
+        "sha256": "230fa150e7c13bfe144ef875e4011805d21c1e91f9409b7b50fff60d3469f3eb"
+      },
+      {
+        "byte_count": 566,
+        "path": "scripts/research/run_multidataset_m25b_replication_0029.sh",
+        "sha256": "6ed2e39e258d51338c7df3dd7b22482623ca4bbd497ab370d590e55db20768b6"
+      },
+      {
+        "byte_count": 741,
+        "path": "scripts/research/run_multidataset_m26a_policy_lock_0030.sh",
+        "sha256": "a13d8dd30cfb5a3fae33f17c1b6b97434eeb6a4102e75d5cb2f08c4d47bd5035"
+      },
+      {
+        "byte_count": 483,
+        "path": "scripts/research/run_multidataset_m26b_decision_0031.sh",
+        "sha256": "3ca4cae613809b3105ed7d36cad668a109c5b83767bf3e6d03a5e80284b3688e"
+      },
+      {
+        "byte_count": 732,
+        "path": "scripts/research/run_multidataset_m27a_robustness_input_lock_0032.sh",
+        "sha256": "5633475f00898bd588d32a5206df383c44f9f3c8063c5938e622e6869bd39edf"
+      },
+      {
+        "byte_count": 514,
+        "path": "scripts/research/run_multidataset_m27b_robustness_0033.sh",
+        "sha256": "f4f5a6acb63e3ca2f9f870663fce136c3f96138c9900b920806499157273c83f"
+      },
+      {
+        "byte_count": 640,
+        "path": "scripts/research/run_multidataset_m28a_analytical_release_input_lock_0034.sh",
+        "sha256": "c0172771c684844e76521a0718e2dfe1b0cd2e0e93e61f1f5c1b35c0e73a6361"
+      },
+      {
+        "byte_count": 522,
+        "path": "scripts/research/run_multidataset_m28b_analytical_release_0035.sh",
+        "sha256": "56028f857dbae83b262fcfa53ab213dc7a2925ca09da144f9144e1c398c84dcf"
+      },
+      {
+        "byte_count": 503,
+        "path": "scripts/research/run_multidataset_wave_0032_0035.sh",
+        "sha256": "eb1b84972603146771286543d4c0ee4c11f3afbd62f438b095a3540521e42d4d"
+      }
+    ],
+    "source_tree_identity_sha256": "d7b4a50f9820187872d86df39ec4c0e7a2fb9978b8616bf9b676efbb890e51dd",
+    "strategy": "git_head_plus_explicit_artifact_relevant_file_hashes"
+  }
+}

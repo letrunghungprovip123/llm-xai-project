@@ -7,9 +7,6 @@
 
 *.zip
 
-infra
-
-
 # =========================
 # Node / Next.js
 # =========================
@@ -103,3 +100,48 @@ data/reports/**/*.csv
 logs/
 .cache/
 *.log
+
+# Kết quả kiểm tra cục bộ của phiên refactor; không phải artifact nghiên cứu chính thức.
+.refactor-validation/
+
+# BEGIN local LLM validation artifacts
+data/reports/llm_validation/validation_v1/canonicalization/generation_index.jsonl
+data/reports/llm_validation/validation_v1/claim_extraction_deepseek_v2_1/
+data/reports/llm_validation/validation_v1/claim_finalization_v1/
+apply_claim_finalization*.py
+apply_claim_extraction*.py
+*.bak
+*.orig
+*.rej
+.DS_Store
+# END local LLM validation artifacts
+
+# Local ResearchOps service secrets
+.env.researchops-prefect.local
+
+# Local Prefect/ResearchOps execution evidence
+.researchops/
+
+# =========================
+# Additional local/tooling junk
+# =========================
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.pyre/
+.pytype/
+build/
+*.egg-info/
+.eggs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tmp
+*.temp
+*.swp
+*.swo
+*~

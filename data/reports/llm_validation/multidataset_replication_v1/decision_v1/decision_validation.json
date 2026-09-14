@@ -1,0 +1,64 @@
+{
+  "active_robust_pool_mode": "NONE",
+  "checks": {
+    "cross_dataset_latency_hard_axis_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "invalid_robust_recommendation_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "monetary_cost_axis_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "ni_row_count": {
+      "expected": 30,
+      "observed": 30,
+      "passed": true
+    },
+    "option_count": {
+      "expected": 18,
+      "observed": 18,
+      "passed": true
+    },
+    "robust_rule_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "s0_selectable_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "s5_normal_candidate_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "scenario_option_rows": {
+      "expected": 90,
+      "observed": 90,
+      "passed": true
+    },
+    "threshold_relaxation_events": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    }
+  },
+  "exit_gate": "MULTIDATASET_DECISION_READY",
+  "failed_check_count": 0,
+  "no_winner_rule": "NO_ROBUST_RECOMMENDATION",
+  "passed": true,
+  "reference_best": {
+    "freddie": "qwen3_8b::S4",
+    "home_credit": "qwen3_8b::S1"
+  },
+  "schema_version": "multidataset_decision_validation_v1"
+}

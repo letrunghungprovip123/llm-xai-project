@@ -1,0 +1,249 @@
+{
+  "alpha": 0.05,
+  "check_count": 43,
+  "checks": {
+    "adjusted_p_smaller_than_raw_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "analysis_frame_row_count": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "analysis_source_identity_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "complete_case_count": {
+      "expected": 27,
+      "observed": 27,
+      "passed": true
+    },
+    "complete_case_omnibus_subject_set": {
+      "expected": [
+        27
+      ],
+      "observed": [
+        27
+      ],
+      "passed": true
+    },
+    "complete_case_omnibus_test_count": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "conditional_holm_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "conditional_invalid_pair_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "conditional_pair_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "conditional_paired_test_count": {
+      "expected": 99,
+      "observed": 99,
+      "passed": true
+    },
+    "descriptive_count_formula_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_analysis_generation_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_descriptive_key_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "duplicate_paired_contrast_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "evidence_level_count": {
+      "expected": 6,
+      "observed": 6,
+      "passed": true
+    },
+    "holm_adjustment_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "infinite_output_value_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "input_analytical_mart_gate": {
+      "expected": "ANALYTICAL_MART_READY",
+      "observed": "ANALYTICAL_MART_READY",
+      "passed": true
+    },
+    "invalid_conditions_per_case_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "invalid_model_evidence_cell_size_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "invalid_omnibus_degrees_freedom_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "invalid_primary_pair_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "model_count": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "model_evidence_cell_count": {
+      "expected": 18,
+      "observed": 18,
+      "passed": true
+    },
+    "omnibus_effect_set": {
+      "expected": [
+        "evidence",
+        "model",
+        "model:evidence"
+      ],
+      "observed": [
+        "evidence",
+        "model",
+        "model:evidence"
+      ],
+      "passed": true
+    },
+    "omnibus_effect_size_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "omnibus_epsilon_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "omnibus_p_value_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "omnibus_test_count": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "paired_contrast_family_counts": {
+      "expected": {
+        "evidence_vs_s0": 15,
+        "model_within_evidence": 18
+      },
+      "observed": {
+        "evidence_vs_s0": 15,
+        "model_within_evidence": 18
+      },
+      "passed": true
+    },
+    "paired_descriptive_value_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "paired_effect_size_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "paired_p_value_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "paired_significance_flag_mismatch_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "paired_test_count": {
+      "expected": 33,
+      "observed": 33,
+      "passed": true
+    },
+    "primary_metric_null_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "primary_metric_out_of_bounds_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "sensitivity_summary_row_count": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "statistical_analysis_version_set": {
+      "expected": [
+        "v1.1"
+      ],
+      "observed": [
+        "v1.1"
+      ],
+      "passed": true
+    },
+    "subject_count": {
+      "expected": 36,
+      "observed": 36,
+      "passed": true
+    },
+    "unusable_generation_non_s4_count": {
+      "details": "Missingness is structured and concentrated in S4.",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "unusable_generation_output_count": {
+      "expected": 10,
+      "observed": 10,
+      "passed": true
+    },
+    "unusable_primary_metric_nonzero_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    }
+  },
+  "exit_gate": "STATISTICAL_CORE_READY",
+  "failed_check_count": 0,
+  "input_gate": "ANALYTICAL_MART_READY",
+  "passed": true,
+  "statistical_analysis_version": "v1.1"
+}

@@ -1,0 +1,77 @@
+{
+  "check_count": 13,
+  "checks": {
+    "certified_report_files_present": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "claim_release_ready": {
+      "expected": [
+        "READY",
+        "READY_WITH_LIMITATIONS"
+      ],
+      "observed": "READY_WITH_LIMITATIONS",
+      "passed": true
+    },
+    "clean_git_snapshot": {
+      "expected": "clean",
+      "observed": "clean",
+      "passed": true
+    },
+    "count_final_atomic_claims": {
+      "expected": 14667,
+      "observed": 14667,
+      "passed": true
+    },
+    "count_planned_llm_generations": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "count_unusable_llm_generations": {
+      "expected": 10,
+      "observed": 10,
+      "passed": true
+    },
+    "count_usable_llm_generations": {
+      "expected": 638,
+      "observed": 638,
+      "passed": true
+    },
+    "gate_data_mart": {
+      "expected": "DATA_MART_READY",
+      "observed": "DATA_MART_READY",
+      "passed": true
+    },
+    "gate_decision_support": {
+      "expected": "DECISION_SUPPORT_READY",
+      "observed": "DECISION_SUPPORT_READY",
+      "passed": true
+    },
+    "gate_diagnostics": {
+      "expected": "DIAGNOSTICS_READY",
+      "observed": "DIAGNOSTICS_READY",
+      "passed": true
+    },
+    "gate_metrics": {
+      "expected": "ANALYTICAL_MART_READY",
+      "observed": "ANALYTICAL_MART_READY",
+      "passed": true
+    },
+    "gate_statistics": {
+      "expected": "STATISTICAL_CORE_READY",
+      "observed": "STATISTICAL_CORE_READY",
+      "passed": true
+    },
+    "gate_validator_sensitivity": {
+      "expected": "VALIDATOR_SENSITIVITY_READY",
+      "observed": "VALIDATOR_SENSITIVITY_READY",
+      "passed": true
+    }
+  },
+  "exit_gate": "REPORT_WRITING_READY",
+  "failed_check_count": 0,
+  "passed": true,
+  "schema_version": "report_readiness_validation_v1"
+}

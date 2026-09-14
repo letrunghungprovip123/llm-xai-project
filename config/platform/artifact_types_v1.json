@@ -1,0 +1,545 @@
+{
+  "schema_version": "artifact_types_v1",
+  "status": "ACTIVE",
+  "artifact_types": [
+    {
+      "artifact_type": "aggregated_generations",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Aggregated Generations"
+    },
+    {
+      "artifact_type": "analytical_mart",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Analytical Mart"
+    },
+    {
+      "artifact_type": "baseline_comparison_release",
+      "storage_class": "RELEASE",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Baseline Comparison Release"
+    },
+    {
+      "artifact_type": "baseline_generation_metrics",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: baseline_generation_metrics"
+    },
+    {
+      "artifact_type": "baseline_option_performance",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: baseline_option_performance"
+    },
+    {
+      "artifact_type": "calibration_evaluation",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Calibration Evaluation"
+    },
+    {
+      "artifact_type": "calibration_sample",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Calibration Sample"
+    },
+    {
+      "artifact_type": "canonical_generations",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Canonical Generations"
+    },
+    {
+      "artifact_type": "case_heterogeneity_summary",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: case_heterogeneity_summary"
+    },
+    {
+      "artifact_type": "certified_report_numbers",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: certified_report_numbers"
+    },
+    {
+      "artifact_type": "claim_measurement_release",
+      "storage_class": "RELEASE",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Claim Measurement Release"
+    },
+    {
+      "artifact_type": "claim_validation_results",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Claim Validation Results"
+    },
+    {
+      "artifact_type": "complete_case_omnibus_tests",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: complete_case_omnibus_tests"
+    },
+    {
+      "artifact_type": "complete_release_bundle",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Immutable index of the complete governed research release."
+    },
+    {
+      "artifact_type": "conditional_paired_tests",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: conditional_paired_tests"
+    },
+    {
+      "artifact_type": "dashboard_i18n_certification",
+      "storage_class": "CERTIFICATION",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Dashboard I18N Certification"
+    },
+    {
+      "artifact_type": "dashboard_kpis",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: dashboard_kpis"
+    },
+    {
+      "artifact_type": "data_audit_report",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Data Audit Report"
+    },
+    {
+      "artifact_type": "data_split",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Data Split"
+    },
+    {
+      "artifact_type": "decision_support_release",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Decision Support Release"
+    },
+    {
+      "artifact_type": "descriptive_statistics",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: descriptive_statistics"
+    },
+    {
+      "artifact_type": "diagnostics_release",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Diagnostics Release"
+    },
+    {
+      "artifact_type": "environment_verification_report",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Source, lock, and runtime environment verification report."
+    },
+    {
+      "artifact_type": "evaluation_subset",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Evaluation Subset"
+    },
+    {
+      "artifact_type": "evidence_design_summary",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: evidence_design_summary"
+    },
+    {
+      "artifact_type": "evidence_packages",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Evidence Packages"
+    },
+    {
+      "artifact_type": "evidence_utilization_summary",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: evidence_utilization_summary"
+    },
+    {
+      "artifact_type": "explanation_ir",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Explanation Ir"
+    },
+    {
+      "artifact_type": "extracted_claims",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Extracted Claims"
+    },
+    {
+      "artifact_type": "feature_groups",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Feature Groups"
+    },
+    {
+      "artifact_type": "feature_matrix",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Feature Matrix"
+    },
+    {
+      "artifact_type": "filtered_generations",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Filtered Generations"
+    },
+    {
+      "artifact_type": "final_claims",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Final Claims"
+    },
+    {
+      "artifact_type": "llm_vs_template_case_pairs",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: llm_vs_template_case_pairs"
+    },
+    {
+      "artifact_type": "llm_vs_template_summary",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: llm_vs_template_summary"
+    },
+    {
+      "artifact_type": "llm_vs_template_tests",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: llm_vs_template_tests"
+    },
+    {
+      "artifact_type": "mechanism_breakdowns",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: mechanism_breakdowns"
+    },
+    {
+      "artifact_type": "metric_visibility_registry",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: metric_visibility_registry"
+    },
+    {
+      "artifact_type": "mlflow_registration_receipt",
+      "storage_class": "CERTIFICATION",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Immutable receipt linking governed model artifacts to MLflow runs and model versions"
+    },
+    {
+      "artifact_type": "model_metrics",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Model Metrics"
+    },
+    {
+      "artifact_type": "model_promotion_receipt",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Immutable model promotion decision and MLflow alias receipt."
+    },
+    {
+      "artifact_type": "model_ready_report",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Model Ready Report"
+    },
+    {
+      "artifact_type": "narrative_contract_results",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Narrative Contract Results"
+    },
+    {
+      "artifact_type": "narrative_structure_summary",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: narrative_structure_summary"
+    },
+    {
+      "artifact_type": "omnibus_tests",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: omnibus_tests"
+    },
+    {
+      "artifact_type": "option_performance",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: option_performance"
+    },
+    {
+      "artifact_type": "orchestration_acceptance_result",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Deterministic Prefect orchestration acceptance result."
+    },
+    {
+      "artifact_type": "orchestration_approval_acceptance_result",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Protected approval-boundary acceptance result."
+    },
+    {
+      "artifact_type": "paired_tests",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: paired_tests"
+    },
+    {
+      "artifact_type": "pipeline_execution_receipt",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Immutable Prefect-to-ResearchOps pipeline execution receipt."
+    },
+    {
+      "artifact_type": "pipeline_failures",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: pipeline_failures"
+    },
+    {
+      "artifact_type": "preprocessed_data",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Preprocessed Data"
+    },
+    {
+      "artifact_type": "raw_generations",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Raw Generations"
+    },
+    {
+      "artifact_type": "raw_home_credit_dataset",
+      "storage_class": "EXTERNAL",
+      "immutable_after_verification": false,
+      "external": true,
+      "description": "Raw Home Credit Dataset"
+    },
+    {
+      "artifact_type": "recommendation_evidence",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: recommendation_evidence"
+    },
+    {
+      "artifact_type": "release_metadata",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: release_metadata"
+    },
+    {
+      "artifact_type": "release_promotion_receipt",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Immutable release promotion decision receipt."
+    },
+    {
+      "artifact_type": "research_data_mart",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Research Data Mart"
+    },
+    {
+      "artifact_type": "research_question_registry",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: research_question_registry"
+    },
+    {
+      "artifact_type": "scenario_criterion_contributions",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: scenario_criterion_contributions"
+    },
+    {
+      "artifact_type": "scenario_options",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: scenario_options"
+    },
+    {
+      "artifact_type": "semantic_final_claims",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Semantic Final Claims"
+    },
+    {
+      "artifact_type": "stage_execution_evidence",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Immutable command, environment, logs, inputs, outputs, and result evidence for one stage attempt."
+    },
+    {
+      "artifact_type": "statistical_core",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Statistical Core"
+    },
+    {
+      "artifact_type": "statistical_sensitivity_summary",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: statistical_sensitivity_summary"
+    },
+    {
+      "artifact_type": "target_audit_report",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Target Audit Report"
+    },
+    {
+      "artifact_type": "thesis_report_release",
+      "storage_class": "RELEASE",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Thesis Report Release"
+    },
+    {
+      "artifact_type": "trained_model",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Trained Model"
+    },
+    {
+      "artifact_type": "unusable_generations",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: unusable_generations"
+    },
+    {
+      "artifact_type": "validator_generation_pairs",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: validator_generation_pairs"
+    },
+    {
+      "artifact_type": "validator_metric_summary",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: validator_metric_summary"
+    },
+    {
+      "artifact_type": "validator_sensitivity_release",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Validator Sensitivity Release"
+    },
+    {
+      "artifact_type": "validator_sensitivity_tests",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: validator_sensitivity_tests"
+    },
+    {
+      "artifact_type": "visualization_data_release",
+      "storage_class": "RELEASE",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Visualization Data Release"
+    },
+    {
+      "artifact_type": "visualization_dictionary",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Certified visualization dataset: visualization_dictionary"
+    },
+    {
+      "artifact_type": "xai_artifacts",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Xai Artifacts"
+    },
+    {
+      "artifact_type": "xai_quality_report",
+      "storage_class": "ARTIFACT",
+      "immutable_after_verification": true,
+      "external": false,
+      "description": "Xai Quality Report"
+    }
+  ]
+}

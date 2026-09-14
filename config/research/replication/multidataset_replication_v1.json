@@ -1,0 +1,76 @@
+{
+  "schema_version": "multidataset_replication_protocol_v1",
+  "protocol_id": "home_credit_to_freddie_replication_v1",
+  "status": "FROZEN_BEFORE_CROSS_DATASET_EXECUTION",
+  "historical_note": "This composition protocol is retrospectively formalized after both within-dataset analyses and frozen before cross-dataset execution; it is not a prospective preregistration.",
+  "datasets": ["home_credit_default_risk", "freddie_sflld_2024"],
+  "primary_metric": "end_to_end_faithfulness_yield",
+  "inference_unit_within_dataset": "canonical_case",
+  "cross_dataset_case_pairing_allowed": false,
+  "models": ["qwen3_8b", "deepseek_v4_flash", "phi4_mini_instruct"],
+  "evidence_mapping": [
+    {
+      "evidence_level":"S0",
+      "canonical_role":"PREDICTION_ONLY_CONTROL",
+      "accepted_roles":["baseline","prediction_only_control"],
+      "expected_signature":{"semantic_guidance_level":"none","structural_guidance_level":"low","safe_phrase_available":false,"adaptive_selection":false,"concept_evidence_available":false,"backend_skeleton_available":false}
+    },
+    {
+      "evidence_level":"S1",
+      "canonical_role":"INDEPENDENT_SYNTHESIS_BASELINE",
+      "accepted_roles":["independent_synthesis_baseline"],
+      "expected_signature":{"semantic_guidance_level":"none","structural_guidance_level":"low","safe_phrase_available":false,"adaptive_selection":false,"concept_evidence_available":false,"backend_skeleton_available":false}
+    },
+    {
+      "evidence_level":"S2",
+      "canonical_role":"SEMANTIC_GROUNDING",
+      "accepted_roles":["semantic_grounding"],
+      "expected_signature":{"semantic_guidance_level":"high","structural_guidance_level":"low","safe_phrase_available":true,"adaptive_selection":false,"concept_evidence_available":false,"backend_skeleton_available":false}
+    },
+    {
+      "evidence_level":"S3",
+      "canonical_role":"ADAPTIVE_COMPACT",
+      "accepted_roles":["adaptive_compact"],
+      "expected_signature":{"semantic_guidance_level":"high","structural_guidance_level":"medium","safe_phrase_available":true,"adaptive_selection":true,"concept_evidence_available":false,"backend_skeleton_available":false}
+    },
+    {
+      "evidence_level":"S4",
+      "canonical_role":"RICH_CONCEPT_AWARE",
+      "accepted_roles":["rich_evidence_stress_test","rich_concept_aware"],
+      "expected_signature":{"semantic_guidance_level":"high","structural_guidance_level":"medium","safe_phrase_available":true,"adaptive_selection":true,"concept_evidence_available":true,"backend_skeleton_available":false}
+    },
+    {
+      "evidence_level":"S5",
+      "canonical_role":"BACKEND_SKELETON",
+      "accepted_roles":["controlled_rendering","backend_skeleton"],
+      "expected_signature":{"semantic_guidance_level":"high","structural_guidance_level":"high","safe_phrase_available":true,"adaptive_selection":true,"concept_evidence_available":true,"backend_skeleton_available":true}
+    }
+  ],
+  "model_revision_policy": {
+    "exact_match_status": "EXACT_MODEL_REVISION_REPLICATION",
+    "mismatch_status": "MODEL_FAMILY_PROTOCOL_REPLICATION",
+    "unknown_status": "MODEL_REVISION_UNKNOWN",
+    "revision_mismatch_blocks_replication": false
+  },
+  "primary_contrasts": {
+    "expected_count": 33,
+    "families": ["model_within_evidence", "evidence_vs_s0"]
+  },
+  "bootstrap": {
+    "method": "independent_case_resampled_percentile",
+    "iterations": 10000,
+    "confidence": 0.95,
+    "home_credit_seed": 20260820,
+    "freddie_seed": 20260821,
+    "preserve_within_study_repeated_structure": true
+  },
+  "replication_classification": {
+    "REPLICATED": "same non-zero direction and both within-study 95% bootstrap confidence intervals exclude zero",
+    "DIRECTIONALLY_REPLICATED": "same non-zero direction but one or both within-study 95% bootstrap confidence intervals include zero",
+    "DIRECTION_CONFLICT": "non-zero effect signs are opposite",
+    "INCONCLUSIVE": "one or both observed effects are effectively zero or cannot be estimated"
+  },
+  "material_heterogeneity": "delta_of_deltas_95pct_bootstrap_ci_excludes_zero",
+  "rank_stability": "spearman_correlation_of_18_option_mean_e2e_ranks",
+  "provider_execution_allowed": false
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "claim_validation_determinism_report_v1",
+  "compared_artifacts": [
+    {
+      "name": "claim_validation_results.jsonl",
+      "sha256_a": "2e338006805191aeebb0f43bf8ce95e29ead49f3df27749a04c7f25eebf6cc4c",
+      "sha256_b": "2e338006805191aeebb0f43bf8ce95e29ead49f3df27749a04c7f25eebf6cc4c",
+      "byte_identical": true
+    },
+    {
+      "name": "validation_execution_errors.jsonl",
+      "sha256_a": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256_b": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_identical": true
+    },
+    {
+      "name": "claim_validation_summary.json",
+      "sha256_a": "a346df02595f00eb82178073dc98a7018a6234d7b59fddb514656d5e54d2f49b",
+      "sha256_b": "a346df02595f00eb82178073dc98a7018a6234d7b59fddb514656d5e54d2f49b",
+      "byte_identical": true
+    },
+    {
+      "name": "reason_code_counts.csv",
+      "sha256_a": "61d0c9f849cccce34fc129fb6267b67f0c464f06727da3e4cf749b43e2f547a5",
+      "sha256_b": "61d0c9f849cccce34fc129fb6267b67f0c464f06727da3e4cf749b43e2f547a5",
+      "byte_identical": true
+    },
+    {
+      "name": "generation_validation_summary.jsonl",
+      "sha256_a": "f70a38d357dfd550ccfbd683e3e96a938d7e3b491d109c5cf6f3cfae77fcfdf5",
+      "sha256_b": "f70a38d357dfd550ccfbd683e3e96a938d7e3b491d109c5cf6f3cfae77fcfdf5",
+      "byte_identical": true
+    }
+  ],
+  "match": true
+}

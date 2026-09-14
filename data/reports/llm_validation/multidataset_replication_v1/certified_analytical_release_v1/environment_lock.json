@@ -1,0 +1,18 @@
+{
+  "dependency_locks": {
+    "package-lock.json": {
+      "byte_count": 367317,
+      "sha256": "b282085141ca0e62c0a590397443bb26217e583c814ca0e4bd5a64d8328cc61a"
+    },
+    "pyproject.toml": {
+      "byte_count": 129,
+      "sha256": "23551bf013e534d9b4784922f1e872727e78de61b78fdcc7538c8bed75e4a7f9"
+    }
+  },
+  "git_branch": "refactor/validation-foundation-v1",
+  "git_head": "cda3019992217ca8ca09238e1070a2cf10b1adc3",
+  "git_status_porcelain": " M research/python/diagnostics/build.py\n M research/python/diagnostics/claim_diagnostics.py\n M research/python/diagnostics/generation_diagnostics.py\n M research/python/diagnostics/load.py\n M research/python/metric_engineering/build.py\n M research/python/metric_engineering/load.py\n M research/python/metric_engineering/validate.py\n M research/python/statistical_analysis/build.py\n M research/python/statistical_analysis/inference.py\n M research/python/statistical_analysis/load.py\n M research/python/statistical_analysis/validate.py\n?? research/python/statistical_analysis/bootstrap.py",
+  "node_version": "v24.8.0",
+  "platform": "macOS-15.0-arm64-arm-64bit",
+  "python_version": "3.12.13"
+}

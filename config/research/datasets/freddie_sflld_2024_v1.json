@@ -1,0 +1,41 @@
+{
+  "schema_version": "dataset_profile_v1",
+  "dataset_id": "freddie_sflld_2024",
+  "dataset_version": "standard_vintage_2024_v1",
+  "domain": "credit_risk",
+  "task_type": "binary_classification",
+  "entity": {
+    "entity_type": "mortgage_loan",
+    "source_id_column": "loan_identifier"
+  },
+  "target": {
+    "source_column": "serious_delinquency_within_12m",
+    "canonical_name": "target",
+    "positive_value": 1,
+    "negative_value": 0,
+    "semantic_name": "serious_mortgage_delinquency_within_12_months",
+    "prediction_horizon": "12_months",
+    "prediction_semantics": {
+      "positive_label": "high_12m_serious_delinquency_risk",
+      "negative_label": "low_12m_serious_delinquency_risk",
+      "prediction_subject": "rủi ro quá hạn nghiêm trọng của khoản vay thế chấp trong 12 tháng",
+      "positive_display_name": "rủi ro quá hạn nghiêm trọng trong 12 tháng cao",
+      "negative_display_name": "rủi ro quá hạn nghiêm trọng trong 12 tháng thấp",
+      "positive_direction_phrase": "rủi ro quá hạn nghiêm trọng cao",
+      "negative_direction_phrase": "rủi ro quá hạn nghiêm trọng thấp"
+    }
+  },
+  "adapter": {
+    "adapter_id": "freddie_sflld",
+    "adapter_version": "standard_2024_v1"
+  },
+  "capabilities": {
+    "supports_stratified_split": true,
+    "supports_feature_level_xai": true,
+    "supports_semantic_registry": true,
+    "supports_case_strata": true,
+    "supports_adaptive_evidence": true,
+    "has_stable_entity_id": true,
+    "feature_count": 19
+  }
+}

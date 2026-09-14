@@ -1,0 +1,88 @@
+{
+  "bootstrap": {
+    "confidence": 0.95,
+    "freddie_seed": 20260821,
+    "home_credit_seed": 20260820,
+    "iterations": 10000,
+    "method": "independent_case_resampled_percentile",
+    "preserve_within_study_repeated_structure": true
+  },
+  "counts": {
+    "omnibus_effects": 3,
+    "options": 18,
+    "primary_contrasts": 33
+  },
+  "files": {
+    "contrast_concordance.csv": {
+      "byte_count": 7485,
+      "sha256": "5e81e11e0363aa91cd66247ef48db84e9ed3d88d4c21f13c627ed83fc9d7cf30"
+    },
+    "cross_dataset_effects.csv": {
+      "byte_count": 675,
+      "sha256": "4f5e4ab93f3af4f56a99a6f043f32fffbd33c979a0d216d238e43a476bcc7bc6"
+    },
+    "cross_dataset_option_performance.csv": {
+      "byte_count": 7836,
+      "sha256": "7f3dfe7cc7f4eed0af79de5807b23476d55d63a9c1542bb53dbf8fb31f887b76"
+    },
+    "delta_of_deltas.csv": {
+      "byte_count": 3438,
+      "sha256": "a8ac13a738249eeef399aac9524a10b737f1667f85747c1051f73e0878ea3de8"
+    },
+    "failure_profile_comparison.csv": {
+      "byte_count": 3372,
+      "sha256": "bc6f79e71c2a128b376d25296a422360eeb624967b52857fac6f3f5563bb53bf"
+    },
+    "rank_stability.csv": {
+      "byte_count": 157,
+      "sha256": "a514cf333eb15da9506e9fc38a86b02a6f94aa78676a1b79431b1454b0c9d43f"
+    },
+    "replication_findings.csv": {
+      "byte_count": 6656,
+      "sha256": "764c9abd9e5fd42b88654cf5a0d6429173c55d75a06b34e192741666f82110a6"
+    },
+    "replication_validation.json": {
+      "byte_count": 5177,
+      "sha256": "d6c10919f1cb5574a14775d77d5ad78b5f052ad1568a4360a65f6e69865a4444"
+    }
+  },
+  "gate": "MULTIDATASET_REPLICATION_READY",
+  "independence_metric": "mean_safe_phrase_matched_claim_rate",
+  "independence_metric_comparable": true,
+  "model_revision_details": {
+    "deepseek_v4_flash": {
+      "freddie_revisions": [
+        "DeepSeek-V4-Flash"
+      ],
+      "home_credit_revisions": [],
+      "status": "UNKNOWN"
+    },
+    "phi4_mini_instruct": {
+      "freddie_revisions": [
+        "cfbefacb99257ffa30c83adab238a50856ac3083"
+      ],
+      "home_credit_revisions": [
+        "618e63e60172e9efa181cbfeee9d7012e5b2ad66"
+      ],
+      "status": "MISMATCH"
+    },
+    "qwen3_8b": {
+      "freddie_revisions": [
+        "b968826d9c46dd6066d109eabc6255188de91218"
+      ],
+      "home_credit_revisions": [
+        "21073ac5a57f8ac6b159dae129728af51ac707e8"
+      ],
+      "status": "MISMATCH"
+    }
+  },
+  "model_revision_scope": "MODEL_REVISION_UNKNOWN",
+  "parent_input_lock": {
+    "path": "data/reports/llm_validation/multidataset_replication_v1/m25_input_lock_v1/multidataset_replication_input_lock.json",
+    "sha256": "dce497c2f9cab1574eb12fc9e7a5b73a010d7f37b55a62944316119f3f05098f"
+  },
+  "primary_metric": "end_to_end_faithfulness_yield",
+  "producer": "M25B_0029",
+  "protocol_id": "home_credit_to_freddie_replication_v1",
+  "schema_version": "multidataset_replication_manifest_v1"
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "multidataset_analytical_release_protocol_v1",
+  "release_id": "certified_multidataset_analytical_release_v1",
+  "status": "FROZEN_BEFORE_ANALYTICAL_RELEASE_BUILD",
+  "provider_execution_allowed": false,
+  "scientific_recomputation_allowed": false,
+  "dataset_scopes": [
+    "HOME_CREDIT",
+    "FREDDIE",
+    "CROSS_DATASET",
+    "GLOBAL"
+  ],
+  "analysis_lanes": [
+    "PRIMARY",
+    "SECONDARY",
+    "SENSITIVITY",
+    "DIAGNOSTIC",
+    "DECISION",
+    "REPLICATION",
+    "LIMITATION"
+  ],
+  "report_number_families": [
+    "DATASET_SUMMARY",
+    "OPTION_PERFORMANCE",
+    "OMNIBUS_EFFECT",
+    "PLANNED_CONTRAST",
+    "REPLICATION",
+    "DECISION",
+    "ROBUSTNESS",
+    "CONDITIONAL_QUALITY",
+    "MECHANISM"
+  ],
+  "report_source_operations": [
+    "DIRECT_SINGLE_ROW",
+    "COUNT_ROWS",
+    "SUM",
+    "MEAN"
+  ],
+  "required_limitations": [
+    "AUTOMATED_VALIDATOR_NOT_HUMAN_GROUND_TRUTH",
+    "TWO_CREDIT_RISK_DATASETS_ONLY",
+    "NO_UNIVERSAL_DOMAIN_GENERALIZATION",
+    "MONETARY_COST_NOT_COMPARABLE",
+    "CROSS_RUNTIME_LATENCY_NOT_FULLY_COMPARABLE"
+  ],
+  "conditional_limitations": {
+    "MODEL_REVISION_UNKNOWN": "replication_scope == MODEL_REVISION_UNKNOWN",
+    "MODEL_REVISION_MISMATCH": "replication_scope == MODEL_FAMILY_PROTOCOL_REPLICATION"
+  },
+  "research_questions": [
+    {
+      "rq_id": "RQ1",
+      "title": "Within-dataset operational effectiveness",
+      "scope": "HOME_CREDIT_AND_FREDDIE"
+    },
+    {
+      "rq_id": "RQ2",
+      "title": "Conditional quality and structured missingness",
+      "scope": "HOME_CREDIT_AND_FREDDIE"
+    },
+    {
+      "rq_id": "RQ3",
+      "title": "Failure mechanisms and evidence utilization",
+      "scope": "HOME_CREDIT_AND_FREDDIE"
+    },
+    {
+      "rq_id": "RQ4",
+      "title": "Cross-dataset replication and effect stability",
+      "scope": "CROSS_DATASET"
+    },
+    {
+      "rq_id": "RQ5",
+      "title": "Decision support and robustness",
+      "scope": "CROSS_DATASET"
+    },
+    {
+      "rq_id": "RQ6",
+      "title": "Measurement limitations and deterministic extensions",
+      "scope": "GLOBAL"
+    }
+  ],
+  "source_identity": {
+    "strategy": "git_head_plus_explicit_artifact_relevant_file_hashes",
+    "git_head_alone_sufficient": false
+  }
+}

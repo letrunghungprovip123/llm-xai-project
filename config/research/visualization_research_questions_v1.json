@@ -1,0 +1,199 @@
+{
+  "schema_version": "visualization_research_questions_v1",
+  "status": "FROZEN_FOR_DASHBOARD_V2",
+  "frozen_parent_release": "thesis-report-v1",
+  "research_questions": [
+    {
+      "rq_id": "RQ1",
+      "title": "Primary operational effectiveness",
+      "question": "How do narrative model, controlled evidence condition, and their interaction affect end-to-end operational faithfulness across all planned LLM generations?",
+      "status": "ACTIVE",
+      "population": "648 planned LLM generations",
+      "unit_of_inference": "canonical case with repeated model and evidence conditions",
+      "primary_metrics": [
+        "end_to_end_faithfulness_yield"
+      ],
+      "supporting_metrics": [
+        "p10_end_to_end_yield",
+        "usability_rate"
+      ],
+      "primary_sources": [
+        "generation_metrics.csv",
+        "omnibus_tests.csv",
+        "paired_tests.csv"
+      ],
+      "dashboard_pages": [
+        "executive_overview",
+        "performance_reliability",
+        "statistical_evidence"
+      ],
+      "interpretation_restrictions": [
+        "Do not treat claims as independent observations",
+        "Do not assume S0-S5 is a linear ordinal scale"
+      ]
+    },
+    {
+      "rq_id": "RQ2",
+      "title": "Conditional quality and structured missingness",
+      "question": "Among usable generations, how do semantic faithfulness and verifiability differ across models and evidence conditions, and are conclusions robust to structured S4 failures?",
+      "status": "ACTIVE",
+      "population": "638 usable generations with 27 complete canonical cases for balanced sensitivity",
+      "unit_of_inference": "paired canonical case",
+      "primary_metrics": [
+        "conservative_faithfulness",
+        "verifiability",
+        "resolved_faithfulness"
+      ],
+      "supporting_metrics": [
+        "observed_pair_count",
+        "excluded_pair_count"
+      ],
+      "primary_sources": [
+        "conditional_paired_tests.csv",
+        "complete_case_omnibus_tests.csv",
+        "unusable_generations.csv",
+        "sensitivity_summary.csv"
+      ],
+      "dashboard_pages": [
+        "performance_reliability",
+        "statistical_evidence",
+        "mechanisms_diagnostics"
+      ],
+      "interpretation_restrictions": [
+        "Never impute conditional scores for unusable generations",
+        "Missingness is structured pipeline failure, not MCAR"
+      ]
+    },
+    {
+      "rq_id": "RQ3",
+      "title": "Evidence utilization and mechanisms",
+      "question": "Which evidence-exposure, narrative-policy, and claim-level mechanisms explain variation in operational faithfulness across models, evidence conditions, and case strata?",
+      "status": "ACTIVE",
+      "population": "648 LLM generations, 216 evidence packages, 2941 evidence items, and 14667 validated claims",
+      "unit_of_inference": "descriptive generation, evidence package, claim, or canonical case as explicitly labeled",
+      "primary_metrics": [
+        "selected_feature_mention_rate",
+        "concept_mention_rate",
+        "coverage",
+        "conservative_faithfulness"
+      ],
+      "supporting_metrics": [
+        "policy_compliance",
+        "claim_status_composition",
+        "safe_phrase_signal"
+      ],
+      "primary_sources": [
+        "evidence_packages.csv",
+        "evidence_items.csv",
+        "generations.csv",
+        "claims.csv",
+        "mechanism_breakdowns.csv",
+        "evidence_design_summary.csv",
+        "evidence_utilization_summary.csv",
+        "narrative_structure_summary.csv",
+        "case_heterogeneity_summary.csv"
+      ],
+      "dashboard_pages": [
+        "mechanisms_diagnostics",
+        "case_explorer"
+      ],
+      "interpretation_restrictions": [
+        "Safe-phrase overlap is a lexical signal, not proof of copying",
+        "Mechanism analyses are explanatory associations, not causal effects"
+      ]
+    },
+    {
+      "rq_id": "RQ4",
+      "title": "Deployment trade-offs",
+      "question": "What quality, reliability, and efficiency trade-offs distinguish the 18 LLM model-evidence options, and which options are preferred under explicit deployment priorities?",
+      "status": "ACTIVE",
+      "population": "18 LLM model-evidence options across five frozen decision scenarios",
+      "unit_of_inference": "model-evidence option",
+      "primary_metrics": [
+        "utility_score",
+        "mean_end_to_end_yield",
+        "p10_end_to_end_yield",
+        "usability_rate"
+      ],
+      "supporting_metrics": [
+        "mean_latency_seconds_planned",
+        "mean_total_token_count_planned",
+        "mean_supported_claims_per_1000_tokens"
+      ],
+      "primary_sources": [
+        "option_performance.csv",
+        "scenario_options.csv",
+        "scenario_criterion_contributions.csv",
+        "recommendations.csv",
+        "recommendation_evidence.csv"
+      ],
+      "dashboard_pages": [
+        "decision_studio"
+      ],
+      "interpretation_restrictions": [
+        "Utility is a preference-based score, not probability or significance",
+        "What-if outputs are user-specified scenarios, not certified findings"
+      ]
+    },
+    {
+      "rq_id": "RQ5",
+      "title": "Measurement robustness",
+      "question": "How sensitive are the principal findings to the selected claim-measurement artifact release?",
+      "status": "ACTIVE",
+      "population": "648 paired Candidate-V4 LLM generations",
+      "unit_of_inference": "paired canonical case",
+      "primary_metrics": [
+        "candidate_v4_metric_delta"
+      ],
+      "supporting_metrics": [
+        "holm_adjusted_p_value",
+        "rank_biserial_correlation"
+      ],
+      "primary_sources": [
+        "validator_generation_pairs.csv",
+        "validator_metric_summary.csv",
+        "validator_sensitivity_tests.csv"
+      ],
+      "dashboard_pages": [
+        "validator_sensitivity"
+      ],
+      "interpretation_restrictions": [
+        "Do not claim V4 is more correct without human calibration",
+        "Artifact dependence must be reported as a material limitation"
+      ]
+    },
+    {
+      "rq_id": "RQ6",
+      "title": "Deterministic Template Baseline extension",
+      "question": "Compared with a deterministic non-LLM template under the same controlled evidence, what incremental informational value do LLM narratives provide, and what reliability and structural-efficiency costs accompany that value?",
+      "status": "ACTIVE_AFTER_BASELINE_COMPARISON_READY",
+      "population": "216 Template Baseline generations paired with 648 LLM generations",
+      "unit_of_inference": "paired canonical case",
+      "primary_metrics": [
+        "end_to_end_faithfulness_yield",
+        "supported_claim_count",
+        "supported_claims_per_100_words"
+      ],
+      "supporting_metrics": [
+        "output_word_count",
+        "conservative_faithfulness",
+        "verifiability"
+      ],
+      "primary_sources": [
+        "baseline_generation_metrics.csv",
+        "llm_vs_template_case_pairs.csv",
+        "llm_vs_template_tests.csv"
+      ],
+      "dashboard_pages": [
+        "template_baseline_comparison",
+        "case_explorer"
+      ],
+      "interpretation_restrictions": [
+        "Template Baseline is not a fourth LLM and is excluded from decision ranking",
+        "Structured template claim extraction is deterministic but not identical to the LLM extraction channel",
+        "Naturalness, usefulness, and trust require human evaluation",
+        "Template latency at zero milliseconds is measurement-floor limited"
+      ]
+    }
+  ]
+}

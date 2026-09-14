@@ -1,0 +1,44 @@
+{
+  "summary_schema_version": "claim_finalization_summary_v2",
+  "finalizer_version": "claim_finalizer_v2.0.0",
+  "finalization_policy_version": "claim_finalization_policy_v3",
+  "claims_v2_count": 14680,
+  "claims_v3_count": 14667,
+  "change_counts": {
+    "ADD": 2,
+    "UPDATE": 14665,
+    "DROP": 15,
+    "SPLIT": 2
+  },
+  "reviewed_population": {
+    "total": 260,
+    "category_counts": {
+      "CONCEPT_DIRECTION_FIRST_MATCH_AMBIGUITY": 161,
+      "EXPLICIT_PREDICTION_DIRECTION_NOT_ENCODED": 4,
+      "FACTOR_STATEMENT_MISCLASSIFIED_AS_PREDICTION": 14,
+      "PREDICTION_SUBSPAN_FRAGMENT": 15,
+      "UNCERTAINTY_EXACT_MATCH_MISMATCH": 63,
+      "VALID_OVERALL_PREDICTION_CONTRADICTION": 3
+    },
+    "fragments_handled": 15,
+    "mistyped_predictions_handled": 14,
+    "directions_repaired": 4,
+    "contradictions_preserved": 3
+  },
+  "semantic_operation_counts": {
+    "DROP_FRAGMENT": 15,
+    "MIGRATE_SCHEMA": 14420,
+    "PRESERVE_EXPERIMENTAL_ERROR": 3,
+    "REGRESSION_ONLY": 224,
+    "RETYPE": 12,
+    "SPLIT": 2,
+    "UPDATE_DIRECTION": 4
+  },
+  "source_span_reconstruction": {
+    "audited_claim_count": 14667,
+    "exact_match_count": 14667,
+    "mismatch_count": 0
+  },
+  "compatibility_matrix_failures": 0,
+  "output_claims_sha256": "89d90150df82c01f1b5557a9fbd27d26c405c0f5f5402bdbfeed93105c478cfe"
+}

@@ -1,0 +1,25 @@
+{
+  "raw_sha256": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263",
+  "loans": 1048649,
+  "performance_rows": 19704553,
+  "eligible": 1036383,
+  "positive": 5572,
+  "negative": 1030811,
+  "censored": 12266,
+  "event_counts": {
+    "90plus_delinquency": 5572,
+    "no_serious_event_through_12m": 957764,
+    "voluntary_payoff_before_12m": 73047
+  },
+  "censor_reason_counts": {
+    "insufficient_12m_observation": 637,
+    "left_censored_after_payment_month_1": 8737,
+    "non_outcome_termination_96": 2892
+  },
+  "quarters": {
+    "2024Q1": {"loans": 215009, "eligible": 213176, "positive": 1300, "censored": 1833},
+    "2024Q2": {"loans": 255661, "eligible": 252936, "positive": 1607, "censored": 2725},
+    "2024Q3": {"loans": 296104, "eligible": 292158, "positive": 1509, "censored": 3946},
+    "2024Q4": {"loans": 281875, "eligible": 278113, "positive": 1156, "censored": 3762}
+  }
+}

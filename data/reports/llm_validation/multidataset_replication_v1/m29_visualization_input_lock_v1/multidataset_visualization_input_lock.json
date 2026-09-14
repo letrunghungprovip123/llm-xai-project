@@ -1,0 +1,688 @@
+{
+  "authorized_sources": {
+    "freddie_claim_diagnostics": {
+      "byte_count": 14091959,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/diagnostics_v1/claim_diagnostics.csv",
+      "sha256": "aedc674ae391903f33a1e55a57be07128eb7de6ef48eacbe771634992f902fd4"
+    },
+    "freddie_generation_metrics": {
+      "byte_count": 690526,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/metric_v1/generation_metrics.csv",
+      "sha256": "a732d02fc199747688e9dc922c3a041288da789b707c1da9cc6033ad4e5b7ff1"
+    },
+    "home_credit_claim_diagnostics": {
+      "byte_count": 8160869,
+      "path": "data/reports/llm_validation/validation_v1/analysis/diagnostics/claim_diagnostics.csv",
+      "sha256": "22aff7845f0b6602c655a4dcae2ec63e3ab56f99a4cd6ff8f534be068314abb4"
+    },
+    "home_credit_generation_metrics": {
+      "byte_count": 352954,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/generation_metrics.csv",
+      "sha256": "8aeaf54d6c71612f46da7fd6a84b5e0a402c4fa342cbf9634009f1e6b86a591d"
+    },
+    "m25::freddie_diagnostics_manifest": {
+      "byte_count": 7173,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/diagnostics_v1/diagnostics_manifest.json",
+      "sha256": "1eb1c1f5d9239dd4ab322dfca21b3dea6535365dfa71fc825a19f28c371b96c9"
+    },
+    "m25::freddie_generation_diagnostics": {
+      "byte_count": 631001,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/diagnostics_v1/generation_diagnostics.csv",
+      "sha256": "dad1166e4050ef175f8c87f082a681c631b1f1530be09a72294e786de4362d08"
+    },
+    "m25::freddie_generation_metrics": {
+      "byte_count": 690526,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/metric_v1/generation_metrics.csv",
+      "sha256": "a732d02fc199747688e9dc922c3a041288da789b707c1da9cc6033ad4e5b7ff1"
+    },
+    "m25::freddie_metric_manifest": {
+      "byte_count": 1627,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/metric_v1/metric_manifest.json",
+      "sha256": "a6938f838cf59709534654a5d840a5a1c249ad7d65a72d060bc089ff496541ff"
+    },
+    "m25::freddie_omnibus_tests": {
+      "byte_count": 1347,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/statistical_analysis_v1/omnibus_tests.csv",
+      "sha256": "f962916903eb612aaedf62f816a952e80cb58d3ad24b21c7e8b63c645392240e"
+    },
+    "m25::freddie_option_performance": {
+      "byte_count": 5109,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/metric_v1/option_performance.csv",
+      "sha256": "7c96a6719da4f077e917c1aaf709390dffa92e516d156747f90ed34a61ed46ad"
+    },
+    "m25::freddie_paired_tests": {
+      "byte_count": 10985,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/statistical_analysis_v1/paired_tests.csv",
+      "sha256": "cb15dd13b12611afc3cd78f479328d224a3e33fe831ae7edad548e18a635253b"
+    },
+    "m25::freddie_statistical_manifest": {
+      "byte_count": 2884,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/statistical_analysis_v1/statistical_manifest.json",
+      "sha256": "61054bc2781652ac2729ceceda5e0611541eace43b964cdcb4a0a2518a850279"
+    },
+    "m25::home_credit_data_mart_validation": {
+      "byte_count": 8393,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/data_mart_validation.json",
+      "sha256": "80048f464e9176f684275328e561772b5b3ebbb7b522f10ae30209f3beaf08f9"
+    },
+    "m25::home_credit_diagnostic_validation": {
+      "byte_count": 10488,
+      "path": "data/reports/llm_validation/validation_v1/analysis/diagnostics/diagnostic_validation.json",
+      "sha256": "bbb3e48db00997582052a637f2f0d54462d3cc9523cb9e5a2ba0f102596846d9"
+    },
+    "m25::home_credit_evidence_levels": {
+      "byte_count": 1236,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/evidence_levels.csv",
+      "sha256": "15e0c90cba31475f1c26b7868e51a68451167df90cbf5b8e09f5598008f7a0f0"
+    },
+    "m25::home_credit_generation_diagnostics": {
+      "byte_count": 281580,
+      "path": "data/reports/llm_validation/validation_v1/analysis/diagnostics/generation_diagnostics.csv",
+      "sha256": "c5d0683ae2cbce012a404fdcc713327652c5f5841e665e3984e16e6afa2c3fc4"
+    },
+    "m25::home_credit_generation_index": {
+      "byte_count": 12927421,
+      "path": "data/reports/llm_validation/validation_v1/canonicalization/generation_index.jsonl",
+      "sha256": "252edae8dd920c259a1da74d7b2f09b26558b994e01b3cd29dd60c0d6f9086ec"
+    },
+    "m25::home_credit_generation_metrics": {
+      "byte_count": 352954,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/generation_metrics.csv",
+      "sha256": "8aeaf54d6c71612f46da7fd6a84b5e0a402c4fa342cbf9634009f1e6b86a591d"
+    },
+    "m25::home_credit_metric_validation": {
+      "byte_count": 5751,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/metric_validation.json",
+      "sha256": "18d109ead979ecf3911a5b5944e5d6c6e8ffc29d15310647cce09c214d1c2e03"
+    },
+    "m25::home_credit_models": {
+      "byte_count": 696,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/models.csv",
+      "sha256": "14d530dceb8b1cdef116907008f77003236cda679dd4bc46eae38f19b8b94c56"
+    },
+    "m25::home_credit_omnibus_tests": {
+      "byte_count": 1345,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/omnibus_tests.csv",
+      "sha256": "51f8893ba335effcfb90d68a9e563551ce2374cf9c632b62fb844006b1b89292"
+    },
+    "m25::home_credit_paired_tests": {
+      "byte_count": 9350,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/paired_tests.csv",
+      "sha256": "f603f9614a5c71e9b72ab2e0ddca8a701a457e19d042ad2b1eeab6ca3f45d684"
+    },
+    "m25::home_credit_statistical_validation": {
+      "byte_count": 5462,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/statistical_validation.json",
+      "sha256": "dd752a441a08cda3c9de17f0e4e80fb91e6b0df59de5925d3293b60781507a7b"
+    },
+    "m25_contrast_concordance": {
+      "byte_count": 7485,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/contrast_concordance.csv",
+      "sha256": "5e81e11e0363aa91cd66247ef48db84e9ed3d88d4c21f13c627ed83fc9d7cf30"
+    },
+    "m25_input_lock": {
+      "byte_count": 23525,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/m25_input_lock_v1/multidataset_replication_input_lock.json",
+      "sha256": "dce497c2f9cab1574eb12fc9e7a5b73a010d7f37b55a62944316119f3f05098f"
+    },
+    "m25_manifest": {
+      "byte_count": 2878,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/replication_manifest.json",
+      "sha256": "891d8e2fe13f09538637969267bd8bb8646b1a1869a990feeefbeeebba5b757b"
+    },
+    "m25_rank_stability": {
+      "byte_count": 157,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/rank_stability.csv",
+      "sha256": "a514cf333eb15da9506e9fc38a86b02a6f94aa78676a1b79431b1454b0c9d43f"
+    },
+    "m25_validation": {
+      "byte_count": 5177,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/replication_validation.json",
+      "sha256": "d6c10919f1cb5574a14775d77d5ad78b5f052ad1568a4360a65f6e69865a4444"
+    },
+    "m26_dataset_option_assessment": {
+      "byte_count": 10662,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/dataset_option_assessment.csv",
+      "sha256": "f0cd65b0074da1140e88c70b111241c1255f7313e76bb386a539ee6b6d1113f5"
+    },
+    "m26_manifest": {
+      "byte_count": 2288,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/decision_manifest.json",
+      "sha256": "06ff341fcc2d11e3ef1df0876332b70e6517c8be4da6cc86a33c7714038244d7"
+    },
+    "m26_noninferiority_results": {
+      "byte_count": 3626,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/noninferiority_results.csv",
+      "sha256": "7012f52dd01a3f83b7c2a298b5d4a48f0a6c2a4db3d26babea928c0733b1369d"
+    },
+    "m26_policy_lock": {
+      "byte_count": 4850,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/m26_policy_lock_v1/multidataset_decision_policy_lock.json",
+      "sha256": "529d86dbb9e1fa4fd3778c0aee00f3e8874b7750293bd954d9661d420ab351bb"
+    },
+    "m26_recommendations": {
+      "byte_count": 576,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/recommendations.csv",
+      "sha256": "88b2beed4af2aa95027dd011eb83ab5af1aa0726c96f496e7f70b52067a2f2f6"
+    },
+    "m26_scenario_options": {
+      "byte_count": 50244,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/scenario_options.csv",
+      "sha256": "b13d02acc4374be47cdac3336d20b9869fda8caa2bf35dec1eb71c9038194217"
+    },
+    "m26_validation": {
+      "byte_count": 1391,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/decision_validation.json",
+      "sha256": "0c95270fcb703edd8f0e8a45e468ca54878e27e8c277a48a4c392078d5d01daa"
+    },
+    "m27::human_calibration_status.json": {
+      "byte_count": 174,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/human_calibration_status.json",
+      "sha256": "8fd4b4bf79569967a1b11da06a3b45c3853f4a274d3530adaf6a85f48ae46225"
+    },
+    "m27::margin_sensitivity_summary.csv": {
+      "byte_count": 395,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/margin_sensitivity_summary.csv",
+      "sha256": "032c8aeb3d00d9c75ecc24f35f014894fde6a8d6edf543091283e110bb58a45b"
+    },
+    "m27::metric_sensitivity.csv": {
+      "byte_count": 20545,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/metric_sensitivity.csv",
+      "sha256": "b5759cc0ac533a596f514e99348541a9a584e45b9f0fe2ea74f32d89b4859015"
+    },
+    "m27::population_contrast_sensitivity.csv": {
+      "byte_count": 11933,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/population_contrast_sensitivity.csv",
+      "sha256": "b55f27409091ba9b8114e2c6cd82ba010ca8bead89544835187c075a0c5a7eaf"
+    },
+    "m27::population_effect_sensitivity.csv": {
+      "byte_count": 1112,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/population_effect_sensitivity.csv",
+      "sha256": "49be06b9db5f0eeb7bd48a125cb8c7b58caf9c6e319f29331d5bd48c67e1b9ca"
+    },
+    "m27::recommendation_sensitivity.csv": {
+      "byte_count": 484,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/recommendation_sensitivity.csv",
+      "sha256": "8f32bbb4e362335d6522605f191478e16ba0403d38631a7b77e965f816f8060c"
+    },
+    "m27::robustness_summary.csv": {
+      "byte_count": 876,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/robustness_summary.csv",
+      "sha256": "37271bda7f899ad2a627a19d383e277889dd80d16c16ee72b8ff26a0214a3fa6"
+    },
+    "m27::template_baseline_status.json": {
+      "byte_count": 241,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/template_baseline_status.json",
+      "sha256": "daa982534f3602a5358d3460234189b11974dced4beac8ee6acae5af1a88ef88"
+    },
+    "m27::validator_sensitivity_status.json": {
+      "byte_count": 193,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/validator_sensitivity_status.json",
+      "sha256": "7a7e1fadf47ce26091d75621a5512d1b7bbe153e29da6aea9a53175fa7678d03"
+    },
+    "m27_input_lock": {
+      "byte_count": 9039,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/m27_robustness_input_lock_v1/multidataset_robustness_input_lock.json",
+      "sha256": "ea4c5cac7f28eb8ff72ce76dc2e32d72082cc04dc17e33958e2949e8a0ac82f2"
+    },
+    "m27_manifest": {
+      "byte_count": 3929,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/robustness_manifest.json",
+      "sha256": "4ce25548c6a544d87b52e93d7236504c5ccaf4763d61b36a1435237f73795f65"
+    },
+    "m27_validation": {
+      "byte_count": 1679,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/robustness_v1/robustness_validation.json",
+      "sha256": "5853ad7404f448b8230364f9654d2366c69606e55bf963f2507785d499aee0ec"
+    }
+  },
+  "gate": "MULTIDATASET_VISUALIZATION_V3_INPUT_LOCK_READY",
+  "m28_metric_ids": [
+    "active_pool_mode",
+    "bootstrap_robustness_status",
+    "claim_type_robustness_status",
+    "conservative_faithfulness",
+    "contradiction_loss",
+    "decision_robustness_status",
+    "end_to_end_faithfulness_yield",
+    "final_claims",
+    "margin_robustness_status",
+    "material_heterogeneity_contrast_count",
+    "metric_robustness_status",
+    "not_verifiable_loss",
+    "omnibus_p_value",
+    "partial_eta_squared",
+    "pipeline_loss",
+    "planned_contrast_adjusted_p_value",
+    "planned_contrast_mean_difference",
+    "planned_generations",
+    "population_robustness_status",
+    "primary_option_id",
+    "replication_status",
+    "replication_status_count::DIRECTIONALLY_REPLICATED",
+    "replication_status_count::DIRECTION_CONFLICT",
+    "replication_status_count::INCONCLUSIVE",
+    "replication_status_count::REPLICATED",
+    "resolved_faithfulness",
+    "robust_primary_candidate_count",
+    "robust_selected_count",
+    "safe_phrase_matched_claim_rate",
+    "scenario_recommendation_status",
+    "spearman_rho",
+    "unsupported_loss",
+    "unusable_generations",
+    "usable_generations",
+    "validation_status_count::CONTRADICTED",
+    "validation_status_count::NOT_APPLICABLE",
+    "validation_status_count::NOT_VERIFIABLE",
+    "validation_status_count::SUPPORTED",
+    "validation_status_count::UNSUPPORTED",
+    "verifiability"
+  ],
+  "m28_release_id": "certified_multidataset_analytical_release_v1",
+  "m28_replication_scope": "MODEL_REVISION_UNKNOWN",
+  "m28_report_number_count": 275,
+  "m28_report_number_ids": [
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S1::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S1::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S2::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S2::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S3::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S3::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S4::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S4::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S5::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::deepseek_v4_flash::S5::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S1::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S1::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S2::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S2::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S3::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S3::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S4::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S4::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S5::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::phi4_mini_instruct::S5::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S1::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S1::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S2::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S2::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S3::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S3::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S4::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S4::mean_difference",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S5::adjusted_p_value",
+    "contrast::FREDDIE::evidence_vs_s0::qwen3_8b::S5::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S0::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S0::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S0::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S0::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S0::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S0::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S1::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S1::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S1::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S1::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S1::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S1::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S2::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S2::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S2::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S2::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S2::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S2::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S3::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S3::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S3::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S3::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S3::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S3::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S4::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S4::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S4::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S4::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S4::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S4::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S5::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S5::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S5::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S5::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::FREDDIE::model_within_evidence::S5::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::FREDDIE::model_within_evidence::S5::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S1::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S1::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S2::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S2::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S3::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S3::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S4::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S4::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S5::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::deepseek_v4_flash::S5::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S1::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S1::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S2::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S2::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S3::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S3::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S4::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S4::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S5::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::phi4_mini_instruct::S5::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S1::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S1::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S2::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S2::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S3::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S3::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S4::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S4::mean_difference",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S5::adjusted_p_value",
+    "contrast::HOME_CREDIT::evidence_vs_s0::qwen3_8b::S5::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S0::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S0::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S0::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S0::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S0::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S0::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S1::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S1::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S1::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S1::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S1::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S1::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S2::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S2::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S2::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S2::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S2::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S2::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S3::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S3::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S3::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S3::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S3::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S3::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S4::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S4::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S4::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S4::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S4::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S4::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S5::deepseek_v4_flash::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S5::deepseek_v4_flash::phi4_mini_instruct::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S5::qwen3_8b::deepseek_v4_flash::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S5::qwen3_8b::deepseek_v4_flash::mean_difference",
+    "contrast::HOME_CREDIT::model_within_evidence::S5::qwen3_8b::phi4_mini_instruct::adjusted_p_value",
+    "contrast::HOME_CREDIT::model_within_evidence::S5::qwen3_8b::phi4_mini_instruct::mean_difference",
+    "dataset::FREDDIE::conservative_faithfulness::mean",
+    "dataset::FREDDIE::final_claims",
+    "dataset::FREDDIE::mean_e2e",
+    "dataset::FREDDIE::planned_generations",
+    "dataset::FREDDIE::resolved_faithfulness::mean",
+    "dataset::FREDDIE::status::CONTRADICTED",
+    "dataset::FREDDIE::status::NOT_APPLICABLE",
+    "dataset::FREDDIE::status::NOT_VERIFIABLE",
+    "dataset::FREDDIE::status::SUPPORTED",
+    "dataset::FREDDIE::status::UNSUPPORTED",
+    "dataset::FREDDIE::unusable_generations",
+    "dataset::FREDDIE::usable_generations",
+    "dataset::FREDDIE::verifiability::mean",
+    "dataset::HOME_CREDIT::conservative_faithfulness::mean",
+    "dataset::HOME_CREDIT::final_claims",
+    "dataset::HOME_CREDIT::mean_e2e",
+    "dataset::HOME_CREDIT::planned_generations",
+    "dataset::HOME_CREDIT::resolved_faithfulness::mean",
+    "dataset::HOME_CREDIT::status::CONTRADICTED",
+    "dataset::HOME_CREDIT::status::NOT_APPLICABLE",
+    "dataset::HOME_CREDIT::status::NOT_VERIFIABLE",
+    "dataset::HOME_CREDIT::status::SUPPORTED",
+    "dataset::HOME_CREDIT::status::UNSUPPORTED",
+    "dataset::HOME_CREDIT::unusable_generations",
+    "dataset::HOME_CREDIT::usable_generations",
+    "dataset::HOME_CREDIT::verifiability::mean",
+    "decision::FREDDIE_PRIMARY::option",
+    "decision::HOME_CREDIT_PRIMARY::option",
+    "decision::cross_dataset_robust_selected_count",
+    "decision::scenario::BALANCED::status",
+    "decision::scenario::EFFICIENCY_AWARE::status",
+    "decision::scenario::INDEPENDENCE_SENSITIVE::status",
+    "decision::scenario::QUALITY_FIRST::status",
+    "decision::scenario::RELIABILITY_FIRST::status",
+    "diagnostic::FREDDIE::contradiction_loss::mean",
+    "diagnostic::FREDDIE::not_verifiable_loss::mean",
+    "diagnostic::FREDDIE::pipeline_loss::mean",
+    "diagnostic::FREDDIE::safe_phrase_matched_claim_rate::mean",
+    "diagnostic::FREDDIE::unsupported_loss::mean",
+    "diagnostic::HOME_CREDIT::contradiction_loss::mean",
+    "diagnostic::HOME_CREDIT::not_verifiable_loss::mean",
+    "diagnostic::HOME_CREDIT::pipeline_loss::mean",
+    "diagnostic::HOME_CREDIT::safe_phrase_matched_claim_rate::mean",
+    "diagnostic::HOME_CREDIT::unsupported_loss::mean",
+    "omnibus::FREDDIE::evidence::p_value_used",
+    "omnibus::FREDDIE::evidence::partial_eta_squared",
+    "omnibus::FREDDIE::model::p_value_used",
+    "omnibus::FREDDIE::model::partial_eta_squared",
+    "omnibus::FREDDIE::model:evidence::p_value_used",
+    "omnibus::FREDDIE::model:evidence::partial_eta_squared",
+    "omnibus::HOME_CREDIT::evidence::p_value_used",
+    "omnibus::HOME_CREDIT::evidence::partial_eta_squared",
+    "omnibus::HOME_CREDIT::model::p_value_used",
+    "omnibus::HOME_CREDIT::model::partial_eta_squared",
+    "omnibus::HOME_CREDIT::model:evidence::p_value_used",
+    "omnibus::HOME_CREDIT::model:evidence::partial_eta_squared",
+    "option::FREDDIE::deepseek_v4_flash::S0::mean_e2e",
+    "option::FREDDIE::deepseek_v4_flash::S1::mean_e2e",
+    "option::FREDDIE::deepseek_v4_flash::S2::mean_e2e",
+    "option::FREDDIE::deepseek_v4_flash::S3::mean_e2e",
+    "option::FREDDIE::deepseek_v4_flash::S4::mean_e2e",
+    "option::FREDDIE::deepseek_v4_flash::S5::mean_e2e",
+    "option::FREDDIE::phi4_mini_instruct::S0::mean_e2e",
+    "option::FREDDIE::phi4_mini_instruct::S1::mean_e2e",
+    "option::FREDDIE::phi4_mini_instruct::S2::mean_e2e",
+    "option::FREDDIE::phi4_mini_instruct::S3::mean_e2e",
+    "option::FREDDIE::phi4_mini_instruct::S4::mean_e2e",
+    "option::FREDDIE::phi4_mini_instruct::S5::mean_e2e",
+    "option::FREDDIE::qwen3_8b::S0::mean_e2e",
+    "option::FREDDIE::qwen3_8b::S1::mean_e2e",
+    "option::FREDDIE::qwen3_8b::S2::mean_e2e",
+    "option::FREDDIE::qwen3_8b::S3::mean_e2e",
+    "option::FREDDIE::qwen3_8b::S4::mean_e2e",
+    "option::FREDDIE::qwen3_8b::S5::mean_e2e",
+    "option::HOME_CREDIT::deepseek_v4_flash::S0::mean_e2e",
+    "option::HOME_CREDIT::deepseek_v4_flash::S1::mean_e2e",
+    "option::HOME_CREDIT::deepseek_v4_flash::S2::mean_e2e",
+    "option::HOME_CREDIT::deepseek_v4_flash::S3::mean_e2e",
+    "option::HOME_CREDIT::deepseek_v4_flash::S4::mean_e2e",
+    "option::HOME_CREDIT::deepseek_v4_flash::S5::mean_e2e",
+    "option::HOME_CREDIT::phi4_mini_instruct::S0::mean_e2e",
+    "option::HOME_CREDIT::phi4_mini_instruct::S1::mean_e2e",
+    "option::HOME_CREDIT::phi4_mini_instruct::S2::mean_e2e",
+    "option::HOME_CREDIT::phi4_mini_instruct::S3::mean_e2e",
+    "option::HOME_CREDIT::phi4_mini_instruct::S4::mean_e2e",
+    "option::HOME_CREDIT::phi4_mini_instruct::S5::mean_e2e",
+    "option::HOME_CREDIT::qwen3_8b::S0::mean_e2e",
+    "option::HOME_CREDIT::qwen3_8b::S1::mean_e2e",
+    "option::HOME_CREDIT::qwen3_8b::S2::mean_e2e",
+    "option::HOME_CREDIT::qwen3_8b::S3::mean_e2e",
+    "option::HOME_CREDIT::qwen3_8b::S4::mean_e2e",
+    "option::HOME_CREDIT::qwen3_8b::S5::mean_e2e",
+    "replication::evidence_vs_s0::deepseek_v4_flash::S1::S0::status",
+    "replication::evidence_vs_s0::deepseek_v4_flash::S2::S0::status",
+    "replication::evidence_vs_s0::deepseek_v4_flash::S3::S0::status",
+    "replication::evidence_vs_s0::deepseek_v4_flash::S4::S0::status",
+    "replication::evidence_vs_s0::deepseek_v4_flash::S5::S0::status",
+    "replication::evidence_vs_s0::phi4_mini_instruct::S1::S0::status",
+    "replication::evidence_vs_s0::phi4_mini_instruct::S2::S0::status",
+    "replication::evidence_vs_s0::phi4_mini_instruct::S3::S0::status",
+    "replication::evidence_vs_s0::phi4_mini_instruct::S4::S0::status",
+    "replication::evidence_vs_s0::phi4_mini_instruct::S5::S0::status",
+    "replication::evidence_vs_s0::qwen3_8b::S1::S0::status",
+    "replication::evidence_vs_s0::qwen3_8b::S2::S0::status",
+    "replication::evidence_vs_s0::qwen3_8b::S3::S0::status",
+    "replication::evidence_vs_s0::qwen3_8b::S4::S0::status",
+    "replication::evidence_vs_s0::qwen3_8b::S5::S0::status",
+    "replication::material_heterogeneity_count",
+    "replication::model_within_evidence::S0::deepseek_v4_flash::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S0::qwen3_8b::deepseek_v4_flash::status",
+    "replication::model_within_evidence::S0::qwen3_8b::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S1::deepseek_v4_flash::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S1::qwen3_8b::deepseek_v4_flash::status",
+    "replication::model_within_evidence::S1::qwen3_8b::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S2::deepseek_v4_flash::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S2::qwen3_8b::deepseek_v4_flash::status",
+    "replication::model_within_evidence::S2::qwen3_8b::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S3::deepseek_v4_flash::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S3::qwen3_8b::deepseek_v4_flash::status",
+    "replication::model_within_evidence::S3::qwen3_8b::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S4::deepseek_v4_flash::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S4::qwen3_8b::deepseek_v4_flash::status",
+    "replication::model_within_evidence::S4::qwen3_8b::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S5::deepseek_v4_flash::phi4_mini_instruct::status",
+    "replication::model_within_evidence::S5::qwen3_8b::deepseek_v4_flash::status",
+    "replication::model_within_evidence::S5::qwen3_8b::phi4_mini_instruct::status",
+    "replication::option_rank_spearman",
+    "replication::status_count::DIRECTIONALLY_REPLICATED",
+    "replication::status_count::DIRECTION_CONFLICT",
+    "replication::status_count::INCONCLUSIVE",
+    "replication::status_count::REPLICATED",
+    "robustness::bootstrap::status",
+    "robustness::claim_type::status",
+    "robustness::decision::status",
+    "robustness::margin::PRIMARY_003::pool",
+    "robustness::margin::PRIMARY_003::primary_candidate_count",
+    "robustness::margin::RELAXED_005::pool",
+    "robustness::margin::RELAXED_005::primary_candidate_count",
+    "robustness::margin::STRICT_002::pool",
+    "robustness::margin::STRICT_002::primary_candidate_count",
+    "robustness::margin::status",
+    "robustness::metric::status",
+    "robustness::population::status"
+  ],
+  "m28_robust_recommendation_status": "NO_ROBUST_RECOMMENDATION",
+  "m28_scopes": [
+    "CROSS_DATASET",
+    "FREDDIE",
+    "HOME_CREDIT"
+  ],
+  "parents": {
+    "analytical_release_manifest.json": {
+      "byte_count": 2194,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/certified_analytical_release_v1/analytical_release_manifest.json",
+      "sha256": "ce5868fc2f8f0686e1e2b8803ea084d51c28d6aa32c7f1632ec96ce52cdd2fb4"
+    },
+    "analytical_release_validation.json": {
+      "byte_count": 1364,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/certified_analytical_release_v1/analytical_release_validation.json",
+      "sha256": "575d0a8a15d73ef0061ab7301fb1346547093ab63967cc5b29d0c7a17c3d8ab2"
+    },
+    "findings_registry.csv": {
+      "byte_count": 1313,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/certified_analytical_release_v1/findings_registry.csv",
+      "sha256": "72f9535c047335d6c1c0d02f763be573be22b55fd8783d02f0ab6e6e959ac3e2"
+    },
+    "limitations_registry.csv": {
+      "byte_count": 3074,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/certified_analytical_release_v1/limitations_registry.csv",
+      "sha256": "cc0023d670cb2a6aeac6f3ae88ec7036f0b40894f6c5f296532c07d8561acbb8"
+    },
+    "release_metric_dictionary.csv": {
+      "byte_count": 2480,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/certified_analytical_release_v1/release_metric_dictionary.csv",
+      "sha256": "47a08ccfe23dda6d339aba9a928a952cf4cb94abc5fd1b2d8ce04d6a7399cb04"
+    },
+    "report_numbers.json": {
+      "byte_count": 274813,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/certified_analytical_release_v1/report_numbers.json",
+      "sha256": "28aab06f57356a6ab938d06f313228a1964c1cf30fc606f28e30d2cc8e29721d"
+    },
+    "report_source_index.csv": {
+      "byte_count": 167594,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/certified_analytical_release_v1/report_source_index.csv",
+      "sha256": "3ce97085eb8ac5bbc7c84f0d6e4ee69ffb4b06a338850c1d535ab1d8142729d2"
+    },
+    "research_question_registry.csv": {
+      "byte_count": 413,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/certified_analytical_release_v1/research_question_registry.csv",
+      "sha256": "f437f44ac0268301c1f6aef5e1ad35413fb7c24a0acf44f33e38eb27b7ef2d9a"
+    },
+    "source_artifact_index.csv": {
+      "byte_count": 10145,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/certified_analytical_release_v1/source_artifact_index.csv",
+      "sha256": "bf7b0c4ccb97bab62a8c3363103af5fa5758f4e68bcd3c110975dce47bf62c19"
+    }
+  },
+  "producer": "M29A_0036",
+  "protocol": {
+    "byte_count": 4629,
+    "path": "config/research/replication/multidataset_visualization_v3.json",
+    "sha256": "c116161349366b088b997c39553779b691d7410fbb25310ba46d9e11797165dd"
+  },
+  "provider_execution_allowed": false,
+  "release_id": "visualization-data-v3",
+  "schema_version": "multidataset_visualization_v3_input_lock_v1",
+  "scientific_recomputation_allowed": false,
+  "source_discovery_allowed": false,
+  "source_identity": {
+    "file_count": 11,
+    "files": [
+      {
+        "byte_count": 4629,
+        "path": "config/research/replication/multidataset_visualization_v3.json",
+        "sha256": "c116161349366b088b997c39553779b691d7410fbb25310ba46d9e11797165dd"
+      },
+      {
+        "byte_count": 75,
+        "path": "research/python/visualization_v3/__init__.py",
+        "sha256": "9bb8be5c508f0d2ecbcf9307555edd27170d3069e7adc30c7386cde9f8cf2658"
+      },
+      {
+        "byte_count": 10215,
+        "path": "research/python/visualization_v3/build.py",
+        "sha256": "9bb855cf84a052fc57c6b3c0f4f43504364e815d61f844edeaa5bb51cef3b2e9"
+      },
+      {
+        "byte_count": 3909,
+        "path": "research/python/visualization_v3/common.py",
+        "sha256": "602b4383e5ca3cbc70b214a00275690930ea9e4f8c33679de320f803e512f2ba"
+      },
+      {
+        "byte_count": 3215,
+        "path": "research/python/visualization_v3/input_lock.py",
+        "sha256": "50fc13fb99998a795986f6a9d3572114ac5267e6300b03126d770e805d515abd"
+      },
+      {
+        "byte_count": 3030,
+        "path": "research/python/visualization_v3/validate.py",
+        "sha256": "57ec39a3b6fb22d2c098a09b243ad335302397e1c911c5d8be5332ed49dee767"
+      },
+      {
+        "byte_count": 4664,
+        "path": "scripts/research/multidataset_m29_visualization_0037.py",
+        "sha256": "f572c853c95d68293c1bd085cd05d897fd063c33e96b4ba8e5cbd320b575245a"
+      },
+      {
+        "byte_count": 1286,
+        "path": "scripts/research/multidataset_m29_visualization_input_lock_0036.py",
+        "sha256": "5810f6b4959016bcf2d4760d5169f4606a0142b20ac4d8f9b21f6cb0cf28f7b2"
+      },
+      {
+        "byte_count": 452,
+        "path": "scripts/research/run_multidataset_m29a_visualization_input_lock_0036.sh",
+        "sha256": "05b8beb25d25f50cd46c83e80560867d76f3915942385d8ab887fc13b601c556"
+      },
+      {
+        "byte_count": 457,
+        "path": "scripts/research/run_multidataset_m29b_visualization_0037.sh",
+        "sha256": "5661e9be607e249df24da3882ddd077c96477174a6c1bf10b198ec3929dc4551"
+      },
+      {
+        "byte_count": 600,
+        "path": "scripts/research/run_multidataset_wave_0036_0039.sh",
+        "sha256": "51122e807cb22cf5f946b09c8760550e5ff5213e6af2a55f34ae8c8b39ef2474"
+      }
+    ],
+    "source_tree_identity_sha256": "c133e1bca0f937c94a9af59801724903648b69ef3d83420835225227b9cbf205",
+    "strategy": "explicit_m29_artifact_relevant_file_hashes"
+  }
+}

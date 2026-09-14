@@ -1,0 +1,122 @@
+{
+  "checks": {
+    "bootstrap_iterations": {
+      "expected": 10000,
+      "observed": 10000,
+      "passed": true
+    },
+    "contrast_count": {
+      "expected": 33,
+      "observed": 33,
+      "passed": true
+    },
+    "contrast_id_set_match": {
+      "expected": [
+        "evidence_vs_s0::deepseek_v4_flash::S1::S0",
+        "evidence_vs_s0::deepseek_v4_flash::S2::S0",
+        "evidence_vs_s0::deepseek_v4_flash::S3::S0",
+        "evidence_vs_s0::deepseek_v4_flash::S4::S0",
+        "evidence_vs_s0::deepseek_v4_flash::S5::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S1::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S2::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S3::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S4::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S5::S0",
+        "evidence_vs_s0::qwen3_8b::S1::S0",
+        "evidence_vs_s0::qwen3_8b::S2::S0",
+        "evidence_vs_s0::qwen3_8b::S3::S0",
+        "evidence_vs_s0::qwen3_8b::S4::S0",
+        "evidence_vs_s0::qwen3_8b::S5::S0",
+        "model_within_evidence::S0::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S0::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S0::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S1::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S1::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S1::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S2::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S2::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S2::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S3::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S3::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S3::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S4::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S4::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S4::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S5::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S5::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S5::qwen3_8b::phi4_mini_instruct"
+      ],
+      "observed": [
+        "evidence_vs_s0::deepseek_v4_flash::S1::S0",
+        "evidence_vs_s0::deepseek_v4_flash::S2::S0",
+        "evidence_vs_s0::deepseek_v4_flash::S3::S0",
+        "evidence_vs_s0::deepseek_v4_flash::S4::S0",
+        "evidence_vs_s0::deepseek_v4_flash::S5::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S1::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S2::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S3::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S4::S0",
+        "evidence_vs_s0::phi4_mini_instruct::S5::S0",
+        "evidence_vs_s0::qwen3_8b::S1::S0",
+        "evidence_vs_s0::qwen3_8b::S2::S0",
+        "evidence_vs_s0::qwen3_8b::S3::S0",
+        "evidence_vs_s0::qwen3_8b::S4::S0",
+        "evidence_vs_s0::qwen3_8b::S5::S0",
+        "model_within_evidence::S0::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S0::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S0::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S1::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S1::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S1::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S2::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S2::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S2::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S3::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S3::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S3::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S4::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S4::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S4::qwen3_8b::phi4_mini_instruct",
+        "model_within_evidence::S5::deepseek_v4_flash::phi4_mini_instruct",
+        "model_within_evidence::S5::qwen3_8b::deepseek_v4_flash",
+        "model_within_evidence::S5::qwen3_8b::phi4_mini_instruct"
+      ],
+      "passed": true
+    },
+    "cross_dataset_case_pair_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "delta_of_deltas_count": {
+      "expected": 33,
+      "observed": 33,
+      "passed": true
+    },
+    "failure_profile_count": {
+      "expected": 18,
+      "observed": 18,
+      "passed": true
+    },
+    "invalid_ci_order_count": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "omnibus_effect_count": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "option_count": {
+      "expected": 18,
+      "observed": 18,
+      "passed": true
+    }
+  },
+  "exit_gate": "MULTIDATASET_REPLICATION_READY",
+  "failed_check_count": 0,
+  "model_revision_scope": "MODEL_REVISION_UNKNOWN",
+  "passed": true,
+  "schema_version": "multidataset_replication_validation_v1"
+}

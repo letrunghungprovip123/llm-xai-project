@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "target_contract_v1.schema.json",
+  "title": "Target Contract V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_column", "canonical_name", "positive_value", "negative_value",
+    "semantic_name", "prediction_horizon"
+  ],
+  "properties": {
+    "source_column": {"type": "string", "minLength": 1},
+    "canonical_name": {"type": "string", "minLength": 1},
+    "positive_value": {},
+    "negative_value": {},
+    "semantic_name": {"type": "string", "minLength": 1},
+    "prediction_horizon": {"type": ["string", "null"], "minLength": 1},
+    "prediction_semantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive_label", "negative_label", "prediction_subject",
+        "positive_display_name", "negative_display_name",
+        "positive_direction_phrase", "negative_direction_phrase"
+      ],
+      "properties": {
+        "positive_label": {"type": "string", "minLength": 1},
+        "negative_label": {"type": "string", "minLength": 1},
+        "prediction_subject": {"type": "string", "minLength": 1},
+        "positive_display_name": {"type": "string", "minLength": 1},
+        "negative_display_name": {"type": "string", "minLength": 1},
+        "positive_direction_phrase": {"type": "string", "minLength": 1},
+        "negative_direction_phrase": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

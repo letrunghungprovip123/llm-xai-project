@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim_validation_policy.schema.json",
+  "title": "Claim validation policy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_version",
+    "status",
+    "status_taxonomy_version",
+    "reason_code_taxonomy_version",
+    "numeric_policy_version",
+    "direction_normalization",
+    "near_zero_shap_epsilon",
+    "evidence_exposure_boundary",
+    "one_result_per_claim",
+    "unresolved_join_behavior",
+    "unsupported_claim_type_behavior",
+    "claim_type_routing"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "claim_validation_policy_v1"
+    },
+    "policy_version": {
+      "const": "claim_validation_policy_v1"
+    },
+    "status": {
+      "const": "FROZEN"
+    },
+    "status_taxonomy_version": {
+      "const": "claim_validation_status_taxonomy_v1"
+    },
+    "reason_code_taxonomy_version": {
+      "const": "claim_validation_reason_codes_v1"
+    },
+    "numeric_policy_version": {
+      "const": "numeric_tolerance_policy_v1"
+    },
+    "direction_normalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "increase_risk",
+        "decrease_risk",
+        "increases_risk",
+        "decreases_risk",
+        "mixed",
+        "neutral",
+        "unknown"
+      ],
+      "properties": {
+        "increase_risk": {
+          "const": "increase_risk"
+        },
+        "decrease_risk": {
+          "const": "decrease_risk"
+        },
+        "increases_risk": {
+          "const": "increase_risk"
+        },
+        "decreases_risk": {
+          "const": "decrease_risk"
+        },
+        "mixed": {
+          "const": "mixed"
+        },
+        "neutral": {
+          "const": "neutral"
+        },
+        "unknown": {
+          "const": "unknown"
+        }
+      }
+    },
+    "near_zero_shap_epsilon": {
+      "const": 1e-12
+    },
+    "evidence_exposure_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "validation_source",
+        "hidden_IR_prohibited",
+        "s0"
+      ],
+      "properties": {
+        "validation_source": {
+          "const": "canonical_evidence_package"
+        },
+        "hidden_IR_prohibited": {
+          "const": true
+        },
+        "s0": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "exposed_claim_families",
+            "unexposed_claim_families",
+            "unexposed_behavior"
+          ],
+          "properties": {
+            "exposed_claim_families": {
+              "const": [
+                "PREDICTION"
+              ]
+            },
+            "unexposed_claim_families": {
+              "const": [
+                "FEATURE",
+                "CONCEPT",
+                "DIRECTION",
+                "MAGNITUDE",
+                "RANKING"
+              ]
+            },
+            "unexposed_behavior": {
+              "const": "UNSUPPORTED_WITH_EXPOSURE_REASON"
+            }
+          }
+        }
+      }
+    },
+    "one_result_per_claim": {
+      "const": true
+    },
+    "unresolved_join_behavior": {
+      "const": "ERROR"
+    },
+    "unsupported_claim_type_behavior": {
+      "const": "ERROR"
+    },
+    "claim_type_routing": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": {
+        "$ref": "#/$defs/route"
+      }
+    }
+  },
+  "$defs": {
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_type",
+        "validator_family",
+        "allowed_statuses",
+        "allowed_reason_families",
+        "required_expected_fields",
+        "required_observed_fields",
+        "not_applicable_allowed",
+        "hard_safety_failure_possible"
+      ],
+      "properties": {
+        "claim_type": {
+          "$ref": "#/$defs/claimType"
+        },
+        "validator_family": {
+          "enum": [
+            "PREDICTION",
+            "FEATURE",
+            "DIRECTION",
+            "CONCEPT",
+            "MAGNITUDE",
+            "RANKING",
+            "NUMERIC",
+            "POLICY",
+            "UNCERTAINTY"
+          ]
+        },
+        "allowed_statuses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "SUPPORTED",
+              "UNSUPPORTED",
+              "CONTRADICTED",
+              "NOT_VERIFIABLE",
+              "NOT_APPLICABLE"
+            ]
+          }
+        },
+        "allowed_reason_families": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "MATCH",
+              "PREDICTION",
+              "EXPOSURE",
+              "FEATURE",
+              "CONCEPT",
+              "DIRECTION",
+              "NUMERIC",
+              "RANKING",
+              "MAGNITUDE",
+              "UNCERTAINTY",
+              "POLICY"
+            ]
+          }
+        },
+        "required_expected_fields": {
+          "$ref": "#/$defs/factFieldArray"
+        },
+        "required_observed_fields": {
+          "$ref": "#/$defs/factFieldArray"
+        },
+        "not_applicable_allowed": {
+          "type": "boolean"
+        },
+        "hard_safety_failure_possible": {
+          "type": "boolean"
+        }
+      }
+    },
+    "factFieldArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "prediction_label",
+          "probability",
+          "numeric_value",
+          "numeric_unit",
+          "numeric_role",
+          "feature_id",
+          "concept_id",
+          "direction",
+          "magnitude",
+          "rank",
+          "certainty",
+          "causal_strength",
+          "exposure_status"
+        ]
+      }
+    },
+    "claimType": {
+      "enum": [
+        "prediction",
+        "feature_presence",
+        "feature_direction",
+        "concept_presence",
+        "concept_direction",
+        "magnitude",
+        "ranking",
+        "numeric",
+        "causal",
+        "uncertainty",
+        "distributed_evidence",
+        "recommendation",
+        "limitation"
+      ]
+    }
+  }
+}

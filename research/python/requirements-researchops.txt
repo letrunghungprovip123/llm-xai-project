@@ -1,0 +1,16 @@
+# ResearchOps Phase 1-2 deterministic tooling
+pydantic>=2.13,<3
+PyYAML>=6.0,<7
+pytest>=9,<10
+jsonschema>=4.26,<5
+boto3>=1.43,<2
+SQLAlchemy>=2.0,<3
+alembic>=1.18,<2
+psycopg[binary]>=3.2,<4
+
+# ResearchOps Phase 5 experiment tracking and model registry
+mlflow==3.14.0
+
+# ResearchOps Phase 6 workflow orchestration
+prefect==3.7.8
+asyncpg>=0.30,<1

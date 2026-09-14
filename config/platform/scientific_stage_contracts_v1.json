@@ -1,0 +1,924 @@
+{
+  "schema_version": "scientific_stage_contracts_v1",
+  "status": "ACTIVE",
+  "stage_count": 42,
+  "stages": [
+    {
+      "stage_id": "data.audit",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "RAW_DATA_AUDIT_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/batch_1_summary.json",
+      "failure_evidence_globs": [
+        "data/manifests/raw_file_manifest.json",
+        "data/manifests/batch_1_summary.json"
+      ],
+      "outputs": [
+        {
+          "name": "audit",
+          "contract": "data_audit_report",
+          "patterns": [
+            "data/manifests/raw_file_manifest.json",
+            "data/manifests/batch_1_summary.json",
+            "data/reports/raw_schema_summary.csv",
+            "data/reports/raw_schema_audit_report.md",
+            "data/reports/relationship_audit_report.md",
+            "data/reports/batch_1_summary.md"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "data.target_audit",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "TARGET_AUDIT_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/batch_a2_target_missing_audit_summary.json",
+      "failure_evidence_globs": [
+        "data/manifests/batch_a2_target_missing_audit_summary.json"
+      ],
+      "outputs": [
+        {
+          "name": "target_audit",
+          "contract": "target_audit_report",
+          "patterns": [
+            "data/manifests/batch_a2_target_missing_audit_summary.json",
+            "data/reports/target_audit_report.md",
+            "data/reports/missing_summary.csv",
+            "data/reports/anomaly_summary.csv",
+            "data/reports/missing_anomaly_report.md",
+            "data/reports/batch_a2_target_missing_audit_summary.md"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "data.feature_engineering",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "FEATURE_ENGINEERING_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/batch_b_feature_engineering_summary.json",
+      "failure_evidence_globs": [
+        "data/manifests/batch_b_feature_engineering_summary.json"
+      ],
+      "outputs": [
+        {
+          "name": "features",
+          "contract": "feature_groups",
+          "patterns": [
+            "data/interim/*_features.parquet",
+            "data/manifests/batch_b_feature_engineering_summary.json",
+            "data/reports/feature_group_build_report.md",
+            "data/reports/batch_b_feature_engineering_summary.md"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "data.feature_matrix",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "FEATURE_MATRIX_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/batch_c_feature_matrix_registry_summary.json",
+      "failure_evidence_globs": [
+        "data/manifests/batch_c_feature_matrix_registry_summary.json"
+      ],
+      "outputs": [
+        {
+          "name": "matrix",
+          "contract": "feature_matrix",
+          "patterns": [
+            "data/processed/feature_matrix_full.parquet",
+            "data/processed/target_full.parquet",
+            "ml/registry/feature_registry.csv",
+            "ml/registry/feature_registry.yaml",
+            "ml/registry/model_feature_columns.json",
+            "ml/registry/model_feature_metadata.json",
+            "data/manifests/batch_c_feature_matrix_registry_summary.json",
+            "data/reports/feature_matrix_registry_report.md",
+            "data/reports/batch_c_feature_matrix_registry_summary.md"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "data.split",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "DATA_SPLIT_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/split_manifest.json",
+      "failure_evidence_globs": [
+        "data/manifests/split_manifest.json",
+        "data/manifests/batch_d_leakage_split_summary.json"
+      ],
+      "outputs": [
+        {
+          "name": "split",
+          "contract": "data_split",
+          "patterns": [
+            "data/processed/splits/*.parquet",
+            "data/manifests/split_manifest.json",
+            "data/manifests/batch_d_leakage_split_summary.json",
+            "data/reports/leakage_audit_report.md",
+            "data/reports/split_report.md",
+            "data/reports/batch_d_leakage_split_summary.md"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "data.preprocessing",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "PREPROCESSING_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/preprocessing_manifest.json",
+      "failure_evidence_globs": [
+        "data/manifests/batch_e_input_validation_failed.json",
+        "data/manifests/batch_e_target_validation_failed.json",
+        "data/manifests/preprocessing_manifest.json"
+      ],
+      "outputs": [
+        {
+          "name": "preprocessed",
+          "contract": "preprocessed_data",
+          "patterns": [
+            "data/processed/model_ready/**/*.parquet",
+            "artifacts/preprocessing/*.joblib",
+            "ml/registry/preprocessed_feature_*.json",
+            "data/manifests/preprocessing_manifest.json",
+            "data/manifests/batch_e_preprocessing_summary.json",
+            "data/reports/preprocessing_report.md",
+            "data/reports/batch_e_preprocessing_summary.md"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "ml.train",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "MODEL_TRAINING_READY",
+      "adapter_id": "model_training_manifest_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/model_training_manifest.json",
+      "failure_evidence_globs": [
+        "data/manifests/model_training_manifest.json"
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "contract": "trained_model",
+          "patterns": [
+            "artifacts/models/*.joblib",
+            "data/manifests/model_training_manifest.json",
+            "ml/registry/model_registry.json"
+          ]
+        },
+        {
+          "name": "metrics",
+          "contract": "model_metrics",
+          "patterns": [
+            "data/reports/model_metrics_summary.csv",
+            "data/reports/model_training_report.md"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "ml.model_ready_audit",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "MODEL_READY",
+      "adapter_id": "model_ready_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/model_ready_audit_manifest.json",
+      "failure_evidence_globs": [
+        "data/manifests/model_ready_audit_manifest.json"
+      ],
+      "outputs": [
+        {
+          "name": "report",
+          "contract": "model_ready_report",
+          "patterns": [
+            "data/manifests/model_ready_audit_manifest.json",
+            "data/reports/model_ready_audit/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "xai.generate",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "XAI_READY",
+      "adapter_id": "xai_manifest_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/xai_evidence_manifest.json",
+      "failure_evidence_globs": [
+        "data/manifests/xai_evidence_manifest.json"
+      ],
+      "outputs": [
+        {
+          "name": "xai",
+          "contract": "xai_artifacts",
+          "patterns": [
+            "data/manifests/xai_evidence_manifest.json",
+            "data/reports/xai/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "xai.quality",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "XAI_QUALITY_READY",
+      "adapter_id": "xai_quality_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/xai_evidence_quality_manifest.json",
+      "failure_evidence_globs": [
+        "data/manifests/xai_evidence_quality_manifest.json"
+      ],
+      "outputs": [
+        {
+          "name": "quality",
+          "contract": "xai_quality_report",
+          "patterns": [
+            "data/manifests/xai_evidence_quality_manifest.json",
+            "data/reports/xai_quality/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "xai.explanation_ir",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "EXPLANATION_IR_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/explanation_ir_v2_manifest_evaluation.json",
+      "failure_evidence_globs": [
+        "data/manifests/explanation_ir_v2_manifest_evaluation.json"
+      ],
+      "outputs": [
+        {
+          "name": "ir",
+          "contract": "explanation_ir",
+          "patterns": [
+            "artifacts/**/explanation_ir*.jsonl",
+            "data/manifests/explanation_ir_v2_manifest_evaluation.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "xai.evidence_packages",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "EVIDENCE_PACKAGES_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/evidence_exposure_manifest_evaluation.json",
+      "failure_evidence_globs": [
+        "data/manifests/evidence_exposure_manifest_evaluation.json"
+      ],
+      "outputs": [
+        {
+          "name": "evidence",
+          "contract": "evidence_packages",
+          "patterns": [
+            "artifacts/**/evidence_packages*.jsonl",
+            "data/manifests/evidence_exposure_manifest_evaluation.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "xai.evaluation_subset",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "EVALUATION_SUBSET_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/evidence_exposure_manifest_evaluation.json",
+      "failure_evidence_globs": [
+        "data/manifests/evidence_exposure_manifest_evaluation.json"
+      ],
+      "outputs": [
+        {
+          "name": "subset",
+          "contract": "evaluation_subset",
+          "patterns": [
+            "artifacts/**/evaluation_subset*.json",
+            "data/manifests/evidence_exposure_manifest_evaluation.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "llm.generate",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "LLM_GENERATION_COMPLETE",
+      "adapter_id": "generation_manifest_v1",
+      "adapter_version": 1,
+      "report_glob": "data/manifests/llm_explanation_manifest_evaluation_llm_api.json",
+      "failure_evidence_globs": [
+        "data/manifests/llm_explanation_manifest_evaluation_llm_api.json"
+      ],
+      "outputs": [
+        {
+          "name": "generations",
+          "contract": "raw_generations",
+          "patterns": [
+            "artifacts/**/generations/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "llm.aggregate",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "GENERATION_AGGREGATION_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "artifacts/**/aggregated_generations*.jsonl",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "aggregated",
+          "contract": "aggregated_generations",
+          "patterns": [
+            "artifacts/**/aggregated_generations*.jsonl"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "llm.filter_deepseek",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "FILTERED_GENERATIONS_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "artifacts/**/filtered_generations*.jsonl",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "filtered",
+          "contract": "filtered_generations",
+          "patterns": [
+            "artifacts/**/filtered_generations*.jsonl"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "llm.canonicalize",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "CANONICAL_GENERATIONS_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "artifacts/**/canonical_generation*.jsonl",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "canonical",
+          "contract": "canonical_generations",
+          "patterns": [
+            "artifacts/**/canonical_generation*.jsonl"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "llm.contract_validate",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "NARRATIVE_CONTRACT_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "artifacts/**/contract_validation*.jsonl",
+      "failure_evidence_globs": [
+        "artifacts/**/contract_validation*.jsonl"
+      ],
+      "outputs": [
+        {
+          "name": "contract_results",
+          "contract": "narrative_contract_results",
+          "patterns": [
+            "artifacts/**/contract_validation*.jsonl"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "claims.extract",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "ATOMIC_CLAIMS_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "artifacts/**/claims_extracted*.jsonl",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "claims",
+          "contract": "extracted_claims",
+          "patterns": [
+            "artifacts/**/claims_extracted*.jsonl"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "claims.finalize_replay",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "FINAL_CLAIMS_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "artifacts/**/final_claims*.jsonl",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "final_claims",
+          "contract": "final_claims",
+          "patterns": [
+            "artifacts/**/final_claims*.jsonl"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "claims.finalize_semantic",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "SEMANTIC_FINAL_CLAIMS_READY",
+      "adapter_id": "manifest_status_v1",
+      "adapter_version": 1,
+      "report_glob": "artifacts/**/semantic_final_claims*.jsonl",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "semantic_claims",
+          "contract": "semantic_final_claims",
+          "patterns": [
+            "artifacts/**/semantic_final_claims*.jsonl"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "claims.validate",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "CLAIM_VALIDATION_READY",
+      "adapter_id": "claim_validation_release_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/claim_validation_results.jsonl",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/claim_validation_results.jsonl"
+      ],
+      "outputs": [
+        {
+          "name": "validation",
+          "contract": "claim_validation_results",
+          "patterns": [
+            "data/reports/llm_validation/**/claim_validation_results.jsonl"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "calibration.prepare",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "CALIBRATION_SAMPLE_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/calibration_sample*",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "sample",
+          "contract": "calibration_sample",
+          "patterns": [
+            "data/reports/llm_validation/**/calibration_sample*"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "calibration.evaluate",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "CALIBRATION_EVALUATION_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/calibration_report.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/calibration_report.json"
+      ],
+      "outputs": [
+        {
+          "name": "evaluation",
+          "contract": "calibration_evaluation",
+          "patterns": [
+            "data/reports/llm_validation/**/calibration_report.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "release.claim_measurement",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "CLAIM_MEASUREMENT_RELEASE_READY",
+      "adapter_id": "claim_validation_release_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/claim_validation_release.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/claim_validation_release.json"
+      ],
+      "outputs": [
+        {
+          "name": "release",
+          "contract": "claim_measurement_release",
+          "patterns": [
+            "data/reports/llm_validation/**/claim_validation_release.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "analytics.data_mart",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "DATA_MART_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/data_mart/data_mart_validation.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/data_mart/data_mart_validation.json"
+      ],
+      "outputs": [
+        {
+          "name": "data_mart",
+          "contract": "research_data_mart",
+          "patterns": [
+            "data/reports/llm_validation/**/data_mart/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "analytics.metrics",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "ANALYTICAL_MART_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/data_mart/metric_validation.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/data_mart/metric_validation.json"
+      ],
+      "outputs": [
+        {
+          "name": "analytical_mart",
+          "contract": "analytical_mart",
+          "patterns": [
+            "data/reports/llm_validation/**/data_mart/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "analytics.statistics",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "STATISTICAL_CORE_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/statistical_analysis/statistical_validation.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/statistical_analysis/statistical_validation.json"
+      ],
+      "outputs": [
+        {
+          "name": "statistics",
+          "contract": "statistical_core",
+          "patterns": [
+            "data/reports/llm_validation/**/statistical_analysis/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "analytics.diagnostics",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "DIAGNOSTICS_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/diagnostics/diagnostic_validation.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/diagnostics/diagnostic_validation.json"
+      ],
+      "outputs": [
+        {
+          "name": "diagnostics",
+          "contract": "diagnostics_release",
+          "patterns": [
+            "data/reports/llm_validation/**/diagnostics/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "analytics.decision_support",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "DECISION_SUPPORT_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/decision_support/decision_validation.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/decision_support/decision_validation.json"
+      ],
+      "outputs": [
+        {
+          "name": "decision",
+          "contract": "decision_support_release",
+          "patterns": [
+            "data/reports/llm_validation/**/decision_support/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "analytics.validator_sensitivity",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "VALIDATOR_SENSITIVITY_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/validator_sensitivity/validator_sensitivity_validation.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/validator_sensitivity/validator_sensitivity_validation.json"
+      ],
+      "outputs": [
+        {
+          "name": "sensitivity",
+          "contract": "validator_sensitivity_release",
+          "patterns": [
+            "data/reports/llm_validation/**/validator_sensitivity/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "release.thesis_report",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "REPORT_WRITING_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/report_release/report_readiness_validation.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/report_release/report_readiness_validation.json"
+      ],
+      "outputs": [
+        {
+          "name": "report",
+          "contract": "thesis_report_release",
+          "patterns": [
+            "data/reports/llm_validation/**/report_release/report_numbers.json",
+            "data/reports/llm_validation/**/report_release/report_source_index.csv",
+            "data/reports/llm_validation/**/report_release/report_release_manifest.json",
+            "data/reports/llm_validation/**/report_release/report_readiness_validation.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "release.baseline_comparison",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "BASELINE_COMPARISON_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/baseline_comparison/baseline_comparison_validation.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/baseline_comparison/baseline_comparison_validation.json"
+      ],
+      "outputs": [
+        {
+          "name": "baseline",
+          "contract": "baseline_comparison_release",
+          "patterns": [
+            "data/reports/llm_validation/**/baseline_comparison/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "release.visualization_data",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "VISUALIZATION_DATA_V2_READY",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": "data/reports/llm_validation/**/visualization_v2/visualization_validation.json",
+      "failure_evidence_globs": [
+        "data/reports/llm_validation/**/visualization_v2/visualization_validation.json"
+      ],
+      "outputs": [
+        {
+          "name": "visualization",
+          "contract": "visualization_data_release",
+          "patterns": [
+            "data/reports/llm_validation/**/visualization_v2/**"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "dashboard.i18n_certification",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "DASHBOARD_I18N_CERTIFIED",
+      "adapter_id": "dashboard_i18n_certification_v1",
+      "adapter_version": 1,
+      "report_glob": "release/thesis_dashboard_v1/tests/i18n_certification/i18n_certification_summary.json",
+      "failure_evidence_globs": [
+        "release/thesis_dashboard_v1/tests/i18n_certification/i18n_certification_summary.json"
+      ],
+      "outputs": [
+        {
+          "name": "certification",
+          "contract": "dashboard_i18n_certification",
+          "patterns": [
+            "release/thesis_dashboard_v1/tests/i18n_certification/i18n_certification_summary.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "ops.mlflow_register",
+      "stage_version": 3,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "MLFLOW_MODEL_REGISTERED",
+      "adapter_id": "mlflow_registration_receipt_v1",
+      "adapter_version": 1,
+      "report_glob": "artifacts/researchops/**/mlflow_registration_receipt.json",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "receipt",
+          "contract": "mlflow_registration_receipt",
+          "patterns": [
+            "artifacts/researchops/**/mlflow_registration_receipt.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "ops.verify_source_environment",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "SOURCE_ENVIRONMENT_VERIFIED",
+      "adapter_id": "environment_verification_v1",
+      "adapter_version": 1,
+      "report_glob": ".researchops/runs/**/environment_verification_report.json",
+      "failure_evidence_globs": [
+        ".researchops/runs/**/environment_verification_report.json"
+      ],
+      "outputs": [
+        {
+          "name": "report",
+          "contract": "environment_verification_report",
+          "patterns": [
+            ".researchops/runs/**/environment_verification_report.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "release.complete_bundle",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "COMPLETE_RELEASE_BUNDLE_READY",
+      "adapter_id": "complete_release_bundle_v1",
+      "adapter_version": 1,
+      "report_glob": ".researchops/runs/**/complete_release_bundle.json",
+      "failure_evidence_globs": [
+        ".researchops/runs/**/complete_release_bundle.json"
+      ],
+      "outputs": [
+        {
+          "name": "bundle",
+          "contract": "complete_release_bundle",
+          "patterns": [
+            ".researchops/runs/**/complete_release_bundle.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "ops.prefect_acceptance",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "PREFECT_ACCEPTANCE_READY",
+      "adapter_id": "execution_success_v1",
+      "adapter_version": 1,
+      "report_glob": ".researchops/runs/**/orchestration_acceptance_result.json",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "result",
+          "contract": "orchestration_acceptance_result",
+          "patterns": [
+            ".researchops/runs/**/orchestration_acceptance_result.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "ops.prefect_approval_acceptance",
+      "stage_version": 2,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "PREFECT_APPROVAL_ACCEPTANCE_READY",
+      "adapter_id": "execution_success_v1",
+      "adapter_version": 1,
+      "report_glob": ".researchops/runs/**/orchestration_approval_acceptance_result.json",
+      "failure_evidence_globs": [],
+      "outputs": [
+        {
+          "name": "result",
+          "contract": "orchestration_approval_acceptance_result",
+          "patterns": [
+            ".researchops/runs/**/orchestration_approval_acceptance_result.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "ops.release_promote",
+      "stage_version": 1,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "RELEASE_PROMOTION_COMPLETED",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": ".researchops/runs/**/release_promotion_receipt.json",
+      "failure_evidence_globs": [
+        ".researchops/runs/**/release_promotion_receipt.json"
+      ],
+      "outputs": [
+        {
+          "name": "receipt",
+          "contract": "release_promotion_receipt",
+          "patterns": [
+            ".researchops/runs/**/release_promotion_receipt.json"
+          ]
+        }
+      ]
+    },
+    {
+      "stage_id": "ops.model_promote",
+      "stage_version": 1,
+      "execution_gate": "STAGE_EXECUTION_SUCCEEDED",
+      "semantic_gate": "MODEL_PROMOTION_COMPLETED",
+      "adapter_id": "standard_check_report_v1",
+      "adapter_version": 1,
+      "report_glob": ".researchops/runs/**/model_promotion_receipt.json",
+      "failure_evidence_globs": [
+        ".researchops/runs/**/model_promotion_receipt.json"
+      ],
+      "outputs": [
+        {
+          "name": "receipt",
+          "contract": "model_promotion_receipt",
+          "patterns": [
+            ".researchops/runs/**/model_promotion_receipt.json"
+          ]
+        }
+      ]
+    }
+  ]
+}

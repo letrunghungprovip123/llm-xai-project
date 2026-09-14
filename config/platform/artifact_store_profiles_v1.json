@@ -1,0 +1,28 @@
+{
+  "schema_version": "artifact_store_profiles_v1",
+  "status": "ACTIVE",
+  "profiles": {
+    "development-filesystem": {
+      "backend": "filesystem",
+      "root": "artifacts/researchops",
+      "read_only": false
+    },
+    "test-filesystem": {
+      "backend": "filesystem",
+      "root": ".tmp/researchops-artifacts",
+      "read_only": false
+    },
+    "development-minio": {
+      "backend": "s3",
+      "settings_source": "environment",
+      "environment_prefix": "RESEARCHOPS_S3_",
+      "read_only": false
+    },
+    "staging-s3": {
+      "backend": "s3",
+      "settings_source": "environment",
+      "environment_prefix": "RESEARCHOPS_S3_",
+      "read_only": false
+    }
+  }
+}

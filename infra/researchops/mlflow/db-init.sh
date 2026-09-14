@@ -1,0 +1,57 @@
+#!/bin/sh
+set -eu
+
+: "${RESEARCHOPS_POSTGRES_USER:?}"
+: "${RESEARCHOPS_POSTGRES_PASSWORD:?}"
+: "${MLFLOW_POSTGRES_DB:?}"
+: "${MLFLOW_POSTGRES_USER:?}"
+: "${MLFLOW_POSTGRES_PASSWORD:?}"
+: "${POSTGRES_HOST:=researchops-postgres}"
+: "${POSTGRES_PORT:=5432}"
+
+case "$MLFLOW_POSTGRES_DB" in
+  *[!A-Za-z0-9_]*|'') echo "Invalid MLFLOW_POSTGRES_DB" >&2; exit 2 ;;
+esac
+case "$MLFLOW_POSTGRES_USER" in
+  *[!A-Za-z0-9_]*|'') echo "Invalid MLFLOW_POSTGRES_USER" >&2; exit 2 ;;
+esac
+case "$MLFLOW_POSTGRES_PASSWORD" in
+  *[!A-Za-z0-9_-]*|'') echo "MLFLOW_POSTGRES_PASSWORD must be URL-safe" >&2; exit 2 ;;
+esac
+
+export PGPASSWORD="$RESEARCHOPS_POSTGRES_PASSWORD"
+
+until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+  -U "$RESEARCHOPS_POSTGRES_USER" -d postgres >/dev/null 2>&1; do
+  sleep 1
+done
+
+ROLE_EXISTS="$(psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+  -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -tAc \
+  "SELECT 1 FROM pg_roles WHERE rolname='${MLFLOW_POSTGRES_USER}'")"
+
+if [ "$ROLE_EXISTS" != "1" ]; then
+  psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+    -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -v ON_ERROR_STOP=1 \
+    -c "CREATE ROLE \"${MLFLOW_POSTGRES_USER}\" LOGIN PASSWORD '${MLFLOW_POSTGRES_PASSWORD}'"
+else
+  psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+    -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -v ON_ERROR_STOP=1 \
+    -c "ALTER ROLE \"${MLFLOW_POSTGRES_USER}\" WITH LOGIN PASSWORD '${MLFLOW_POSTGRES_PASSWORD}'"
+fi
+
+DB_EXISTS="$(psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+  -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -tAc \
+  "SELECT 1 FROM pg_database WHERE datname='${MLFLOW_POSTGRES_DB}'")"
+
+if [ "$DB_EXISTS" != "1" ]; then
+  createdb -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+    -U "$RESEARCHOPS_POSTGRES_USER" \
+    -O "$MLFLOW_POSTGRES_USER" "$MLFLOW_POSTGRES_DB"
+fi
+
+psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" \
+  -U "$RESEARCHOPS_POSTGRES_USER" -d postgres -v ON_ERROR_STOP=1 \
+  -c "ALTER DATABASE \"${MLFLOW_POSTGRES_DB}\" OWNER TO \"${MLFLOW_POSTGRES_USER}\""
+
+echo "MLFLOW_DATABASE_BOOTSTRAP=PASS"

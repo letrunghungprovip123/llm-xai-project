@@ -1,0 +1,128 @@
+{
+  "schema_version": "prefect_deployments_v1",
+  "status": "ACTIVE",
+  "work_pool_name": "researchops-local-process",
+  "source_directory": "/workspace",
+  "deployments": [
+    {
+      "flow_id": "verify_source_environment",
+      "flow_name": "verify-source-environment",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.verify_source_environment",
+      "work_queue_name": "verification",
+      "manual_only": true
+    },
+    {
+      "flow_id": "train_model_release",
+      "flow_name": "train-model-release",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.train_model_release",
+      "work_queue_name": "cpu-heavy",
+      "manual_only": true
+    },
+    {
+      "flow_id": "register_verified_training_release",
+      "flow_name": "register-verified-training-release",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.register_verified_training_release",
+      "work_queue_name": "release",
+      "manual_only": true
+    },
+    {
+      "flow_id": "build_xai_release",
+      "flow_name": "build-xai-release",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.build_xai_release",
+      "work_queue_name": "cpu-heavy",
+      "manual_only": true
+    },
+    {
+      "flow_id": "build_evidence_release",
+      "flow_name": "build-evidence-release",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.build_evidence_release",
+      "work_queue_name": "verification",
+      "manual_only": true
+    },
+    {
+      "flow_id": "generate_llm_batch",
+      "flow_name": "generate-llm-batch",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.generate_llm_batch",
+      "work_queue_name": "provider-llm",
+      "manual_only": true
+    },
+    {
+      "flow_id": "build_claim_measurement_release",
+      "flow_name": "build-claim-measurement-release",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.build_claim_measurement_release",
+      "work_queue_name": "provider-llm",
+      "manual_only": true
+    },
+    {
+      "flow_id": "build_analytical_release",
+      "flow_name": "build-analytical-release",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.build_analytical_release",
+      "work_queue_name": "release",
+      "manual_only": true
+    },
+    {
+      "flow_id": "build_visualization_release",
+      "flow_name": "build-visualization-release",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.build_visualization_release",
+      "work_queue_name": "release",
+      "manual_only": true
+    },
+    {
+      "flow_id": "certify_dashboard_release",
+      "flow_name": "certify-dashboard-release",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.certify_dashboard_release",
+      "work_queue_name": "release",
+      "manual_only": true
+    },
+    {
+      "flow_id": "build_complete_release_bundle",
+      "flow_name": "build-complete-release-bundle",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.build_complete_release_bundle",
+      "work_queue_name": "release",
+      "manual_only": true
+    },
+    {
+      "flow_id": "prefect_acceptance_fixture",
+      "flow_name": "prefect-acceptance-fixture",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.prefect_acceptance_fixture",
+      "work_queue_name": "verification",
+      "manual_only": true
+    },
+    {
+      "flow_id": "prefect_approval_acceptance_fixture",
+      "flow_name": "prefect-approval-acceptance-fixture",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.prefect_approval_acceptance_fixture",
+      "work_queue_name": "verification",
+      "manual_only": true
+    },
+    {
+      "flow_id": "promote_research_release",
+      "flow_name": "promote-research-release",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.promote_research_release",
+      "work_queue_name": "release",
+      "manual_only": true
+    },
+    {
+      "flow_id": "promote_model_version",
+      "flow_name": "promote-model-version",
+      "deployment_name": "local",
+      "entrypoint": "research.python.researchops.orchestration.prefect_adapter.flows.promote_model_version",
+      "work_queue_name": "release",
+      "manual_only": true
+    }
+  ]
+}

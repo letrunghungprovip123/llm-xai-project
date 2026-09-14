@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mlflow_registry_policy_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "registered_model_name", "aliases", "candidate_selection_source", "promotion_requirements", "non_waivable_requirements", "training_code_may_assign_champion"],
+  "properties": {
+    "schema_version": {"const": "mlflow_registry_policy_v1"},
+    "status": {"const": "ACTIVE"},
+    "registered_model_name": {"type": "string", "minLength": 1},
+    "aliases": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"}},
+    "candidate_selection_source": {"type": "string", "minLength": 1},
+    "promotion_requirements": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "non_waivable_requirements": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "training_code_may_assign_champion": {"const": false}
+  }
+}

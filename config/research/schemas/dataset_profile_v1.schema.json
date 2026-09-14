@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dataset_profile_v1.schema.json",
+  "title": "Dataset Profile V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "dataset_id", "dataset_version", "domain", "task_type",
+    "entity", "target", "adapter", "capabilities"
+  ],
+  "properties": {
+    "schema_version": {"const": "dataset_profile_v1"},
+    "dataset_id": {"type": "string", "minLength": 1},
+    "dataset_version": {"type": "string", "minLength": 1},
+    "domain": {"const": "credit_risk"},
+    "task_type": {"const": "binary_classification"},
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entity_type", "source_id_column"],
+      "properties": {
+        "entity_type": {"type": "string", "minLength": 1},
+        "source_id_column": {"type": "string", "minLength": 1}
+      }
+    },
+    "target": {
+      "$ref": "target_contract_v1.schema.json"
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter_id", "adapter_version"],
+      "properties": {
+        "adapter_id": {"type": "string", "minLength": 1},
+        "adapter_version": {"type": "string", "minLength": 1}
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supports_stratified_split": {"type": "boolean"},
+        "supports_feature_level_xai": {"type": "boolean"},
+        "supports_semantic_registry": {"type": "boolean"},
+        "supports_case_strata": {"type": "boolean"},
+        "supports_adaptive_evidence": {"type": "boolean"},
+        "has_stable_entity_id": {"type": "boolean"},
+        "feature_count": {"type": ["integer", "null"], "minimum": 1}
+      }
+    }
+  }
+}

@@ -1,0 +1,320 @@
+{
+  "check_count": 54,
+  "checks": {
+    "all_output_versions_are_v2": {
+      "expected": [
+        "v2.0"
+      ],
+      "observed": [
+        "v2.0"
+      ],
+      "passed": true
+    },
+    "baseline_comparison_ready": {
+      "expected": "BASELINE_COMPARISON_READY",
+      "observed": "BASELINE_COMPARISON_READY",
+      "passed": true
+    },
+    "baseline_output_artifacts_verified": {
+      "expected": 7,
+      "observed": 7,
+      "passed": true
+    },
+    "certified_denominator_parity": {
+      "expected": {
+        "claims": 14667,
+        "planned": 648,
+        "unusable": 10,
+        "usable": 638
+      },
+      "observed": {
+        "claims": 14667,
+        "planned": 648,
+        "unusable": 10,
+        "usable": 638
+      },
+      "passed": true
+    },
+    "dashboard_contract_datasets_present": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "dashboard_contract_has_nine_pages": {
+      "expected": 9,
+      "observed": 9,
+      "passed": true
+    },
+    "dashboard_contract_parent_release_matches": {
+      "expected": "thesis-report-v1",
+      "observed": "thesis-report-v1",
+      "passed": true
+    },
+    "decision_scenarios_exclude_template": {
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    "dictionary_covers_all_fields": {
+      "expected": 893,
+      "observed": 893,
+      "passed": true
+    },
+    "heterogeneity_generator_partition": {
+      "expected": {
+        "LLM": 648,
+        "TEMPLATE": 216
+      },
+      "observed": {
+        "LLM": 648,
+        "TEMPLATE": 216
+      },
+      "passed": true
+    },
+    "metric_visibility_has_four_tiers": {
+      "expected": 4,
+      "observed": 4,
+      "passed": true
+    },
+    "narrative_generator_partition": {
+      "expected": {
+        "LLM": 648,
+        "TEMPLATE": 216
+      },
+      "observed": {
+        "LLM": 648,
+        "TEMPLATE": 216
+      },
+      "passed": true
+    },
+    "no_infinite_numeric_outputs": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "no_prediction_only_baseline_label": {
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    "parent_report_artifacts_verified": {
+      "expected": 12,
+      "observed": 12,
+      "passed": true
+    },
+    "primary_option_table_excludes_template": {
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    "primary_statistical_units_are_case_level": {
+      "expected": 36,
+      "observed": [
+        36
+      ],
+      "passed": true
+    },
+    "release_metadata_commit_present": {
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    "report_release_ready": {
+      "expected": "REPORT_WRITING_READY",
+      "observed": "REPORT_WRITING_READY",
+      "passed": true
+    },
+    "row_count_baseline_generation_metrics": {
+      "expected": 216,
+      "observed": 216,
+      "passed": true
+    },
+    "row_count_baseline_option_performance": {
+      "expected": 6,
+      "observed": 6,
+      "passed": true
+    },
+    "row_count_case_heterogeneity_summary": {
+      "expected": 864,
+      "observed": 864,
+      "passed": true
+    },
+    "row_count_certified_report_numbers": {
+      "expected": 18,
+      "observed": 18,
+      "passed": true
+    },
+    "row_count_complete_case_omnibus_tests": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "row_count_conditional_paired_tests": {
+      "expected": 99,
+      "observed": 99,
+      "passed": true
+    },
+    "row_count_dashboard_kpis": {
+      "expected": 22,
+      "observed": 22,
+      "passed": true
+    },
+    "row_count_descriptive_statistics": {
+      "expected": 272,
+      "observed": 272,
+      "passed": true
+    },
+    "row_count_evidence_design_summary": {
+      "expected": 216,
+      "observed": 216,
+      "passed": true
+    },
+    "row_count_evidence_utilization_summary": {
+      "expected": 864,
+      "observed": 864,
+      "passed": true
+    },
+    "row_count_llm_vs_template_case_pairs": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "row_count_llm_vs_template_summary": {
+      "expected": 24,
+      "observed": 24,
+      "passed": true
+    },
+    "row_count_llm_vs_template_tests": {
+      "expected": 105,
+      "observed": 105,
+      "passed": true
+    },
+    "row_count_mechanism_breakdowns": {
+      "expected": 203,
+      "observed": 203,
+      "passed": true
+    },
+    "row_count_narrative_structure_summary": {
+      "expected": 864,
+      "observed": 864,
+      "passed": true
+    },
+    "row_count_omnibus_tests": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "row_count_option_performance": {
+      "expected": 18,
+      "observed": 18,
+      "passed": true
+    },
+    "row_count_paired_tests": {
+      "expected": 33,
+      "observed": 33,
+      "passed": true
+    },
+    "row_count_pipeline_failures": {
+      "expected": 10,
+      "observed": 10,
+      "passed": true
+    },
+    "row_count_recommendation_evidence": {
+      "expected": 85,
+      "observed": 85,
+      "passed": true
+    },
+    "row_count_release_metadata": {
+      "expected": 1,
+      "observed": 1,
+      "passed": true
+    },
+    "row_count_research_question_registry": {
+      "expected": 6,
+      "observed": 6,
+      "passed": true
+    },
+    "row_count_scenario_criterion_contributions": {
+      "expected": 504,
+      "observed": 504,
+      "passed": true
+    },
+    "row_count_scenario_options": {
+      "expected": 90,
+      "observed": 90,
+      "passed": true
+    },
+    "row_count_statistical_sensitivity_summary": {
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    "row_count_unusable_generations": {
+      "expected": 10,
+      "observed": 10,
+      "passed": true
+    },
+    "row_count_validator_generation_pairs": {
+      "expected": 648,
+      "observed": 648,
+      "passed": true
+    },
+    "row_count_validator_metric_summary": {
+      "expected": 112,
+      "observed": 112,
+      "passed": true
+    },
+    "row_count_validator_sensitivity_tests": {
+      "expected": 40,
+      "observed": 40,
+      "passed": true
+    },
+    "rq6_activated_by_baseline_gate": {
+      "expected": "ACTIVE_AFTER_BASELINE_COMPARISON_READY",
+      "observed": "ACTIVE_AFTER_BASELINE_COMPARISON_READY",
+      "passed": true
+    },
+    "six_research_questions_unique": {
+      "expected": 6,
+      "observed": 6,
+      "passed": true
+    },
+    "template_not_human_naturalness_evaluated": {
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    "template_pair_identity_unique": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "utilization_generator_partition": {
+      "expected": {
+        "LLM": 648,
+        "TEMPLATE": 216
+      },
+      "observed": {
+        "LLM": 648,
+        "TEMPLATE": 216
+      },
+      "passed": true
+    },
+    "validator_sensitivity_units_are_case_level": {
+      "expected": 36,
+      "observed": [
+        36
+      ],
+      "passed": true
+    }
+  },
+  "claim_rows_used_as_independent_units": false,
+  "exit_gate": "VISUALIZATION_DATA_V2_READY",
+  "failed_check_count": 0,
+  "passed": true,
+  "research_question_count": 6,
+  "schema_version": "visualization_validation_v2",
+  "template_baseline_enabled": true,
+  "template_is_fourth_llm": false,
+  "visualization_version": "v2.0"
+}

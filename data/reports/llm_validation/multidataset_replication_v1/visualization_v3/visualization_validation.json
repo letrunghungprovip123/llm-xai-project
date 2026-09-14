@@ -1,0 +1,116 @@
+{
+  "checks": {
+    "case_identity": {
+      "expected": 72,
+      "observed": 72,
+      "passed": true
+    },
+    "finite_numeric_values": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "option_identity": {
+      "expected": 36,
+      "observed": 36,
+      "passed": true
+    },
+    "report_number_referential_integrity": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "robust_recommendation_preserved": {
+      "expected": "NO_ROBUST_RECOMMENDATION",
+      "observed": [
+        "NO_ROBUST_RECOMMENDATION"
+      ],
+      "passed": true
+    },
+    "scientific_recomputation_forbidden": {
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    "structural_row_counts": {
+      "expected": {},
+      "observed": {},
+      "passed": true
+    },
+    "table_registry_exact": {
+      "expected": [
+        "case_claim_diagnostics",
+        "case_detail_capabilities",
+        "case_generation_metrics",
+        "case_index",
+        "claim_type_profile",
+        "contrast_concordance",
+        "cross_dataset_effects",
+        "cross_dataset_eligibility",
+        "cross_dataset_option_performance",
+        "decision_option_assessment",
+        "failure_decomposition",
+        "findings",
+        "limitations",
+        "margin_sensitivity_summary",
+        "metric_dictionary",
+        "metric_sensitivity",
+        "noninferiority_results",
+        "omnibus_effects",
+        "option_performance",
+        "pareto_frontier",
+        "planned_contrasts",
+        "population_contrast_sensitivity",
+        "population_effect_sensitivity",
+        "rank_stability",
+        "recommendation_sensitivity",
+        "recommendations",
+        "report_source_index",
+        "research_questions",
+        "robustness_summary",
+        "scenario_options",
+        "study_summary",
+        "visualization_dictionary"
+      ],
+      "observed": [
+        "case_claim_diagnostics",
+        "case_detail_capabilities",
+        "case_generation_metrics",
+        "case_index",
+        "claim_type_profile",
+        "contrast_concordance",
+        "cross_dataset_effects",
+        "cross_dataset_eligibility",
+        "cross_dataset_option_performance",
+        "decision_option_assessment",
+        "failure_decomposition",
+        "findings",
+        "limitations",
+        "margin_sensitivity_summary",
+        "metric_dictionary",
+        "metric_sensitivity",
+        "noninferiority_results",
+        "omnibus_effects",
+        "option_performance",
+        "pareto_frontier",
+        "planned_contrasts",
+        "population_contrast_sensitivity",
+        "population_effect_sensitivity",
+        "rank_stability",
+        "recommendation_sensitivity",
+        "recommendations",
+        "report_source_index",
+        "research_questions",
+        "robustness_summary",
+        "scenario_options",
+        "study_summary",
+        "visualization_dictionary"
+      ],
+      "passed": true
+    }
+  },
+  "exit_gate": "MULTIDATASET_VISUALIZATION_DATA_V3_READY",
+  "failed_check_count": 0,
+  "passed": true,
+  "schema_version": "multidataset_visualization_v3_validation_v1"
+}

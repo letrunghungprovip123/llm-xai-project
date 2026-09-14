@@ -1,0 +1,38 @@
+{
+  "schema_version": "freddie_diagnostics_protocol_v1",
+  "dataset_id": "freddie_sflld_2024",
+  "experiment_id": "freddie_sflld_2024_replication_v1",
+  "status": "FROZEN_BEFORE_FREDDIE_DIAGNOSTIC_EXECUTION",
+  "historical_note": "This protocol is retrospectively formalized after M23 certification and frozen before Freddie M24 diagnostic execution; it is not a prospective preregistration.",
+  "provider_execution_allowed": false,
+  "diagnostic_version": "freddie_diagnostics_v1",
+  "primary_population": "all_648_planned_generations",
+  "loss_decomposition": {
+    "usable_supported_component": "SUPPORTED / APPLICABLE",
+    "usable_not_verifiable_loss": "NOT_VERIFIABLE / APPLICABLE",
+    "usable_unsupported_loss": "UNSUPPORTED / APPLICABLE",
+    "usable_contradiction_loss": "CONTRADICTED / APPLICABLE",
+    "unusable_pipeline_loss": 1.0,
+    "identity": "supported_yield_component + pipeline_loss + not_verifiable_loss + unsupported_loss + contradiction_loss = 1"
+  },
+  "failure_topology": {
+    "source": "M21 frozen unusable generation identity set",
+    "forbid_model_or_evidence_hardcoding": true
+  },
+  "claim_taxonomy": {
+    "additional_dataset_claim_types": ["causal"],
+    "unknown_claim_type_policy": "FAIL_CLOSED"
+  },
+  "safe_phrase_analysis": {
+    "requested": true,
+    "interpretation": "lexical_overlap_signal_only",
+    "forbidden_interpretations": [
+      "proof_of_copying",
+      "proof_of_causal_dependency",
+      "proof_of_model_non_independence"
+    ],
+    "minimum_phrase_tokens": 4,
+    "high_overlap_threshold": 0.8,
+    "readiness_policy": "DISABLE_SUBANALYSIS_IF_EXPOSURE_CONTRACT_CANNOT_BE_CERTIFIED"
+  }
+}

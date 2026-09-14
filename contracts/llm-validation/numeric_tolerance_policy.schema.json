@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "numeric_tolerance_policy.schema.json",
+  "title": "Numeric tolerance policy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "numeric_policy_version",
+    "status",
+    "unknown_role_behavior",
+    "rules",
+    "source_references"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "numeric_tolerance_policy_v1"
+    },
+    "numeric_policy_version": {
+      "const": "numeric_tolerance_policy_v1"
+    },
+    "status": {
+      "const": "FROZEN"
+    },
+    "unknown_role_behavior": {
+      "const": "NOT_VERIFIABLE"
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    },
+    "source_references": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/sourceReference"
+      }
+    }
+  },
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "numeric_role",
+        "unit",
+        "normalization",
+        "comparison_mode",
+        "absolute_tolerance",
+        "relative_tolerance",
+        "display_precision_source",
+        "unsupported_behavior"
+      ],
+      "properties": {
+        "numeric_role": {
+          "enum": [
+            "prediction_score",
+            "decision_threshold",
+            "feature_value",
+            "rank",
+            "other"
+          ]
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "normalization": {
+          "enum": [
+            "PERCENT_TO_UNIT_INTERVAL",
+            "UNIT_INTERVAL_IDENTITY",
+            "EXACT_INTEGER",
+            "NONE"
+          ]
+        },
+        "comparison_mode": {
+          "enum": [
+            "EXACT",
+            "HALF_DISPLAY_UNIT",
+            "NOT_VERIFIABLE"
+          ]
+        },
+        "absolute_tolerance": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "relative_tolerance": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "display_precision_source": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "unsupported_behavior": {
+          "const": "NOT_VERIFIABLE"
+        }
+      }
+    },
+    "sourceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "symbol",
+        "rationale"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))[^\\u0000]+$"
+        },
+        "symbol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

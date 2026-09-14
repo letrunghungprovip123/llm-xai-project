@@ -1,0 +1,33 @@
+{
+  "schema_version": "claim_validation_test_thresholds_v1",
+  "coverage": {
+    "lines": 90,
+    "branches": 90,
+    "functions": 90,
+    "critical_branch_percent": 100
+  },
+  "mutation": {
+    "critical_score": 100,
+    "overall_score": 90,
+    "critical_survivors": 0
+  },
+  "calibration": {
+    "minimum_double_rated": 600,
+    "minimum_raw_agreement": 0.9,
+    "minimum_overall_kappa": 0.8,
+    "minimum_family_kappa": 0.7,
+    "minimum_macro_f1": 0.95,
+    "minimum_family_macro_f1": 0.9,
+    "minimum_supported_precision": 0.98,
+    "minimum_contradicted_precision": 0.95,
+    "minimum_not_verifiable_precision": 0.9,
+    "maximum_hard_safety_false_negatives": 0
+  },
+  "coverage_scope": {
+    "include": ["research/ts/claim_validation/**/*.ts"],
+    "exclude": [
+      "research/ts/claim_validation/main.ts",
+      "research/ts/claim_validation/writer.ts"
+    ]
+  }
+}

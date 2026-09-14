@@ -1,0 +1,119 @@
+{
+  "schema_version": "claim_validation_manifest_v3",
+  "validation_schema_version": "claim_validation_v4",
+  "validator_version": "claim_validator_v4.0.0",
+  "policy_version": "claim_validation_policy_v1",
+  "reason_taxonomy_version": "claim_validation_reason_codes_v1",
+  "numeric_policy_version": "numeric_tolerance_policy_v1",
+  "source_commit": "c505221c9c58665a08da38352e69de805efe9f47",
+  "run_mode": "FULL",
+  "started_at": "2026-07-24T05:33:49.409Z",
+  "ended_at": "2026-07-24T05:33:55.305Z",
+  "determinism": {
+    "validator_mode": "DETERMINISTIC",
+    "provider_calls": false,
+    "hidden_ir_used": false,
+    "result_timestamp_is_version_constant": true,
+    "stable_order": "claim_id_ascending",
+    "smoke_selector": null
+  },
+  "inputs": {
+    "finalized_claims": {
+      "path": "data/reports/llm_validation/validation_v1/claim_finalization_candidate/claims_final.jsonl",
+      "sha256": "89d90150df82c01f1b5557a9fbd27d26c405c0f5f5402bdbfeed93105c478cfe",
+      "record_count": 14667
+    },
+    "canonical_generation_index": {
+      "path": "data/reports/llm_validation/validation_v1/canonicalization/generation_index.jsonl",
+      "sha256": "252edae8dd920c259a1da74d7b2f09b26558b994e01b3cd29dd60c0d6f9086ec",
+      "record_count": 648
+    },
+    "canonical_evidence_packages": {
+      "path": "data/reports/llm_validation/validation_v1/canonicalization/evidence_packages_36.jsonl",
+      "sha256": "37c25b261d496e7c9bf50a62141f93b5544a45af43208918d0eaf589d6307117",
+      "record_count": 216
+    }
+  },
+  "cohort": {
+    "official_input_claim_count": 14667,
+    "selected_claim_count": 14667,
+    "selected_claim_ids": null,
+    "smoke_limit": null,
+    "main_generations": 648,
+    "usable_generations": 638,
+    "unusable_generations": 10,
+    "template_baseline_generations": null
+  },
+  "reconciliation": {
+    "input_claim_count": 14667,
+    "output_result_count": 14667,
+    "unique_input_claim_ids": 14667,
+    "unique_output_claim_ids": 14667,
+    "unique_validation_ids": 14667,
+    "missing_claim_ids": [],
+    "unexpected_claim_ids": []
+  },
+  "status_counts": {
+    "CONTRADICTED": 25,
+    "NOT_APPLICABLE": 12,
+    "NOT_VERIFIABLE": 1018,
+    "SUPPORTED": 13540,
+    "UNSUPPORTED": 72
+  },
+  "reason_code_counts": {
+    "CONCEPT_NOT_FOUND_IN_EVIDENCE": 65,
+    "DIRECTION_MIXED_OR_UNKNOWN": 162,
+    "DIRECTION_REVERSED": 15,
+    "EXACT_MATCH": 7908,
+    "MAGNITUDE_MATCH": 15,
+    "MAGNITUDE_OVERSTATED": 4,
+    "MAGNITUDE_SEMANTICS_UNSUPPORTED": 3,
+    "MAGNITUDE_SOURCE_MISSING": 1,
+    "NORMALIZED_MATCH": 5098,
+    "NUMERIC_OUTSIDE_TOLERANCE": 3,
+    "NUMERIC_ROLE_UNSUPPORTED": 165,
+    "NUMERIC_SOURCE_MISSING": 73,
+    "POLICY_RULE_NOT_APPLICABLE": 12,
+    "PREDICTION_LABEL_MISMATCH": 3,
+    "PREDICTION_VALUE_UNAVAILABLE": 2,
+    "RANK_SOURCE_MISSING": 6,
+    "RANKING_UNSUPPORTED": 3,
+    "SEMANTIC_SOURCE_UNFROZEN": 36,
+    "SEMANTIC_SUBTYPE_UNRESOLVED": 570,
+    "TOLERANCE_MATCH": 519,
+    "UNCERTAINTY_NOT_GROUNDED": 4
+  },
+  "execution_error_count": 0,
+  "outputs": {
+    "claim_validation_results": {
+      "path": "claim_validation_results.jsonl",
+      "sha256": "5e8b0f05cde4042715025b2c7aeb783af05d7e0578b827b9c85e1435e91f59d5",
+      "byte_count": 44868674,
+      "record_count": 14667
+    },
+    "validation_execution_errors": {
+      "path": "validation_execution_errors.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_count": 0,
+      "record_count": 0
+    },
+    "claim_validation_summary": {
+      "path": "claim_validation_summary.json",
+      "sha256": "1bc25e93a27a2d11163e8316accfb5df420606d2d0d54a219bd687ecb92077a3",
+      "byte_count": 9802,
+      "record_count": null
+    },
+    "reason_code_counts": {
+      "path": "reason_code_counts.csv",
+      "sha256": "6c211083573a8d4185cc8e0dcba5594bfb1b537164b92c28fe230ca4c98a6bda",
+      "byte_count": 1379,
+      "record_count": 21
+    },
+    "generation_validation_summary": {
+      "path": "generation_validation_summary.jsonl",
+      "sha256": "4aca7dfee7801f8d7d6ddf9622230f02732c60c0b3a55cf61f8573dd32574855",
+      "byte_count": 298070,
+      "record_count": 648
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": "prefect_runtime_contract_v1",
+  "status": "ACTIVE",
+  "prefect_version": "3.7.8",
+  "api_url": "http://127.0.0.1:4200/api",
+  "internal_api_url": "http://researchops-prefect-server:4200/api",
+  "database": {
+    "database_name": "prefect",
+    "user_name": "prefect_app",
+    "migration_owner": "prefect",
+    "managed_by": "prefect_cli"
+  },
+  "messaging": {
+    "broker": "prefect_redis.messaging",
+    "cache": "prefect_redis.messaging",
+    "redis_database": 0,
+    "docket_database": 1
+  },
+  "work_pool": {
+    "name": "researchops-local-process",
+    "type": "process",
+    "description": "Local ResearchOps process work pool for deterministic and explicitly approved stages.",
+    "concurrency_limit": 4
+  },
+  "queues": [
+    {
+      "name": "release",
+      "priority": 1,
+      "concurrency_limit": 1,
+      "purpose": "Certification, immutable bundle creation, and release operations."
+    },
+    {
+      "name": "provider-llm",
+      "priority": 2,
+      "concurrency_limit": 1,
+      "purpose": "Paid or provider-dependent LLM stages after explicit approval."
+    },
+    {
+      "name": "cpu-heavy",
+      "priority": 5,
+      "concurrency_limit": 1,
+      "purpose": "Training, XAI, and analytical stages with substantial local CPU or memory use."
+    },
+    {
+      "name": "verification",
+      "priority": 10,
+      "concurrency_limit": 4,
+      "purpose": "Deterministic validation, manifest verification, and environment checks."
+    }
+  ],
+  "policies": {
+    "migration_on_server_start": false,
+    "separate_background_services": true,
+    "worker_limit": 4,
+    "provider_default_schedule": false,
+    "release_default_schedule": false
+  }
+}

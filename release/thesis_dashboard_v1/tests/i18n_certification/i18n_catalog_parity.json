@@ -1,0 +1,21 @@
+{
+  "locales": [
+    "vi",
+    "en"
+  ],
+  "key_count": 1529,
+  "missing_by_locale": {
+    "vi": [],
+    "en": []
+  },
+  "extra_by_locale": {
+    "vi": [],
+    "en": []
+  },
+  "blank_by_locale": {
+    "vi": [],
+    "en": []
+  },
+  "placeholder_mismatches": {},
+  "passed": true
+}

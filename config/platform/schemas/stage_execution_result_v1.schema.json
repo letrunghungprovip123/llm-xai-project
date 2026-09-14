@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "DiscoveredOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "contract": {
+          "title": "Contract",
+          "type": "string"
+        },
+        "file_count": {
+          "minimum": 1,
+          "title": "File Count",
+          "type": "integer"
+        },
+        "manifest_sha256": {
+          "title": "Manifest Sha256",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "contract",
+        "artifact_id",
+        "manifest_sha256",
+        "file_count"
+      ],
+      "title": "DiscoveredOutput",
+      "type": "object"
+    }
+  },
+  "$id": "https://researchops.local/schemas/stage_execution_result_v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attempt": {
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "ended_at": {
+      "format": "date-time",
+      "title": "Ended At",
+      "type": "string"
+    },
+    "error_category": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Category"
+    },
+    "error_message": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Message"
+    },
+    "error_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Type"
+    },
+    "evidence_artifact_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Artifact Id"
+    },
+    "exit_code": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exit Code"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    },
+    "node_id": {
+      "title": "Node Id",
+      "type": "string"
+    },
+    "orchestration_key": {
+      "title": "Orchestration Key",
+      "type": "string"
+    },
+    "outputs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DiscoveredOutput"
+      },
+      "title": "Outputs",
+      "type": "array"
+    },
+    "pipeline_run_id": {
+      "title": "Pipeline Run Id",
+      "type": "string"
+    },
+    "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "stage_execution_result_v1",
+      "default": "stage_execution_result_v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stage_id": {
+      "title": "Stage Id",
+      "type": "string"
+    },
+    "stage_run_id": {
+      "title": "Stage Run Id",
+      "type": "string"
+    },
+    "stage_version": {
+      "title": "Stage Version",
+      "type": "integer"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED",
+        "REUSED"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "pipeline_run_id",
+    "stage_run_id",
+    "node_id",
+    "stage_id",
+    "stage_version",
+    "status",
+    "attempt",
+    "orchestration_key",
+    "command",
+    "started_at",
+    "ended_at"
+  ],
+  "title": "StageExecutionResult",
+  "type": "object"
+}

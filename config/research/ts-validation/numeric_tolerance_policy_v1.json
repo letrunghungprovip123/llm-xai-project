@@ -1,0 +1,110 @@
+{
+  "schema_version": "numeric_tolerance_policy_v1",
+  "numeric_policy_version": "numeric_tolerance_policy_v1",
+  "status": "FROZEN",
+  "unknown_role_behavior": "NOT_VERIFIABLE",
+  "rules": [
+    {
+      "numeric_role": "prediction_score",
+      "unit": "percent",
+      "normalization": "PERCENT_TO_UNIT_INTERVAL",
+      "comparison_mode": "HALF_DISPLAY_UNIT",
+      "absolute_tolerance": 0.00005,
+      "relative_tolerance": null,
+      "display_precision_source": "probability_percent_display uses 2 decimal percentage points",
+      "unsupported_behavior": "NOT_VERIFIABLE"
+    },
+    {
+      "numeric_role": "prediction_score",
+      "unit": "probability",
+      "normalization": "UNIT_INTERVAL_IDENTITY",
+      "comparison_mode": "HALF_DISPLAY_UNIT",
+      "absolute_tolerance": 0.00005,
+      "relative_tolerance": null,
+      "display_precision_source": "probability_display uses 4 decimals",
+      "unsupported_behavior": "NOT_VERIFIABLE"
+    },
+    {
+      "numeric_role": "decision_threshold",
+      "unit": "percent",
+      "normalization": "PERCENT_TO_UNIT_INTERVAL",
+      "comparison_mode": "HALF_DISPLAY_UNIT",
+      "absolute_tolerance": 0.00005,
+      "relative_tolerance": null,
+      "display_precision_source": "threshold_percent_display uses 2 decimal percentage points",
+      "unsupported_behavior": "NOT_VERIFIABLE"
+    },
+    {
+      "numeric_role": "decision_threshold",
+      "unit": "probability",
+      "normalization": "UNIT_INTERVAL_IDENTITY",
+      "comparison_mode": "HALF_DISPLAY_UNIT",
+      "absolute_tolerance": 0.00005,
+      "relative_tolerance": null,
+      "display_precision_source": "threshold_display uses 4 decimals",
+      "unsupported_behavior": "NOT_VERIFIABLE"
+    },
+    {
+      "numeric_role": "rank",
+      "unit": "rank",
+      "normalization": "EXACT_INTEGER",
+      "comparison_mode": "EXACT",
+      "absolute_tolerance": 0,
+      "relative_tolerance": null,
+      "display_precision_source": "rank is an integer ordinal",
+      "unsupported_behavior": "NOT_VERIFIABLE"
+    },
+    {
+      "numeric_role": "other",
+      "unit": "count",
+      "normalization": "EXACT_INTEGER",
+      "comparison_mode": "EXACT",
+      "absolute_tolerance": 0,
+      "relative_tolerance": null,
+      "display_precision_source": "derived count facts are deterministic integers",
+      "unsupported_behavior": "NOT_VERIFIABLE"
+    },
+    {
+      "numeric_role": "feature_value",
+      "unit": "*",
+      "normalization": "NONE",
+      "comparison_mode": "NOT_VERIFIABLE",
+      "absolute_tolerance": null,
+      "relative_tolerance": null,
+      "display_precision_source": null,
+      "unsupported_behavior": "NOT_VERIFIABLE"
+    },
+    {
+      "numeric_role": "other",
+      "unit": "*",
+      "normalization": "NONE",
+      "comparison_mode": "NOT_VERIFIABLE",
+      "absolute_tolerance": null,
+      "relative_tolerance": null,
+      "display_precision_source": null,
+      "unsupported_behavior": "NOT_VERIFIABLE"
+    }
+  ],
+  "source_references": [
+    {
+      "path": "research/python/explanation_ir/ir_schema.py",
+      "symbol": "format_probability",
+      "rationale": "Raw probability display is frozen to 4 decimal places."
+    },
+    {
+      "path": "research/python/explanation_ir/ir_schema.py",
+      "symbol": "format_probability_percent",
+      "rationale": "Percent display is frozen to 2 decimal percentage points."
+    },
+    {
+      "path": "research/ts/claim_extraction/atomicClaimSchema.ts",
+      "symbol": "parseNumericClaimValue",
+      "rationale": "Percent suffixes and percent aliases normalize to the canonical percent unit."
+    },
+    {
+      "path": "research/ts/claim_finalization/claimFinalizationRules.ts",
+      "symbol": "toCanonicalCountClaim",
+      "rationale": "Derived count facts are emitted as exact integer values with unit count."
+    }
+  ]
+}

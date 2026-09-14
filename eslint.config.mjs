@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Python/runtime and generated ResearchOps state are not frontend source.
+    ".venv/**",
+    ".researchops/**",
+    // Code lịch sử không thuộc active lint/import graph.
+    "legacy/**",
+    ".refactor-validation/**",
   ]),
 ]);
 

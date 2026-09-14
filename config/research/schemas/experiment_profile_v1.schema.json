@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "experiment_profile_v1.schema.json",
+  "title": "Experiment Profile V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "experiment_id", "dataset_id", "case_strata",
+    "cases_per_stratum", "evidence_conditions", "llm_count",
+    "expected_planned_generations"
+  ],
+  "properties": {
+    "schema_version": {"const": "experiment_profile_v1"},
+    "experiment_id": {"type": "string", "minLength": 1},
+    "dataset_id": {"type": "string", "minLength": 1},
+    "case_strata": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "cases_per_stratum": {"type": "integer", "minimum": 1},
+    "evidence_conditions": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "llm_count": {"type": "integer", "minimum": 1},
+    "expected_planned_generations": {"type": "integer", "minimum": 1}
+  }
+}

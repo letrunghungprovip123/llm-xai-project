@@ -1,0 +1,99 @@
+{
+  "jobDefinitionName": "llm-xai-batch-i-gpu-main",
+  "type": "container",
+  "platformCapabilities": [
+    "EC2"
+  ],
+  "containerProperties": {
+    "image": "699475930862.dkr.ecr.us-east-1.amazonaws.com/llm-xai-batch-i@sha256:2e147dc25373ac6190e0116d2ccc45d04c5923b67cbd4b721e61c1ca90956105",
+    "jobRoleArn": "arn:aws:iam::699475930862:role/llm-xai-batch-job-role",
+    "executionRoleArn": "arn:aws:iam::699475930862:role/ecsTaskExecutionRole",
+    "resourceRequirements": [
+      {
+        "type": "VCPU",
+        "value": "8"
+      },
+      {
+        "type": "MEMORY",
+        "value": "28672"
+      },
+      {
+        "type": "GPU",
+        "value": "1"
+      }
+    ],
+    "environment": [
+      {
+        "name": "REPEAT_ID",
+        "value": "1"
+      },
+      {
+        "name": "EXPERIMENT_STAGE",
+        "value": "evaluation"
+      },
+      {
+        "name": "EVIDENCE_LEVELS",
+        "value": "S0,S1,S2,S3,S4,S5"
+      },
+      {
+        "name": "CHECKPOINT_EVERY",
+        "value": "10"
+      },
+      {
+        "name": "CONCURRENCY",
+        "value": "1"
+      },
+      {
+        "name": "PROMPT_VERSION",
+        "value": "prompt_v1"
+      },
+      {
+        "name": "OUTPUT_SCHEMA_VERSION",
+        "value": "1.0"
+      },
+      {
+        "name": "MAX_TOKENS",
+        "value": "2000"
+      },
+      {
+        "name": "VLLM_DTYPE",
+        "value": "auto"
+      },
+      {
+        "name": "VLLM_MAX_MODEL_LEN",
+        "value": "12288"
+      },
+      {
+        "name": "VLLM_GPU_MEMORY_UTILIZATION",
+        "value": "0.88"
+      },
+      {
+        "name": "VLLM_STARTUP_TIMEOUT_SECONDS",
+        "value": "1800"
+      }
+    ],
+    "linuxParameters": {
+      "sharedMemorySize": 8192
+    },
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/aws/batch/llm-xai-batch-i",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "main"
+      }
+    }
+  },
+  "retryStrategy": {
+    "attempts": 1
+  },
+  "timeout": {
+    "attemptDurationSeconds": 18000
+  },
+  "tags": {
+    "Project": "llm-xai-batch-i",
+    "Stage": "evaluation",
+    "BudgetTarget": "usd-10",
+    "SourceRevision": "5cd405fec7aaa271ebcc62d9b44d95a82757c759"
+  }
+}

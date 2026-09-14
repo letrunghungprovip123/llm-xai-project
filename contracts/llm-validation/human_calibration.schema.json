@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-xai.local/contracts/human_calibration.schema.json",
+  "title": "Human claim-validation calibration annotation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "blind_id",
+    "rater_id",
+    "claim_type_correct",
+    "claim_complete",
+    "evidence_identity_correct",
+    "validation_status",
+    "reason_family",
+    "critical_ambiguity",
+    "notes"
+  ],
+  "properties": {
+    "blind_id": { "type": "string", "minLength": 1 },
+    "rater_id": { "type": "string", "minLength": 1 },
+    "claim_type_correct": { "type": "boolean" },
+    "claim_complete": { "type": "boolean" },
+    "evidence_identity_correct": { "type": "boolean" },
+    "validation_status": {
+      "enum": ["SUPPORTED", "UNSUPPORTED", "CONTRADICTED", "NOT_VERIFIABLE"]
+    },
+    "reason_family": { "type": "string", "minLength": 1 },
+    "critical_ambiguity": { "type": "boolean" },
+    "notes": { "type": "string" }
+  }
+}

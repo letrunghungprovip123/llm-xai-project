@@ -1,0 +1,5 @@
+{
+  "automated_validator_is_human_ground_truth": false,
+  "reason": "No adjudicated multi-dataset human-calibration release is an M27 parent.",
+  "status": "NOT_PERFORMED"
+}

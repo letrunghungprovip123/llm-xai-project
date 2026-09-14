@@ -1,0 +1,61 @@
+{
+  "schema_version": "freddie_downstream_replication_v1",
+  "dataset_id": "freddie_sflld_2024",
+  "experiment_id": "freddie_sflld_2024_replication_v1",
+  "protocol_id": "home_credit_to_freddie_replication_v1",
+  "protocol_sha256": "b99c234551f0eb19d18cab242cee78aa65cad78dc1798049b9c045acb9ec2c3e",
+  "evidence_sha256": "569bfbeec2ea410ca4805e9b7f2eeb5c6610ca67100c638a019e37d9e77010a7",
+  "evidence_path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/evidence_exposure/evaluation_36/evidence_packages_36.jsonl",
+  "frozen_source_root": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_narratives/m17b_frozen",
+  "canonical_output_dir": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/canonicalization",
+  "contract_output": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/contract_validation/generation_contract_metrics.jsonl",
+  "claim_root": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/claim_extraction",
+  "finalization_root": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/claim_finalization",
+  "expected": {
+    "cases": 36,
+    "evidence_packages": 216,
+    "models": 3,
+    "evidence_levels": ["S0", "S1", "S2", "S3", "S4", "S5"],
+    "planned_generations": 648,
+    "runtime_success": 648,
+    "usable_generations": 645,
+    "unusable_generations": 3
+  },
+  "sources": [
+    {
+      "model_id": "qwen3_8b",
+      "run_id": "freddie_qwen3_8b_eval36_r1_pinned2_20260819T030554Z",
+      "aws_job_id": "b09325c0-f2c2-43af-b1b4-9255de9609f3",
+      "source_uri": "s3://llm-xai-batch-i-699475930862-us-east-1/batch-i/runs/freddie_qwen3_8b_eval36_r1_pinned2_20260819T030554Z/outputs",
+      "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "expected_records": 216,
+      "expected_usable": 216,
+      "generations_file": "qwen3_8b/generations.jsonl",
+      "prompts_file": "qwen3_8b/prompts.jsonl",
+      "source_manifest_file": "qwen3_8b/SOURCE.json"
+    },
+    {
+      "model_id": "deepseek_v4_flash",
+      "run_id": "freddie_deepseek_v4_flash_eval36_r1_20260819T044207Z",
+      "source_uri": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_narratives/m17a_runs/freddie_deepseek_v4_flash_eval36_r1_20260819T044207Z",
+      "model_revision": "DeepSeek-V4-Flash",
+      "expected_records": 216,
+      "expected_usable": 213,
+      "generations_file": "deepseek_v4_flash/generations.jsonl",
+      "prompts_file": "deepseek_v4_flash/prompts.jsonl",
+      "source_manifest_file": "deepseek_v4_flash/SOURCE.json"
+    },
+    {
+      "model_id": "phi4_mini_instruct",
+      "run_id": "freddie_phi4_mini_eval36_r1_20260819T033652Z",
+      "aws_job_id": "39662712-2de2-48ee-96de-837c739a2b10",
+      "source_uri": "s3://llm-xai-batch-i-699475930862-us-east-1/batch-i/runs/freddie_phi4_mini_eval36_r1_20260819T033652Z/outputs",
+      "model_revision": "cfbefacb99257ffa30c83adab238a50856ac3083",
+      "expected_records": 216,
+      "expected_usable": 216,
+      "generations_file": "phi4_mini_instruct/generations.jsonl",
+      "prompts_file": "phi4_mini_instruct/prompts.jsonl",
+      "source_manifest_file": "phi4_mini_instruct/SOURCE.json"
+    }
+  ]
+}

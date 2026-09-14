@@ -1,0 +1,323 @@
+{
+  "default_locale": "vi",
+  "catalog": {
+    "locales": [
+      "vi",
+      "en"
+    ],
+    "key_count": 1529,
+    "missing_by_locale": {
+      "vi": [],
+      "en": []
+    },
+    "extra_by_locale": {
+      "vi": [],
+      "en": []
+    },
+    "blank_by_locale": {
+      "vi": [],
+      "en": []
+    },
+    "placeholder_mismatches": {},
+    "passed": true
+  },
+  "pages": [
+    {
+      "page_id": "overview",
+      "route": "/",
+      "locale": "vi",
+      "expected_title": "Tổng quan điều hành",
+      "visible_string_count": 92,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "overview",
+      "route": "/",
+      "locale": "en",
+      "expected_title": "Executive Overview",
+      "visible_string_count": 92,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "effectiveness",
+      "route": "/effectiveness",
+      "locale": "vi",
+      "expected_title": "Hiệu quả & Độ tin cậy",
+      "visible_string_count": 172,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "effectiveness",
+      "route": "/effectiveness",
+      "locale": "en",
+      "expected_title": "Effectiveness & Reliability",
+      "visible_string_count": 172,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "mechanisms",
+      "route": "/mechanisms",
+      "locale": "vi",
+      "expected_title": "Bằng chứng, Cơ chế & Chẩn đoán",
+      "visible_string_count": 257,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "mechanisms",
+      "route": "/mechanisms",
+      "locale": "en",
+      "expected_title": "Evidence, Mechanisms & Diagnostics",
+      "visible_string_count": 256,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "decision",
+      "route": "/decision",
+      "locale": "vi",
+      "expected_title": "Không gian quyết định",
+      "visible_string_count": 208,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "decision",
+      "route": "/decision",
+      "locale": "en",
+      "expected_title": "Decision Studio",
+      "visible_string_count": 208,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "robustness",
+      "route": "/robustness",
+      "locale": "vi",
+      "expected_title": "Độ vững & Đường cơ sở Template",
+      "visible_string_count": 215,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "robustness",
+      "route": "/robustness",
+      "locale": "en",
+      "expected_title": "Robustness & Template Baseline",
+      "visible_string_count": 215,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "cases",
+      "route": "/cases",
+      "locale": "vi",
+      "expected_title": "Khám phá hồ sơ",
+      "visible_string_count": 346,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "cases",
+      "route": "/cases",
+      "locale": "en",
+      "expected_title": "Case Explorer",
+      "visible_string_count": 346,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "methods",
+      "route": "/methods",
+      "locale": "vi",
+      "expected_title": "Khả năng tái lập & Phương pháp",
+      "visible_string_count": 449,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    },
+    {
+      "page_id": "methods",
+      "route": "/methods",
+      "locale": "en",
+      "expected_title": "Reproducibility & Methods",
+      "visible_string_count": 449,
+      "title_present": true,
+      "opposite_locale_leaks": [],
+      "heuristic_language_leaks": [],
+      "passed": true
+    }
+  ],
+  "exports": [
+    {
+      "page_id": "overview",
+      "locale": "vi",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "overview",
+      "locale": "en",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "effectiveness",
+      "locale": "vi",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "effectiveness",
+      "locale": "en",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "mechanisms",
+      "locale": "vi",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "mechanisms",
+      "locale": "en",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "decision",
+      "locale": "vi",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "decision",
+      "locale": "en",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "robustness",
+      "locale": "vi",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "robustness",
+      "locale": "en",
+      "manifest_name": "manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "cases",
+      "locale": "vi",
+      "manifest_name": "case_export_manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "cases",
+      "locale": "en",
+      "manifest_name": "case_export_manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "methods",
+      "locale": "vi",
+      "manifest_name": "methods_manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    },
+    {
+      "page_id": "methods",
+      "locale": "en",
+      "manifest_name": "methods_manifest.json",
+      "display_locale_matches": true,
+      "readme_present": true,
+      "readme_locale_marker_present": true,
+      "stable_identity_matches_other_locale": true,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

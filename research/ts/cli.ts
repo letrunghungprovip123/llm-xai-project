@@ -1,0 +1,164 @@
+import { spawn } from "node:child_process";
+
+type StageCommand = {
+  executable: "python3" | "tsx";
+  arguments: string[];
+};
+
+const STAGE_COMMANDS: Record<string, StageCommand> = {
+  "ml:data-audit": {
+    executable: "python3",
+    arguments: ["-m", "research.python.data_audit.main"],
+  },
+  "ml:target-audit": {
+    executable: "python3",
+    arguments: ["-m", "research.python.target_audit.main"],
+  },
+  "ml:features": {
+    executable: "python3",
+    arguments: ["-m", "research.python.feature_engineering.main"],
+  },
+  "ml:matrix": {
+    executable: "python3",
+    arguments: ["-m", "research.python.feature_matrix.main"],
+  },
+  "ml:split": {
+    executable: "python3",
+    arguments: ["-m", "research.python.data_split.main"],
+  },
+  "ml:preprocess": {
+    executable: "python3",
+    arguments: ["-m", "research.python.preprocessing.main"],
+  },
+  "ml:train": {
+    executable: "python3",
+    arguments: ["-m", "research.python.modeling.main"],
+  },
+  "ml:model-ready-audit": {
+    executable: "python3",
+    arguments: ["-m", "research.python.modeling.model_ready_audit"],
+  },
+  "ml:xai": {
+    executable: "python3",
+    arguments: ["-m", "research.python.xai.main"],
+  },
+  "ml:xai-quality": {
+    executable: "python3",
+    arguments: ["-m", "research.python.xai.quality.main"],
+  },
+  "ml:ir": {
+    executable: "python3",
+    arguments: ["-m", "research.python.explanation_ir.main"],
+  },
+  "ml:evidence": {
+    executable: "python3",
+    arguments: ["-m", "research.python.evidence_exposure.main"],
+  },
+  "ml:evidence-subset": {
+    executable: "python3",
+    arguments: [
+      "-m",
+      "research.python.evidence_exposure.select_evaluation_subset",
+    ],
+  },
+  "llm:generate": {
+    executable: "tsx",
+    arguments: ["research/ts/narrative/main.ts"],
+  },
+  "llm:aggregate": {
+    executable: "tsx",
+    arguments: ["research/ts/narrative/aggregate-main.ts"],
+  },
+  "llm:filter-deepseek": {
+    executable: "tsx",
+    arguments: ["research/ts/canonicalization/filter-main.ts"],
+  },
+  "llm:canonicalize": {
+    executable: "tsx",
+    arguments: ["research/ts/canonicalization/main.ts"],
+  },
+  "llm:contract": {
+    executable: "tsx",
+    arguments: ["research/ts/contract_validation/main.ts"],
+  },
+  "llm:claims": {
+    executable: "tsx",
+    arguments: ["research/ts/claim_extraction/main.ts"],
+  },
+  "llm:claims-finalize": {
+    executable: "tsx",
+    arguments: ["research/ts/claim_finalization/main.ts"],
+  },
+  "llm:claims-finalize-v3": {
+    executable: "tsx",
+    arguments: ["research/ts/claim_finalization/semanticMain.ts"],
+  },
+  "llm:validate": {
+    executable: "tsx",
+    arguments: ["research/ts/claim_validation/main.ts"],
+  },
+  "llm:prepare-validation-calibration": {
+    executable: "tsx",
+    arguments: ["research/ts/claim_validation/calibration/prepareMain.ts"],
+  },
+  "llm:evaluate-validation-calibration": {
+    executable: "tsx",
+    arguments: ["research/ts/claim_validation/calibration/evaluateMain.ts"],
+  },
+  "llm:verify-validation-release": {
+    executable: "tsx",
+    arguments: ["research/ts/claim_validation/releaseMain.ts"],
+  },
+};
+
+function printUsage(): void {
+  const stages = Object.keys(STAGE_COMMANDS).sort();
+  console.log("Cách dùng: npm run research -- <stage> [arguments]");
+  console.log("");
+  console.log("Các stage hiện có:");
+  for (const stage of stages) {
+    console.log(`  ${stage}`);
+  }
+}
+
+function runStage(stageName: string, forwardedArguments: string[]): void {
+  const command = STAGE_COMMANDS[stageName];
+  if (!command) {
+    console.error(`Stage không hợp lệ: ${stageName}`);
+    printUsage();
+    process.exitCode = 2;
+    return;
+  }
+
+  const child = spawn(
+    command.executable,
+    [...command.arguments, ...forwardedArguments],
+    { stdio: "inherit" },
+  );
+
+  child.on("error", (error) => {
+    console.error(`Không thể chạy ${stageName}: ${error.message}`);
+    process.exitCode = 1;
+  });
+
+  child.on("exit", (code, signal) => {
+    if (signal) {
+      console.error(`Stage ${stageName} dừng bởi signal ${signal}.`);
+      process.exitCode = 1;
+      return;
+    }
+    process.exitCode = code ?? 1;
+  });
+}
+
+const [stageName, ...rawForwardedArguments] = process.argv.slice(2);
+const forwardedArguments =
+  rawForwardedArguments[0] === "--"
+    ? rawForwardedArguments.slice(1)
+    : rawForwardedArguments;
+
+if (!stageName || stageName === "--help" || stageName === "-h") {
+  printUsage();
+} else {
+  runStage(stageName, forwardedArguments);
+}

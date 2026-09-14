@@ -1,0 +1,94 @@
+{
+  "baseline_comparison_version": "v1.0",
+  "claim_extraction_channel_identical_to_llm": false,
+  "eligible_for_decision_ranking": false,
+  "human_naturalness_evaluated": false,
+  "input_artifacts": [
+    {
+      "path": "data/reports/llm_validation/validation_v1/canonicalization/template_baseline_index.jsonl",
+      "sha256": "4d8e2e4c5d644ab33733d5bb2251bd1d6ebbb21588f662d709a0f01ee992de15"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/cases.csv",
+      "sha256": "c64f679b8666867c90d0f3dd3861989f86d29fc6a1e1cf64d71f4baeab4354e8"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/evidence_packages.csv",
+      "sha256": "1a4dd078921aa220e741141d4dcfec3282ae8f9b89e165640dd7ae1e1c6ce27a"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/evidence_items.csv",
+      "sha256": "c4ce568a29c22b0c0e60030c762fe774f4116ea6def78c25f2e1f1930817d440"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/generations.csv",
+      "sha256": "35e0cef1cb5869f03f1c836632d86238b68839cbf87fe5e0c5160d3e09154d77"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/generation_metrics.csv",
+      "sha256": "8aeaf54d6c71612f46da7fd6a84b5e0a402c4fa342cbf9634009f1e6b86a591d"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/models.csv",
+      "sha256": "14d530dceb8b1cdef116907008f77003236cda679dd4bc46eae38f19b8b94c56"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/evidence_levels.csv",
+      "sha256": "15e0c90cba31475f1c26b7868e51a68451167df90cbf5b8e09f5598008f7a0f0"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/report_release/report_release_manifest.json",
+      "sha256": "19a8dbb12011c97812d059ce588d9d5fb377aa689fe06d679b340a09a263839c"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/report_release/report_readiness_validation.json",
+      "sha256": "9c2aba9b402222b08a8e22347f3d4b94836229851d9b623fa40ab091f21fe73e"
+    },
+    {
+      "path": "config/research/claim_measurement_release_v1.json",
+      "sha256": "608b38239ddd664e4438caa90fb2a29a49f1b4aa00abffee1e54060915a45cd4"
+    },
+    {
+      "path": "config/research/visualization_research_questions_v1.json",
+      "sha256": "214a748e04787f03ff8c68ee26e921aad57b0cc8fddc4224bcf2cd78c1baa261"
+    }
+  ],
+  "output_artifacts": [
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/baseline_comparison/baseline_claims.csv",
+      "sha256": "8c61318ceb34ae342f86cc1e52ba136c0ac49648cf6c67e840c753700a25ffd6"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/baseline_comparison/baseline_generation_metrics.csv",
+      "sha256": "0df6103474d02c33ad5bd154dc2fc9126aef7af851b6878f004b0428fd3d031f"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/baseline_comparison/baseline_option_performance.csv",
+      "sha256": "3f9f0b61ddd30db8534ad45c005786febbbe76d237ead7e006f6531326368abc"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/baseline_comparison/llm_vs_template_case_pairs.csv",
+      "sha256": "c5c4f2518a05426dc10082d6c543c1e633e3073aac9794b0a33136b1b8b11429"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/baseline_comparison/llm_vs_template_summary.csv",
+      "sha256": "a6595ad82959268ad5951fd1622a1b9d8918f68d119179afe7a6652409725ae5"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/baseline_comparison/llm_vs_template_tests.csv",
+      "sha256": "ef0e85e7b18b7f19d76434400c47d4670239fcc6cac52a9ac3dde5fef5ac8689"
+    },
+    {
+      "path": "data/reports/llm_validation/validation_v1/analysis/baseline_comparison/baseline_metric_dictionary.csv",
+      "sha256": "4b82292e024383ac9ad90f60b388b104d5443d00c2ebcfe12b41eddec0f6e8bb"
+    }
+  ],
+  "parent_exit_gate": "REPORT_WRITING_READY",
+  "primary_claim_measurement_release": "claim_measurement_candidate_primary_v1",
+  "schema_version": "baseline_comparison_manifest_v1",
+  "structured_adapter_version": "structured_template_adapter_v1",
+  "template_generator_id": "template_baseline",
+  "template_is_fourth_llm": false,
+  "template_latency_measurement_floor_limited": true,
+  "validation_mode": "DETERMINISTIC_CONTRACT_REPLAY"
+}

@@ -1,0 +1,26 @@
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+
+  .app-navbar,
+  .app-header__actions,
+  .release-strip,
+  .metric-card__info,
+  .modebar-container,
+  .finding-item__link {
+    display: none !important;
+  }
+
+  .dashboard-page {
+    max-width: none;
+    padding: 0;
+  }
+
+  .metric-card,
+  .chart-card,
+  .findings-panel {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+}

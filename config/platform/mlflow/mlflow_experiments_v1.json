@@ -1,0 +1,20 @@
+{
+  "schema_version": "mlflow_experiments_v1",
+  "status": "ACTIVE",
+  "experiments": [
+    {"name": "credit-risk-modeling", "purpose": "Credit-risk training, comparison and registered model candidates"},
+    {"name": "xai-quality", "purpose": "XAI generation quality and compatibility summaries"},
+    {"name": "evidence-package-generation", "purpose": "S0-S5 evidence-package generation summaries"},
+    {"name": "llm-generation-evaluation", "purpose": "Provider/model generation evaluation summaries"},
+    {"name": "claim-validation", "purpose": "Claim-validation aggregate quality summaries"},
+    {"name": "release-certification", "purpose": "Release-level certification and reproducibility summaries"}
+  ],
+  "default_tags": {
+    "researchops.project": "llm-xai",
+    "researchops.contract_version": "mlflow_tracking_v1",
+    "researchops.lifecycle": "active",
+    "researchops.owner": "research",
+    "researchops.data_classification": "research",
+    "researchops.source_of_truth": "artifact_manifest_v3"
+  }
+}

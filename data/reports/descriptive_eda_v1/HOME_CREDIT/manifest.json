@@ -1,0 +1,47 @@
+{
+  "dataset": "HOME_CREDIT",
+  "created_at": "2026-09-05T13:37:58",
+  "input_root": ".researchops/workspaces/home_credit_default_risk/home_credit_common_ml_v1/hc-common-ml-preprocess-001/data/processed/splits",
+  "input_files": {
+    ".researchops/workspaces/home_credit_default_risk/home_credit_common_ml_v1/hc-common-ml-preprocess-001/data/processed/splits/X_train.parquet": {
+      "bytes": 68130954,
+      "sha256": "046f1f5c4db7ea140ea12ab4a106aa986b1a33d38c726928ee59c5ead93fef1d"
+    },
+    ".researchops/workspaces/home_credit_default_risk/home_credit_common_ml_v1/hc-common-ml-preprocess-001/data/processed/splits/y_train.parquet": {
+      "bytes": 6239109,
+      "sha256": "807ede1580625937cd29fff82dfae80c6108b8c00efc5edf167edbb514da201f"
+    },
+    ".researchops/workspaces/home_credit_default_risk/home_credit_common_ml_v1/hc-common-ml-preprocess-001/data/processed/splits/X_valid.parquet": {
+      "bytes": 15951222,
+      "sha256": "ade9e704039820e9fba3183bed80ef6209652a866e9eb76b44f99b8c641802db"
+    },
+    ".researchops/workspaces/home_credit_default_risk/home_credit_common_ml_v1/hc-common-ml-preprocess-001/data/processed/splits/y_valid.parquet": {
+      "bytes": 1404373,
+      "sha256": "9b5e4289c51562ff02d44b1e0d63d85c01a8fc0f2a2d6feaec1f410d02d0984b"
+    },
+    ".researchops/workspaces/home_credit_default_risk/home_credit_common_ml_v1/hc-common-ml-preprocess-001/data/processed/splits/X_test.parquet": {
+      "bytes": 15949264,
+      "sha256": "032a0f4f12d5bbe486fe3e509eb89afa782303eae4d8ccb598d56602c5479ba5"
+    },
+    ".researchops/workspaces/home_credit_default_risk/home_credit_common_ml_v1/hc-common-ml-preprocess-001/data/processed/splits/y_test.parquet": {
+      "bytes": 1403689,
+      "sha256": "065854c0ce9e6527737f407f75a4d199bea0c382f0d1bc05c537aa89fc26957f"
+    }
+  },
+  "training_rows": 215257,
+  "predictor_count": 166,
+  "numeric_predictor_count": 159,
+  "categorical_predictor_count": 7,
+  "target_column": "target",
+  "excluded_identifier_columns": [
+    "case_id",
+    "source_entity_id"
+  ],
+  "skew_direction_rule": {
+    "right_skewed": "> 0.5",
+    "left_skewed": "< -0.5",
+    "approximately_symmetric": "[-0.5, 0.5]"
+  },
+  "kurtosis_definition": "pandas excess kurtosis",
+  "target_correlation_role": "descriptive Pearson correlation with binary target; not causal inference"
+}

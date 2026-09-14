@@ -1,0 +1,7 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests/research/python"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 88

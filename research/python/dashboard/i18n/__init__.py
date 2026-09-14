@@ -1,0 +1,137 @@
+from .ag_grid_locale import ag_grid_locale_text, validate_ag_grid_locale_parity
+from .certification import (
+    DashboardLocaleCertification,
+    ExportLocaleResult,
+    PageLocaleResult,
+    certify_dashboard_locales,
+    certify_exports,
+    certify_pages,
+    visible_strings,
+)
+"""Strict EN/VI internationalization foundation for the dashboard."""
+
+from .component_locale import localize_component_tree, localize_records, localize_text
+from .domain_labels import (
+    TECHNICAL_ALLOWLIST,
+    claim_status_label,
+    claim_type_label,
+    failure_type_label,
+    pipeline_stage_label,
+    reason_code_label,
+    utilization_metric_label,
+    domain_label,
+    evidence_label,
+    is_technical_allowlisted,
+    metric_label,
+    page_label,
+    reporting_role_label,
+    technical_label,
+    visibility_tier_label,
+)
+from .formatters import (
+    format_integer,
+    format_missing,
+    format_not_applicable,
+    format_number,
+    format_p_value,
+    format_percent,
+    format_percentage_points,
+)
+from .methods_labels import methods_identifier_label, methods_unknown_identifier_tokens
+from .locale_state import (
+    LocaleControlState,
+    locale_control_state,
+    locale_document_language,
+    locale_from_trigger,
+)
+from .locale import (
+    DEFAULT_LOCALE,
+    SUPPORTED_LOCALES,
+    UnsupportedLocaleError,
+    is_supported_locale,
+    normalize_locale,
+)
+from .page_metadata import DocumentMetadata, document_metadata, normalize_pathname
+from .plotly_locale import catalog_replacements, localize_plotly_figure
+from .translator import (
+    MissingTranslationError,
+    TranslationCatalogError,
+    TranslationError,
+    TranslationInterpolationError,
+    catalog,
+    t,
+    translation_keys,
+)
+from .types import LocaleCode
+from .validation import (
+    CatalogParityError,
+    CatalogValidationReport,
+    require_valid_catalogs,
+    validate_catalogs,
+)
+
+
+__all__ = [
+    "CatalogParityError",
+    "CatalogValidationReport",
+    "DEFAULT_LOCALE",
+    "DashboardLocaleCertification",
+    "ExportLocaleResult",
+    "PageLocaleResult",
+    "DocumentMetadata",
+    "LocaleCode",
+    "LocaleControlState",
+    "MissingTranslationError",
+    "SUPPORTED_LOCALES",
+    "TECHNICAL_ALLOWLIST",
+    "TranslationCatalogError",
+    "TranslationError",
+    "TranslationInterpolationError",
+    "UnsupportedLocaleError",
+    "ag_grid_locale_text",
+    "catalog",
+    "certify_dashboard_locales",
+    "certify_exports",
+    "certify_pages",
+    "catalog_replacements",
+    "claim_status_label",
+    "claim_type_label",
+    "failure_type_label",
+    "pipeline_stage_label",
+    "reason_code_label",
+    "utilization_metric_label",
+    "document_metadata",
+    "domain_label",
+    "evidence_label",
+    "format_integer",
+    "format_missing",
+    "format_not_applicable",
+    "format_number",
+    "format_p_value",
+    "format_percent",
+    "format_percentage_points",
+    "is_supported_locale",
+    "locale_control_state",
+    "locale_document_language",
+    "locale_from_trigger",
+    "localize_plotly_figure",
+    "localize_text",
+    "localize_records",
+    "localize_component_tree",
+    "is_technical_allowlisted",
+    "metric_label",
+    "methods_identifier_label",
+    "methods_unknown_identifier_tokens",
+    "normalize_locale",
+    "normalize_pathname",
+    "page_label",
+    "reporting_role_label",
+    "require_valid_catalogs",
+    "t",
+    "technical_label",
+    "translation_keys",
+    "validate_ag_grid_locale_parity",
+    "validate_catalogs",
+    "visibility_tier_label",
+    "visible_strings",
+]

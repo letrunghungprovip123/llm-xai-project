@@ -1,0 +1,230 @@
+{
+  "schema_version": "claim_validation_coverage_v1",
+  "runner": "node_test_v8_coverage",
+  "generated_at": "2026-07-23T15:06:00.731Z",
+  "test_count": 18,
+  "scope": {
+    "include": [
+      "research/llm/claim_validation/**/*.ts"
+    ],
+    "exclude": [
+      "research/llm/claim_validation/main.ts",
+      "research/llm/claim_validation/writer.ts"
+    ]
+  },
+  "thresholds": {
+    "lines": 90,
+    "branches": 90,
+    "functions": 90,
+    "critical_branch_percent": 100
+  },
+  "total": {
+    "lines": 97.76,
+    "branches": 90.77,
+    "functions": 99.38
+  },
+  "files": {
+    "evaluate.ts": {
+      "lines": 97.6,
+      "branches": 85.48,
+      "functions": 100,
+      "uncovered_lines": "24-25 39 139 145-146"
+    },
+    "io.ts": {
+      "lines": 98.57,
+      "branches": 91.84,
+      "functions": 100,
+      "uncovered_lines": "46"
+    },
+    "metrics.ts": {
+      "lines": 98.06,
+      "branches": 96.15,
+      "functions": 100,
+      "uncovered_lines": "24-25"
+    },
+    "constants.ts": {
+      "lines": 100,
+      "branches": 94.74,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "evidenceItemParser.ts": {
+      "lines": 100,
+      "branches": 96.67,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "evidenceParser.ts": {
+      "lines": 98.32,
+      "branches": 88.46,
+      "functions": 100,
+      "uncovered_lines": "76 156-157"
+    },
+    "evidencePolicyParser.ts": {
+      "lines": 100,
+      "branches": 93.1,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "factConsistency.ts": {
+      "lines": 95.62,
+      "branches": 87.8,
+      "functions": 100,
+      "uncovered_lines": "96 113-114 122-124"
+    },
+    "generationParser.ts": {
+      "lines": 96.3,
+      "branches": 75.86,
+      "functions": 100,
+      "uncovered_lines": "41-42 174-176 182 185"
+    },
+    "indexes.ts": {
+      "lines": 100,
+      "branches": 96.55,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "input.ts": {
+      "lines": 100,
+      "branches": 96.88,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "numericPolicy.ts": {
+      "lines": 96.73,
+      "branches": 92.65,
+      "functions": 100,
+      "uncovered_lines": "87-88 104-105 150"
+    },
+    "outputArtifacts.ts": {
+      "lines": 100,
+      "branches": 86.84,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "parseHelpers.ts": {
+      "lines": 94.81,
+      "branches": 96.15,
+      "functions": 100,
+      "uncovered_lines": "26-27 142-143 151-154"
+    },
+    "pipeline.ts": {
+      "lines": 100,
+      "branches": 90,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "policy.ts": {
+      "lines": 100,
+      "branches": 86.11,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "reasonCodes.ts": {
+      "lines": 98.47,
+      "branches": 93.88,
+      "functions": 100,
+      "uncovered_lines": "74-75"
+    },
+    "reconciliation.ts": {
+      "lines": 100,
+      "branches": 95.83,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "result.ts": {
+      "lines": 99.35,
+      "branches": 88.14,
+      "functions": 100,
+      "uncovered_lines": "253-254"
+    },
+    "schema.ts": {
+      "lines": 98.17,
+      "branches": 88.14,
+      "functions": 100,
+      "uncovered_lines": "133 136 143 219"
+    },
+    "selection.ts": {
+      "lines": 98.61,
+      "branches": 88.52,
+      "functions": 100,
+      "uncovered_lines": "140-141"
+    },
+    "summary.ts": {
+      "lines": 96.11,
+      "branches": 89.39,
+      "functions": 100,
+      "uncovered_lines": "44 165-170"
+    },
+    "types.ts": {
+      "lines": 97.51,
+      "branches": 86.67,
+      "functions": 76.92,
+      "uncovered_lines": "95-99"
+    },
+    "validationExecution.ts": {
+      "lines": 100,
+      "branches": 94.74,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "validators.ts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "index.ts": {
+      "lines": 100,
+      "branches": 96.55,
+      "functions": 100,
+      "uncovered_lines": ""
+    },
+    "numericRankingMagnitude.ts": {
+      "lines": 98.38,
+      "branches": 89.25,
+      "functions": 100,
+      "uncovered_lines": "13 241-242 300-301 344"
+    },
+    "policyClaims.ts": {
+      "lines": 97.98,
+      "branches": 91.35,
+      "functions": 100,
+      "uncovered_lines": "271-272 337-340 364-365"
+    },
+    "predictionFeatureConcept.ts": {
+      "lines": 98.31,
+      "branches": 91.49,
+      "functions": 100,
+      "uncovered_lines": "65-66 276-279"
+    },
+    "shared.ts": {
+      "lines": 93.24,
+      "branches": 89.45,
+      "functions": 98.48,
+      "uncovered_lines": "166-174 184 327-328 332-337 422-428 471-483"
+    }
+  },
+  "critical_semantic_branch_matrix": {
+    "required_count": 8,
+    "covered_count": 8,
+    "percent": 100,
+    "tests": {
+      "concept aggregate direction covers every canonical branch": true,
+      "all 81 allowed duplicate concept groups are permutation invariant": true,
+      "all 161 reviewed concept-direction claims use the aggregate": true,
+      "all 36 S5 packages distinguish exposed-forbidden from absent": true,
+      "fact-consistency rejects inconsistent exact and normalized matches": true,
+      "tolerance, contradiction and unresolved-fact invariants fail closed": true,
+      "S5 exposed-forbidden evidence remains supported with policy violation": true,
+      "prediction routing fails closed for missing, ambiguous and prohibited sources": true
+    }
+  },
+  "gates": {
+    "lines": true,
+    "branches": true,
+    "functions": true,
+    "critical_semantic_branches": true
+  },
+  "pass": true
+}

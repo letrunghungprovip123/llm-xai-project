@@ -1,0 +1,54 @@
+{
+  "checks": {
+    "artifact_relevant_source_identity": {
+      "expected": "d7b4a50f9820187872d86df39ec4c0e7a2fb9978b8616bf9b676efbb890e51dd",
+      "observed": "d7b4a50f9820187872d86df39ec4c0e7a2fb9978b8616bf9b676efbb890e51dd",
+      "passed": true
+    },
+    "findings_backed_by_report_numbers": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "provider_execution_allowed": {
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    "release_schema_validation": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "report_number_ids_unique": {
+      "expected": 275,
+      "observed": 275,
+      "passed": true
+    },
+    "report_number_trace": {
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    "required_limitations_present": {
+      "expected": [],
+      "observed": [],
+      "passed": true
+    },
+    "scientific_recomputation_allowed": {
+      "expected": false,
+      "observed": false,
+      "passed": true
+    }
+  },
+  "exit_gate": "CERTIFIED_MULTIDATASET_ANALYTICAL_RELEASE_READY",
+  "failed_check_count": 0,
+  "passed": true,
+  "report_trace_validation": {
+    "checked_report_numbers": 275,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "passed": true
+  },
+  "schema_version": "certified_multidataset_analytical_release_validation_v1"
+}

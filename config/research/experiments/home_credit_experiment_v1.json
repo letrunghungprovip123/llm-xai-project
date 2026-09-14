@@ -1,0 +1,17 @@
+{
+  "schema_version": "experiment_profile_v1",
+  "experiment_id": "home_credit_experiment_v1",
+  "dataset_id": "home_credit_default_risk",
+  "case_strata": [
+    "top_high_risk",
+    "low_risk",
+    "true_positive",
+    "false_positive",
+    "false_negative",
+    "near_threshold"
+  ],
+  "cases_per_stratum": 6,
+  "evidence_conditions": ["S0", "S1", "S2", "S3", "S4", "S5"],
+  "llm_count": 3,
+  "expected_planned_generations": 648
+}

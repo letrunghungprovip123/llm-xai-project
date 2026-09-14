@@ -1,0 +1,18 @@
+{
+  "schema_version": "freddie_target_protocol_v1",
+  "target_id": "serious_delinquency_within_12m_v1",
+  "dataset_id": "freddie_sflld_2024",
+  "horizon_anchor": "origination_first_payment_date",
+  "raw_loan_age_used_for_horizon": false,
+  "horizon_payment_index_min": 1,
+  "horizon_payment_index_max": 12,
+  "serious_delinquency_min_cycles": 3,
+  "reo_status": "RA",
+  "unknown_delinquency_status": "XX",
+  "serious_zero_balance_codes": ["02", "03", "09"],
+  "clean_negative_zero_balance_codes": ["01"],
+  "censoring_zero_balance_codes": ["15", "16", "96"],
+  "negative_requires_complete_months_through_horizon": true,
+  "early_payoff_negative_requires_complete_months_through_termination": true,
+  "positive_event_overrides_censoring": true
+}

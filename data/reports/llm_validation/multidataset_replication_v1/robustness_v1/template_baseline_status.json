@@ -1,0 +1,7 @@
+{
+  "analysis_role": "SENSITIVITY_ONLY",
+  "baseline_role": "DETERMINISTIC_BASELINE_NOT_FOURTH_LLM",
+  "executed": false,
+  "reason": "Certified common-renderer template outputs are not present for both datasets.",
+  "status": "NOT_READY"
+}

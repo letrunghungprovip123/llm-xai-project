@@ -1,0 +1,68 @@
+{
+  "schema_version": "canonical_dataset_bundle_v1",
+  "dataset_id": "home_credit_default_risk",
+  "dataset_version": "v1",
+  "dataset_fingerprint": "a295268d2ca169dde59c0961d27ab24d8201b1496af638d797e1fdfff247b84f",
+  "dataset_profile_sha256": "590cf6ac2c9821a6513ca0199f86d5226e8a2418d2b02ea7e40a9576103e3e76",
+  "artifacts": {
+    "feature_matrix": {
+      "path": "data/processed/feature_matrix_full.parquet",
+      "sha256": "e45804b76cacc4286ae81946b4900426b4ccbf6080bde38a2a8eae1d5188c65c",
+      "required": true
+    },
+    "target": {
+      "path": "data/processed/target_full.parquet",
+      "sha256": "0d787e204036d450842bc1fa4a997cb775fc1b2f6c264ea6425936858f1959e4",
+      "required": true
+    },
+    "feature_registry_csv": {
+      "path": "ml/registry/feature_registry.csv",
+      "sha256": "7134631bb3f7cda3ebbcea98b02efadfde032786697f2ebd00778c01a0b7c2e7",
+      "required": true
+    },
+    "feature_registry_yaml": {
+      "path": "ml/registry/feature_registry.yaml",
+      "sha256": "a10e4d68f6e29ae485b025fcb5645da32add2347732221e7ecf745ef27dfb02c",
+      "required": true
+    },
+    "concept_registry_yaml": {
+      "path": "ml/registry/concept_registry.yaml",
+      "sha256": "bab47c4b11cca24cc6821f6b99711f7173ab114addecd835b63f1589b5a8b1f9",
+      "required": true
+    },
+    "raw_file_manifest": {
+      "path": "data/manifests/raw_file_manifest.json",
+      "sha256": "a979b663d080b7e26b8978a41067ff03e213eaaef21d181a6cdc6ad4792f7c9b",
+      "required": false
+    },
+    "feature_matrix_summary": {
+      "path": "data/manifests/batch_c_feature_matrix_registry_summary.json",
+      "sha256": "55e4499a07516e9943ec1db203accb7da9384c4df9c4daaee2a00f1aaa9db87b",
+      "required": false
+    },
+    "id_columns": {
+      "path": "ml/registry/id_columns.json",
+      "sha256": "a1dc614cd690d24b83b84e9f11f35f63ab8fbe2863bda80dacbda88799459641",
+      "required": false
+    },
+    "target_column": {
+      "path": "ml/registry/target_column.json",
+      "sha256": "1767c5565c3db3f07477651e8125c73bf41223c2c2a15a86e8494601d3fb58d5",
+      "required": false
+    },
+    "model_feature_metadata": {
+      "path": "ml/registry/model_feature_metadata.json",
+      "sha256": "e164e6ca7ce8d182da9c915140167244c8364c93799716239b307cf7f045484f",
+      "required": false
+    }
+  },
+  "provenance": {
+    "adapter_id": "home_credit",
+    "adapter_version": "compat_v1",
+    "fingerprint_method": "raw_manifest_sha256_set_v1",
+    "created_at_utc": "2026-08-12T08:49:49.897300+00:00",
+    "historical_outputs_wrapped_without_rewrite": true,
+    "artifact_source_root_locator": "/Users/hung123/Documents/NghienCuuSau/llm-xai-next",
+    "artifact_paths_relative_to_source_root": true
+  }
+}

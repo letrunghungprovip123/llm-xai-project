@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mlflow_tracking_contract_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "mlflow_version", "training_experiment", "registered_model_name", "tracking_key_version", "run_structure", "required_run_tags", "required_training_parameters", "metric_mapping", "integration_states", "stable_status_values"],
+  "properties": {
+    "schema_version": {"const": "mlflow_tracking_contract_v1"},
+    "status": {"const": "ACTIVE"},
+    "mlflow_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "training_experiment": {"type": "string", "minLength": 1},
+    "registered_model_name": {"type": "string", "minLength": 1},
+    "tracking_key_version": {"const": "tracking_key_v1"},
+    "run_structure": {"const": "parent_with_model_children"},
+    "required_run_tags": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "required_training_parameters": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "metric_mapping": {"type": "object", "additionalProperties": {"type": "string"}},
+    "integration_states": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"}},
+    "stable_status_values": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"}}
+  }
+}

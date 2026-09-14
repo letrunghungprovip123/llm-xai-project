@@ -1,0 +1,1 @@
+"""Dashboard foundation module."""

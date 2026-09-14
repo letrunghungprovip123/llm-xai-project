@@ -1,0 +1,103 @@
+{
+  "phase": "Phase 0",
+  "operation": "build_canonical_generation_index",
+  "tool_version": "canonicalizer_v1.1.0",
+  "status": "PASSED_WITH_WARNINGS",
+  "created_at": "2026-07-18T10:31:06.120Z",
+  "strict_official_counts": true,
+  "raw_official_artifacts_modified": false,
+  "main_model_order": [
+    "qwen3_8b",
+    "deepseek_v4_flash",
+    "phi4_mini_instruct"
+  ],
+  "outputs": {
+    "evidence_packages_36": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/evidence_packages_36.jsonl",
+      "sha256": "37c25b261d496e7c9bf50a62141f93b5544a45af43208918d0eaf589d6307117",
+      "byte_count": 6826430,
+      "record_count": 216
+    },
+    "generation_index_jsonl": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/generation_index.jsonl",
+      "sha256": "252edae8dd920c259a1da74d7b2f09b26558b994e01b3cd29dd60c0d6f9086ec",
+      "byte_count": 12927421,
+      "record_count": 648
+    },
+    "generation_index_csv": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/generation_index.csv",
+      "sha256": "0b68967b2b7850eb9f02b0707364cd8e7f437123721abdeecb4ef8ead8f42821",
+      "byte_count": 516515,
+      "record_count": 648
+    },
+    "template_baseline_index_jsonl": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/template_baseline_index.jsonl",
+      "sha256": "4d8e2e4c5d644ab33733d5bb2251bd1d6ebbb21588f662d709a0f01ee992de15",
+      "byte_count": 3054265,
+      "record_count": 216
+    },
+    "template_baseline_index_csv": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/template_baseline_index.csv",
+      "sha256": "536b3938d66352e3031066e194c742749c2772d2a0bb9d4f72eba94e1a1001a9",
+      "byte_count": 165757,
+      "record_count": 216
+    },
+    "canonical_sources": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/canonical_sources.json",
+      "sha256": "5ffc98f61bac9876a22b657d611fc1660311b80aeb866cc8afad3c38bd97168d",
+      "byte_count": 8459
+    },
+    "matrix_integrity_report": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/matrix_integrity_report.csv",
+      "sha256": "3c870b9f67a1b112e7263b8307c89ff92de01b81b8cc5e0c7d5a233a3868ac36",
+      "byte_count": 1391,
+      "record_count": 23
+    },
+    "input_schema_report": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/input_schema_report.json",
+      "sha256": "4c65371775449094aac7b9c9ff99b61235df33c411c3dd8278540decc6464529",
+      "byte_count": 55585
+    },
+    "phase0_audit_report_json": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/phase0_audit_report.json",
+      "sha256": "479b4395c0244ed69d62f7ab700eb295f48362ca722a9ca1562326530249d296",
+      "byte_count": 10003
+    },
+    "phase0_audit_report_md": {
+      "path": "/private/tmp/llm-xai-next-refactor-20260718/.refactor-validation/r10/final-canonicalization/phase0_audit_report.md",
+      "sha256": "cca1eb1d30f503ff92ed2ddfd65ce5c3420ed752190ad3f6f323af129e7a8169",
+      "byte_count": 4277
+    }
+  },
+  "counts": {
+    "main_planned": 648,
+    "main_actual": 648,
+    "main_usable": 638,
+    "main_unusable": 10,
+    "by_model": {
+      "qwen3_8b": {
+        "planned": 216,
+        "actual": 216,
+        "usable": 216,
+        "unusable": 0
+      },
+      "deepseek_v4_flash": {
+        "planned": 216,
+        "actual": 216,
+        "usable": 213,
+        "unusable": 3
+      },
+      "phi4_mini_instruct": {
+        "planned": 216,
+        "actual": 216,
+        "usable": 209,
+        "unusable": 7
+      }
+    },
+    "template_baseline_actual": 216,
+    "template_baseline_usable": 216,
+    "template_baseline_eligible_for_selection": false
+  },
+  "integrity_check_count": 37,
+  "warning_count": 5
+}

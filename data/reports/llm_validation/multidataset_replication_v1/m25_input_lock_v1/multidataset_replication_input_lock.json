@@ -1,0 +1,568 @@
+{
+  "bootstrap": {
+    "confidence": 0.95,
+    "freddie_seed": 20260821,
+    "home_credit_seed": 20260820,
+    "iterations": 10000,
+    "method": "independent_case_resampled_percentile",
+    "preserve_within_study_repeated_structure": true
+  },
+  "compatibility": {
+    "cases_per_study": 36,
+    "cross_dataset_case_pairing_allowed": false,
+    "datasets": [
+      "home_credit_default_risk",
+      "freddie_sflld_2024"
+    ],
+    "evidence_levels": [
+      "S0",
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5"
+    ],
+    "evidence_mapping": {
+      "freddie": {
+        "dataset": "freddie",
+        "duplicate_levels": [],
+        "extra_levels": [],
+        "incompatible_levels": [],
+        "levels": {
+          "S0": {
+            "accepted_roles": [
+              "baseline",
+              "prediction_only_control"
+            ],
+            "canonical_role": "PREDICTION_ONLY_CONTROL",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": false,
+              "semantic_guidance_level": "none",
+              "structural_guidance_level": "low"
+            },
+            "observed_role": "prediction_only_control",
+            "observed_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": false,
+              "semantic_guidance_level": "none",
+              "structural_guidance_level": "low"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S1": {
+            "accepted_roles": [
+              "independent_synthesis_baseline"
+            ],
+            "canonical_role": "INDEPENDENT_SYNTHESIS_BASELINE",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": false,
+              "semantic_guidance_level": "none",
+              "structural_guidance_level": "low"
+            },
+            "observed_role": "independent_synthesis_baseline",
+            "observed_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": false,
+              "semantic_guidance_level": "none",
+              "structural_guidance_level": "low"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S2": {
+            "accepted_roles": [
+              "semantic_grounding"
+            ],
+            "canonical_role": "SEMANTIC_GROUNDING",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "low"
+            },
+            "observed_role": "semantic_grounding",
+            "observed_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "low"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S3": {
+            "accepted_roles": [
+              "adaptive_compact"
+            ],
+            "canonical_role": "ADAPTIVE_COMPACT",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "medium"
+            },
+            "observed_role": "adaptive_compact",
+            "observed_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "medium"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S4": {
+            "accepted_roles": [
+              "rich_concept_aware",
+              "rich_evidence_stress_test"
+            ],
+            "canonical_role": "RICH_CONCEPT_AWARE",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": true,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "medium"
+            },
+            "observed_role": "rich_evidence_stress_test",
+            "observed_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": true,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "medium"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S5": {
+            "accepted_roles": [
+              "backend_skeleton",
+              "controlled_rendering"
+            ],
+            "canonical_role": "BACKEND_SKELETON",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": true,
+              "concept_evidence_available": true,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "high"
+            },
+            "observed_role": "controlled_rendering",
+            "observed_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": true,
+              "concept_evidence_available": true,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "high"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          }
+        },
+        "missing_columns": [],
+        "passed": true
+      },
+      "home_credit": {
+        "dataset": "home_credit",
+        "duplicate_levels": [],
+        "extra_levels": [],
+        "incompatible_levels": [],
+        "levels": {
+          "S0": {
+            "accepted_roles": [
+              "baseline",
+              "prediction_only_control"
+            ],
+            "canonical_role": "PREDICTION_ONLY_CONTROL",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": false,
+              "semantic_guidance_level": "none",
+              "structural_guidance_level": "low"
+            },
+            "observed_role": "prediction_only_control",
+            "observed_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": false,
+              "semantic_guidance_level": "none",
+              "structural_guidance_level": "low"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S1": {
+            "accepted_roles": [
+              "independent_synthesis_baseline"
+            ],
+            "canonical_role": "INDEPENDENT_SYNTHESIS_BASELINE",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": false,
+              "semantic_guidance_level": "none",
+              "structural_guidance_level": "low"
+            },
+            "observed_role": "independent_synthesis_baseline",
+            "observed_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": false,
+              "semantic_guidance_level": "none",
+              "structural_guidance_level": "low"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S2": {
+            "accepted_roles": [
+              "semantic_grounding"
+            ],
+            "canonical_role": "SEMANTIC_GROUNDING",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "low"
+            },
+            "observed_role": "semantic_grounding",
+            "observed_signature": {
+              "adaptive_selection": false,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "low"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S3": {
+            "accepted_roles": [
+              "adaptive_compact"
+            ],
+            "canonical_role": "ADAPTIVE_COMPACT",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "medium"
+            },
+            "observed_role": "adaptive_compact",
+            "observed_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": false,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "medium"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S4": {
+            "accepted_roles": [
+              "rich_concept_aware",
+              "rich_evidence_stress_test"
+            ],
+            "canonical_role": "RICH_CONCEPT_AWARE",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": true,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "medium"
+            },
+            "observed_role": "rich_evidence_stress_test",
+            "observed_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": false,
+              "concept_evidence_available": true,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "medium"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          },
+          "S5": {
+            "accepted_roles": [
+              "backend_skeleton",
+              "controlled_rendering"
+            ],
+            "canonical_role": "BACKEND_SKELETON",
+            "compatible": true,
+            "expected_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": true,
+              "concept_evidence_available": true,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "high"
+            },
+            "observed_role": "controlled_rendering",
+            "observed_signature": {
+              "adaptive_selection": true,
+              "backend_skeleton_available": true,
+              "concept_evidence_available": true,
+              "safe_phrase_available": true,
+              "semantic_guidance_level": "high",
+              "structural_guidance_level": "high"
+            },
+            "role_compatible": true,
+            "signature_compatible": true,
+            "signature_mismatches": []
+          }
+        },
+        "missing_columns": [],
+        "passed": true
+      }
+    },
+    "model_revision_details": {
+      "deepseek_v4_flash": {
+        "freddie_revisions": [
+          "DeepSeek-V4-Flash"
+        ],
+        "home_credit_revisions": [],
+        "status": "UNKNOWN"
+      },
+      "phi4_mini_instruct": {
+        "freddie_revisions": [
+          "cfbefacb99257ffa30c83adab238a50856ac3083"
+        ],
+        "home_credit_revisions": [
+          "618e63e60172e9efa181cbfeee9d7012e5b2ad66"
+        ],
+        "status": "MISMATCH"
+      },
+      "qwen3_8b": {
+        "freddie_revisions": [
+          "b968826d9c46dd6066d109eabc6255188de91218"
+        ],
+        "home_credit_revisions": [
+          "21073ac5a57f8ac6b159dae129728af51ac707e8"
+        ],
+        "status": "MISMATCH"
+      }
+    },
+    "model_revision_scope": "MODEL_REVISION_UNKNOWN",
+    "models": [
+      "deepseek_v4_flash",
+      "phi4_mini_instruct",
+      "qwen3_8b"
+    ],
+    "options": 18,
+    "primary_contrasts": 33
+  },
+  "contrast_ids": [
+    "evidence_vs_s0::deepseek_v4_flash::S1::S0",
+    "evidence_vs_s0::deepseek_v4_flash::S2::S0",
+    "evidence_vs_s0::deepseek_v4_flash::S3::S0",
+    "evidence_vs_s0::deepseek_v4_flash::S4::S0",
+    "evidence_vs_s0::deepseek_v4_flash::S5::S0",
+    "evidence_vs_s0::phi4_mini_instruct::S1::S0",
+    "evidence_vs_s0::phi4_mini_instruct::S2::S0",
+    "evidence_vs_s0::phi4_mini_instruct::S3::S0",
+    "evidence_vs_s0::phi4_mini_instruct::S4::S0",
+    "evidence_vs_s0::phi4_mini_instruct::S5::S0",
+    "evidence_vs_s0::qwen3_8b::S1::S0",
+    "evidence_vs_s0::qwen3_8b::S2::S0",
+    "evidence_vs_s0::qwen3_8b::S3::S0",
+    "evidence_vs_s0::qwen3_8b::S4::S0",
+    "evidence_vs_s0::qwen3_8b::S5::S0",
+    "model_within_evidence::S0::deepseek_v4_flash::phi4_mini_instruct",
+    "model_within_evidence::S0::qwen3_8b::deepseek_v4_flash",
+    "model_within_evidence::S0::qwen3_8b::phi4_mini_instruct",
+    "model_within_evidence::S1::deepseek_v4_flash::phi4_mini_instruct",
+    "model_within_evidence::S1::qwen3_8b::deepseek_v4_flash",
+    "model_within_evidence::S1::qwen3_8b::phi4_mini_instruct",
+    "model_within_evidence::S2::deepseek_v4_flash::phi4_mini_instruct",
+    "model_within_evidence::S2::qwen3_8b::deepseek_v4_flash",
+    "model_within_evidence::S2::qwen3_8b::phi4_mini_instruct",
+    "model_within_evidence::S3::deepseek_v4_flash::phi4_mini_instruct",
+    "model_within_evidence::S3::qwen3_8b::deepseek_v4_flash",
+    "model_within_evidence::S3::qwen3_8b::phi4_mini_instruct",
+    "model_within_evidence::S4::deepseek_v4_flash::phi4_mini_instruct",
+    "model_within_evidence::S4::qwen3_8b::deepseek_v4_flash",
+    "model_within_evidence::S4::qwen3_8b::phi4_mini_instruct",
+    "model_within_evidence::S5::deepseek_v4_flash::phi4_mini_instruct",
+    "model_within_evidence::S5::qwen3_8b::deepseek_v4_flash",
+    "model_within_evidence::S5::qwen3_8b::phi4_mini_instruct"
+  ],
+  "freddie_analysis_input_lock": {
+    "byte_count": 11086,
+    "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/input_lock_v1/freddie_analysis_input_lock.json",
+    "sha256": "d54f9dee4b5623bb0bcb8a70f96719f0e8e37e4e8eb03671cc3de06f30986bb6"
+  },
+  "gate": "MULTIDATASET_REPLICATION_INPUT_LOCK_READY",
+  "inputs": {
+    "freddie_diagnostics_manifest": {
+      "byte_count": 7173,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/diagnostics_v1/diagnostics_manifest.json",
+      "sha256": "1eb1c1f5d9239dd4ab322dfca21b3dea6535365dfa71fc825a19f28c371b96c9"
+    },
+    "freddie_generation_diagnostics": {
+      "byte_count": 631001,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/diagnostics_v1/generation_diagnostics.csv",
+      "sha256": "dad1166e4050ef175f8c87f082a681c631b1f1530be09a72294e786de4362d08"
+    },
+    "freddie_generation_metrics": {
+      "byte_count": 690526,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/metric_v1/generation_metrics.csv",
+      "row_count": 648,
+      "sha256": "a732d02fc199747688e9dc922c3a041288da789b707c1da9cc6033ad4e5b7ff1"
+    },
+    "freddie_metric_manifest": {
+      "byte_count": 1627,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/metric_v1/metric_manifest.json",
+      "sha256": "a6938f838cf59709534654a5d840a5a1c249ad7d65a72d060bc089ff496541ff"
+    },
+    "freddie_omnibus_tests": {
+      "byte_count": 1347,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/statistical_analysis_v1/omnibus_tests.csv",
+      "sha256": "f962916903eb612aaedf62f816a952e80cb58d3ad24b21c7e8b63c645392240e"
+    },
+    "freddie_option_performance": {
+      "byte_count": 5109,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/metric_v1/option_performance.csv",
+      "sha256": "7c96a6719da4f077e917c1aaf709390dffa92e516d156747f90ed34a61ed46ad"
+    },
+    "freddie_paired_tests": {
+      "byte_count": 10985,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/statistical_analysis_v1/paired_tests.csv",
+      "row_count": 33,
+      "sha256": "cb15dd13b12611afc3cd78f479328d224a3e33fe831ae7edad548e18a635253b"
+    },
+    "freddie_statistical_manifest": {
+      "byte_count": 2884,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/statistical_analysis_v1/statistical_manifest.json",
+      "sha256": "61054bc2781652ac2729ceceda5e0611541eace43b964cdcb4a0a2518a850279"
+    },
+    "home_credit_data_mart_validation": {
+      "byte_count": 8393,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/data_mart_validation.json",
+      "sha256": "80048f464e9176f684275328e561772b5b3ebbb7b522f10ae30209f3beaf08f9"
+    },
+    "home_credit_diagnostic_validation": {
+      "byte_count": 10488,
+      "path": "data/reports/llm_validation/validation_v1/analysis/diagnostics/diagnostic_validation.json",
+      "sha256": "bbb3e48db00997582052a637f2f0d54462d3cc9523cb9e5a2ba0f102596846d9"
+    },
+    "home_credit_evidence_levels": {
+      "byte_count": 1236,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/evidence_levels.csv",
+      "row_count": 6,
+      "sha256": "15e0c90cba31475f1c26b7868e51a68451167df90cbf5b8e09f5598008f7a0f0"
+    },
+    "home_credit_generation_diagnostics": {
+      "byte_count": 281580,
+      "path": "data/reports/llm_validation/validation_v1/analysis/diagnostics/generation_diagnostics.csv",
+      "sha256": "c5d0683ae2cbce012a404fdcc713327652c5f5841e665e3984e16e6afa2c3fc4"
+    },
+    "home_credit_generation_index": {
+      "byte_count": 12927421,
+      "path": "data/reports/llm_validation/validation_v1/canonicalization/generation_index.jsonl",
+      "row_count": 648,
+      "sha256": "252edae8dd920c259a1da74d7b2f09b26558b994e01b3cd29dd60c0d6f9086ec"
+    },
+    "home_credit_generation_metrics": {
+      "byte_count": 352954,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/generation_metrics.csv",
+      "row_count": 648,
+      "sha256": "8aeaf54d6c71612f46da7fd6a84b5e0a402c4fa342cbf9634009f1e6b86a591d"
+    },
+    "home_credit_metric_validation": {
+      "byte_count": 5751,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/metric_validation.json",
+      "sha256": "18d109ead979ecf3911a5b5944e5d6c6e8ffc29d15310647cce09c214d1c2e03"
+    },
+    "home_credit_models": {
+      "byte_count": 696,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/models.csv",
+      "row_count": 3,
+      "sha256": "14d530dceb8b1cdef116907008f77003236cda679dd4bc46eae38f19b8b94c56"
+    },
+    "home_credit_omnibus_tests": {
+      "byte_count": 1345,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/omnibus_tests.csv",
+      "sha256": "51f8893ba335effcfb90d68a9e563551ce2374cf9c632b62fb844006b1b89292"
+    },
+    "home_credit_paired_tests": {
+      "byte_count": 9350,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/paired_tests.csv",
+      "row_count": 33,
+      "sha256": "f603f9614a5c71e9b72ab2e0ddca8a701a457e19d042ad2b1eeab6ca3f45d684"
+    },
+    "home_credit_statistical_validation": {
+      "byte_count": 5462,
+      "path": "data/reports/llm_validation/validation_v1/analysis/statistical_analysis/statistical_validation.json",
+      "sha256": "dd752a441a08cda3c9de17f0e4e80fb91e6b0df59de5925d3293b60781507a7b"
+    }
+  },
+  "primary_metric": "end_to_end_faithfulness_yield",
+  "producer": "M25A_0028",
+  "protocol": {
+    "byte_count": 4169,
+    "path": "config/research/replication/multidataset_replication_v1.json",
+    "sha256": "67070e807edb66d3c252d1c416f450c38bba592363e1a5e01b02750b817bfec2"
+  },
+  "protocol_id": "home_credit_to_freddie_replication_v1",
+  "provider_execution_allowed": false,
+  "schema_version": "multidataset_replication_input_lock_v1"
+}

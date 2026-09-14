@@ -1,0 +1,216 @@
+{
+  "gate": "MULTIDATASET_ROBUSTNESS_INPUT_LOCK_READY",
+  "inputs": {
+    "freddie_claim_diagnostics": {
+      "byte_count": 14091959,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/diagnostics_v1/claim_diagnostics.csv",
+      "row_count": 12309,
+      "sha256": "aedc674ae391903f33a1e55a57be07128eb7de6ef48eacbe771634992f902fd4"
+    },
+    "freddie_generation_metrics": {
+      "byte_count": 690526,
+      "path": ".researchops/workspaces/freddie_sflld_2024/freddie_sflld_2024_replication_v1/freddie-xai-ir-001/data/reports/llm_validation/freddie_replication_v1/analysis/metric_v1/generation_metrics.csv",
+      "row_count": 648,
+      "sha256": "a732d02fc199747688e9dc922c3a041288da789b707c1da9cc6033ad4e5b7ff1"
+    },
+    "home_credit_claim_diagnostics": {
+      "byte_count": 8160869,
+      "path": "data/reports/llm_validation/validation_v1/analysis/diagnostics/claim_diagnostics.csv",
+      "row_count": 14667,
+      "sha256": "22aff7845f0b6602c655a4dcae2ec63e3ab56f99a4cd6ff8f534be068314abb4"
+    },
+    "home_credit_generation_metrics": {
+      "byte_count": 352954,
+      "path": "data/reports/llm_validation/validation_v1/analysis/data_mart/generation_metrics.csv",
+      "row_count": 648,
+      "sha256": "8aeaf54d6c71612f46da7fd6a84b5e0a402c4fa342cbf9634009f1e6b86a591d"
+    },
+    "m25_contrast_concordance": {
+      "byte_count": 7485,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/contrast_concordance.csv",
+      "sha256": "5e81e11e0363aa91cd66247ef48db84e9ed3d88d4c21f13c627ed83fc9d7cf30"
+    },
+    "m25_rank_stability": {
+      "byte_count": 157,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/rank_stability.csv",
+      "sha256": "a514cf333eb15da9506e9fc38a86b02a6f94aa78676a1b79431b1454b0c9d43f"
+    },
+    "m26_dataset_option_assessment": {
+      "byte_count": 10662,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/dataset_option_assessment.csv",
+      "sha256": "f0cd65b0074da1140e88c70b111241c1255f7313e76bb386a539ee6b6d1113f5"
+    },
+    "m26_noninferiority_results": {
+      "byte_count": 3626,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/noninferiority_results.csv",
+      "sha256": "7012f52dd01a3f83b7c2a298b5d4a48f0a6c2a4db3d26babea928c0733b1369d"
+    },
+    "m26_recommendations": {
+      "byte_count": 576,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/recommendations.csv",
+      "sha256": "88b2beed4af2aa95027dd011eb83ab5af1aa0726c96f496e7f70b52067a2f2f6"
+    },
+    "m26_scenario_options": {
+      "byte_count": 50244,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/scenario_options.csv",
+      "sha256": "b13d02acc4374be47cdac3336d20b9869fda8caa2bf35dec1eb71c9038194217"
+    }
+  },
+  "observed": {
+    "datasets": [
+      "home_credit_default_risk",
+      "freddie_sflld_2024"
+    ],
+    "freddie_claim_types": [
+      "causal",
+      "concept_direction",
+      "concept_presence",
+      "distributed_evidence",
+      "feature_direction",
+      "feature_presence",
+      "limitation",
+      "magnitude",
+      "numeric",
+      "prediction",
+      "ranking",
+      "recommendation",
+      "uncertainty"
+    ],
+    "freddie_complete_case_count": 33,
+    "freddie_complete_case_ids": [
+      "case_freddie_sflld_2024_mortgage_loan_0c6c9ac4884d5e5a4469",
+      "case_freddie_sflld_2024_mortgage_loan_0e33bc31e7df53896f84",
+      "case_freddie_sflld_2024_mortgage_loan_1fa8118026ff1682d5a7",
+      "case_freddie_sflld_2024_mortgage_loan_20a4d3397a8c3db737c9",
+      "case_freddie_sflld_2024_mortgage_loan_24b021fbe15cb1d57635",
+      "case_freddie_sflld_2024_mortgage_loan_2ec9a8d8272b008d259c",
+      "case_freddie_sflld_2024_mortgage_loan_2fcf3e14e185f31d3c32",
+      "case_freddie_sflld_2024_mortgage_loan_3cce353d2a925ae9b543",
+      "case_freddie_sflld_2024_mortgage_loan_3cd2f4685a3251aeed80",
+      "case_freddie_sflld_2024_mortgage_loan_421a5d3412fb4770c51a",
+      "case_freddie_sflld_2024_mortgage_loan_564cf5cd4f2151e3af39",
+      "case_freddie_sflld_2024_mortgage_loan_58c97fbb1d1dedb66ab4",
+      "case_freddie_sflld_2024_mortgage_loan_62b6753d49a79051c1e8",
+      "case_freddie_sflld_2024_mortgage_loan_7524106ac3d8985e70f8",
+      "case_freddie_sflld_2024_mortgage_loan_7c8525f5f80c13629954",
+      "case_freddie_sflld_2024_mortgage_loan_7eb691ea29b17869e7b6",
+      "case_freddie_sflld_2024_mortgage_loan_7f1e7ee0b2fce8d12850",
+      "case_freddie_sflld_2024_mortgage_loan_87cd10b2a368ebd5c8dd",
+      "case_freddie_sflld_2024_mortgage_loan_8f8d38cca2e5e2baff51",
+      "case_freddie_sflld_2024_mortgage_loan_99682fd97798dbb3ea22",
+      "case_freddie_sflld_2024_mortgage_loan_9e982a0887a75842f7c4",
+      "case_freddie_sflld_2024_mortgage_loan_aaff933ae14660da6c2f",
+      "case_freddie_sflld_2024_mortgage_loan_bb88813ea10725dec25c",
+      "case_freddie_sflld_2024_mortgage_loan_bd5734f3fe2826307bab",
+      "case_freddie_sflld_2024_mortgage_loan_d423ea436be87866dad8",
+      "case_freddie_sflld_2024_mortgage_loan_d80b30e260e5c1c2a8db",
+      "case_freddie_sflld_2024_mortgage_loan_d94d178dc38880fc35cd",
+      "case_freddie_sflld_2024_mortgage_loan_ed5ba8114afb037ae48f",
+      "case_freddie_sflld_2024_mortgage_loan_f00f5a230596acfef9f4",
+      "case_freddie_sflld_2024_mortgage_loan_f34b7ff5edc04c9e3201",
+      "case_freddie_sflld_2024_mortgage_loan_f4eeddd369cb162e8320",
+      "case_freddie_sflld_2024_mortgage_loan_f946f1ad26f8905e4198",
+      "case_freddie_sflld_2024_mortgage_loan_f950fed24b6d1bef9667"
+    ],
+    "home_credit_claim_types": [
+      "concept_direction",
+      "concept_presence",
+      "distributed_evidence",
+      "feature_direction",
+      "feature_presence",
+      "limitation",
+      "magnitude",
+      "numeric",
+      "prediction",
+      "ranking",
+      "recommendation",
+      "uncertainty"
+    ],
+    "home_credit_complete_case_count": 27,
+    "home_credit_complete_case_ids": [
+      "101372",
+      "102796",
+      "103103",
+      "106502",
+      "118093",
+      "119043",
+      "144623",
+      "156227",
+      "157248",
+      "163956",
+      "164606",
+      "164923",
+      "218966",
+      "233833",
+      "241828",
+      "249619",
+      "284004",
+      "307146",
+      "316050",
+      "316762",
+      "322688",
+      "331412",
+      "342828",
+      "360304",
+      "382059",
+      "416599",
+      "433214"
+    ],
+    "options": 18
+  },
+  "parents": {
+    "m25_input_lock": {
+      "byte_count": 23525,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/m25_input_lock_v1/multidataset_replication_input_lock.json",
+      "sha256": "dce497c2f9cab1574eb12fc9e7a5b73a010d7f37b55a62944316119f3f05098f"
+    },
+    "m25_manifest": {
+      "byte_count": 2878,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/replication_manifest.json",
+      "sha256": "891d8e2fe13f09538637969267bd8bb8646b1a1869a990feeefbeeebba5b757b"
+    },
+    "m25_validation": {
+      "byte_count": 5177,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/replication_v1/replication_validation.json",
+      "sha256": "d6c10919f1cb5574a14775d77d5ad78b5f052ad1568a4360a65f6e69865a4444"
+    },
+    "m26_manifest": {
+      "byte_count": 2288,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/decision_manifest.json",
+      "sha256": "06ff341fcc2d11e3ef1df0876332b70e6517c8be4da6cc86a33c7714038244d7"
+    },
+    "m26_policy_lock": {
+      "byte_count": 4850,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/m26_policy_lock_v1/multidataset_decision_policy_lock.json",
+      "sha256": "529d86dbb9e1fa4fd3778c0aee00f3e8874b7750293bd954d9661d420ab351bb"
+    },
+    "m26_validation": {
+      "byte_count": 1391,
+      "path": "data/reports/llm_validation/multidataset_replication_v1/decision_v1/decision_validation.json",
+      "sha256": "0c95270fcb703edd8f0e8a45e468ca54878e27e8c277a48a4c392078d5d01daa"
+    }
+  },
+  "producer": "M27A_0032",
+  "protocol": {
+    "byte_count": 3062,
+    "path": "config/research/replication/multidataset_robustness_v1.json",
+    "sha256": "e70418df0429add39bf92972f6d467eaa2bed0186f5e7a9e642b32aed73101c2"
+  },
+  "protocol_id": "home_credit_freddie_robustness_v1",
+  "provider_execution_allowed": false,
+  "readiness": {
+    "human_calibration": {
+      "reason": "No adjudicated multi-dataset human-calibration release is an M27 parent.",
+      "status": "NOT_PERFORMED"
+    },
+    "template_baseline": {
+      "reason": "Certified common-renderer template outputs are not present for both datasets.",
+      "status": "NOT_READY"
+    },
+    "validator_sensitivity": {
+      "reason": "Comparable certified alternative-validator outputs are not present for both datasets.",
+      "status": "NOT_AVAILABLE"
+    }
+  },
+  "schema_version": "multidataset_robustness_input_lock_v1"
+}

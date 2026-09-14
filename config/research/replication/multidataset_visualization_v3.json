@@ -1,0 +1,166 @@
+{
+  "allowed_dataset_scopes": [
+    "HOME_CREDIT",
+    "FREDDIE",
+    "CROSS_DATASET",
+    "GLOBAL"
+  ],
+  "case_detail_policy": {
+    "raw_claim_text_required": false,
+    "raw_generation_text_required": false,
+    "unavailable_fields_must_be_explicit": true
+  },
+  "certification": {
+    "atomic_promotion": true,
+    "deterministic_double_build": true,
+    "m28_report_number_values_must_be_preserved": true,
+    "no_robust_recommendation_must_be_preserved": true
+  },
+  "comparison_scopes": [
+    "CROSS_DATASET"
+  ],
+  "null_semantics": {
+    "null_is_false": false,
+    "null_is_not_applicable": false,
+    "null_is_zero": false
+  },
+  "parent_release_id": "certified_multidataset_analytical_release_v1",
+  "primary_analysis_lane": "PRIMARY",
+  "provider_execution_allowed": false,
+  "release_id": "visualization-data-v3",
+  "schema_version": "multidataset_visualization_v3_protocol_v1",
+  "scientific_recomputation_allowed": false,
+  "source_capabilities": {
+    "cross_dataset_effects": "DERIVED_BY_JOIN_FROM_M28_AUTHORIZED_WITHIN_STUDY_OMNIBUS_TABLES",
+    "cross_dataset_option_performance": "DERIVED_BY_RESHAPE_FROM_M28_AUTHORIZED_M26_DATASET_OPTION_ASSESSMENT",
+    "delta_of_deltas": "NOT_AVAILABLE_IN_M28_AUTHORIZED_SOURCE_INDEX",
+    "failure_profile_comparison": "NOT_AVAILABLE_IN_M28_AUTHORIZED_SOURCE_INDEX",
+    "replication_findings": "USE_M28_FINDINGS_REGISTRY"
+  },
+  "source_discovery_allowed": false,
+  "status": "FROZEN_BEFORE_VISUALIZATION_V3_BUILD",
+  "study_scopes": [
+    "HOME_CREDIT",
+    "FREDDIE"
+  ],
+  "tables": {
+    "case_claim_diagnostics": {
+      "file": "case_claim_diagnostics.csv"
+    },
+    "case_detail_capabilities": {
+      "expected_rows": 2,
+      "file": "case_detail_capabilities.csv"
+    },
+    "case_generation_metrics": {
+      "expected_rows": 1296,
+      "file": "case_generation_metrics.csv"
+    },
+    "case_index": {
+      "expected_rows": 72,
+      "file": "case_index.csv"
+    },
+    "claim_type_profile": {
+      "file": "claim_type_profile.csv"
+    },
+    "contrast_concordance": {
+      "expected_rows": 33,
+      "file": "contrast_concordance.csv"
+    },
+    "cross_dataset_effects": {
+      "expected_rows": 3,
+      "file": "cross_dataset_effects.csv"
+    },
+    "cross_dataset_eligibility": {
+      "expected_rows": 18,
+      "file": "cross_dataset_eligibility.csv"
+    },
+    "cross_dataset_option_performance": {
+      "expected_rows": 18,
+      "file": "cross_dataset_option_performance.csv"
+    },
+    "decision_option_assessment": {
+      "expected_rows": 18,
+      "file": "decision_option_assessment.csv"
+    },
+    "failure_decomposition": {
+      "expected_rows": 2,
+      "file": "failure_decomposition.csv"
+    },
+    "findings": {
+      "file": "findings.csv"
+    },
+    "limitations": {
+      "file": "limitations.csv"
+    },
+    "margin_sensitivity_summary": {
+      "expected_rows": 3,
+      "file": "margin_sensitivity_summary.csv"
+    },
+    "metric_dictionary": {
+      "file": "metric_dictionary.csv"
+    },
+    "metric_sensitivity": {
+      "file": "metric_sensitivity.csv"
+    },
+    "noninferiority_results": {
+      "expected_rows": 30,
+      "file": "noninferiority_results.csv"
+    },
+    "omnibus_effects": {
+      "expected_rows": 6,
+      "file": "omnibus_effects.csv"
+    },
+    "option_performance": {
+      "expected_rows": 36,
+      "file": "option_performance.csv"
+    },
+    "pareto_frontier": {
+      "expected_rows": 18,
+      "file": "pareto_frontier.csv"
+    },
+    "planned_contrasts": {
+      "expected_rows": 66,
+      "file": "planned_contrasts.csv"
+    },
+    "population_contrast_sensitivity": {
+      "expected_rows": 66,
+      "file": "population_contrast_sensitivity.csv"
+    },
+    "population_effect_sensitivity": {
+      "expected_rows": 6,
+      "file": "population_effect_sensitivity.csv"
+    },
+    "rank_stability": {
+      "expected_rows": 1,
+      "file": "rank_stability.csv"
+    },
+    "recommendation_sensitivity": {
+      "file": "recommendation_sensitivity.csv"
+    },
+    "recommendations": {
+      "file": "recommendations.csv"
+    },
+    "report_source_index": {
+      "file": "report_source_index.csv"
+    },
+    "research_questions": {
+      "file": "research_questions.csv"
+    },
+    "robustness_summary": {
+      "expected_rows": 6,
+      "file": "robustness_summary.csv"
+    },
+    "scenario_options": {
+      "expected_rows": 90,
+      "file": "scenario_options.csv"
+    },
+    "study_summary": {
+      "expected_rows": 2,
+      "file": "study_summary.csv"
+    },
+    "visualization_dictionary": {
+      "file": "visualization_dictionary.csv"
+    }
+  },
+  "visualization_version": "v3.0"
+}

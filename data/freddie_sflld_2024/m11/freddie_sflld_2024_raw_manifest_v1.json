@@ -1,0 +1,169 @@
+{
+  "dataset_id": "freddie_sflld_2024",
+  "layout": {
+    "origination_width": 31,
+    "performance_width": 35,
+    "quarter_count": 4
+  },
+  "quarters": [
+    {
+      "nested_zip_sha256": "f3092fd4aaa29932dccae8c2c756360250ebdb040923ac79ac3d4fc2a160ec76",
+      "origination": {
+        "duplicate_loan_ids": 0,
+        "expected_width": 31,
+        "loan_id_prefix_mismatch_rows": 0,
+        "malformed_rows": 0,
+        "member": "orig_2024Q1.txt",
+        "rows": 215009,
+        "sha256": "fe135885f64742c4c4cfbd839f428e7e22659c0dba89745d4b14ea761f6ba357",
+        "unique_loan_ids": 215009,
+        "width_histogram": {
+          "31": 215009
+        }
+      },
+      "outer_member": "historical_data_2024Q1.zip",
+      "outer_member_compressed_bytes": 75626958,
+      "outer_member_uncompressed_bytes": 75626958,
+      "performance": {
+        "expected_width": 35,
+        "loan_id_prefix_mismatch_rows": 0,
+        "loan_id_sort_order_violations": 0,
+        "malformed_rows": 0,
+        "max_reporting_period": "202603",
+        "member": "perf_2024Q1.txt",
+        "min_reporting_period": "202401",
+        "origination_ids_without_performance": 0,
+        "orphan_rows": 0,
+        "rows": 4908884,
+        "sha256": "8dec844de57e14ce055c5e7080c562ee3af3a1deb02b9a0c06092e21bfbd61dc",
+        "unique_loan_ids": 215009,
+        "width_histogram": {
+          "35": 4908884
+        }
+      },
+      "quarter": "2024Q1"
+    },
+    {
+      "nested_zip_sha256": "746b152c200e54e14a4b8ae693f623d221f70aa66aabc97255df329b1d37212b",
+      "origination": {
+        "duplicate_loan_ids": 0,
+        "expected_width": 31,
+        "loan_id_prefix_mismatch_rows": 0,
+        "malformed_rows": 0,
+        "member": "orig_2024Q2.txt",
+        "rows": 255661,
+        "sha256": "4d9d4d98004a47f7a8ebefe399fd7dcb93a3e42abd9dda789b8fdb4fc54916fd",
+        "unique_loan_ids": 255661,
+        "width_histogram": {
+          "31": 255661
+        }
+      },
+      "outer_member": "historical_data_2024Q2.zip",
+      "outer_member_compressed_bytes": 78857217,
+      "outer_member_uncompressed_bytes": 78857217,
+      "performance": {
+        "expected_width": 35,
+        "loan_id_prefix_mismatch_rows": 0,
+        "loan_id_sort_order_violations": 0,
+        "malformed_rows": 0,
+        "max_reporting_period": "202603",
+        "member": "perf_2024Q2.txt",
+        "min_reporting_period": "202404",
+        "origination_ids_without_performance": 0,
+        "orphan_rows": 0,
+        "rows": 5144507,
+        "sha256": "d6231be441aa0b89e9a7705a442f4df56a6bd3e464d5aa972ad54df5fa3ac91a",
+        "unique_loan_ids": 255661,
+        "width_histogram": {
+          "35": 5144507
+        }
+      },
+      "quarter": "2024Q2"
+    },
+    {
+      "nested_zip_sha256": "36585509581c0a0126168ec865ef6b8ce87568df813fcc83d39abdc5e6beda74",
+      "origination": {
+        "duplicate_loan_ids": 0,
+        "expected_width": 31,
+        "loan_id_prefix_mismatch_rows": 0,
+        "malformed_rows": 0,
+        "member": "orig_2024Q3.txt",
+        "rows": 296104,
+        "sha256": "98149d74e6d9add1af6cea47126da011f2db8d1a1c73978ce23d6eebe8e682e5",
+        "unique_loan_ids": 296104,
+        "width_histogram": {
+          "31": 296104
+        }
+      },
+      "outer_member": "historical_data_2024Q3.zip",
+      "outer_member_compressed_bytes": 81215844,
+      "outer_member_uncompressed_bytes": 81215844,
+      "performance": {
+        "expected_width": 35,
+        "loan_id_prefix_mismatch_rows": 0,
+        "loan_id_sort_order_violations": 0,
+        "malformed_rows": 0,
+        "max_reporting_period": "202603",
+        "member": "perf_2024Q3.txt",
+        "min_reporting_period": "202407",
+        "origination_ids_without_performance": 0,
+        "orphan_rows": 0,
+        "rows": 5309791,
+        "sha256": "7293e0e2765aaacbfeac97976c735ee6cb04170a815486b3dc4832a25f499bec",
+        "unique_loan_ids": 296104,
+        "width_histogram": {
+          "35": 5309791
+        }
+      },
+      "quarter": "2024Q3"
+    },
+    {
+      "nested_zip_sha256": "dbb1661500c3b0daad9ba2d291ad58e85b89feae3050e2078ace7a94d28b366f",
+      "origination": {
+        "duplicate_loan_ids": 0,
+        "expected_width": 31,
+        "loan_id_prefix_mismatch_rows": 0,
+        "malformed_rows": 0,
+        "member": "orig_2024Q4.txt",
+        "rows": 281875,
+        "sha256": "169793623e9e7cc7fa5dec789290273ca220a10ea2092261a94dfae898c94d2a",
+        "unique_loan_ids": 281875,
+        "width_histogram": {
+          "31": 281875
+        }
+      },
+      "outer_member": "historical_data_2024Q4.zip",
+      "outer_member_compressed_bytes": 66455261,
+      "outer_member_uncompressed_bytes": 66455261,
+      "performance": {
+        "expected_width": 35,
+        "loan_id_prefix_mismatch_rows": 0,
+        "loan_id_sort_order_violations": 0,
+        "malformed_rows": 0,
+        "max_reporting_period": "202603",
+        "member": "perf_2024Q4.txt",
+        "min_reporting_period": "202410",
+        "origination_ids_without_performance": 0,
+        "orphan_rows": 0,
+        "rows": 4341371,
+        "sha256": "031149ae3c618c90a5ad8e1d2c0cee6fc5eb4b6c96b41906057149c2cfa8d62b",
+        "unique_loan_ids": 281875,
+        "width_histogram": {
+          "35": 4341371
+        }
+      },
+      "quarter": "2024Q4"
+    }
+  ],
+  "schema_version": "freddie_sflld_raw_manifest_v1",
+  "source": {
+    "filename": "historical_data_2024.zip",
+    "outer_zip_members": [
+      "historical_data_2024Q1.zip",
+      "historical_data_2024Q2.zip",
+      "historical_data_2024Q3.zip",
+      "historical_data_2024Q4.zip"
+    ],
+    "sha256": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263"
+  }
+}

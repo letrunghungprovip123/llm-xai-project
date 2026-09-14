@@ -1,0 +1,81 @@
+{
+  "schema_version": "llm_xai_analysis_plan_v1",
+  "analysis_plan_id": "llm_xai_thesis_analysis_v1",
+  "status": "FROZEN_FOR_REPORTING",
+  "study_population": {
+    "planned_generation_count": 648,
+    "usable_generation_count": 638,
+    "unusable_generation_count": 10,
+    "canonical_case_count": 36,
+    "model_count": 3,
+    "evidence_condition_count": 6,
+    "statistical_unit": "generation repeated within canonical case"
+  },
+  "primary_estimand": {
+    "metric_id": "end_to_end_faithfulness_yield",
+    "official_name": "End-to-end operational faithfulness yield",
+    "population": "all 648 planned LLM generations",
+    "formula": "conservative_faithfulness for usable generations with applicable claims; otherwise 0",
+    "range": [0.0, 1.0],
+    "unusable_handling": "pre-specified operational penalty of 0",
+    "aggregation": "macro mean over planned generations",
+    "inference_unit": "canonical case",
+    "factors": ["model", "evidence_condition", "model:evidence_condition"],
+    "direction": "higher_is_better"
+  },
+  "secondary_estimands": [
+    {
+      "metric_id": "resolved_faithfulness",
+      "population": "usable generations with resolved claims",
+      "unusable_handling": "missing; never imputed to 0"
+    },
+    {
+      "metric_id": "verifiability",
+      "population": "usable generations with applicable claims",
+      "unusable_handling": "missing; never imputed to 0"
+    },
+    {
+      "metric_id": "conservative_faithfulness",
+      "population": "usable generations with applicable claims",
+      "unusable_handling": "missing; never imputed to 0"
+    },
+    {
+      "metric_id": "usable",
+      "population": "all 648 planned generations",
+      "unusable_handling": "binary endpoint"
+    }
+  ],
+  "statistical_plan": {
+    "primary_omnibus": "two-factor within-case repeated-measures ANOVA on the complete 648-cell operational endpoint with Greenhouse-Geisser correction",
+    "primary_post_hoc": "pre-specified case-paired Wilcoxon signed-rank tests",
+    "multiplicity": "Holm correction within each planned contrast family",
+    "conditional_sensitivity": "paired analyses use only complete case pairs for the selected conditional metric and report excluded-pair counts",
+    "complete_case_sensitivity": "repeat the factorial analysis on cases with all 18 usable conditions",
+    "claim_rows_are_independent": false,
+    "evidence_is_ordinal": false
+  },
+  "evidence_condition_semantics": {
+    "S0": "prediction-only control",
+    "S1": "raw top-feature evidence",
+    "S2": "semantically enriched top-feature evidence",
+    "S3": "adaptive compact evidence",
+    "S4": "rich concept-aware stress condition with truncation risk",
+    "S5": "backend-controlled structural intervention; not simply more evidence than S4"
+  },
+  "reporting_scope": {
+    "validator_interpretation": "operational faithfulness under the frozen project ontology and deterministic validator",
+    "human_ground_truth_claim_allowed": false,
+    "causal_claim_allowed": false,
+    "population_generalization_allowed": false,
+    "probability_term_allowed_for_predictor_score": false,
+    "preferred_predictor_term": "risk score"
+  },
+  "frozen_decisions": {
+    "claim_measurement_release": "claim_measurement_candidate_primary_v1",
+    "alternative_validator_role": "sensitivity_only",
+    "repeat_count_per_condition": 1,
+    "repeat_limitation_required": true,
+    "template_naturalness_claim_requires_human_study": true,
+    "fairness_is_not_established_by_faithfulness": true
+  }
+}

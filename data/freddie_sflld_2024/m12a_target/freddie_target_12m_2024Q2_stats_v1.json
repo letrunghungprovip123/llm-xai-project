@@ -1,0 +1,33 @@
+{
+  "dataset_id": "freddie_sflld_2024",
+  "nested_zip_sha256": "746b152c200e54e14a4b8ae693f623d221f70aa66aabc97255df329b1d37212b",
+  "quarter": "2024Q2",
+  "raw_source_sha256": "b0443ad3d4575ef32cac7119a67793b43d067c49b1ca52d55f8e4acef5d8f263",
+  "schema_version": "freddie_target_quarter_stats_v1",
+  "stats": {
+    "censor_reason_counts": {
+      "insufficient_12m_observation": 160,
+      "left_censored_after_payment_month_1": 1787,
+      "non_outcome_termination_96": 778
+    },
+    "censored": 2725,
+    "eligible": 252936,
+    "event_counts": {
+      "90plus_delinquency": 1607,
+      "no_serious_event_through_12m": 230579,
+      "voluntary_payoff_before_12m": 20750
+    },
+    "loans": 255661,
+    "negative": 251329,
+    "performance_rows": 5144507,
+    "positive": 1607,
+    "quarter": "2024Q2"
+  },
+  "target_id": "serious_delinquency_within_12m_v1",
+  "target_partition": {
+    "filename": "freddie_target_12m_2024Q2_v1.csv",
+    "rows": 255661,
+    "sha256": "436aeac16aca3edc326285c523c5ce672b8ea175c45889420c53dea3ad2efbe0"
+  },
+  "target_protocol_sha256": "7f0582758f948087bfc3a5d643ad99ea8400f19788d793d44828a8ee1b62c157"
+}

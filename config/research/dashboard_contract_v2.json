@@ -1,0 +1,168 @@
+{
+  "schema_version": "dashboard_contract_v2",
+  "status": "FROZEN_BEFORE_DASH_IMPLEMENTATION",
+  "parent_analytical_release": "thesis-report-v1",
+  "required_gates": [
+    "REPORT_WRITING_READY",
+    "BASELINE_COMPARISON_READY",
+    "VISUALIZATION_DATA_V2_READY"
+  ],
+  "application_modes": [
+    {
+      "mode_id": "CERTIFIED",
+      "purpose": "Thesis reporting and formal defense",
+      "allows_recalculation_of_inference": false,
+      "allows_user_weight_changes": false
+    },
+    {
+      "mode_id": "EXPLORATORY",
+      "purpose": "Descriptive filtering and case exploration",
+      "allows_recalculation_of_inference": false,
+      "allows_user_weight_changes": false
+    },
+    {
+      "mode_id": "WHAT_IF",
+      "purpose": "User-specified preference-weight analysis",
+      "allows_recalculation_of_inference": false,
+      "allows_user_weight_changes": true
+    }
+  ],
+  "pages": [
+    {
+      "page_id": "executive_overview",
+      "rq_ids": [
+        "RQ1"
+      ],
+      "required_datasets": [
+        "certified_report_numbers",
+        "dashboard_kpis",
+        "option_performance",
+        "omnibus_tests",
+        "release_metadata"
+      ]
+    },
+    {
+      "page_id": "performance_reliability",
+      "rq_ids": [
+        "RQ1",
+        "RQ2"
+      ],
+      "required_datasets": [
+        "option_performance",
+        "descriptive_statistics",
+        "case_heterogeneity_summary",
+        "pipeline_failures",
+        "unusable_generations"
+      ]
+    },
+    {
+      "page_id": "statistical_evidence",
+      "rq_ids": [
+        "RQ1",
+        "RQ2"
+      ],
+      "required_datasets": [
+        "omnibus_tests",
+        "paired_tests",
+        "conditional_paired_tests",
+        "complete_case_omnibus_tests",
+        "statistical_sensitivity_summary"
+      ]
+    },
+    {
+      "page_id": "mechanisms_diagnostics",
+      "rq_ids": [
+        "RQ2",
+        "RQ3"
+      ],
+      "required_datasets": [
+        "mechanism_breakdowns",
+        "evidence_design_summary",
+        "evidence_utilization_summary",
+        "narrative_structure_summary",
+        "pipeline_failures",
+        "unusable_generations"
+      ]
+    },
+    {
+      "page_id": "decision_studio",
+      "rq_ids": [
+        "RQ4"
+      ],
+      "required_datasets": [
+        "option_performance",
+        "scenario_options",
+        "scenario_criterion_contributions",
+        "recommendation_evidence"
+      ]
+    },
+    {
+      "page_id": "validator_sensitivity",
+      "rq_ids": [
+        "RQ5"
+      ],
+      "required_datasets": [
+        "validator_generation_pairs",
+        "validator_metric_summary",
+        "validator_sensitivity_tests"
+      ]
+    },
+    {
+      "page_id": "template_baseline_comparison",
+      "rq_ids": [
+        "RQ6"
+      ],
+      "required_datasets": [
+        "baseline_generation_metrics",
+        "baseline_option_performance",
+        "llm_vs_template_case_pairs",
+        "llm_vs_template_summary",
+        "llm_vs_template_tests"
+      ]
+    },
+    {
+      "page_id": "case_explorer",
+      "rq_ids": [
+        "RQ2",
+        "RQ3",
+        "RQ6"
+      ],
+      "required_datasets": [
+        "case_heterogeneity_summary",
+        "evidence_design_summary",
+        "evidence_utilization_summary",
+        "narrative_structure_summary",
+        "validator_generation_pairs",
+        "llm_vs_template_case_pairs"
+      ]
+    },
+    {
+      "page_id": "reproducibility",
+      "rq_ids": [
+        "RQ1",
+        "RQ2",
+        "RQ3",
+        "RQ4",
+        "RQ5",
+        "RQ6"
+      ],
+      "required_datasets": [
+        "release_metadata",
+        "certified_report_numbers",
+        "visualization_dictionary",
+        "metric_visibility_registry",
+        "research_question_registry"
+      ]
+    }
+  ],
+  "global_restrictions": [
+    "Visualization is read-only over certified outputs",
+    "Browser filters never create new inferential p-values",
+    "Template Baseline is not a fourth LLM and never enters decision ranking",
+    "S0-S5 are categorical controlled evidence conditions",
+    "Human naturalness, usefulness and trust are not measured",
+    "Cost is disabled until a frozen pricing input exists",
+    "Template zero latency is measurement-floor limited",
+    "Utility is not probability or statistical significance"
+  ]
+}

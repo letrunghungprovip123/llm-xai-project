@@ -1,0 +1,58 @@
+{
+  "finalization_schema_version": "claim_finalization_manifest_v2",
+  "finalizer_version": "claim_finalizer_v2.0.0",
+  "finalization_policy_version": "claim_finalization_policy_v3",
+  "deterministic": true,
+  "provider_calls_made": 0,
+  "lineage": {
+    "source_claim_schema_version": "claims_v2",
+    "output_claim_schema_version": "claims_v3",
+    "every_output_record_has_parent_claim_id": true
+  },
+  "inputs": {
+    "generation_index": {
+      "path": "data/reports/llm_validation/validation_v1/canonicalization/generation_index.jsonl",
+      "sha256": "252edae8dd920c259a1da74d7b2f09b26558b994e01b3cd29dd60c0d6f9086ec",
+      "byte_count": 12927421,
+      "record_count": 648
+    },
+    "historical_claims": {
+      "path": "data/reports/llm_validation/validation_v1/claim_finalization_v1/claims_final.jsonl",
+      "sha256": "9b53bae17359f3f43415b62f0c7d9f6d9cbda21f2dcac43081bea93d406763f4",
+      "byte_count": 24071796,
+      "record_count": 14680
+    },
+    "semantic_corrections": {
+      "path": "config/research/llm-validation/claim_semantic_corrections_v1.jsonl",
+      "sha256": "ac9cb2ca42b8aa90092396f164ad5da6274e96e8fbcaf2bdf8ae790fb49fb17a",
+      "byte_count": 214723,
+      "record_count": 260
+    }
+  },
+  "outputs": {
+    "claims": {
+      "path": "data/reports/llm_validation/validation_v1/claim_finalization_candidate/claims_final.jsonl",
+      "sha256": "89d90150df82c01f1b5557a9fbd27d26c405c0f5f5402bdbfeed93105c478cfe",
+      "byte_count": 28945199,
+      "record_count": 14667
+    },
+    "changes": {
+      "path": "data/reports/llm_validation/validation_v1/claim_finalization_candidate/claim_finalization_changes.jsonl",
+      "sha256": "cecd1c1b072ae6c947e42c3ff1969ceecbbf6f4f72839860f6cbc4829f5c46d6",
+      "byte_count": 63280524,
+      "record_count": 14682
+    },
+    "summary": {
+      "path": "data/reports/llm_validation/validation_v1/claim_finalization_candidate/claim_finalization_summary.json",
+      "sha256": "c88da0b4911ea3624e20f29e5c35fe2a5cb7acef3baea625ea8b0cb442d51a22",
+      "byte_count": 1323,
+      "record_count": 1
+    }
+  },
+  "invariants": {
+    "official_incomplete_fragments": 0,
+    "source_span_mismatches": 0,
+    "compatibility_matrix_failures": 0,
+    "unique_claim_ids": true
+  }
+}

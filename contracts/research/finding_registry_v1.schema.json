@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"finding_registry_v1",
+  "type":"object",
+  "required":["finding_id","research_question_id","finding_type","dataset_scope","status","supporting_report_numbers","robustness_status","limitation_refs"],
+  "properties":{
+    "finding_id":{"type":"string","minLength":1},
+    "research_question_id":{"type":"string","minLength":1},
+    "finding_type":{"type":"string","minLength":1},
+    "dataset_scope":{"type":"string","minLength":1},
+    "status":{"type":"string","minLength":1},
+    "supporting_report_numbers":{"type":"array","items":{"type":"string"}},
+    "robustness_status":{"type":"string","minLength":1},
+    "limitation_refs":{"type":"array","items":{"type":"string"}}
+  },
+  "additionalProperties":true
+}

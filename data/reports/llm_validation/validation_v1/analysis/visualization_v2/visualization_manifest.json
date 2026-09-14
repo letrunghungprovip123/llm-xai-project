@@ -1,0 +1,430 @@
+{
+  "baseline_gate": "BASELINE_COMPARISON_READY",
+  "dashboard_contract_schema": "dashboard_contract_v2",
+  "manifest_path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/visualization_manifest.json",
+  "output_artifacts": [
+    {
+      "column_count": 11,
+      "dataset_name": "dashboard_kpis",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/dashboard_kpis.csv",
+      "row_count": 22,
+      "sha256": "87ccb33bf087df12830650ab2a8867dff1081725817dedc9b2b40b29291604cc"
+    },
+    {
+      "column_count": 58,
+      "dataset_name": "option_performance",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/option_performance.csv",
+      "row_count": 18,
+      "sha256": "4e72f5c8b108cf16aef27173ba20a401d7d57a10f6002ea97822d677e4bfdcc1"
+    },
+    {
+      "column_count": 48,
+      "dataset_name": "mechanism_breakdowns",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/mechanism_breakdowns.csv",
+      "row_count": 203,
+      "sha256": "df6e5407062195fbd82b98995edf123bcdf82b8ef4e24ec6739c40da83903809"
+    },
+    {
+      "column_count": 78,
+      "dataset_name": "scenario_options",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/scenario_options.csv",
+      "row_count": 90,
+      "sha256": "9dd937446b94e5e06d4cf6b0299368c366ea11f96a941ecd808fbd1b98952ce1"
+    },
+    {
+      "column_count": 21,
+      "dataset_name": "scenario_criterion_contributions",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/scenario_criterion_contributions.csv",
+      "row_count": 504,
+      "sha256": "96b2bf06fe0fcd209656816671e1f320a37c0fb38dbaa1695a9486de54e9f809"
+    },
+    {
+      "column_count": 20,
+      "dataset_name": "recommendation_evidence",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/recommendation_evidence.csv",
+      "row_count": 85,
+      "sha256": "ef8e7c27a20d1729d6f248d8326c00f845cc6b57e5db14e436924ef2865b8322"
+    },
+    {
+      "column_count": 31,
+      "dataset_name": "pipeline_failures",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/pipeline_failures.csv",
+      "row_count": 10,
+      "sha256": "495db00dd7df6b248337d29be9d7b6d48ad8981953f274012ae3ad297743609b"
+    },
+    {
+      "column_count": 48,
+      "dataset_name": "evidence_design_summary",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/evidence_design_summary.csv",
+      "row_count": 216,
+      "sha256": "9ad7d43d58e169645faab50c2cd39373091cc89866a3d4cac06e37429dda445a"
+    },
+    {
+      "column_count": 44,
+      "dataset_name": "evidence_utilization_summary",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/evidence_utilization_summary.csv",
+      "row_count": 864,
+      "sha256": "d7e23cb22c5f58071cb8defe892b202f37fffd27eb80bbe8cc1dd668af8ddfa0"
+    },
+    {
+      "column_count": 48,
+      "dataset_name": "narrative_structure_summary",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/narrative_structure_summary.csv",
+      "row_count": 864,
+      "sha256": "c98642b4c59b23cde475d96a9d5735c113033aa871990ba9e60b4739babeb426"
+    },
+    {
+      "column_count": 44,
+      "dataset_name": "case_heterogeneity_summary",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/case_heterogeneity_summary.csv",
+      "row_count": 864,
+      "sha256": "c2c7603e8d915c4ab70d1d4fa7355de969c5d50b429464e7868ea06da53f94ec"
+    },
+    {
+      "column_count": 13,
+      "dataset_name": "research_question_registry",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/research_question_registry.csv",
+      "row_count": 6,
+      "sha256": "061f082a49533c072de6198104907f821ee6002aad0c046172f6be4ee32100d1"
+    },
+    {
+      "column_count": 5,
+      "dataset_name": "metric_visibility_registry",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/metric_visibility_registry.csv",
+      "row_count": 41,
+      "sha256": "200e2398b6d4032c2ed54cea308a67d46f0c695f8abd0a8ae06c26ba4fa1cd6b"
+    },
+    {
+      "column_count": 64,
+      "dataset_name": "baseline_generation_metrics",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/baseline_generation_metrics.csv",
+      "row_count": 216,
+      "sha256": "731f87f77bede09e202c60294242b57b4ad1876f6ebfbeba6830613f49e2f4d0"
+    },
+    {
+      "column_count": 23,
+      "dataset_name": "baseline_option_performance",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/baseline_option_performance.csv",
+      "row_count": 6,
+      "sha256": "f0e62ead43f2ef1e1a93dbfc2a74144d179519e57e4879f1e9ef103f3c91e457"
+    },
+    {
+      "column_count": 39,
+      "dataset_name": "llm_vs_template_case_pairs",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/llm_vs_template_case_pairs.csv",
+      "row_count": 648,
+      "sha256": "17e7fd7f6159090b7fb63acb86b3c2cbd3247611204605983449b74198a91f89"
+    },
+    {
+      "column_count": 25,
+      "dataset_name": "llm_vs_template_summary",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/llm_vs_template_summary.csv",
+      "row_count": 24,
+      "sha256": "f63054c9ffe38973de2239798a7ffb7f85a2ecf51b0be16f377c92075b0bfe9a"
+    },
+    {
+      "column_count": 23,
+      "dataset_name": "llm_vs_template_tests",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/llm_vs_template_tests.csv",
+      "row_count": 105,
+      "sha256": "03cada1d58863cf0befc398f6ebd0eaffa2e39fffa863f3e64ff1d3899589784"
+    },
+    {
+      "column_count": 17,
+      "dataset_name": "descriptive_statistics",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/descriptive_statistics.csv",
+      "row_count": 272,
+      "sha256": "f2d7aaffc6d9a9ad687d35063542f3408e97770eac47bbc89966115a989fa7da"
+    },
+    {
+      "column_count": 23,
+      "dataset_name": "omnibus_tests",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/omnibus_tests.csv",
+      "row_count": 3,
+      "sha256": "67a4c990e86233ca394b123bbaec7efcd773d4f2f37ecbf545e60790df054aeb"
+    },
+    {
+      "column_count": 25,
+      "dataset_name": "paired_tests",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/paired_tests.csv",
+      "row_count": 33,
+      "sha256": "eef4bacb86078d2cb57019ee91ae440168dec40fde1509d8cd77bfca18fc12fa"
+    },
+    {
+      "column_count": 25,
+      "dataset_name": "conditional_paired_tests",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/conditional_paired_tests.csv",
+      "row_count": 99,
+      "sha256": "9a0d612adf05f32905111e8eadb42eba1d5355481b66e7d93dfebfca21ec2627"
+    },
+    {
+      "column_count": 23,
+      "dataset_name": "complete_case_omnibus_tests",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/complete_case_omnibus_tests.csv",
+      "row_count": 3,
+      "sha256": "26a0ea5ff60f4146b224c18f490afe2e8fcb6980a7f5d95bba3736bc936b3cee"
+    },
+    {
+      "column_count": 12,
+      "dataset_name": "statistical_sensitivity_summary",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/statistical_sensitivity_summary.csv",
+      "row_count": 3,
+      "sha256": "8b6b96728b95cb8f6b13f64cf520a1d8ed3e5f7696152d8d1ef70d2bf22dcb4b"
+    },
+    {
+      "column_count": 21,
+      "dataset_name": "unusable_generations",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/unusable_generations.csv",
+      "row_count": 10,
+      "sha256": "0fff21e566497bda553405e7f5b662518de82134f026f988b40a58452e770a48"
+    },
+    {
+      "column_count": 44,
+      "dataset_name": "validator_generation_pairs",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/validator_generation_pairs.csv",
+      "row_count": 648,
+      "sha256": "c26c3018e9720d4b971befceba21bf8d654a963608aa604ccfd70b2786b9ec00"
+    },
+    {
+      "column_count": 11,
+      "dataset_name": "validator_metric_summary",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/validator_metric_summary.csv",
+      "row_count": 112,
+      "sha256": "4b23f91da8fd23ff3d5cd7a99e455608d5a19e8d986330eba3fbd823a1372c29"
+    },
+    {
+      "column_count": 18,
+      "dataset_name": "validator_sensitivity_tests",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/validator_sensitivity_tests.csv",
+      "row_count": 40,
+      "sha256": "eaa496f9b1fa22efc0ef9596700f9755bc82ae7d92e140d7d63a5523098b85da"
+    },
+    {
+      "column_count": 8,
+      "dataset_name": "certified_report_numbers",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/certified_report_numbers.csv",
+      "row_count": 18,
+      "sha256": "7a3d05f8b7ee15dd88c5fec73e40c2ffc7966577d2c8a74e9374a73a0f9392ba"
+    },
+    {
+      "column_count": 23,
+      "dataset_name": "release_metadata",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/release_metadata.csv",
+      "row_count": 1,
+      "sha256": "d7b8be2a9b2188f81a190deb5e1fdf1d79a5ade8f4e4a2320fb05eaf4e9725e9"
+    },
+    {
+      "column_count": 8,
+      "dataset_name": "visualization_dictionary",
+      "path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/visualization_dictionary.csv",
+      "row_count": 893,
+      "sha256": "56712e3920793fbf8a4b943ff8e53c1578717bc661c52644f5696a6f2aed2784"
+    }
+  ],
+  "parent_analytical_gate": "REPORT_WRITING_READY",
+  "research_questions": [
+    {
+      "dashboard_pages": [
+        "executive_overview",
+        "performance_reliability",
+        "statistical_evidence"
+      ],
+      "interpretation_restrictions": [
+        "Do not treat claims as independent observations",
+        "Do not assume S0-S5 is a linear ordinal scale"
+      ],
+      "population": "648 planned LLM generations",
+      "primary_metrics": [
+        "end_to_end_faithfulness_yield"
+      ],
+      "primary_sources": [
+        "generation_metrics.csv",
+        "omnibus_tests.csv",
+        "paired_tests.csv"
+      ],
+      "question": "How do narrative model, controlled evidence condition, and their interaction affect end-to-end operational faithfulness across all planned LLM generations?",
+      "rq_id": "RQ1",
+      "status": "ACTIVE",
+      "supporting_metrics": [
+        "p10_end_to_end_yield",
+        "usability_rate"
+      ],
+      "title": "Primary operational effectiveness",
+      "unit_of_inference": "canonical case with repeated model and evidence conditions"
+    },
+    {
+      "dashboard_pages": [
+        "performance_reliability",
+        "statistical_evidence",
+        "mechanisms_diagnostics"
+      ],
+      "interpretation_restrictions": [
+        "Never impute conditional scores for unusable generations",
+        "Missingness is structured pipeline failure, not MCAR"
+      ],
+      "population": "638 usable generations with 27 complete canonical cases for balanced sensitivity",
+      "primary_metrics": [
+        "conservative_faithfulness",
+        "verifiability",
+        "resolved_faithfulness"
+      ],
+      "primary_sources": [
+        "conditional_paired_tests.csv",
+        "complete_case_omnibus_tests.csv",
+        "unusable_generations.csv",
+        "sensitivity_summary.csv"
+      ],
+      "question": "Among usable generations, how do semantic faithfulness and verifiability differ across models and evidence conditions, and are conclusions robust to structured S4 failures?",
+      "rq_id": "RQ2",
+      "status": "ACTIVE",
+      "supporting_metrics": [
+        "observed_pair_count",
+        "excluded_pair_count"
+      ],
+      "title": "Conditional quality and structured missingness",
+      "unit_of_inference": "paired canonical case"
+    },
+    {
+      "dashboard_pages": [
+        "mechanisms_diagnostics",
+        "case_explorer"
+      ],
+      "interpretation_restrictions": [
+        "Safe-phrase overlap is a lexical signal, not proof of copying",
+        "Mechanism analyses are explanatory associations, not causal effects"
+      ],
+      "population": "648 LLM generations, 216 evidence packages, 2941 evidence items, and 14667 validated claims",
+      "primary_metrics": [
+        "selected_feature_mention_rate",
+        "concept_mention_rate",
+        "coverage",
+        "conservative_faithfulness"
+      ],
+      "primary_sources": [
+        "evidence_packages.csv",
+        "evidence_items.csv",
+        "generations.csv",
+        "claims.csv",
+        "mechanism_breakdowns.csv",
+        "evidence_design_summary.csv",
+        "evidence_utilization_summary.csv",
+        "narrative_structure_summary.csv",
+        "case_heterogeneity_summary.csv"
+      ],
+      "question": "Which evidence-exposure, narrative-policy, and claim-level mechanisms explain variation in operational faithfulness across models, evidence conditions, and case strata?",
+      "rq_id": "RQ3",
+      "status": "ACTIVE",
+      "supporting_metrics": [
+        "policy_compliance",
+        "claim_status_composition",
+        "safe_phrase_signal"
+      ],
+      "title": "Evidence utilization and mechanisms",
+      "unit_of_inference": "descriptive generation, evidence package, claim, or canonical case as explicitly labeled"
+    },
+    {
+      "dashboard_pages": [
+        "decision_studio"
+      ],
+      "interpretation_restrictions": [
+        "Utility is a preference-based score, not probability or significance",
+        "What-if outputs are user-specified scenarios, not certified findings"
+      ],
+      "population": "18 LLM model-evidence options across five frozen decision scenarios",
+      "primary_metrics": [
+        "utility_score",
+        "mean_end_to_end_yield",
+        "p10_end_to_end_yield",
+        "usability_rate"
+      ],
+      "primary_sources": [
+        "option_performance.csv",
+        "scenario_options.csv",
+        "scenario_criterion_contributions.csv",
+        "recommendations.csv",
+        "recommendation_evidence.csv"
+      ],
+      "question": "What quality, reliability, and efficiency trade-offs distinguish the 18 LLM model-evidence options, and which options are preferred under explicit deployment priorities?",
+      "rq_id": "RQ4",
+      "status": "ACTIVE",
+      "supporting_metrics": [
+        "mean_latency_seconds_planned",
+        "mean_total_token_count_planned",
+        "mean_supported_claims_per_1000_tokens"
+      ],
+      "title": "Deployment trade-offs",
+      "unit_of_inference": "model-evidence option"
+    },
+    {
+      "dashboard_pages": [
+        "validator_sensitivity"
+      ],
+      "interpretation_restrictions": [
+        "Do not claim V4 is more correct without human calibration",
+        "Artifact dependence must be reported as a material limitation"
+      ],
+      "population": "648 paired Candidate-V4 LLM generations",
+      "primary_metrics": [
+        "candidate_v4_metric_delta"
+      ],
+      "primary_sources": [
+        "validator_generation_pairs.csv",
+        "validator_metric_summary.csv",
+        "validator_sensitivity_tests.csv"
+      ],
+      "question": "How sensitive are the principal findings to the selected claim-measurement artifact release?",
+      "rq_id": "RQ5",
+      "status": "ACTIVE",
+      "supporting_metrics": [
+        "holm_adjusted_p_value",
+        "rank_biserial_correlation"
+      ],
+      "title": "Measurement robustness",
+      "unit_of_inference": "paired canonical case"
+    },
+    {
+      "dashboard_pages": [
+        "template_baseline_comparison",
+        "case_explorer"
+      ],
+      "interpretation_restrictions": [
+        "Template Baseline is not a fourth LLM and is excluded from decision ranking",
+        "Structured template claim extraction is deterministic but not identical to the LLM extraction channel",
+        "Naturalness, usefulness, and trust require human evaluation",
+        "Template latency at zero milliseconds is measurement-floor limited"
+      ],
+      "population": "216 Template Baseline generations paired with 648 LLM generations",
+      "primary_metrics": [
+        "end_to_end_faithfulness_yield",
+        "supported_claim_count",
+        "supported_claims_per_100_words"
+      ],
+      "primary_sources": [
+        "baseline_generation_metrics.csv",
+        "llm_vs_template_case_pairs.csv",
+        "llm_vs_template_tests.csv"
+      ],
+      "question": "Compared with a deterministic non-LLM template under the same controlled evidence, what incremental informational value do LLM narratives provide, and what reliability and structural-efficiency costs accompany that value?",
+      "rq_id": "RQ6",
+      "status": "ACTIVE_AFTER_BASELINE_COMPARISON_READY",
+      "supporting_metrics": [
+        "output_word_count",
+        "conservative_faithfulness",
+        "verifiability"
+      ],
+      "title": "Deterministic Template Baseline extension",
+      "unit_of_inference": "paired canonical case"
+    }
+  ],
+  "schema_version": "visualization_manifest_v2",
+  "template_baseline": {
+    "claim_extraction_channel_identical_to_llm": false,
+    "eligible_for_decision_ranking": false,
+    "enabled": true,
+    "generator_count": 216,
+    "human_naturalness_evaluated": false,
+    "is_fourth_llm": false
+  },
+  "validation_path": "data/reports/llm_validation/validation_v1/analysis/visualization_v2/visualization_validation.json",
+  "visualization_version": "v2.0"
+}

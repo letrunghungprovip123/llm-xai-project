@@ -1,0 +1,18 @@
+{
+  "schema_version": "mlflow_registry_policy_v1",
+  "status": "ACTIVE",
+  "registered_model_name": "credit-risk-predictor",
+  "aliases": ["candidate", "champion", "archived-reference"],
+  "candidate_selection_source": "model_registry.best_model.model_name",
+  "promotion_requirements": [
+    "artifact_manifest_verified",
+    "required_metrics_present",
+    "model_ready_audit_passed",
+    "xai_compatibility_passed",
+    "environment_snapshot_accepted",
+    "approval_recorded",
+    "no_blocking_gate_failed"
+  ],
+  "non_waivable_requirements": ["artifact_manifest_verified"],
+  "training_code_may_assign_champion": false
+}

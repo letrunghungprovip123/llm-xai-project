@@ -1,0 +1,62 @@
+{
+  "checks": [
+    {
+      "check_id": "credit_risk_binary_task",
+      "detail": "domain=credit_risk; task_type=binary_classification",
+      "status": "PASS"
+    },
+    {
+      "check_id": "stable_entity_identity",
+      "detail": "declared supported",
+      "status": "PASS"
+    },
+    {
+      "check_id": "feature_level_xai",
+      "detail": "declared supported",
+      "status": "PASS"
+    },
+    {
+      "check_id": "semantic_registry",
+      "detail": "declared supported",
+      "status": "PASS"
+    },
+    {
+      "check_id": "case_strata",
+      "detail": "declared supported",
+      "status": "PASS"
+    },
+    {
+      "check_id": "adaptive_evidence",
+      "detail": "declared supported",
+      "status": "PASS"
+    },
+    {
+      "check_id": "feature_richness",
+      "detail": "feature_count=19; below recommended 20, so adaptive evidence separability needs extra scrutiny",
+      "status": "WARN"
+    },
+    {
+      "check_id": "explicit_target_semantics",
+      "detail": "endpoint-specific prediction semantics explicitly defined",
+      "status": "PASS"
+    },
+    {
+      "check_id": "prediction_horizon_documented",
+      "detail": "prediction_horizon=12_months",
+      "status": "PASS"
+    },
+    {
+      "check_id": "canonical_bundle_identity",
+      "detail": "profile=freddie_sflld_2024/standard_vintage_2024_v1; bundle=freddie_sflld_2024/standard_vintage_2024_v1",
+      "status": "PASS"
+    },
+    {
+      "check_id": "canonical_bundle_artifacts",
+      "detail": "all required canonical artifacts declared",
+      "status": "PASS"
+    }
+  ],
+  "dataset_id": "freddie_sflld_2024",
+  "schema_version": "dataset_replication_profile_report_v1",
+  "status": "WARN"
+}
